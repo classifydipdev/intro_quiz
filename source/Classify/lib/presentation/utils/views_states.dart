@@ -1,0 +1,1 @@
+enum LoadingStates { Loading, Compleate }
