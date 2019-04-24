@@ -8,6 +8,10 @@ class MainScreenView extends AppView<MainScreenModel> {
 
   @override
   Widget getView(BuildContext context) {
-    return Container();
+    return Container(
+      height: double.maxFinite,
+      width: double.maxFinite,
+      color: Colors.white,
+    );
   }
 }
