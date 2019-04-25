@@ -1,7 +1,7 @@
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/res/images.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
-import 'package:classify/presentation/ui/screens/learn_planing/timing/timing_screen_model.dart';
+import 'package:classify/presentation/ui/screens/learn_planning/timing/timing_screen_model.dart';
 import 'package:classify/presentation/ui/widgets/pickers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,15 +11,8 @@ class TimingScreenView extends AppView<TimingScreenModel> {
 
   @override
   Widget getView(BuildContext context) {
-    return MediaQuery(
-      data: new MediaQueryData(),
-      child: new MaterialApp(
-        builder: (context, widget) {
-          return Scaffold(
-            body: getBody(),
-          );
-        },
-      ),
+    return Scaffold(
+      body: getBody(),
     );
   }
 

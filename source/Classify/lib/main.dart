@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:classify/presentation/res/theme.dart';
-import 'package:classify/presentation/ui/screens/learn_planing/timing/timing_screen.dart';
+import 'package:classify/presentation/ui/screens/learn_planning/timing/timing_screen.dart';
 import 'package:classify/presentation/ui/screens/main/main_screen.dart';
+import 'package:classify/presentation/ui/screens/splash/splash_screen.dart';
 import 'package:classify/presentation/utils/localizations.dart';
 import 'package:classify/presentation/utils/push_notifications.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -24,22 +25,21 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TimingScreen();
-    // return new MaterialApp(
-    //   debugShowCheckedModeBanner: false,
-    //   localizationsDelegates: [
-    //     AppLocalizationsDelegate(),
-    //     GlobalMaterialLocalizations.delegate,
-    //     GlobalWidgetsLocalizations.delegate
-    //   ],
-    //   supportedLocales: [Locale("en")],
-    //   onGenerateTitle: (BuildContext context) =>
-    //       AppLocalizations.of(context).appName,
-    //   navigatorObservers: [
-    //     FirebaseAnalyticsObserver(analytics: analytics),
-    //   ],
-    //   theme: ThemeApp.data,
-    //   home: MainScreen(),
-    // );
+    return new MaterialApp(
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: [
+        AppLocalizationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
+      supportedLocales: [Locale("en")],
+      onGenerateTitle: (BuildContext context) =>
+          AppLocalizations.of(context).appName,
+      // navigatorObservers: [
+      //   FirebaseAnalyticsObserver(analytics: analytics),
+      // ],
+      theme: ThemeApp.data,
+      home: SplashScreen(),
+    );
   }
 }

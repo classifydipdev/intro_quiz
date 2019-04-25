@@ -1,7 +1,7 @@
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_screen.dart';
-import 'package:classify/presentation/ui/screens/learn_planing/timing/timing_screen_model.dart';
-import 'package:classify/presentation/ui/screens/learn_planing/timing/timing_screen_view.dart';
-import 'package:classify/presentation/ui/screens/learn_planing/timing/timing_screen_view_model.dart';
+import 'package:classify/presentation/ui/screens/learn_planning/timing/timing_screen_model.dart';
+import 'package:classify/presentation/ui/screens/learn_planning/timing/timing_screen_view.dart';
+import 'package:classify/presentation/ui/screens/learn_planning/timing/timing_screen_view_model.dart';
 
 class TimingScreen extends AppScreen<TimingScreenModel, TimingScreenView,
     TimingScreenViewModel> {
