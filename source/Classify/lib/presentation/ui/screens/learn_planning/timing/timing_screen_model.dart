@@ -9,4 +9,6 @@ class TimingScreenModel extends AppModel {
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
   OnCallCommand onNavigateTo = OnCallCommand();
+
+  Function onSaveInfo;
 }

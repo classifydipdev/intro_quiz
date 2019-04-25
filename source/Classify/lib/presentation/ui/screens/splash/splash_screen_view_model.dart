@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
+import 'package:classify/presentation/ui/screens/learn_planning/learn_planning_screen.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/subjects/subjects_screen.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/timing/timing_screen.dart';
 import 'package:classify/presentation/ui/screens/splash/splash_screen_model.dart';
@@ -21,7 +22,7 @@ class SplashScreenViewModel
 
   Timer startTimer(){
     return Timer(Duration(seconds: 3), (){
-      view.navigateTo(view.context, SubjectsScreen(), true);
+      view.navigateTo(view.context, LearnPlanningScreen(), true);
     });
   }
 

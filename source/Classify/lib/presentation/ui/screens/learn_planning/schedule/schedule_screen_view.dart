@@ -8,10 +8,9 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
 
   @override
   Widget getView(BuildContext context) {
-    return Container(
-      height: double.maxFinite,
-      width: double.maxFinite,
-      color: Colors.white,
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Container(),
     );
   }
 }

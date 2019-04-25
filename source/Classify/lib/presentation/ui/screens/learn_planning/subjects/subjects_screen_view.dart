@@ -11,6 +11,7 @@ class SubjectsScreenView extends AppView<SubjectsScreenModel> {
   @override
   Widget getView(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: getBody(),
     );
   }
