@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:classify/presentation/res/theme.dart';
+import 'package:classify/presentation/ui/screens/learn_planing/timing/timing_screen.dart';
 import 'package:classify/presentation/ui/screens/main/main_screen.dart';
 import 'package:classify/presentation/utils/localizations.dart';
 import 'package:classify/presentation/utils/push_notifications.dart';
@@ -23,7 +24,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MainScreen();
+    return TimingScreen();
     // return new MaterialApp(
     //   debugShowCheckedModeBanner: false,
     //   localizationsDelegates: [
