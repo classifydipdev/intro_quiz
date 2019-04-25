@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Gradle: com.google.android.gms:play-services-ads-identifier:16.0.0@aar" type="AndroidModuleLibraryType">
-    <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7fc142601dc6157a548bcd9f80b56cb9/jars/classes.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
