@@ -1,3 +1,4 @@
+import 'package:classify/domain/enities/learning_plan.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -8,5 +9,8 @@ class SubjectsScreenModel extends AppModel {
 
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  OnCallCommand onNavigateTo = OnCallCommand();
+  OnCallCommand onSubjectSelect = OnCallCommand();
+  OnCallCommand onSubjectRemove = OnCallCommand();
+
+  LearningPlan learningPlan = LearningPlan();
 }
