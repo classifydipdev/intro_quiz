@@ -12,6 +12,7 @@ class TimingScreenView extends AppView<TimingScreenModel> {
   @override
   Widget getView(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: getBody(),
     );
   }
@@ -21,12 +22,6 @@ class TimingScreenView extends AppView<TimingScreenModel> {
       padding: EdgeInsets.only(top: DimensApp.paddingNormalExtra),
       height: double.maxFinite,
       width: double.maxFinite,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(ImagesApp.mojave2),
-          fit: BoxFit.cover,
-        ),
-      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
