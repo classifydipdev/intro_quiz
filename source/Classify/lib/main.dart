@@ -1,39 +1,44 @@
+import 'dart:async';
+
+import 'package:classify/presentation/res/theme.dart';
+import 'package:classify/presentation/ui/screens/main/main_screen.dart';
+import 'package:classify/presentation/utils/localizations.dart';
+import 'package:classify/presentation/utils/push_notifications.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:firebase_analytics/observer.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
+void main() async {
+  // PushNotifications().init();
+  // FlutterError.onError = (FlutterErrorDetails details) {
+  //   FlutterError.dumpErrorToConsole(details);
+  //   Zone.current.handleUncaughtError(details.exception, details.stack);
+  // };
+  runApp(App());
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class App extends StatelessWidget {
+  final FirebaseAnalytics analytics = FirebaseAnalytics();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Container(),
-    );
+    return MainScreen();
+    // return new MaterialApp(
+    //   debugShowCheckedModeBanner: false,
+    //   localizationsDelegates: [
+    //     AppLocalizationsDelegate(),
+    //     GlobalMaterialLocalizations.delegate,
+    //     GlobalWidgetsLocalizations.delegate
+    //   ],
+    //   supportedLocales: [Locale("en")],
+    //   onGenerateTitle: (BuildContext context) =>
+    //       AppLocalizations.of(context).appName,
+    //   navigatorObservers: [
+    //     FirebaseAnalyticsObserver(analytics: analytics),
+    //   ],
+    //   theme: ThemeApp.data,
+    //   home: MainScreen(),
+    // );
   }
 }
