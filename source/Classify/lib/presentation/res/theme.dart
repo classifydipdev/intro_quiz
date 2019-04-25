@@ -6,5 +6,6 @@ class ThemeApp {
     primaryColorDark: ColorsApp.primaryDark,
     primaryColor: ColorsApp.primary,
     accentColor: ColorsApp.accent,
+    canvasColor: Colors.transparent,
   );
 }
