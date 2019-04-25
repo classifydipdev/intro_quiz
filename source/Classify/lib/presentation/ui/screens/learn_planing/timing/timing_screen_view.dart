@@ -47,7 +47,73 @@ class TimingScreenView extends AppView<TimingScreenModel> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          getHorizontalPicker(PageController(viewportFraction: 0.33), 10, 65, 5, (position) {}),
+          Padding(
+            padding: EdgeInsets.only(top: DimensApp.paddingSmall),
+            child: getHorizontalPicker(PageController(viewportFraction: 0.33),
+                10, 65, 5, (position) {}),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: DimensApp.paddingNormal),
+            child: Text(
+              "School day timings",
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'GoogleSans',
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: DimensApp.paddingNormal),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                  child: Text(
+                    "Start",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'GoogleSans',
+                      fontSize: 22,
+                      //fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Text(
+                    "Finish",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'GoogleSans',
+                      fontSize: 22,
+                      //fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: DimensApp.paddingNormal),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                  child: getTimePicker(7, 18, (int hours, int minutes) {}),
+                ),
+                Expanded(
+                  child: getTimePicker(7, 18, (int hours, int minutes) {}),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
