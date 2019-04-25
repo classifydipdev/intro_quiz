@@ -34,6 +34,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-  - assets/images/mojave1.jpeg
-  - assets/images/mojave2.jpeg
-  - assets/images/mojave3.jpeg
+  - assets/images/mojave1.webp
+  - assets/images/mojave2.webp
+  - assets/images/mojave3.webp

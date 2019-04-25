@@ -13,11 +13,11 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
       body: getBody(),
     );
   }
-Widget getBody() {
+
+  Widget getBody() {
     return Container(
       width: double.maxFinite,
       height: double.maxFinite,
-      padding: EdgeInsets.only(top: 40.0),
       child: Stack(
         children: <Widget>[
           ListView.builder(
@@ -127,6 +127,9 @@ Widget getBody() {
   Widget getDay(String text) {
     return Column(
       children: <Widget>[
+        Padding(
+          padding: EdgeInsets.only(top: 20.0),
+        ),
         Text(
           text,
           style: TextStyle(
@@ -134,16 +137,15 @@ Widget getBody() {
         ),
         Container(
             height: 55.0,
-            width: 400.0,
+            width: double.maxFinite,
             margin: EdgeInsets.all(5.0),
             child: ListView.builder(
-              itemCount: 3,
+              itemCount: 6,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 return getAddItem();
               },
             )),
-        Container(height: 25.0)
       ],
     );
   }
