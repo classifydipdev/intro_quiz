@@ -5,3 +5,5 @@ source/Classify/android/app/.classpath
 source/Classify/android/app/.settings/org.eclipse.buildship.core.prefs
 source/Classify/android/app/.project
 source/Classify/.metadata
+source/Classify/ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+source/Classify/ios/Runner.xcworkspace/contents.xcworkspacedata

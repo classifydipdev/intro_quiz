@@ -1,6 +1,524 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2ab78a72-a4cb-4833-aeec-d33d2ae49dca" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/com/principal/classify/App.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/debug/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/studio/dipdev/classify/MainActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/profile/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/profile/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Runner/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../pubspec.yaml" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/.gradle/" />
+    <ignored path="$PROJECT_DIR$/classes/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/generated/not_namespaced_r_class_sources/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/generated/source/r/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/aapt_friendly_merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/annotation_processor_list/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/annotations_typedef_file/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/annotations_zip/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/check-manifest/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/check_manifest_result/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/compile_library_classes/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/compile_only_not_namespaced_r_class_jar/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/consumer_proguard_file/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/incremental/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/intermediate-jars/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/javac/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/library_and_local_jars_jni/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/library_assets/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/library_java_res/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/library_manifest/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/lint_jar/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/lint_publish_jar/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/merged_jni_libs/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/merged_shaders/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/packaged-classes/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/packaged_res/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/public_res/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/res/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/rs/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/runtime_library_classes/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/shader_assets/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/shaders/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/symbols/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/intermediates/transforms/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/outputs/" />
+    <ignored path="$PROJECT_DIR$/../build/permission_handler/tmp/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/generated/not_namespaced_r_class_sources/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/generated/source/r/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/aapt_friendly_merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/annotation_processor_list/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/annotations_typedef_file/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/annotations_zip/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/check-manifest/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/check_manifest_result/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/compile_library_classes/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/compile_only_not_namespaced_r_class_jar/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/consumer_proguard_file/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/incremental/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/intermediate-jars/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/javac/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/library_and_local_jars_jni/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/library_assets/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/library_java_res/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/library_manifest/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/lint_jar/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/lint_publish_jar/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/merged_jni_libs/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/merged_shaders/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/packaged-classes/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/packaged_res/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/public_res/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/res/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/rs/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/runtime_library_classes/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/shader_assets/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/shaders/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/symbols/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/intermediates/transforms/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/outputs/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_core/tmp/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/generated/not_namespaced_r_class_sources/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/generated/source/r/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/aapt_friendly_merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/annotation_processor_list/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/annotations_typedef_file/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/annotations_zip/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/check-manifest/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/check_manifest_result/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/compile_library_classes/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/compile_only_not_namespaced_r_class_jar/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/consumer_proguard_file/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/incremental/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/intermediate-jars/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/javac/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/library_and_local_jars_jni/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/library_assets/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/library_java_res/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/library_manifest/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/lint_jar/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/lint_publish_jar/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/merged_jni_libs/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/merged_shaders/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/packaged-classes/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/packaged_res/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/public_res/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/res/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/rs/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/runtime_library_classes/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/shader_assets/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/shaders/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/symbols/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/intermediates/transforms/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/outputs/" />
+    <ignored path="$PROJECT_DIR$/../build/shared_preferences/tmp/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/generated/not_namespaced_r_class_sources/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/generated/source/r/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/aapt_friendly_merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/annotation_processor_list/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/annotations_typedef_file/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/annotations_zip/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/check-manifest/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/check_manifest_result/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/compile_library_classes/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/compile_only_not_namespaced_r_class_jar/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/consumer_proguard_file/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/incremental/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/intermediate-jars/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/javac/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/library_and_local_jars_jni/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/library_assets/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/library_java_res/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/library_manifest/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/lint_jar/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/lint_publish_jar/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/merged_jni_libs/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/merged_shaders/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/packaged-classes/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/packaged_res/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/public_res/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/res/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/rs/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/runtime_library_classes/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/shader_assets/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/shaders/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/symbols/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/intermediates/transforms/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/outputs/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_messaging/tmp/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/generated/not_namespaced_r_class_sources/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/generated/source/r/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/aapt_friendly_merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/annotation_processor_list/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/annotations_typedef_file/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/annotations_zip/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/check-manifest/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/check_manifest_result/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/compile_library_classes/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/compile_only_not_namespaced_r_class_jar/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/consumer_proguard_file/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/incremental/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/intermediate-jars/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/javac/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/library_and_local_jars_jni/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/library_assets/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/library_java_res/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/library_manifest/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/lint_jar/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/lint_publish_jar/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/merged_jni_libs/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/merged_shaders/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/packaged-classes/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/packaged_res/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/public_res/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/res/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/rs/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/runtime_library_classes/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/shader_assets/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/shaders/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/symbols/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/intermediates/transforms/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/outputs/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_crashlytics/tmp/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/generated/not_namespaced_r_class_sources/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/generated/source/r/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/aapt_friendly_merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/annotation_processor_list/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/annotations_typedef_file/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/annotations_zip/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/check-manifest/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/check_manifest_result/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/compile_library_classes/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/compile_only_not_namespaced_r_class_jar/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/consumer_proguard_file/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/incremental/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/intermediate-jars/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/javac/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/library_and_local_jars_jni/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/library_assets/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/library_java_res/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/library_manifest/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/lint_jar/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/lint_publish_jar/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/merged_jni_libs/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/merged_shaders/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/packaged-classes/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/packaged_res/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/public_res/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/res/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/rs/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/runtime_library_classes/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/shader_assets/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/shaders/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/symbols/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/intermediates/transforms/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/outputs/" />
+    <ignored path="$PROJECT_DIR$/../build/firebase_analytics/tmp/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/generated/not_namespaced_r_class_sources/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/generated/source/r/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/aapt_friendly_merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/annotation_processor_list/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/annotations_typedef_file/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/annotations_zip/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/blame/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/check_manifest_result/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/compile_library_classes/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/compile_only_not_namespaced_r_class_jar/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/consumer_proguard_file/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/incremental/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/intermediate-jars/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/javac/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/library_and_local_jars_jni/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/library_assets/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/library_java_res/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/library_manifest/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/lint_jar/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/lint_publish_jar/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/merged_jni_libs/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/merged_shaders/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/packaged-classes/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/packaged_res/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/public_res/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/res/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/runtime_library_classes/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/shader_assets/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/symbols/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/intermediates/transforms/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/outputs/" />
+    <ignored path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/build/path_provider/tmp/" />
+    <ignored path="$PROJECT_DIR$/../build/app/generated/not_namespaced_r_class_sources/" />
+    <ignored path="$PROJECT_DIR$/../build/app/generated/source/r/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/annotation_processor_list/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/apk_list/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/blame/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/bundle_manifest/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/check-libraries/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/check-manifest/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/checkDebugClasspath/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/check_manifest_result/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/compatible_screen_manifest/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/duplicate_classes_check/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/flutter/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/incremental/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/instant_app_manifest/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/instant_run_merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/javac/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/jniLibs/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/lint_jar/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/merged_assets/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/merged_jni_libs/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/merged_shaders/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/metadata_feature_manifest/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/prebuild/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/processed_res/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/res/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/rs/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/shader_assets/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/shaders/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/signing_config/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/split_list/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/symbols/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/transforms/" />
+    <ignored path="$PROJECT_DIR$/../build/app/intermediates/validate_signing_config/" />
+    <ignored path="$PROJECT_DIR$/../build/app/kotlin/" />
+    <ignored path="$PROJECT_DIR$/../build/app/outputs/" />
+    <ignored path="$PROJECT_DIR$/../build/app/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/../../../../find-travelers-flutter/source/Find/android">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="827">
+              <caret line="76" column="9" selection-start-line="76" selection-start-column="9" selection-end-line="76" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="22" lean-forward="true" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/kotlin/com/principal/classify/App.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="20" lean-forward="true" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/kotlin/com/principal/classify/App.kt" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="22" />
+    <option name="width" value="1920" />
+    <option name="height" value="1178" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="AndroidView" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="app" type="47feb1d3:ProjectViewModuleNode" />
+            </path>
+            <path>
+              <item name="android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="app" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="app" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="app" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="app" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="app" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
+              <item name="classify" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
   <component name="PropertiesComponent">
     <property name="not.eligible.for.single.variant.sync" value="true" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2ab78a72-a4cb-4833-aeec-d33d2ae49dca" name="Default Changelist" comment="" />
+      <created>1557229169491</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1557229169491</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="22" width="1920" height="1178" extended-state="0" />
+    <layout>
+      <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.49954832" visible="true" weight="0.3370607" />
+      <window_info id="Structure" order="2" side_tool="true" />
+      <window_info id="Build Variants" order="3" sideWeight="0.5004517" side_tool="true" weight="0.3296875" />
+      <window_info id="Image Layers" order="4" />
+      <window_info id="Designer" order="5" />
+      <window_info id="Resources Explorer" order="6" />
+      <window_info id="Capture Tool" order="7" />
+      <window_info id="Favorites" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Run" order="0" />
+      <window_info anchor="bottom" id="Logcat" order="1" weight="0.32971996" />
+      <window_info anchor="bottom" id="TODO" order="2" weight="0.32971996" />
+      <window_info anchor="bottom" id="Android Profiler" order="3" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Debug" order="4" />
+      <window_info anchor="bottom" id="Terminal" order="5" weight="0.32971996" />
+      <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.50106496" side_tool="true" visible="true" weight="0.33609575" />
+      <window_info anchor="bottom" id="Flutter Performance" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Build" order="9" sideWeight="0.49893504" visible="true" weight="0.33609575" />
+      <window_info anchor="bottom" id="Find" order="10" />
+      <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
+      <window_info anchor="right" id="Capture Analysis" order="1" />
+      <window_info anchor="right" id="Gradle" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info anchor="right" id="Flutter Inspector" order="4" />
+      <window_info anchor="right" id="Flutter Outline" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+    </layout>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/../../../../../flutter/.pub-cache/hosted/pub.dartlang.org/flutter_amazon_s3-0.0.9/android/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-88" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="827">
+          <caret line="76" column="9" selection-start-line="76" selection-start-column="9" selection-end-line="76" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="22" lean-forward="true" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/kotlin/com/principal/classify/App.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="20" lean-forward="true" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>
