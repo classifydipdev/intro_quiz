@@ -1,4 +1,4 @@
-package studio.dipdev.classify
+package com.principal.classify
 
 import android.os.Bundle
 
