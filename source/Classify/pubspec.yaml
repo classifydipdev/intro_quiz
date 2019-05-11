@@ -37,3 +37,10 @@ flutter:
   - assets/images/mojave1.webp
   - assets/images/mojave2.webp
   - assets/images/mojave3.webp
+
+  fonts:
+      - family: ProximaNova-Extrabld
+        fonts:
+          - asset: assets/fonts/ProximaNova-Extrabld.otf
+
+

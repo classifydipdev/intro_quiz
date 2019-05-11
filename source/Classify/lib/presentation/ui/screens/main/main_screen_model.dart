@@ -9,4 +9,10 @@ class MainScreenModel extends AppModel {
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
   OnCallCommand onNavigateTo = OnCallCommand();
+
+
+
+  double get screenHeight {
+    return MediaQuery.of(view.context).size.height;
+  }
 }
