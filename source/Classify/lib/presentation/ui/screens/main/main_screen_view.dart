@@ -66,7 +66,7 @@ class MainScreenView extends AppView<MainScreenModel> {
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 19,
-                                    fontFamily: 'ProximaNova-Extrabld',
+                                    fontFamily: MainScreenModel.fontFamily,
                                     color: Colors.white),
                               )),
                           Text(
@@ -74,7 +74,7 @@ class MainScreenView extends AppView<MainScreenModel> {
                             textAlign: TextAlign.left,
                             style: TextStyle(
                                 fontSize: 14,
-                                fontFamily: 'ProximaNova-Extrabld',
+                                fontFamily: MainScreenModel.fontFamily,
                                 color: Colors.white),
                           ),
                         ],
@@ -94,8 +94,8 @@ class MainScreenView extends AppView<MainScreenModel> {
                             right: Radius.elliptical(20, 30)),
                         image: DecorationImage(
                           alignment: Alignment.center,
-                          image: AssetImage('assets/images/mojave3.webp'),
-                          fit: BoxFit.fitHeight,
+                          image: AssetImage('assets/images/profilePicture.webp'),
+                          fit: BoxFit.cover,
                         ),
                       ))))
         ],
@@ -123,14 +123,20 @@ class MainScreenView extends AppView<MainScreenModel> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Icon(Icons.event_note, color: Color(0xffff8600)),
+                     Image(
+                        image: new AssetImage("assets/images/icons/homeworkOrange.webp"),
+                        width: 22,
+                        height: 22,
+                        fit: BoxFit.contain,
+                        alignment: Alignment.center,
+                      ),
                       Text(
                         "\t HomeWork".toUpperCase(),
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
-                            fontFamily: 'ProximaNova-Extrabld',
+                            fontFamily: MainScreenModel.fontFamily,
                             color: Color(0xffff8600)),
                       )
                     ],
@@ -150,7 +156,7 @@ class MainScreenView extends AppView<MainScreenModel> {
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 17,
-                                  fontFamily: 'ProximaNova-Extrabld',
+                                  fontFamily: MainScreenModel.fontFamily,
                                   color: Colors.black54),
                             ),
                             Text(
@@ -158,7 +164,7 @@ class MainScreenView extends AppView<MainScreenModel> {
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                   fontSize: 13,
-                                  fontFamily: 'ProximaNova-Extrabld',
+                                  fontFamily: MainScreenModel.fontFamily,
                                   color: Color(0xffb8b7b6)),
                             )
                           ],
@@ -169,7 +175,7 @@ class MainScreenView extends AppView<MainScreenModel> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
-                              fontFamily: 'ProximaNova-Extrabld',
+                              fontFamily: MainScreenModel.fontFamily,
                               color: Color(0xffff8600)),
                         )
                       ],
@@ -190,7 +196,7 @@ class MainScreenView extends AppView<MainScreenModel> {
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 17,
-                                  fontFamily: 'ProximaNova-Extrabld',
+                                  fontFamily: MainScreenModel.fontFamily,
                                   color: Colors.black54),
                             ),
                             Text(
@@ -198,7 +204,7 @@ class MainScreenView extends AppView<MainScreenModel> {
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                   fontSize: 13,
-                                  fontFamily: 'ProximaNova-Extrabld',
+                                  fontFamily: MainScreenModel.fontFamily,
                                   color: Color(0xffb8b7b6)),
                             )
                           ],
@@ -209,7 +215,7 @@ class MainScreenView extends AppView<MainScreenModel> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
-                              fontFamily: 'ProximaNova-Extrabld',
+                              fontFamily: MainScreenModel.fontFamily,
                               color: Color(0xffff8600)),
                         )
                       ],
@@ -230,7 +236,7 @@ class MainScreenView extends AppView<MainScreenModel> {
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 17,
-                                  fontFamily: 'ProximaNova-Extrabld',
+                                  fontFamily: MainScreenModel.fontFamily,
                                   color: Colors.black54),
                             ),
                             Text(
@@ -238,7 +244,7 @@ class MainScreenView extends AppView<MainScreenModel> {
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                   fontSize: 13,
-                                  fontFamily: 'ProximaNova-Extrabld',
+                                  fontFamily: MainScreenModel.fontFamily,
                                   color: Color(0xffb8b7b6)),
                             )
                           ],
@@ -249,7 +255,7 @@ class MainScreenView extends AppView<MainScreenModel> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
-                              fontFamily: 'ProximaNova-Extrabld',
+                              fontFamily: MainScreenModel.fontFamily,
                               color: Color(0xffff8600)),
                         )
                       ],
@@ -279,14 +285,20 @@ class MainScreenView extends AppView<MainScreenModel> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Icon(Icons.calendar_today, color: Color(0xff00ffbb)),
+                      Image(
+                        image: new AssetImage("assets/images/icons/calendarGreen.webp"),
+                        width: 22,
+                        height: 22,
+                        fit: BoxFit.contain,
+                        alignment: Alignment.center,
+                      ),
                       Text(
                         "\t Monday".toUpperCase(),
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
-                            fontFamily: 'ProximaNova-Extrabld',
+                            fontFamily: MainScreenModel.fontFamily,
                             color: Color(0xff00ffbb)),
                       )
                     ],
@@ -302,7 +314,7 @@ class MainScreenView extends AppView<MainScreenModel> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 17,
-                              fontFamily: 'ProximaNova-Extrabld',
+                              fontFamily: MainScreenModel.fontFamily,
                               color: Colors.black54),
                         ),
                         Text(
@@ -311,7 +323,7 @@ class MainScreenView extends AppView<MainScreenModel> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
-                              fontFamily: 'ProximaNova-Extrabld',
+                              fontFamily: MainScreenModel.fontFamily,
                               color: Color(0xff00ffbb)),
                         )
                       ],
@@ -328,7 +340,7 @@ class MainScreenView extends AppView<MainScreenModel> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 17,
-                              fontFamily: 'ProximaNova-Extrabld',
+                              fontFamily: MainScreenModel.fontFamily,
                               color: Colors.black54),
                         ),
                         Text(
@@ -337,7 +349,7 @@ class MainScreenView extends AppView<MainScreenModel> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
-                              fontFamily: 'ProximaNova-Extrabld',
+                              fontFamily: MainScreenModel.fontFamily,
                               color: Color(0xff00ffbb)),
                         )
                       ],
@@ -354,7 +366,7 @@ class MainScreenView extends AppView<MainScreenModel> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 17,
-                              fontFamily: 'ProximaNova-Extrabld',
+                              fontFamily: MainScreenModel.fontFamily,
                               color: Colors.black54),
                         ),
                         Text(
@@ -363,7 +375,7 @@ class MainScreenView extends AppView<MainScreenModel> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
-                              fontFamily: 'ProximaNova-Extrabld',
+                              fontFamily: MainScreenModel.fontFamily,
                               color: Color(0xff00ffbb)),
                         )
                       ],
@@ -380,7 +392,7 @@ class MainScreenView extends AppView<MainScreenModel> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 17,
-                              fontFamily: 'ProximaNova-Extrabld',
+                              fontFamily: MainScreenModel.fontFamily,
                               color: Colors.black54),
                         ),
                         Text(
@@ -389,7 +401,7 @@ class MainScreenView extends AppView<MainScreenModel> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
-                              fontFamily: 'ProximaNova-Extrabld',
+                              fontFamily: MainScreenModel.fontFamily,
                               color: Color(0xff00ffbb)),
                         )
                       ],
@@ -406,7 +418,7 @@ class MainScreenView extends AppView<MainScreenModel> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 17,
-                              fontFamily: 'ProximaNova-Extrabld',
+                              fontFamily: MainScreenModel.fontFamily,
                               color: Colors.black54),
                         ),
                         Text(
@@ -415,7 +427,7 @@ class MainScreenView extends AppView<MainScreenModel> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
-                              fontFamily: 'ProximaNova-Extrabld',
+                              fontFamily: MainScreenModel.fontFamily,
                               color: Color(0xff00ffbb)),
                         )
                       ],

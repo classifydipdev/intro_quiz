@@ -11,7 +11,7 @@ class MainScreenModel extends AppModel {
   OnCallCommand onNavigateTo = OnCallCommand();
 
 
-
+  static const String fontFamily = "GoogleSans";
   double get screenHeight {
     return MediaQuery.of(view.context).size.height;
   }

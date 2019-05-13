@@ -37,10 +37,18 @@ flutter:
   - assets/images/mojave1.webp
   - assets/images/mojave2.webp
   - assets/images/mojave3.webp
+  - assets/images/icons/homeworkOrange.webp
+  - assets/images/icons/calendarGreen.webp
+  - assets/images/profilePicture.webp
 
   fonts:
-      - family: ProximaNova-Extrabld
+      - family: GoogleSans
         fonts:
-          - asset: assets/fonts/ProximaNova-Extrabld.otf
+          - asset: assets/fonts/GoogleSans-Bold.ttf
+          - asset: assets/fonts/GoogleSans-BoldItalic.ttf
+          - asset: assets/fonts/GoogleSans-Italic.ttf
+          - asset: assets/fonts/GoogleSans-Medium.otf
+          - asset: assets/fonts/GoogleSans-MediumItalic.otf
+          - asset: assets/fonts/GoogleSans-Regular.ttf
 
 

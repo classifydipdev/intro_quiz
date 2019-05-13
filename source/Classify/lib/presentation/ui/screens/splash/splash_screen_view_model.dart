@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/learn_planning_screen.dart';
+import 'package:classify/presentation/ui/screens/main/main_screen.dart';
 import 'package:classify/presentation/ui/screens/splash/splash_screen_model.dart';
 import 'package:classify/presentation/ui/screens/splash/splash_screen_view.dart';
 import 'package:package_info/package_info.dart';
@@ -20,7 +21,8 @@ class SplashScreenViewModel
 
   Timer startTimer() {
     return Timer(Duration(seconds: 3), () {
-      view.navigateTo(view.context, LearnPlanningScreen(), true);
+      //view.navigateTo(view.context, LearnPlanningScreen(), true);
+      view.navigateTo(view.context, MainScreen(), true);
     });
   }
 
