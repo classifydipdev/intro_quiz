@@ -83,7 +83,7 @@ class AuthScreenView extends AppView<AuthScreenModel> {
         padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
         color: Colors.white,
         onPressed: () {
-          //TODO navigateTo Google account
+          model.onSignInByGoogle.onCall();
         },
         child: Row(
           mainAxisSize: MainAxisSize.max,
