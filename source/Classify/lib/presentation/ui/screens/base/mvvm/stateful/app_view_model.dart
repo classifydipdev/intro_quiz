@@ -1,4 +1,7 @@
+import 'package:classify/data/auth/entities/auth_exception.dart';
 import 'package:classify/domain/managers/preference_manager.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_model.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -25,7 +28,8 @@ abstract class AppViewModel<M extends AppModel, V extends BaseView<M>>
       FirebaseMessaging().configure(
         onMessage: (Map<String, dynamic> message) async {
           print("onMessage: $message");
-          Toast.show(message['notification']['title'], view.context, duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+          Toast.show(message['notification']['title'], view.context,
+              duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
           model.pushNotided.onCall();
         },
         onLaunch: (Map<String, dynamic> message) async {
@@ -45,9 +49,46 @@ abstract class AppViewModel<M extends AppModel, V extends BaseView<M>>
     super.viewRefresh();
   }
 
-  void preferenceInit() {
-    
-  }
+  void preferenceInit() {}
 
   void pushNotify() {}
+
+  void showError({String text, Object error}) {
+    if (error != null) {
+      if (error is AuthException) {
+        text = error.message;
+      } else if (error is AppAuthException) {
+        text = error.message;
+      }
+    } else if (text == null || text.length == 0) {
+      text = "Unknown error. Try repeating the action again.";
+    }
+
+    showDialog(
+      context: view.context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Oops! Something went wrong"),
+          content: new Text(text),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void showToast(String text) {
+    Scaffold.of(view.context).showSnackBar(new SnackBar(
+      content: new Text(text),
+    ));
+  }
+
 }
