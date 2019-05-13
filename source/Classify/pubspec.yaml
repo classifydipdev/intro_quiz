@@ -21,6 +21,7 @@ dependencies:
   firebase_messaging: ^5.0.0
   firebase_analytics: ^3.0.0
   toast: ^0.1.4
+  font_awesome_flutter: ^8.4.0
   flutter_advanced_networkimage: ^0.4.15
   cupertino_icons: ^0.1.2
   package_info: ^0.4.0+3

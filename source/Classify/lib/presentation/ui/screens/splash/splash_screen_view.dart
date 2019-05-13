@@ -10,6 +10,7 @@ class SplashScreenView extends AppView<SplashScreenModel> {
   @override
   Widget getView(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       key: model.scaffoldKey,
       body: Container(
         child: Stack(
