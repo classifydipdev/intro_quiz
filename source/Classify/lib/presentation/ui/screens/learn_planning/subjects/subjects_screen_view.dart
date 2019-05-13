@@ -17,12 +17,7 @@ class SubjectsScreenView extends AppView<SubjectsScreenModel> {
   }
 
   Widget getBody() {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage(ImagesApp.mojave1), fit: BoxFit.cover),
-      ),
-      child: GridView.builder(
+    return GridView.builder(
         padding: EdgeInsets.all(40.0),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
@@ -35,7 +30,6 @@ class SubjectsScreenView extends AppView<SubjectsScreenModel> {
         itemBuilder: (BuildContext context, int index) {
           return getButton(Utils.subjectListButtons[index]);
         },
-      ),
     );
   }
 
