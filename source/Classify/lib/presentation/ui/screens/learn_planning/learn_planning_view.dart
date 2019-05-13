@@ -3,6 +3,7 @@ import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_screen.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/learn_planning_model.dart';
+import 'package:classify/presentation/ui/screens/main/main_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
@@ -117,7 +118,10 @@ class LearnPlanningScreenView extends AppView<LearnPlanningScreenModel> {
                     ),
                   ),
                   onPressed: () {
-                    model.pageController.animateToPage(model.page + 1,
+                    if (model.page == 2)
+                      navigateTo(context, MainScreen(), true);
+                    else
+                      model.pageController.animateToPage(model.page + 1,
                         duration: const Duration(milliseconds: 200),
                         curve: Curves.linear);
                   },
