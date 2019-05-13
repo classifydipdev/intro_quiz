@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:classify/presentation/res/theme.dart';
+import 'package:classify/presentation/ui/screens/auth/auth_screen.dart';
 import 'package:classify/presentation/ui/screens/splash/splash_screen.dart';
 import 'package:classify/presentation/utils/localizations.dart';
 import 'package:classify/presentation/utils/push_notifications.dart';
@@ -37,7 +38,7 @@ class App extends StatelessWidget {
         FirebaseAnalyticsObserver(analytics: analytics),
       ],
       theme: ThemeApp.data,
-      home: SplashScreen(),
+      home: AuthScreen(),
     );
   }
 }

@@ -5,8 +5,7 @@ class Utils {
     ButtonStyle(
         "Computing",
         LinearGradient(
-          colors: [Colors.greenAccent[400], Colors.greenAccent[400]],
-        ),
+            colors: [Colors.greenAccent[400], Colors.greenAccent[400]]),
         "1"),
     ButtonStyle(
         "Art",
