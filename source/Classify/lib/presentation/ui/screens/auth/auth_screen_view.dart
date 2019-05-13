@@ -2,6 +2,7 @@ import 'package:classify/presentation/res/colors.dart';
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/ui/screens/auth/auth_screen_model.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
+import 'package:classify/presentation/ui/screens/login/login_screen.dart';
 import 'package:classify/presentation/ui/screens/signup/signup_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/cupertino.dart';
@@ -208,8 +209,7 @@ class AuthScreenView extends AppView<AuthScreenModel> {
       child: CupertinoButton(
         padding: EdgeInsets.all(0),
         onPressed: () {
-          //TODO navigateTo LogIn
-//          navigateTo(context, , false);
+         navigateTo(context, LogInScreen(), false);
         },
         child: Container(
           padding: EdgeInsets.only(top: 10.0, bottom: 10.0),

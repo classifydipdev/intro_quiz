@@ -1,14 +1,14 @@
 import 'package:classify/presentation/res/colors.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
-import 'package:classify/presentation/ui/screens/signup/signup_screen_model.dart';
+import 'package:classify/presentation/ui/screens/login/login_screen_model.dart';
 import 'package:classify/presentation/ui/screens/started/started_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SignUpScreenView extends AppView<SignUpScreenModel> {
-  SignUpScreenView(SignUpScreenModel model) : super(model);
+class LogInScreenView extends AppView<LogInScreenModel> {
+  LogInScreenView(LogInScreenModel model) : super(model);
 
   @override
   Widget getView(BuildContext context) {
@@ -37,7 +37,7 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
         children: <Widget>[
           getLogo(),
           SizedBox(height: 50.0),
-          getFiledContainer("user", "User"),
+          getFiledContainer("email", "Email"),
           SizedBox(height: 25.0),
           getFiledContainer(
             "password",
@@ -54,10 +54,6 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
               ),
             ),
           ),
-          SizedBox(height: 25.0),
-          getFiledContainer("first name", "First Name"),
-          SizedBox(height: 25.0),
-          getFiledContainer("email", "Email"),
           SizedBox(height: 40.0),
           createButton(),
           SizedBox(height: 45.0),
@@ -139,9 +135,8 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          CupertinoButton(
-            padding: EdgeInsets.all(0),
-            onPressed: () {
+          InkWell(
+            onTap: () {
               navigateBack(context);
             },
             child: Container(
@@ -149,24 +144,27 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
                 padding: EdgeInsets.fromLTRB(10.0, 15.0, 15.0, 20.0),
                 child: Text("switch account",
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
+                        color: Colors.white, fontWeight: FontWeight.bold)),
               ),
             ),
           ),
-          OutlineButton(
-            borderSide: BorderSide(color: Colors.white),
-            highlightedBorderColor: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(35.0),
-            ),
-            onPressed: () {
+          InkWell(
+            onTap: () {
               navigateTo(context, StartedScreen(), false);
             },
-            child: Padding(
-              padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
-              child: Text("sign up",
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold)),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                border: Border.all(color: Colors.white, width: 1.0),
+                borderRadius: BorderRadius.circular(35.0),
+              ),
+              child: Padding(
+                padding: EdgeInsets.only(
+                    left: 25.0, top: 15.0, bottom: 15.0, right: 25.0),
+                child: Text("log in",
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold)),
+              ),
             ),
           ),
         ],
