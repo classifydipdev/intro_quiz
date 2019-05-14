@@ -1,12 +1,12 @@
 import 'package:classify/presentation/res/colors.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
-import 'package:classify/presentation/ui/screens/login/login_screen_model.dart';
-import 'package:classify/presentation/ui/screens/started/started_screen.dart';
 import 'package:classify/presentation/utils/field_container.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'login_screen_model.dart';
 
 class LogInScreenView extends AppView<LogInScreenModel> {
   LogInScreenView(LogInScreenModel model) : super(model);
