@@ -1,5 +1,5 @@
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
-import 'package:classify/presentation/ui/screens/main/main_screen.dart';
+import 'package:classify/presentation/ui/screens/started/started_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'signup_screen_model.dart';
@@ -27,7 +27,7 @@ class SignUpScreenViewModel
       showError(error: onError);
     });
 
-    if (user != null) view.navigateTo(model.context, MainScreen(), true);
+    if (user != null) view.navigateTo(model.context, StartedScreen(), true);
     model.loadingHide.onCall();
   }
 
