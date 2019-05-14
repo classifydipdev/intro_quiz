@@ -29,6 +29,7 @@ dependencies:
   package_info: ^0.4.0+3
   flutter_page_indicator: ^0.0.3
   flutter_platform_widgets: ^0.10.0
+  bubble_bottom_bar: ^1.2.0
 
 dev_dependencies:
   flutter_test:
@@ -42,6 +43,8 @@ flutter:
   - assets/images/mojave2.webp
   - assets/images/mojave3.webp
   - assets/images/icons/homeworkOrange.webp
+  - assets/images/icons/homePurple.webp
+  - assets/images/icons/profileGrey.webp
   - assets/images/icons/calendarGreen.webp
   - assets/images/profilePicture.webp
   - assets/icons/logo_icon.svg
