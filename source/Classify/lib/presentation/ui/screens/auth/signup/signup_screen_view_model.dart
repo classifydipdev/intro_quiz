@@ -1,8 +1,9 @@
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/screens/main/main_screen.dart';
-import 'package:classify/presentation/ui/screens/signup/signup_screen_model.dart';
-import 'package:classify/presentation/ui/screens/signup/signup_screen_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import 'signup_screen_model.dart';
+import 'signup_screen_view.dart';
 
 class SignUpScreenViewModel
     extends AppViewModel<SignUpScreenModel, SignUpScreenView> {
@@ -19,7 +20,7 @@ class SignUpScreenViewModel
     if (!validateForm()) return;
 
     model.loadingShow.onCall();
-    final FirebaseUser user = await model.firebaseAuth
+    final FirebaseUser user = await model.firbaseAuth
         .handleEmailSignUn(
             model.emailTextController.text, model.passwordTextController.text)
         .catchError((onError) {

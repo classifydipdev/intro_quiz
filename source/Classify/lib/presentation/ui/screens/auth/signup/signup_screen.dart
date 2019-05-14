@@ -1,7 +1,8 @@
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_screen.dart';
-import 'package:classify/presentation/ui/screens/signup/signup_screen_model.dart';
-import 'package:classify/presentation/ui/screens/signup/signup_screen_view.dart';
-import 'package:classify/presentation/ui/screens/signup/signup_screen_view_model.dart';
+
+import 'signup_screen_model.dart';
+import 'signup_screen_view.dart';
+import 'signup_screen_view_model.dart';
 
 class SignUpScreen extends AppScreen<SignUpScreenModel, SignUpScreenView,
     SignUpScreenViewModel> {

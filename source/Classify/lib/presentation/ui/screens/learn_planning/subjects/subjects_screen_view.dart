@@ -63,7 +63,8 @@ class SubjectsScreenView extends AppView<SubjectsScreenModel> {
             style: TextStyle(
                 fontSize: 18.0,
                 color: Colors.white,
-                fontWeight: FontWeight.bold),
+                fontWeight: FontWeight.bold,
+                fontFamily: 'GoogleSans'),
           ),
         ),
       ),

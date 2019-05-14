@@ -63,7 +63,7 @@ class StartedScreenView extends AppView<StartedScreenModel> {
               padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
               child: Text("Get started",
                   style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold)),
+                      color: Colors.white, fontWeight: FontWeight.bold,)),
             ),
           ),
         ],

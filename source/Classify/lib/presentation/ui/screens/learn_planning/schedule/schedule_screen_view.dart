@@ -169,6 +169,7 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
               style: TextStyle(
                 fontSize: 20.0,
                 color: Colors.white,
+                fontFamily: 'GoogleSans'
               ),
             )),
           ),
