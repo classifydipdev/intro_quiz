@@ -83,7 +83,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                                       fontWeight: FontWeight.bold,
                                       fontSize: 19,
                                       fontFamily: MainScreenModel.fontFamily,
-                                      color: Colors.white),
+                                      color: Colors.white,),
                                 )),
                             Text(
                               "JUNE 2, 2019 - 4 HOMEWORKS".toUpperCase(),

@@ -1,14 +1,15 @@
 import 'package:classify/presentation/res/colors.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
-import 'package:classify/presentation/ui/screens/signup/signup_screen_model.dart';
 import 'package:classify/presentation/utils/field_container.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SignUpScreenView extends AppView<SignUpScreenModel> {
-  SignUpScreenView(SignUpScreenModel model) : super(model);
+import 'login_screen_model.dart';
+
+class LogInScreenView extends AppView<LogInScreenModel> {
+  LogInScreenView(LogInScreenModel model) : super(model);
 
   @override
   Widget getView(BuildContext context) {
@@ -19,6 +20,7 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
 
   Widget getBody() {
     return Container(
+      padding:  EdgeInsets.only(top: 20.0, bottom: 20.0),
       width: MediaQuery.of(context).size.width,
       decoration: new BoxDecoration(
         gradient: LinearGradient(
@@ -39,8 +41,8 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
             children: <Widget>[
               getLogo(),
               SizedBox(height: 50.0),
-              getFieldContainer("user", "User", model.userTextController,
-                  model.userLoginValidator),
+              getFieldContainer("email", "Email", model.emailTextController,
+                  model.emailValidator),
               SizedBox(height: 25.0),
               getFieldContainer(
                 "password",
@@ -64,12 +66,6 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
                   ),
                 ),
               ),
-              SizedBox(height: 25.0),
-              getFieldContainer("first name", "First Name",
-                  model.nameTextController, model.firstNameValidator),
-              SizedBox(height: 25.0),
-              getFieldContainer("email", "Email", model.emailTextController,
-                  model.emailValidator),
               SizedBox(height: 40.0),
               createButton(),
               SizedBox(height: 45.0),
@@ -108,13 +104,12 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
 
   Widget createButton() {
     return Container(
-      margin: EdgeInsets.only(left: 65.0, right: 65.0),
+      margin: EdgeInsets.only(left: 50.0, right: 50.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          CupertinoButton(
-            padding: EdgeInsets.all(0),
-            onPressed: () {
+          InkWell(
+            onTap: () {
               navigateBack(context);
             },
             child: Container(
@@ -122,9 +117,7 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
                 padding: EdgeInsets.fromLTRB(10.0, 15.0, 15.0, 20.0),
                 child: Text("switch account",
                     style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14)),
+                        color: Colors.white, fontWeight: FontWeight.bold)),
               ),
             ),
           ),
@@ -135,13 +128,14 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
               borderRadius: BorderRadius.circular(35.0),
             ),
             onPressed: () {
-              model.onSignUp.onCall();
+              model.onLogIn.onCall();
             },
             child: Padding(
               padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
-              child: Text("sign up",
+              child: Text("log in",
                   style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold)),
+                      color: Colors.white, fontWeight: FontWeight.bold,
+                      fontFamily: 'GoogleSans')),
             ),
           ),
         ],

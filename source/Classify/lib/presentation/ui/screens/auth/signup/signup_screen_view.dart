@@ -1,15 +1,15 @@
 import 'package:classify/presentation/res/colors.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
-import 'package:classify/presentation/ui/screens/login/login_screen_model.dart';
-import 'package:classify/presentation/ui/screens/started/started_screen.dart';
 import 'package:classify/presentation/utils/field_container.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class LogInScreenView extends AppView<LogInScreenModel> {
-  LogInScreenView(LogInScreenModel model) : super(model);
+import 'signup_screen_model.dart';
+
+class SignUpScreenView extends AppView<SignUpScreenModel> {
+  SignUpScreenView(SignUpScreenModel model) : super(model);
 
   @override
   Widget getView(BuildContext context) {
@@ -20,6 +20,7 @@ class LogInScreenView extends AppView<LogInScreenModel> {
 
   Widget getBody() {
     return Container(
+      padding:  EdgeInsets.only(top: 20.0, bottom: 20.0),
       width: MediaQuery.of(context).size.width,
       decoration: new BoxDecoration(
         gradient: LinearGradient(
@@ -40,8 +41,8 @@ class LogInScreenView extends AppView<LogInScreenModel> {
             children: <Widget>[
               getLogo(),
               SizedBox(height: 50.0),
-              getFieldContainer("email", "Email", model.emailTextController,
-                  model.emailValidator),
+              getFieldContainer("user", "User", model.userTextController,
+                  model.userLoginValidator),
               SizedBox(height: 25.0),
               getFieldContainer(
                 "password",
@@ -65,6 +66,12 @@ class LogInScreenView extends AppView<LogInScreenModel> {
                   ),
                 ),
               ),
+              SizedBox(height: 25.0),
+              getFieldContainer("first name", "First Name",
+                  model.nameTextController, model.firstNameValidator),
+              SizedBox(height: 25.0),
+              getFieldContainer("email", "Email", model.emailTextController,
+                  model.emailValidator),
               SizedBox(height: 40.0),
               createButton(),
               SizedBox(height: 45.0),
@@ -75,7 +82,8 @@ class LogInScreenView extends AppView<LogInScreenModel> {
                   "\nprivacy policy and disclaimer",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
+                      color: Colors.white, fontWeight: FontWeight.bold,
+                      fontFamily: 'GoogleSans'),
                 ),
               ),
             ],
@@ -103,12 +111,13 @@ class LogInScreenView extends AppView<LogInScreenModel> {
 
   Widget createButton() {
     return Container(
-      margin: EdgeInsets.only(left: 65.0, right: 65.0),
+      margin: EdgeInsets.only(left: 50.0, right: 50.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          InkWell(
-            onTap: () {
+          CupertinoButton(
+            padding: EdgeInsets.all(0),
+            onPressed: () {
               navigateBack(context);
             },
             child: Container(
@@ -116,7 +125,9 @@ class LogInScreenView extends AppView<LogInScreenModel> {
                 padding: EdgeInsets.fromLTRB(10.0, 15.0, 15.0, 20.0),
                 child: Text("switch account",
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold)),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14)),
               ),
             ),
           ),
@@ -127,11 +138,11 @@ class LogInScreenView extends AppView<LogInScreenModel> {
               borderRadius: BorderRadius.circular(35.0),
             ),
             onPressed: () {
-              model.onLogIn.onCall();
+              model.onSignUp.onCall();
             },
             child: Padding(
               padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
-              child: Text("log in",
+              child: Text("sign up",
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold)),
             ),

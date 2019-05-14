@@ -1,8 +1,9 @@
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
-import 'package:classify/presentation/ui/screens/login/login_screen_model.dart';
-import 'package:classify/presentation/ui/screens/login/login_screen_view.dart';
 import 'package:classify/presentation/ui/screens/main/main_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import 'login_screen_model.dart';
+import 'login_screen_view.dart';
 
 class LogInScreenViewModel
     extends AppViewModel<LogInScreenModel, LogInScreenView> {
@@ -18,7 +19,7 @@ class LogInScreenViewModel
   void logIn() async {
     if (validateForm()) {
       model.loadingShow.onCall();
-      FirebaseUser user = await model.firebaseAuth
+      FirebaseUser user = await model.firbaseAuth
           .handleEmailSignIn(
               model.emailTextController.text, model.passwordTextController.text)
           .catchError((onError) {
