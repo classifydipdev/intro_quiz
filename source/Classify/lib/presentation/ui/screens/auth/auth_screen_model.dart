@@ -1,3 +1,4 @@
+import 'package:classify/data/auth/firebase/auth.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,5 +9,9 @@ class AuthScreenModel extends AppModel {
 
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  OnCallCommand onNavigateTo = OnCallCommand();
+  OnCallCommand onSignInByGoogle = OnCallCommand();
+
+  final AppFirbaseAuth firebaseAuth = AppFirbaseAuth();
+
+  // double 
 }
