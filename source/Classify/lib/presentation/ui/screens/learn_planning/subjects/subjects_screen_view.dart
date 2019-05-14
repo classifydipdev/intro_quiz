@@ -1,4 +1,4 @@
-import 'package:classify/presentation/res/images.dart';
+import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/subjects/subjects_screen_model.dart';
 import 'package:classify/presentation/utils/utils.dart';
@@ -12,24 +12,49 @@ class SubjectsScreenView extends AppView<SubjectsScreenModel> {
   Widget getView(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: getBody(),
+      body: SafeArea(child: getBody()),
     );
   }
 
   Widget getBody() {
-    return GridView.builder(
-        padding: EdgeInsets.all(40.0),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 30.0,
-            mainAxisSpacing: 35.0,
-            childAspectRatio: MediaQuery.of(context).size.width <= 700.0
-                ? 2.5
-                : MediaQuery.of(context).size.width >= 1000.0 ? 5 : 4),
-        itemCount: Utils.subjectListButtons.length,
-        itemBuilder: (BuildContext context, int index) {
-          return getButton(Utils.subjectListButtons[index]);
-        },
+    List<Widget> subjectList = List();
+    for (int i = 0; i < Utils.subjectListButtons.length; i++) {
+      subjectList.add(getButton(Utils.subjectListButtons[i]));
+    }
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: DimensApp.paddingMiddle),
+      child: ListView(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.fromLTRB(DimensApp.paddingSmall,
+                DimensApp.paddingMiddle, DimensApp.paddingSmall, 0),
+            child: Text(
+              "Subjects",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  fontFamily: "GoogleSans",
+                  color: Colors.white),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(DimensApp.paddingSmall),
+            child: Text(
+              "All the timetabled subjects, don't fret: you can always edit these later.",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  fontFamily: "GoogleSans",
+                  color: Colors.white70),
+            ),
+          ),
+          Wrap(
+            children: subjectList,
+          ),
+        ],
+      ),
     );
   }
 
@@ -43,7 +68,11 @@ class SubjectsScreenView extends AppView<SubjectsScreenModel> {
         }
       },
       splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
       child: Container(
+        margin: EdgeInsets.symmetric(
+            horizontal: DimensApp.paddingSmall,
+            vertical: DimensApp.paddingSmall),
         decoration: BoxDecoration(
           gradient: buttonStyle.gradient,
           border: Border.all(
@@ -54,10 +83,13 @@ class SubjectsScreenView extends AppView<SubjectsScreenModel> {
                   model.learningPlan.subjects.contains(buttonStyle.value)
                       ? 1.0
                       : 0.0),
-              width: 3.0),
+              width: 2.0),
           borderRadius: BorderRadius.circular(35.0),
         ),
-        child: Center(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: DimensApp.paddingNormalExtra,
+              vertical: DimensApp.paddingSmall),
           child: Text(
             buttonStyle.text,
             style: TextStyle(
