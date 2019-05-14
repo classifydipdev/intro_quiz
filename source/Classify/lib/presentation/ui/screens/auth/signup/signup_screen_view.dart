@@ -20,6 +20,7 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
 
   Widget getBody() {
     return Container(
+      padding:  EdgeInsets.only(top: 20.0, bottom: 20.0),
       width: MediaQuery.of(context).size.width,
       decoration: new BoxDecoration(
         gradient: LinearGradient(
@@ -81,7 +82,8 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
                   "\nprivacy policy and disclaimer",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
+                      color: Colors.white, fontWeight: FontWeight.bold,
+                      fontFamily: 'GoogleSans'),
                 ),
               ),
             ],
@@ -109,7 +111,7 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
 
   Widget createButton() {
     return Container(
-      margin: EdgeInsets.only(left: 65.0, right: 65.0),
+      margin: EdgeInsets.only(left: 50.0, right: 50.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[

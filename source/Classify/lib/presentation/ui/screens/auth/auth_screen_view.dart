@@ -251,6 +251,7 @@ class AuthScreenView extends AppView<AuthScreenModel> {
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 12.0,
+                      fontFamily: 'GoogleSans'
                     ),
                   ),
                 ),

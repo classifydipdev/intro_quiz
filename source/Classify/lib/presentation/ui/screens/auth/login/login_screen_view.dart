@@ -20,6 +20,7 @@ class LogInScreenView extends AppView<LogInScreenModel> {
 
   Widget getBody() {
     return Container(
+      padding:  EdgeInsets.only(top: 20.0, bottom: 20.0),
       width: MediaQuery.of(context).size.width,
       decoration: new BoxDecoration(
         gradient: LinearGradient(
@@ -103,7 +104,7 @@ class LogInScreenView extends AppView<LogInScreenModel> {
 
   Widget createButton() {
     return Container(
-      margin: EdgeInsets.only(left: 65.0, right: 65.0),
+      margin: EdgeInsets.only(left: 50.0, right: 50.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -133,7 +134,8 @@ class LogInScreenView extends AppView<LogInScreenModel> {
               padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
               child: Text("log in",
                   style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold)),
+                      color: Colors.white, fontWeight: FontWeight.bold,
+                      fontFamily: 'GoogleSans')),
             ),
           ),
         ],
