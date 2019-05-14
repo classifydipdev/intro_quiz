@@ -2,11 +2,13 @@ import 'package:classify/data/auth/entities/auth_exception.dart';
 import 'package:classify/domain/managers/preference_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:toast/toast.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_model.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_arhitecture_helper/presentation/ui/mvvm/stateful/base_view.dart';
 import 'package:flutter_arhitecture_helper/presentation/ui/mvvm/stateful/base_view_model.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 abstract class AppViewModel<M extends AppModel, V extends BaseView<M>>
     extends BaseViewModel<M, V> {
@@ -59,29 +61,41 @@ abstract class AppViewModel<M extends AppModel, V extends BaseView<M>>
         text = error.message;
       } else if (error is AppAuthException) {
         text = error.message;
+      } else if (error is PlatformException) {
+        if (error.code == "ERROR_USER_NOT_FOUND" ||
+            error.code == "ERROR_WRONG_PASSWORD")
+          text = "Incorrect email or password, try again, please.";
       }
-    } else if (text == null || text.length == 0) {
+    }
+    
+    if (text == null || text.length == 0) {
       text = "Unknown error. Try repeating the action again.";
     }
 
-    showDialog(
+    showPlatformDialog(
       context: view.context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
-        return AlertDialog(
-          title: new Text("Oops! Something went wrong"),
-          content: new Text(text),
-          actions: <Widget>[
-            // usually buttons at the bottom of the dialog
-            new FlatButton(
-              child: new Text("Close"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
+      builder: (_) => PlatformAlertDialog(
+            title: Text("Oops! Something went wrong"),
+            content: Text(text),
+            actions: <Widget>[
+              PlatformDialogAction(
+                onPressed: () {
+                  Navigator.pop(view.context);
+                },
+                child: Container(),
+                ios: (_) {
+                  return CupertinoDialogActionData(
+                    child: Text("Ok"),
+                  );
+                },
+                android: (_) {
+                  return MaterialDialogActionData(
+                    child: Text("Ok"),
+                  );
+                },
+              ),
+            ],
+          ),
     );
   }
 
@@ -90,5 +104,4 @@ abstract class AppViewModel<M extends AppModel, V extends BaseView<M>>
       content: new Text(text),
     ));
   }
-
 }

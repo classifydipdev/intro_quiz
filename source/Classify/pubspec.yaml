@@ -28,6 +28,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   package_info: ^0.4.0+3
   flutter_page_indicator: ^0.0.3
+  flutter_platform_widgets: ^0.10.0
 
 dev_dependencies:
   flutter_test:

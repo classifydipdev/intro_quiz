@@ -1,7 +1,7 @@
 import 'package:classify/presentation/res/colors.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/signup/signup_screen_model.dart';
-import 'package:classify/presentation/ui/screens/started/started_screen.dart';
+import 'package:classify/presentation/utils/field_container.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/cupertino.dart';
@@ -32,47 +32,61 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
         ),
       ),
       child: Center(
+        child: Form(
+          key: model.formKey,
           child: ListView(
-        shrinkWrap: true,
-        children: <Widget>[
-          getLogo(),
-          SizedBox(height: 50.0),
-          getFiledContainer("user", "User"),
-          SizedBox(height: 25.0),
-          getFiledContainer(
-            "password",
-            "Password",
-            obscureText: true,
-            trailingWidget: CupertinoButton(
-              minSize: 20,
-              onPressed: () {},
-              padding: EdgeInsets.all(0),
-              child: Icon(
-                FontAwesomeIcons.eye,
-                color: Colors.white,
-                size: 15,
+            shrinkWrap: true,
+            children: <Widget>[
+              getLogo(),
+              SizedBox(height: 50.0),
+              getFieldContainer("user", "User", model.userTextController,
+                  model.userLoginValidator),
+              SizedBox(height: 25.0),
+              getFieldContainer(
+                "password",
+                "Password",
+                model.passwordTextController,
+                model.passwordValidator,
+                obscureText: !model.passwordShow,
+                trailingWidget: CupertinoButton(
+                  minSize: 20,
+                  onPressed: () {
+                    model.passwordShow = !model.passwordShow;
+                    updateUI();
+                  },
+                  padding: EdgeInsets.all(0),
+                  child: Icon(
+                    model.passwordShow
+                        ? FontAwesomeIcons.eyeSlash
+                        : FontAwesomeIcons.eye,
+                    color: Colors.white,
+                    size: 15,
+                  ),
+                ),
               ),
-            ),
-          ),
-          SizedBox(height: 25.0),
-          getFiledContainer("first name", "First Name"),
-          SizedBox(height: 25.0),
-          getFiledContainer("email", "Email"),
-          SizedBox(height: 40.0),
-          createButton(),
-          SizedBox(height: 45.0),
-          Container(
-            margin: EdgeInsets.only(left: 25.0, right: 25.0),
-            child: Text(
-              "by clicking sign up, you agree to our terms of use,"
+              SizedBox(height: 25.0),
+              getFieldContainer("first name", "First Name",
+                  model.nameTextController, model.firstNameValidator),
+              SizedBox(height: 25.0),
+              getFieldContainer("email", "Email", model.emailTextController,
+                  model.emailValidator),
+              SizedBox(height: 40.0),
+              createButton(),
+              SizedBox(height: 45.0),
+              Container(
+                margin: EdgeInsets.only(left: 25.0, right: 25.0),
+                child: Text(
+                  "by clicking sign up, you agree to our terms of use,"
                   "\nprivacy policy and disclaimer",
-              textAlign: TextAlign.center,
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-            ),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
           ),
-        ],
-      )),
+        ),
+      ),
     );
   }
 
@@ -85,47 +99,6 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
             child: SvgPicture.asset(
               'assets/icons/logo_icon.svg',
               width: 55.0,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget getFiledContainer(String name, String description,
-      {Widget trailingWidget, bool obscureText = false}) {
-    return Container(
-      margin: EdgeInsets.only(left: 65.0, right: 65.0),
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(left: 20.0, bottom: 5.0),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(name, style: TextStyle(color: Colors.white)),
-            ),
-          ),
-          TextFormField(
-            style: TextStyle(color: Colors.white),
-            autofocus: false,
-            obscureText: obscureText,
-            cursorColor: Colors.white,
-            decoration: InputDecoration(
-              suffix: trailingWidget != null
-                  ? trailingWidget
-                  : Container(
-                      height: 0,
-                      width: 0,
-                    ),
-              hintText: description,
-              hintStyle: TextStyle(color: Colors.white),
-              contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 25.0, 10.0),
-              enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(35.0),
-                  borderSide: BorderSide(color: Colors.white, width: 1.0)),
-              focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(35.0),
-                  borderSide: BorderSide(color: Colors.white, width: 1.0)),
             ),
           ),
         ],
@@ -149,7 +122,9 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
                 padding: EdgeInsets.fromLTRB(10.0, 15.0, 15.0, 20.0),
                 child: Text("switch account",
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14)),
               ),
             ),
           ),
@@ -160,7 +135,7 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
               borderRadius: BorderRadius.circular(35.0),
             ),
             onPressed: () {
-              navigateTo(context, StartedScreen(), false);
+              model.onSignUp.onCall();
             },
             child: Padding(
               padding: EdgeInsets.only(top: 15.0, bottom: 15.0),

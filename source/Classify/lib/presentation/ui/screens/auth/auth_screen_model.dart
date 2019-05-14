@@ -11,5 +11,7 @@ class AuthScreenModel extends AppModel {
 
   OnCallCommand onSignInByGoogle = OnCallCommand();
 
-  final AppFirbaseAuth firbaseAuth = AppFirbaseAuth();
+  final AppFirbaseAuth firebaseAuth = AppFirbaseAuth();
+
+  // double 
 }
