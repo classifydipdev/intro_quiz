@@ -12,104 +12,41 @@ class TimingScreenView extends AppView<TimingScreenModel> {
   Widget getView(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: getBody(),
+      body: SafeArea(child: getBody()),
     );
   }
 
   Widget getBody() {
     return Container(
-        height: double.maxFinite,
-        width: double.maxFinite,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(top: 20.0),
-              ),
-              Text(
-                "Lesson duration",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'GoogleSans',
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: DimensApp.paddingSmall),
-                child: getHorizontalPicker(
-                    PageController(viewportFraction: 0.33),
-                    10,
-                    65,
-                    5,
-                    (position) {}),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: DimensApp.paddingNormal),
-                child: Text(
-                  "School day timings",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'GoogleSans',
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: DimensApp.paddingNormal),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      child: Text(
-                        "Start",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'GoogleSans',
-                          fontSize: 22,
-                          //fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        "Finish",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'GoogleSans',
-                          fontSize: 22,
-                          //fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: DimensApp.paddingNormal),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      child: getTimePicker(7, 18, (int hours, int minutes) {}),
-                    ),
-                    Expanded(
-                      child: getTimePicker(7, 18, (int hours, int minutes) {}),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+      width: double.maxFinite,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(top: 20.0),
           ),
-        ));
+          Text(
+            "Lessons per day",
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'GoogleSans',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: DimensApp.paddingSmall),
+            child: getHorizontalPicker(
+                PageController(viewportFraction: 0.2, initialPage: 5),
+                1,
+                10,
+                1,
+                (position) {}),
+          ),
+        ],
+      ),
+    );
   }
 }

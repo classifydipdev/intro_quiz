@@ -1,3 +1,4 @@
+import 'package:classify/presentation/res/colors.dart';
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,7 @@ Widget getHorizontalPicker(
     PageController controller, int from, int to, int step, Function onChange) {
   return Container(
     width: 280,
-    height: 40,
+    height: 60,
     child: Stack(
       children: <Widget>[
         PageView.builder(
@@ -17,13 +18,12 @@ Widget getHorizontalPicker(
             return Container(
               transform: Matrix4.translationValues(0, 0, 0),
               child: Container(
-                padding: EdgeInsets.only(top: DimensApp.paddingPico),
+                padding: EdgeInsets.only(top: DimensApp.paddingSmallExtra),
                 child: Text(
                   (step * index + from).toString(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.w100,
+                    fontSize: 20.0,
                     fontFamily: 'GoogleSans',
                     color: Colors.white,
                   ),
@@ -37,10 +37,10 @@ Widget getHorizontalPicker(
           alignment: Alignment.center,
           child: Container(
             height: 50,
-            width: 60,
+            width: 65,
             decoration: BoxDecoration(
               border: new Border.all(
-                  color: Colors.green, width: 1.2, style: BorderStyle.solid),
+                  color: ColorsApp.pink, width: 1.2, style: BorderStyle.solid),
               borderRadius: BorderRadius.circular(80.0),
             ),
           ),
