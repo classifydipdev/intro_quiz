@@ -73,35 +73,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-    configurations.all {
-        resolutionStrategy.eachDependency { details ->
-            if (details.requested.group == 'androidx.core' &&
-                    !details.requested.name.contains('androidx')) {
-                details.useVersion "1.0.1"
-            }
-        }
-
-        exclude group: 'com.google.guava', module: 'failureaccess'
-
-        resolutionStrategy {
-            eachDependency { details ->
-                if('guava' == details.requested.name) {
-                    details.useVersion '27.0-android'
-                }
-            }
-        }
-
-        resolutionStrategy {
-            force 'com.android.support:support-media-compat:28.0.0'
-            force 'com.android.support:appcompat-v7:28.0.0'
-            force "com.android.support:cardview-v7:28.0.0"
-            force "com.android.support:customtabs:28.0.0"
-            force 'com.android.support:support-v4:28.0.0'
-            force "com.google.android.gms:play-services-basement:16.2.0"
-            force "com.google.android.gms:play-services-tasks:16.0.1"
-        }
-    }
 }
 
 flutter {
@@ -112,5 +83,3 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.multidex:multidex:2.0.1'
 }
-
-com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true
