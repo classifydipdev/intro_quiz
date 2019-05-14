@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/auth/auth_screen.dart';
+import 'package:classify/presentation/ui/screens/learn_planning/learn_planning_screen.dart';
 import 'package:classify/presentation/ui/screens/splash/splash_screen.dart';
 import 'package:classify/presentation/utils/localizations.dart';
 import 'package:classify/presentation/utils/push_notifications.dart';
@@ -38,7 +39,7 @@ class App extends StatelessWidget {
         FirebaseAnalyticsObserver(analytics: analytics),
       ],
       theme: ThemeApp.data,
-      home: AuthScreen(),
+      home: LearnPlanningScreen(),
     );
   }
 }

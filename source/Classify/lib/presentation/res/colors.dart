@@ -6,4 +6,5 @@ class ColorsApp {
   static const Color accent = Color(0xFF147AA8);
   static const Color blue = Color(0xFF2e7dfa);
   static const Color purple = Color(0xFFbe78fa);
+  static const Color pink = Color(0xFFebbde4);
 }

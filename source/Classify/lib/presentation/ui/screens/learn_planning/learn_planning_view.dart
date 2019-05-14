@@ -77,7 +77,7 @@ class LearnPlanningScreenView extends AppView<LearnPlanningScreenModel> {
                           style: TextStyle(
                             fontFamily: 'GoogleSans',
                             fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                            fontSize: 16,
                             color: Colors.white,
                           ),
                         ),
@@ -95,7 +95,7 @@ class LearnPlanningScreenView extends AppView<LearnPlanningScreenModel> {
                 alignment: Alignment.center,
                 child: PageIndicator(
                   layout: PageIndicatorLayout.WARM,
-                  size: 10.0,
+                  size: 5.0,
                   controller: model.pageController,
                   space: 5.0,
                   count: 3,
@@ -113,7 +113,7 @@ class LearnPlanningScreenView extends AppView<LearnPlanningScreenModel> {
                     style: TextStyle(
                       fontFamily: 'GoogleSans',
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                      fontSize: 16,
                       color: Colors.white,
                     ),
                   ),
