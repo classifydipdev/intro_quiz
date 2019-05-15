@@ -7,3 +7,4 @@ source/Classify/android/app/.project
 source/Classify/.metadata
 source/Classify/ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
 source/Classify/ios/Runner.xcworkspace/contents.xcworkspacedata
+source/Classify/ios/Runner/Runner.entitlements
