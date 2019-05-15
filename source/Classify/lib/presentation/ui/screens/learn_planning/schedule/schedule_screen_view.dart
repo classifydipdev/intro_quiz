@@ -1,3 +1,4 @@
+import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/schedule/schedule_screen_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,21 +19,40 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
     return Container(
       width: double.maxFinite,
       height: double.maxFinite,
-      child: Stack(
-        children: <Widget>[
-          ListView.builder(
-              itemCount: 5,
-              itemBuilder: (BuildContext context, int index) {
-                List<String> days = [
-                  "MONDAY",
-                  "TUESDAY",
-                  "WEDNESDAY",
-                  "THURSDAY",
-                  "FRIDAY"
-                ];
-                return getDay(days[index]);
-              }),
-        ],
+      child: Padding(
+        padding: EdgeInsets.only(left: DimensApp.paddingNormal),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, DimensApp.paddingMiddle, 0, 0),
+              child: Text(
+                "Timetable",
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                    fontFamily: "GoogleSans",
+                    color: Colors.white),
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: 5,
+                itemBuilder: (BuildContext context, int index) {
+                  List<String> days = [
+                    "MONDAY",
+                    "TUESDAY",
+                    "WEDNESDAY",
+                    "THURSDAY",
+                    "FRIDAY"
+                  ];
+                  return getDay(days[index]);
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -126,58 +146,82 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
 
   Widget getDay(String text) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.only(top: 20.0),
-        ),
-        Text(
-          text,
-          style: TextStyle(
-              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+          padding: EdgeInsets.only(top: 20.0, bottom: 10.0),
+          child: Text(
+            text,
+            style: TextStyle(
+                color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+          ),
         ),
         Container(
-            height: 55.0,
-            width: double.maxFinite,
-            margin: EdgeInsets.all(5.0),
-            child: ListView.builder(
-              itemCount: 6,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (BuildContext context, int index) {
-                return getAddItem();
-              },
-            )),
+          height: 70.0,
+          width: double.maxFinite,
+          margin: EdgeInsets.all(5.0),
+          child: ListView.builder(
+            itemCount: 6,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (BuildContext context, int index) {
+              return getAddItem(index);
+            },
+          ),
+        ),
       ],
     );
   }
 
-  Widget getAddItem() {
+  Widget getAddItem(int index) {
     return Padding(
       padding: EdgeInsets.only(right: 10.0),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        width: 155.0,
-        height: 50.0,
-        alignment: Alignment.center,
-        child: Center(
-          child: InkWell(
-            onTap: () {
-              showSubjectChooser();
-            },
-            child: Container(
-                child: Text(
-              '+',
-              style: TextStyle(
-                fontSize: 20.0,
-                color: Colors.white,
-                fontFamily: 'GoogleSans'
+        height: 55,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(
+                  bottom: DimensApp.paddingMicro,
+                  left: DimensApp.paddingSmallExtra),
+              child: Text(
+                (index + 1).toString(),
+                style: TextStyle(
+                  fontSize: 12.0,
+                  color: Colors.white,
+                  fontFamily: 'GoogleSans',
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            )),
-          ),
-        ),
-        decoration: BoxDecoration(
-          border:
-              Border.all(color: Color.fromRGBO(255, 255, 255, 3.0), width: 2.0),
-          borderRadius: BorderRadius.circular(35.0),
+            ),
+            Container(
+              width: 130.0,
+              height: 50.0,
+              padding: EdgeInsets.all(DimensApp.paddingPico),
+              alignment: Alignment.center,
+              child: OutlineButton(
+                highlightedBorderColor: Colors.white,
+                borderSide: BorderSide(color: Colors.white, width: 2),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(35.0),
+                ),
+                onPressed: () {
+                  showSubjectChooser();
+                },
+                child: Center(
+                  child: Container(
+                    child: Text(
+                      '+',
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.white,
+                          fontFamily: 'GoogleSans'),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

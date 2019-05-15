@@ -23,7 +23,8 @@ class SubjectsScreenView extends AppView<SubjectsScreenModel> {
     }
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: DimensApp.paddingMiddle),
-      child: ListView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
             padding: EdgeInsets.fromLTRB(DimensApp.paddingSmall,
@@ -50,8 +51,12 @@ class SubjectsScreenView extends AppView<SubjectsScreenModel> {
                   color: Colors.white70),
             ),
           ),
-          Wrap(
-            children: subjectList,
+          Expanded(
+            child: SingleChildScrollView(
+              child: Wrap(
+                children: subjectList,
+              ),
+            ),
           ),
         ],
       ),
