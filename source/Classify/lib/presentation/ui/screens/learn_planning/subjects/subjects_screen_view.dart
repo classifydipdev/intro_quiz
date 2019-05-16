@@ -1,6 +1,7 @@
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/subjects/subjects_screen_model.dart';
+import 'package:classify/presentation/ui/widgets/subject_item.dart';
 import 'package:classify/presentation/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,14 @@ class SubjectsScreenView extends AppView<SubjectsScreenModel> {
   Widget getBody() {
     List<Widget> subjectList = List();
     for (int i = 0; i < Utils.subjectListButtons.length; i++) {
-      subjectList.add(getButton(Utils.subjectListButtons[i]));
+      ButtonStyle buttonStyle = Utils.subjectListButtons[i];
+      subjectList.add(getSubjectButton(buttonStyle, (bool isSelected) {
+        if (isSelected) {
+          model.onSubjectRemove.onCallWithValue(buttonStyle.value);
+        } else {
+          model.onSubjectSelect.onCallWithValue(buttonStyle.value);
+        }
+      }, isSelected: model.learningPlan.subjects.contains(buttonStyle.value)));
     }
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: DimensApp.paddingMiddle),
@@ -59,51 +67,6 @@ class SubjectsScreenView extends AppView<SubjectsScreenModel> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget getButton(ButtonStyle buttonStyle) {
-    return InkWell(
-      onTap: () {
-        if (model.learningPlan.subjects.contains(buttonStyle.value)) {
-          model.onSubjectRemove.onCallWithValue(buttonStyle.value);
-        } else {
-          model.onSubjectSelect.onCallWithValue(buttonStyle.value);
-        }
-      },
-      splashColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      child: Container(
-        margin: EdgeInsets.symmetric(
-            horizontal: DimensApp.paddingSmall,
-            vertical: DimensApp.paddingSmall),
-        decoration: BoxDecoration(
-          gradient: buttonStyle.gradient,
-          border: Border.all(
-              color: Color.fromRGBO(
-                  255,
-                  255,
-                  255,
-                  model.learningPlan.subjects.contains(buttonStyle.value)
-                      ? 1.0
-                      : 0.0),
-              width: 2.0),
-          borderRadius: BorderRadius.circular(35.0),
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: DimensApp.paddingNormalExtra,
-              vertical: DimensApp.paddingSmall),
-          child: Text(
-            buttonStyle.text,
-            style: TextStyle(
-                fontSize: 18.0,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'GoogleSans'),
-          ),
-        ),
       ),
     );
   }

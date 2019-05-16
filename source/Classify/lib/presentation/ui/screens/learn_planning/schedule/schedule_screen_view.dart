@@ -1,6 +1,8 @@
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/schedule/schedule_screen_model.dart';
+import 'package:classify/presentation/ui/widgets/subject_item.dart';
+import 'package:classify/presentation/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -85,8 +87,15 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
     showModalBottomSheet(
         context: context,
         builder: (builder) {
+          List<Widget> subjectList = List();
+          for (int i = 0; i < Utils.subjectListButtons.length; i++) {
+            ButtonStyle buttonStyle = Utils.subjectListButtons[i];
+            subjectList.add(getSubjectButton(buttonStyle, () {
+              Navigator.pop(context);
+            }, isBorder: false));
+          }
           return Container(
-            height: 300.0,
+            height: 260.0,
             decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -108,35 +117,14 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
                         color: Colors.black,
                         fontWeight: FontWeight.bold),
                   ),
-//                            Column(
-//                              children: <Widget>[
-//                                GridView.builder(
-//                                  padding: EdgeInsets.all(40.0),
-//                                  gridDelegate:
-//                                      SliverGridDelegateWithFixedCrossAxisCount(
-//                                          crossAxisCount: 2,
-//                                          crossAxisSpacing: 30.0,
-//                                          mainAxisSpacing: 35.0,
-//                                          childAspectRatio:
-//                                              MediaQuery.of(context)
-//                                                          .size
-//                                                          .width <=
-//                                                      700.0
-//                                                  ? 2.5
-//                                                  : MediaQuery.of(context)
-//                                                              .size
-//                                                              .width >=
-//                                                          1000.0
-//                                                      ? 5
-//                                                      : 4),
-//                                  itemCount: 9,
-//                                  itemBuilder:
-//                                      (BuildContext context, int index) {
-//                                    return getButton();
-//                                  },
-//                                )
-//                              ],
-//                            )
+                  Expanded(
+                      child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Wrap(
+                      direction: Axis.vertical,
+                      children: subjectList,
+                    ),
+                  ))
                 ],
               ),
             ),
@@ -176,7 +164,6 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
     return Padding(
       padding: EdgeInsets.only(right: 10.0),
       child: Container(
-        height: 55,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
