@@ -1,78 +1,27 @@
+import 'package:classify/presentation/entities/subject.dart';
 import 'package:flutter/material.dart';
 
 class Utils {
-  static List<ButtonStyle> subjectListButtons = [
-    ButtonStyle(
-        "History",
-        LinearGradient(
-            colors: [Colors.greenAccent[400], Colors.greenAccent[400]]),
-        "1"),
-    ButtonStyle(
-        "English",
-        LinearGradient(
-            colors: [Colors.deepOrange[600], Colors.deepOrange[600]]),
-        "2"),
-    ButtonStyle("Math",
-        LinearGradient(colors: [Colors.yellow[700], Colors.yellow[700]]), "3"),
-    ButtonStyle("PE",
-        LinearGradient(colors: [Colors.purple[600], Colors.purple[600]]), "4"),
-    ButtonStyle("Biology",
-        LinearGradient(colors: [Colors.red[600], Colors.red[600]]), "5"),
-    ButtonStyle("Chemistry",
-        LinearGradient(colors: [Colors.teal[600], Colors.teal[600]]), "6"),
-    ButtonStyle("Computer Science",
-        LinearGradient(colors: [Colors.green[600], Colors.green[600]]), "7"),
-    ButtonStyle("Philosophy",
-        LinearGradient(colors: [Colors.blue[600], Colors.blue[600]]), "8"),
-    ButtonStyle("Economics",
-        LinearGradient(colors: [Colors.pink[600], Colors.pink[600]]), "9"),
-    ButtonStyle(
-        "DT",
-        LinearGradient(colors: [Colors.lightBlue[300], Colors.lightBlue[300]]),
-        "10"),
-    ButtonStyle("Italian",
-        LinearGradient(colors: [Colors.pink[300], Colors.pink[300]]), "11"),
-    ButtonStyle("Latin",
-        LinearGradient(colors: [Colors.lime[600], Colors.lime[600]]), "12"),
-    ButtonStyle("Geography",
-        LinearGradient(colors: [Colors.redAccent, Colors.redAccent]), "13"),
-    ButtonStyle("Spanish",
-        LinearGradient(colors: [Colors.orange[600], Colors.orange[600]]), "14"),
-    ButtonStyle("German",
-        LinearGradient(colors: [Colors.indigo[400], Colors.indigo[400]]), "15"),
-    ButtonStyle(
-        "Physics", LinearGradient(colors: [Colors.black, Colors.black]), "16"),
-    // ButtonStyle(
-    //     "Physics",
-    //     LinearGradient(
-    //       colors: [
-    //         Colors.grey[600],
-    //         Colors.grey[600],
-    //         Colors.grey[700],
-    //         Colors.grey[700],
-    //       ],
-    //       stops: [0.25, 0.50, 0.75, 1],
-    //     ),
-    //     "17"),
-    // ButtonStyle(
-    //     "Drama",
-    //     LinearGradient(
-    //       colors: [
-    //         Colors.cyan[300],
-    //         Colors.cyan[400],
-    //         Colors.cyan[500],
-    //         Colors.cyan[600],
-    //       ],
-    //       stops: [0.25, 0.50, 0.75, 1],
-    //     ),
-    //     "18"),
-  ];
-}
 
-class ButtonStyle {
-  String text;
-  Gradient gradient;
-  String value;
-
-  ButtonStyle(this.text, this.gradient, this.value);
+  static get customSubjectList{
+    return [
+      Subject("1", "History", Colors.greenAccent[400], Colors.greenAccent[400]),
+      Subject("2", "English", Colors.deepOrange[600], Colors.deepOrange[600]),
+      Subject("3", "Math", Colors.yellow[700], Colors.yellow[700]),
+      Subject("4", "PE", Colors.purple[600], Colors.purple[600]),
+      Subject("5", "Biology", Colors.red[600], Colors.red[600]),
+      Subject("6", "Chemistry", Colors.teal[600], Colors.teal[600]),
+      Subject("7", "Computer Science", Colors.green[600], Colors.green[600]),
+      Subject("8", "Philosophy", Colors.blue[600], Colors.blue[600]),
+      Subject("9", "Economics", Colors.pink[600], Colors.pink[600]),
+      Subject("10", "DT", Colors.lightBlue[300], Colors.lightBlue[300]),
+      Subject("11", "Italian", Colors.pink[300], Colors.pink[300]),
+      Subject("12", "Latin", Colors.lime[600], Colors.lime[600]),
+      Subject("13", "Geography", Colors.redAccent, Colors.redAccent),
+      Subject("14", "Spanish", Colors.orange[600], Colors.orange[600]),
+      Subject("15", "German", Colors.indigo[400], Colors.indigo[400]),
+      Subject("16", "Physics", Colors.black, Colors.black),
+      // Subject("17", "Drama", Colors.cyan[300], Colors.cyan[600]),
+    ];
+  }
 }

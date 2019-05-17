@@ -1,3 +1,4 @@
+import 'package:classify/presentation/entities/subject.dart';
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/schedule/schedule_screen_model.dart';
@@ -88,9 +89,9 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
         context: context,
         builder: (builder) {
           List<Widget> subjectList = List();
-          for (int i = 0; i < Utils.subjectListButtons.length; i++) {
-            ButtonStyle buttonStyle = Utils.subjectListButtons[i];
-            subjectList.add(getSubjectButton(buttonStyle, () {
+          for (int i = 0; i < Utils.customSubjectList.length; i++) {
+            Subject subject = Utils.customSubjectList[i];
+            subjectList.add(getSubjectButton(subject, () {
               Navigator.pop(context);
             }, isBorder: false));
           }

@@ -1,3 +1,4 @@
+import 'package:classify/presentation/entities/subject.dart';
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/subjects/subjects_screen_model.dart';
@@ -19,15 +20,15 @@ class SubjectsScreenView extends AppView<SubjectsScreenModel> {
 
   Widget getBody() {
     List<Widget> subjectList = List();
-    for (int i = 0; i < Utils.subjectListButtons.length; i++) {
-      ButtonStyle buttonStyle = Utils.subjectListButtons[i];
-      subjectList.add(getSubjectButton(buttonStyle, (bool isSelected) {
+    for (int i = 0; i < Utils.customSubjectList.length; i++) {
+      Subject subject = Utils.customSubjectList[i];
+      subjectList.add(getSubjectButton(Utils.customSubjectList[i], (bool isSelected) {
         if (isSelected) {
-          model.onSubjectRemove.onCallWithValue(buttonStyle.value);
+          model.onSubjectRemove.onCallWithValue(subject.id);
         } else {
-          model.onSubjectSelect.onCallWithValue(buttonStyle.value);
+          model.onSubjectSelect.onCallWithValue(subject.id);
         }
-      }, isSelected: model.learningPlan.subjects.contains(buttonStyle.value)));
+      }, isSelected: model.learningPlan.subjects.contains(subject.id)));
     }
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: DimensApp.paddingMiddle),

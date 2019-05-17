@@ -1,8 +1,9 @@
+import 'package:classify/presentation/entities/subject.dart';
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/utils/utils.dart';
 import 'package:flutter/material.dart';
 
-Widget getSubjectButton(ButtonStyle buttonStyle, Function onTap,
+Widget getSubjectButton(Subject subject, Function onTap,
     {bool isSelected = false, bool isBorder = true}) {
   return Container(
     height: 70,
@@ -17,7 +18,7 @@ Widget getSubjectButton(ButtonStyle buttonStyle, Function onTap,
             horizontal: DimensApp.paddingSmall,
             vertical: DimensApp.paddingSmall),
         decoration: BoxDecoration(
-          gradient: buttonStyle.gradient,
+          gradient: LinearGradient(colors: [subject.colorStart, subject.colorEnd]),
           border: Border.all(
               color: Color.fromRGBO(
                   255, 255, 255, isSelected && isBorder ? 1.0 : 0.0),
@@ -32,7 +33,7 @@ Widget getSubjectButton(ButtonStyle buttonStyle, Function onTap,
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 Text(
-                  buttonStyle.text,
+                  subject.name,
                   style: TextStyle(
                     fontSize: 18.0,
                     color: Colors.white,
