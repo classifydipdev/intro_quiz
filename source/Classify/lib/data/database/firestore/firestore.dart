@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:classify/data/helpers/firestore_helper.dart';
 
 import '../entities/subject.dart';
 import '../entities/user.dart';
@@ -13,12 +13,12 @@ class AppFirbaseFirestore {
   static final scheduleCollection = "shedules";
   static final lessonCollection = "lessons";
 
-  static final _firestore = Firestore.instance;
+  static final _firestoreHelper = FirestoreBase();
 
   Future<void> addUser(User user) {
     if (user == null || user.id == null) throw Exception("Wrong user");
     var reference = _firestore.collection(userCollection).document(user.id);
-    return _setData(reference, user.toFirestore());
+    return _firestore.setData(reference, user.toFirestore());
   }
 
   Future<void> updateUser(User user) {
@@ -27,10 +27,12 @@ class AppFirbaseFirestore {
     return _updateData(reference, user.toFirestore());
   }
 
-/*   Future<User> getUser(String id) {
+  Future<User> getUser(String id) async {
     var reference = _firestore.collection(userCollection).document(id);
-    return User("", "");
-  } */
+    return await _getData(reference).then((value) {
+      return User.fromFirestore(value);
+    });
+  }
 
   Future<void> addSubject(Subject subject) {
     if (subject == null || subject.name == null)
@@ -39,18 +41,11 @@ class AppFirbaseFirestore {
     return _setData(reference, subject.toFirestore());
   }
 
-  Future<void> _setData(
-      DocumentReference reference, Map<String, dynamic> data) {
-    return reference.setData(data);
-  }
-
-  Future<void> _updateData(
-      DocumentReference reference, Map<String, dynamic> data) {
-    return reference.updateData(data);
-  }
-
-  Future<void> _deleteData(DocumentReference reference) {
-    return reference.delete();
+  Future<void> addSubject(Subject subject) {
+    if (subject == null || subject.nFirestore.instanceame == null)
+      throw Exception("Wrong subject");
+    var reference = _firestore.collection(userCollection).document();
+    return _setData(reference, subject.toFirestore());
   }
 
   factory AppFirbaseFirestore() {
