@@ -1,9 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirestoreHelper {
-  static final FirestoreBase _singleton = new FirestoreBase._internal();
+  static final FirestoreHelper _singleton = new FirestoreHelper._internal();
 
-  static final firestore = Firestore.instance;
+  static final _firestore = Firestore.instance;
+
+  Firestore getFS() {
+    return _firestore;
+  }
 
   Future<DocumentSnapshot> getData(DocumentReference reference) {
     return reference.get();
@@ -30,9 +34,9 @@ class FirestoreHelper {
     return reference.delete();
   }
 
-  factory FirestoreBase() {
+  factory FirestoreHelper() {
     return _singleton;
   }
 
-  FirestoreBase._internal();
+  FirestoreHelper._internal();
 }
