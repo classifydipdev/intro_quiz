@@ -60,77 +60,105 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
     );
   }
 
-//  Widget getButton() {
-//    return InkWell(
-//      onTap: () {
-//        setState(() {});
-//      },
-//      splashColor: Colors.transparent,
-//      child: Container(
-//        decoration: BoxDecoration(
-//          gradient: LinearGradient(colors: [Colors.black, Colors.yellow]),
-//          borderRadius: BorderRadius.circular(35.0),
-//        ),
-//        child: Center(
-//          child: Text(
-//            "123qwe",
-//            style: TextStyle(
-//                fontSize: 18.0,
-//                color: Colors.white,
-//                fontWeight: FontWeight.bold),
-//          ),
-//        ),
-//      ),
-//    );
-//  }
-
   void showSubjectChooser() {
     showModalBottomSheet(
         context: context,
         builder: (builder) {
-          List<Widget> subjectList = List();
-          for (int i = 0; i < Utils.customSubjectList.length; i++) {
-            Subject subject = Utils.customSubjectList[i];
-            subjectList.add(getSubjectButton(subject, () {
-              Navigator.pop(context);
-            }, isBorder: false));
-          }
           return Container(
-            height: 260.0,
+            height: 350.0,
             decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(45.0),
-                    topLeft: Radius.circular(45.0)),
-                border: Border.all(width: 2.0, color: Colors.black)),
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(15.0),
+                topLeft: Radius.circular(15.0),
+              ),
+            ),
             child: Padding(
               padding: EdgeInsets.only(
-                left: 30.0,
-                top: 10.0,
+                top: DimensApp.paddingSmall,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    "Subjects",
-                    style: TextStyle(
-                        fontSize: 22.0,
+                  Container(
+                    width: double.maxFinite,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.35,
+                        height: 4,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(2)),
+                          color: CupertinoColors.lightBackgroundGray,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(
+                      DimensApp.paddingMiddle,
+                      DimensApp.paddingSmall,
+                      0,
+                      DimensApp.paddingSmall,
+                    ),
+                    child: Text(
+                      "Subjects",
+                      style: TextStyle(
+                        fontSize: 18.0,
                         color: Colors.black,
-                        fontWeight: FontWeight.bold),
+                        fontFamily: 'GoogleSans',
+                      ),
+                    ),
                   ),
                   Expanded(
                       child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: Wrap(
-                      direction: Axis.vertical,
-                      children: subjectList,
-                    ),
+                    child: generateSubjectsGrid(Utils.customSubjectList),
                   ))
                 ],
               ),
             ),
           );
         });
+  }
+
+  Widget generateSubjectsGrid(List<Subject> subjects) {
+    if (subjects == null) return Container();
+    List<List<Widget>> subjectsLists = List();
+
+    for (int i = 0; i < 4; i++) {
+      subjectsLists.add(List());
+    }
+
+    for (int i = 0; i < subjects.length; i++) {
+      Subject subject = subjects[i];
+      subjectsLists[(i / subjects.length * 4).toInt()]
+          .add(getSubjectButton(subject, () {
+        Navigator.pop(context);
+      }, isBorder: false));
+    }
+
+    for (int i = 0; i < 4; i++) {
+      if (subjectsLists[i].length == 0) subjectsLists[i].add(Container());
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Row(
+          children: subjectsLists[0],
+        ),
+        Row(
+          children: subjectsLists[1],
+        ),
+        Row(
+          children: subjectsLists[2],
+        ),
+        Row(
+          children: subjectsLists[3],
+        ),
+      ],
+    );
   }
 
   Widget getDay(String text) {
