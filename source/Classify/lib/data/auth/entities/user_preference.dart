@@ -5,13 +5,12 @@ class UserPreference {
   bool notification;
   bool firstStart;
 
-  UserPreference fromFirestore(DocumentSnapshot document) {
-    if (document == null) return null;
+  UserPreference.fromFirestore(DocumentSnapshot document) {
+    assert(document == null);
     Map<dynamic, dynamic> raw = document.data;
     idUser = document.documentID;
     if (raw['notification'] != null) notification = raw['notification'];
     if (raw['firstStart'] != null) firstStart = raw['firstStart'];
-    return this;
   }
 
   Map<String, dynamic> toFirestore() {

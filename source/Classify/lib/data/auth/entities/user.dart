@@ -7,13 +7,12 @@ class User {
 
   User(this.id, this.name, {this.photo});
 
-  User fromFirestore(DocumentSnapshot document) {
-    if (document == null) return null;
+  User.fromFirestore(DocumentSnapshot document) {
+    assert(document != null);
     Map<dynamic, dynamic> raw = document.data;
     id = document.documentID;
     if (raw['name'] != null) name = raw['name'];
     if (raw['photo'] != null) photo = raw['photo'];
-    return this;
   }
 
   Map<String, dynamic> toFirestore() {

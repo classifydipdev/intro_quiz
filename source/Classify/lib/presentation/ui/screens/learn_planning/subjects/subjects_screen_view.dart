@@ -1,4 +1,4 @@
-import 'package:classify/presentation/entities/subject.dart';
+import 'package:classify/data/auth/entities/subject.dart';
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/subjects/subjects_screen_model.dart';
@@ -19,17 +19,21 @@ class SubjectsScreenView extends AppView<SubjectsScreenModel> {
   }
 
   Widget getBody() {
-    List<Widget> subjectList = List();
-    for (int i = 0; i < Utils.customSubjectList.length; i++) {
-      Subject subject = Utils.customSubjectList[i];
-      subjectList.add(getSubjectButton(Utils.customSubjectList[i], (bool isSelected) {
-        if (isSelected) {
-          model.onSubjectRemove.onCallWithValue(subject.id);
-        } else {
-          model.onSubjectSelect.onCallWithValue(subject.id);
-        }
-      }, isSelected: model.learningPlan.subjects.contains(subject.id)));
-    }
+    StreamBuilder<List<Subject>> streamBuilder = StreamBuilder(
+        stream: model.subjectStream,
+        builder: (context, asyncSnapshot) {
+          if (asyncSnapshot.hasError) {
+            return new Text("Error!");
+          } else if (asyncSnapshot.data == null) {
+            return new Text("No data!");
+          } else {
+            List<Widget> widgets = [];
+            for (var subject in asyncSnapshot.data) {
+              widgets.add(getButton(subject));
+            }
+            return Wrap(children: widgets);
+          }
+        });
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: DimensApp.paddingMiddle),
       child: Column(
@@ -62,12 +66,51 @@ class SubjectsScreenView extends AppView<SubjectsScreenModel> {
           ),
           Expanded(
             child: SingleChildScrollView(
-              child: Wrap(
-                children: subjectList,
-              ),
+              child: streamBuilder,
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget getButton(Subject subject) {
+    return InkWell(
+      onTap: () {
+        if (model.learningPlan.subjects.contains(subject.id)) {
+          model.onSubjectRemove.onCallWithValue(subject.id);
+        } else {
+          model.onSubjectSelect.onCallWithValue(subject.id);
+        }
+      },
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      child: Container(
+        margin: EdgeInsets.symmetric(
+            horizontal: DimensApp.paddingSmall,
+            vertical: DimensApp.paddingSmall),
+        decoration: BoxDecoration(
+          gradient:
+              LinearGradient(colors: [subject.colorStart, subject.colorEnd]),
+          border: Border.all(
+              color: Color.fromRGBO(255, 255, 255,
+                  model.learningPlan.subjects.contains(subject.id) ? 1.0 : 0.0),
+              width: 2.0),
+          borderRadius: BorderRadius.circular(35.0),
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: DimensApp.paddingNormalExtra,
+              vertical: DimensApp.paddingSmall),
+          child: Text(
+            subject.name,
+            style: TextStyle(
+                fontSize: 18.0,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'GoogleSans'),
+          ),
+        ),
       ),
     );
   }

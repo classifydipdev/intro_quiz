@@ -9,14 +9,13 @@ class Subject {
 
   Subject(this.id, this.name, this.colorStart, this.colorEnd);
 
-  Subject fromFirestore(DocumentSnapshot document) {
-    if (document == null) return null;
+  Subject.fromFirestore(DocumentSnapshot document) {
+    assert(document == null);
     Map<dynamic, dynamic> raw = document.data;
     id = document.documentID;
     if (raw['name'] != null) name = raw['name'];
     if (raw['colorStart'] != null) colorStart = Color(raw['colorStart']);
     if (raw['colorEnd'] != null) colorEnd = Color(raw['colorEnd']);
-    return this;
   }
 
   Map<String, dynamic> toFirestore() {

@@ -7,13 +7,12 @@ class Lesson {
 
   Lesson(this.id, this.idUser, this.name);
 
-  Lesson fromFirestore(DocumentSnapshot document) {
-    if (document == null) return null;
+  Lesson.fromFirestore(DocumentSnapshot document) {
+    assert(document == null);
     Map<dynamic, dynamic> raw = document.data;
     id = document.documentID;
     if (raw['idUser'] != null) idUser = raw['idUser'];
     if (raw['name'] != null) name = raw['name'];
-    return this;
   }
 
   Map<String, dynamic> toFirestore() {

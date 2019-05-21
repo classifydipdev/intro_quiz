@@ -10,9 +10,13 @@ class SubjectsScreenViewModel
   @override
   init() async {
     super.init();
-
     model.onSubjectSelect.addCallbackObject(onSubjectSelect);
     model.onSubjectRemove.addCallbackObject(onSubjectRemove);
+    getSubjects();
+  }
+
+  void getSubjects(){
+   model.subjectStream = model.firebaseFirestore.getSubjects();
   }
 
   void onSubjectSelect(String index){
