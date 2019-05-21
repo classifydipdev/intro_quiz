@@ -1,4 +1,4 @@
-import 'package:classify/data/auth/entities/auth_exception.dart';
+import 'package:classify/data/entities/auth_exception.dart';
 import 'package:classify/domain/managers/preference_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,3 @@
-import 'package:classify/data/auth/entities/user.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/screens/started/started_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';

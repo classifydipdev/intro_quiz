@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_arhitecture_helper/presentation/ui/base_app/base_app.dart';
 import 'package:flutter_arhitecture_helper/presentation/ui/base_app/base_app_config.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
 import 'presentation/ui/screens/splash/splash_screen.dart';
 
 final FirebaseAnalytics analytics = FirebaseAnalytics();

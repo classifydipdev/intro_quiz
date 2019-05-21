@@ -10,7 +10,7 @@ class Schedule {
   Schedule(this.id, this.idUser, this.idSubject, this.idLesson, this.day);
 
   Schedule.fromFirestore(DocumentSnapshot document) {
-    assert(document == null);
+    assert(document != null);
     Map<dynamic, dynamic> raw = document.data;
     id = document.documentID;
     if (raw['idUser'] != null) idUser = raw['idUser'];

@@ -1,6 +1,8 @@
+import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/schedule/schedule_screen_model.dart';
+import 'package:classify/presentation/ui/widgets/subject_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -57,91 +59,105 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
     );
   }
 
-//  Widget getButton() {
-//    return InkWell(
-//      onTap: () {
-//        setState(() {});
-//      },
-//      splashColor: Colors.transparent,
-//      child: Container(
-//        decoration: BoxDecoration(
-//          gradient: LinearGradient(colors: [Colors.black, Colors.yellow]),
-//          borderRadius: BorderRadius.circular(35.0),
-//        ),
-//        child: Center(
-//          child: Text(
-//            "123qwe",
-//            style: TextStyle(
-//                fontSize: 18.0,
-//                color: Colors.white,
-//                fontWeight: FontWeight.bold),
-//          ),
-//        ),
-//      ),
-//    );
-//  }
-
   void showSubjectChooser() {
     showModalBottomSheet(
         context: context,
         builder: (builder) {
           return Container(
-            height: 300.0,
+            height: 350.0,
             decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(45.0),
-                    topLeft: Radius.circular(45.0)),
-                border: Border.all(width: 2.0, color: Colors.black)),
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(15.0),
+                topLeft: Radius.circular(15.0),
+              ),
+            ),
             child: Padding(
               padding: EdgeInsets.only(
-                left: 30.0,
-                top: 10.0,
+                top: DimensApp.paddingSmall,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    "Subjects",
-                    style: TextStyle(
-                        fontSize: 22.0,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
+                  Container(
+                    width: double.maxFinite,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.35,
+                        height: 4,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(2)),
+                          color: CupertinoColors.lightBackgroundGray,
+                        ),
+                      ),
+                    ),
                   ),
-//                            Column(
-//                              children: <Widget>[
-//                                GridView.builder(
-//                                  padding: EdgeInsets.all(40.0),
-//                                  gridDelegate:
-//                                      SliverGridDelegateWithFixedCrossAxisCount(
-//                                          crossAxisCount: 2,
-//                                          crossAxisSpacing: 30.0,
-//                                          mainAxisSpacing: 35.0,
-//                                          childAspectRatio:
-//                                              MediaQuery.of(context)
-//                                                          .size
-//                                                          .width <=
-//                                                      700.0
-//                                                  ? 2.5
-//                                                  : MediaQuery.of(context)
-//                                                              .size
-//                                                              .width >=
-//                                                          1000.0
-//                                                      ? 5
-//                                                      : 4),
-//                                  itemCount: 9,
-//                                  itemBuilder:
-//                                      (BuildContext context, int index) {
-//                                    return getButton();
-//                                  },
-//                                )
-//                              ],
-//                            )
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(
+                      DimensApp.paddingMiddle,
+                      DimensApp.paddingSmall,
+                      0,
+                      DimensApp.paddingSmall,
+                    ),
+                    child: Text(
+                      "Subjects",
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        color: Colors.black,
+                        fontFamily: 'GoogleSans',
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: generateSubjectsGrid([]),
+                  ))
                 ],
               ),
             ),
           );
         });
+  }
+
+  Widget generateSubjectsGrid(List<Subject> subjects) {
+    if (subjects == null) return Container();
+    List<List<Widget>> subjectsLists = List();
+
+    for (int i = 0; i < 4; i++) {
+      subjectsLists.add(List());
+    }
+
+    for (int i = 0; i < subjects.length; i++) {
+      Subject subject = subjects[i];
+      subjectsLists[(i / subjects.length * 4).toInt()]
+          .add(getSubjectButton(subject, () {
+        Navigator.pop(context);
+      }, isBorder: false));
+    }
+
+    for (int i = 0; i < 4; i++) {
+      if (subjectsLists[i].length == 0) subjectsLists[i].add(Container());
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Row(
+          children: subjectsLists[0],
+        ),
+        Row(
+          children: subjectsLists[1],
+        ),
+        Row(
+          children: subjectsLists[2],
+        ),
+        Row(
+          children: subjectsLists[3],
+        ),
+      ],
+    );
   }
 
   Widget getDay(String text) {
@@ -176,7 +192,6 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
     return Padding(
       padding: EdgeInsets.only(right: 10.0),
       child: Container(
-        height: 55,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[

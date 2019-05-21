@@ -16,12 +16,12 @@ class SplashScreenViewModel
   init() {
     super.init();
     _setTimer();
-    _updateVersionApp();
     _checkLogin();
+    _updateVersionApp();
   }
 
   void _setTimer() async {
-    const twentyMillis = const Duration(seconds: 5);
+    const twentyMillis = const Duration(seconds: 3);
     new Timer(twentyMillis, () {
       model.timerChecked = true;
       _navigate();

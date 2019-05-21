@@ -8,7 +8,7 @@ class Lesson {
   Lesson(this.id, this.idUser, this.name);
 
   Lesson.fromFirestore(DocumentSnapshot document) {
-    assert(document == null);
+    assert(document != null);
     Map<dynamic, dynamic> raw = document.data;
     id = document.documentID;
     if (raw['idUser'] != null) idUser = raw['idUser'];
