@@ -1,9 +1,8 @@
-import 'package:classify/data/auth/entities/subject.dart';
+import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/subjects/subjects_screen_model.dart';
 import 'package:classify/presentation/ui/widgets/subject_item.dart';
-import 'package:classify/presentation/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +28,13 @@ class SubjectsScreenView extends AppView<SubjectsScreenModel> {
           } else {
             List<Widget> widgets = [];
             for (var subject in asyncSnapshot.data) {
-              widgets.add(getButton(subject));
+              widgets.add(getSubjectButton(subject, (bool isSelected) {
+                if (isSelected) {
+                  model.onSubjectRemove.onCallWithValue(subject.id);
+                } else {
+                  model.onSubjectSelect.onCallWithValue(subject.id);
+                }
+              }, isSelected: model.learningPlan.subjects.contains(subject.id)));
             }
             return Wrap(children: widgets);
           }
@@ -70,47 +75,6 @@ class SubjectsScreenView extends AppView<SubjectsScreenModel> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget getButton(Subject subject) {
-    return InkWell(
-      onTap: () {
-        if (model.learningPlan.subjects.contains(subject.id)) {
-          model.onSubjectRemove.onCallWithValue(subject.id);
-        } else {
-          model.onSubjectSelect.onCallWithValue(subject.id);
-        }
-      },
-      splashColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      child: Container(
-        margin: EdgeInsets.symmetric(
-            horizontal: DimensApp.paddingSmall,
-            vertical: DimensApp.paddingSmall),
-        decoration: BoxDecoration(
-          gradient:
-              LinearGradient(colors: [subject.colorStart, subject.colorEnd]),
-          border: Border.all(
-              color: Color.fromRGBO(255, 255, 255,
-                  model.learningPlan.subjects.contains(subject.id) ? 1.0 : 0.0),
-              width: 2.0),
-          borderRadius: BorderRadius.circular(35.0),
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: DimensApp.paddingNormalExtra,
-              vertical: DimensApp.paddingSmall),
-          child: Text(
-            subject.name,
-            style: TextStyle(
-                fontSize: 18.0,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'GoogleSans'),
-          ),
-        ),
       ),
     );
   }

@@ -6,7 +6,7 @@ class UserPreference {
   bool firstStart;
 
   UserPreference.fromFirestore(DocumentSnapshot document) {
-    assert(document == null);
+    assert(document != null);
     Map<dynamic, dynamic> raw = document.data;
     idUser = document.documentID;
     if (raw['notification'] != null) notification = raw['notification'];

@@ -1,9 +1,8 @@
-import 'package:classify/presentation/entities/subject.dart';
+import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/schedule/schedule_screen_model.dart';
 import 'package:classify/presentation/ui/widgets/subject_item.dart';
-import 'package:classify/presentation/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -113,7 +112,7 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
                   Expanded(
                       child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: generateSubjectsGrid(Utils.customSubjectList),
+                    child: generateSubjectsGrid([]),
                   ))
                 ],
               ),

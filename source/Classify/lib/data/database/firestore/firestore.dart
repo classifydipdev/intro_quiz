@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:classify/data/auth/entities/lesson.dart';
-import 'package:classify/data/auth/entities/subject.dart';
-import 'package:classify/data/auth/entities/user.dart';
+import 'package:classify/data/entities/lesson.dart';
+import 'package:classify/data/entities/subject.dart';
+import 'package:classify/data/entities/user.dart';
 import 'package:classify/data/helpers/firestore_helper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 

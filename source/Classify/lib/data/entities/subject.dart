@@ -10,7 +10,7 @@ class Subject {
   Subject(this.id, this.name, this.colorStart, this.colorEnd);
 
   Subject.fromFirestore(DocumentSnapshot document) {
-    assert(document == null);
+    assert(document != null);
     Map<dynamic, dynamic> raw = document.data;
     id = document.documentID;
     if (raw['name'] != null) name = raw['name'];

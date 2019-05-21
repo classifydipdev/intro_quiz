@@ -2,7 +2,7 @@
 
 // import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:flutter_facebook_login/flutter_facebook_login.dart';
-// import 'package:classify/data/auth/entities/auth_exception.dart';
+// import 'package:classify/data//entities/auth_exception.dart';
 
 // class AppFacebookAuth {
 //   final FacebookLogin _facebookLogin = FacebookLogin();

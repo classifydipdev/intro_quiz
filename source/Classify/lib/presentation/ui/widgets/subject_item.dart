@@ -1,6 +1,5 @@
-import 'package:classify/presentation/entities/subject.dart';
+import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/res/dimens.dart';
-import 'package:classify/presentation/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 Widget getSubjectButton(Subject subject, Function onTap,
