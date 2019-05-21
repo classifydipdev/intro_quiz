@@ -18,25 +18,17 @@ class SignUpScreenViewModel
 
   void signUp() async {
     if (!validateForm()) return;
-
     model.loadingShow.onCall();
-    final FirebaseUser fbUser = await model.firbaseAuth
-        .handleEmailSignUn(
+    await model.userManager
+        .signInEmail(
             model.emailTextController.text, model.passwordTextController.text)
-        .catchError((onError) {
+        .then((_) {
+      model.loadingHide.onCall();
+      view.navigateTo(model.context, StartedScreen(), true);
+    }).catchError((onError) {
+      model.loadingHide.onCall();
       showError(error: onError);
     });
-
-    var userInfo = UserUpdateInfo();
-    userInfo.displayName = model.nameTextController.text;
-    await fbUser.updateProfile(userInfo);
-
-    model.loadingHide.onCall();
-    if (fbUser != null) {
-      await model.firebaseFirestore.createUserFromFirebaseAuth(fbUser,
-          name: model.userTextController.text);
-      view.navigateTo(model.context, StartedScreen(), true);
-    }
   }
 
   bool validateForm() {

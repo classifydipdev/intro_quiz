@@ -5,6 +5,7 @@ import 'package:classify/data/entities/subject.dart';
 import 'package:classify/data/entities/user.dart';
 import 'package:classify/data/helpers/firestore_helper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:classify/data/entities/user_preference.dart';
 
 class AppFirbaseFirestore {
   static final AppFirbaseFirestore _singleton =
@@ -18,42 +19,83 @@ class AppFirbaseFirestore {
 
   static final _db = FirestoreHelper();
 
-  Future<void> addUser(User user) {
+  Future<void> addUser(User user) async {
     if (user == null || user.id == null) throw Exception("Wrong user");
     var reference = _db.getFS().collection(userCollection).document(user.id);
-    return _db.setData(reference, user.toFirestore());
+    return await _db.setData(reference, user.toFirestore());
   }
 
   Future<void> createUserFromFirebaseAuth(FirebaseUser fbUser,
       {String name, String photo}) async {
-    return getUser(fbUser.uid).then((user) async {
+    return await getUser(fbUser.uid).then((user) async {
       if (user == null) {
         var photouser = photo != null ? photo : fbUser.photoUrl;
         var nameUser = name != null ? name : fbUser.displayName;
         var user = User(fbUser.uid, nameUser, photo: photouser);
-        await addUser(user);
-      } else return;
+        return await addUser(user);
+      } else
+        return;
     });
   }
 
-  Future<void> updateUser(User user) {
+  Future<void> updateUser(User user) async {
     if (user == null || user.id == null) throw Exception("Wrong user");
     var reference = _db.getFS().collection(userCollection).document(user.id);
-    return _db.updateData(reference, user.toFirestore());
+    return await _db.updateData(reference, user.toFirestore());
   }
 
   Future<User> getUser(String id) async {
     var reference = _db.getFS().collection(userCollection).document(id);
     return await _db.getData(reference).then((value) {
-      return User.fromFirestore(value);
+      if (value.data != null) {
+        return User.fromFirestore(value);
+      } else {
+        return null;
+      }
     });
   }
 
-  Future<void> addSubject(Subject subject) {
+  Future<void> addUserPreference(String idUser) async {
+    return await getUserPreference(idUser).then((preference) async {
+      if (preference == null) {
+        var preference = UserPreference(idUser, true, true);
+        var reference = _db
+            .getFS()
+            .collection(userPreferenceCollection)
+            .document(preference.idUser);
+        return await _db.setData(reference, preference.toFirestore());
+      } else
+        return;
+    });
+  }
+
+  Future<void> updateUserPreference(UserPreference preference) async {
+    if (preference == null || preference.idUser == null)
+      throw Exception("Wrong preference");
+    var reference = _db
+        .getFS()
+        .collection(userPreferenceCollection)
+        .document(preference.idUser);
+    return await _db.updateData(reference, preference.toFirestore());
+  }
+
+  Future<UserPreference> getUserPreference(String idUser) async {
+    var reference =
+        _db.getFS().collection(userPreferenceCollection).document(idUser);
+    return await _db.getData(reference).then((value) {
+      if (value.data != null) {
+        return UserPreference.fromFirestore(value);
+      } else {
+        return null;
+      }
+    });
+  }
+
+  Future<void> addSubject(Subject subject) async {
     if (subject == null || subject.name == null)
       throw Exception("Wrong subject");
     var reference = _db.getFS().collection(subjectCollection).document();
-    return _db.setData(reference, subject.toFirestore());
+    return await _db.setData(reference, subject.toFirestore());
   }
 
   Stream<List<Subject>> getSubjects() {
@@ -68,11 +110,11 @@ class AppFirbaseFirestore {
     });
   }
 
-  Future<void> addLesson(Lesson lesson) {
+  Future<void> addLesson(Lesson lesson) async {
     if (lesson == null || lesson.idUser == null)
       throw Exception("Wrong lesson");
     var reference = _db.getFS().collection(lessonCollection).document();
-    return _db.setData(reference, lesson.toFirestore());
+    return await _db.setData(reference, lesson.toFirestore());
   }
 
   factory AppFirbaseFirestore() {

@@ -1,7 +1,7 @@
+import 'package:classify/presentation/ui/screens/auth/auth_screen.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
+import 'package:classify/presentation/ui/screens/main/main_screen.dart';
 import 'package:classify/presentation/ui/screens/started/started_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
 import 'login_screen_model.dart';
 import 'login_screen_view.dart';
 
@@ -18,17 +18,30 @@ class LogInScreenViewModel
   void logIn() async {
     if (validateForm()) {
       model.loadingShow.onCall();
-      FirebaseUser fbUser = await model.firbaseAuth
-          .handleEmailSignIn(
+      await model.userManager
+          .signInEmail(
               model.emailTextController.text, model.passwordTextController.text)
-          .catchError((onError) {
+          .then((_) {
+        model.loadingHide.onCall();
+        var user = model.userManager.user;
+        if (user != null) {
+          var preference = user.prefference;
+          if (preference != null) {
+            if (preference.firstStart) {
+              view.navigateTo(model.context, StartedScreen(), true);
+            } else {
+              view.navigateTo(model.context, MainScreen(), true);
+            }
+          } else {
+            view.navigateTo(model.context, StartedScreen(), true);
+          }
+        } else {
+          view.navigateTo(model.context, AuthScreen(), true);
+        }
+      }).catchError((onError) {
+        model.loadingHide.onCall();
         showError(error: onError);
       });
-      model.loadingHide.onCall();
-      if (fbUser != null) {
-        await model.firebaseFirestore.createUserFromFirebaseAuth(fbUser);
-        view.navigateTo(model.context, StartedScreen(), true);
-      }
     }
   }
 
