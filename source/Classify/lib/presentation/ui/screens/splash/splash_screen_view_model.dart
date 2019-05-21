@@ -4,6 +4,7 @@ import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_mod
 import 'package:classify/presentation/ui/screens/main/main_screen.dart';
 import 'package:classify/presentation/ui/screens/splash/splash_screen_model.dart';
 import 'package:classify/presentation/ui/screens/splash/splash_screen_view.dart';
+import 'package:classify/presentation/ui/screens/started/started_screen.dart';
 import 'package:package_info/package_info.dart';
 
 import '../auth/auth_screen.dart';
@@ -38,19 +39,34 @@ class SplashScreenViewModel
   }
 
   void _checkLogin() async {
-    model.isLoggedIn = await model.firbaseAuth.checkLogin();
-    if (model.isLoggedIn)
-      await model.firebaseFirestore
-          .createUserFromFirebaseAuth(model.firbaseAuth.getUser());
-    model.userChecked = true;
-    _navigate();
+    await model.userManager.checkSignIn().then((isLoggedIn) {
+      model.isLoggedIn = isLoggedIn;
+      model.userChecked = true;
+      _navigate();
+    }).catchError((onError) {
+      showError(error: onError);
+    });
   }
 
   void _navigate() {
     if (!model.userChecked || !model.timerChecked) return;
-    if (model.isLoggedIn)
-      view.navigateTo(model.context, new MainScreen(), true);
-    else
+    if (model.isLoggedIn) {
+      var user = model.userManager.user;
+      if (user != null) {
+        var preference = user.prefference;
+        if (preference != null) {
+          if (preference.firstStart) {
+            view.navigateTo(model.context, StartedScreen(), true);
+          } else {
+            view.navigateTo(model.context, MainScreen(), true);
+          }
+        } else {
+          view.navigateTo(model.context, StartedScreen(), true);
+        }
+      } else {
+        view.navigateTo(model.context, AuthScreen(), true);
+      }
+    } else
       view.navigateTo(model.context, new AuthScreen(), true);
   }
 }

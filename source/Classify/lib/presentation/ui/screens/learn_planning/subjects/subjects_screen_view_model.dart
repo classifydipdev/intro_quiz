@@ -15,16 +15,16 @@ class SubjectsScreenViewModel
     getSubjects();
   }
 
-  void getSubjects(){
-   model.subjectStream = model.firebaseFirestore.getSubjects();
+  void getSubjects() {
+    model.subjectStream = model.learningManager.getSubjects();
   }
 
-  void onSubjectSelect(String index){
+  void onSubjectSelect(String index) {
     model.learningPlan.subjects.add(index);
     view.updateUI();
   }
 
-  void onSubjectRemove(String index){
+  void onSubjectRemove(String index) {
     model.learningPlan.subjects.remove(index);
     view.updateUI();
   }

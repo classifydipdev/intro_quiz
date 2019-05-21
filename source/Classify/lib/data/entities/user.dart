@@ -1,14 +1,17 @@
+import 'package:classify/data/entities/user_preference.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class User {
   String id;
   String name;
   String photo;
+  UserPreference prefference;
 
-  User(this.id, this.name, {this.photo});
+  User(this.id, this.name, {this.photo, this.prefference});
 
   User.fromFirestore(DocumentSnapshot document) {
-    assert(document != null);
+    assert(document != null, "Document is null!");
+    assert(document.data != null, "User not found!");
     Map<dynamic, dynamic> raw = document.data;
     id = document.documentID;
     if (raw['name'] != null) name = raw['name'];

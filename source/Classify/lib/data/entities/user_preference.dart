@@ -5,8 +5,11 @@ class UserPreference {
   bool notification;
   bool firstStart;
 
+  UserPreference(this.idUser, this.notification, this.firstStart);
+
   UserPreference.fromFirestore(DocumentSnapshot document) {
-    assert(document != null);
+    assert(document != null, "Document is null!");
+    assert(document.data != null, "User and Preference not found!");
     Map<dynamic, dynamic> raw = document.data;
     idUser = document.documentID;
     if (raw['notification'] != null) notification = raw['notification'];

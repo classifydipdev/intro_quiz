@@ -2,7 +2,6 @@ import 'package:classify/presentation/ui/screens/auth/auth_screen_model.dart';
 import 'package:classify/presentation/ui/screens/auth/auth_screen_view.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/screens/main/main_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthScreenViewModel
     extends AppViewModel<AuthScreenModel, AuthScreenView> {
@@ -11,21 +10,20 @@ class AuthScreenViewModel
   @override
   init() async {
     super.init();
-
     model.onSignInByGoogle.addCallback(signInByGoogle);
   }
 
   void signInByGoogle() async {
     model.loadingShow.onCall();
-    final FirebaseUser fbUser =
-        await model.firebaseAuth.handleGoogleSignIn().catchError((onError) {
-      showError(error: onError);
-    });
-    model.loadingHide.onCall();
-    if (fbUser != null) {
-      await model.firebaseFirestore.createUserFromFirebaseAuth(fbUser);
-      view.navigateTo(model.context, MainScreen(), true);
-    }
+      await model.userManager
+          .signInGoogle()
+          .then((_) {
+        model.loadingHide.onCall();
+         view.navigateTo(model.context, MainScreen(), true);
+      }).catchError((onError) {
+        model.loadingHide.onCall();
+        showError(error: onError);
+      });
   }
 
   // void signInByFacebook() async {
