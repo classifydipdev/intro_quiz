@@ -22,21 +22,19 @@ class SubjectsScreenView extends AppView<SubjectsScreenModel> {
         stream: model.subjectStream,
         builder: (context, asyncSnapshot) {
           if (asyncSnapshot.hasError) {
-            return new Text("Error!");
+            return Center(child: Text("Error!"));
           } else if (asyncSnapshot.data == null) {
-            return new Text("No data!");
+            return Center(child: CircularProgressIndicator());
           } else {
             List<Widget> widgets = [];
             for (var subject in asyncSnapshot.data) {
               widgets.add(getSubjectButton(subject, (bool isSelected) {
-                updateUI(() {
-                  if (isSelected) {
-                    model.onSubjectRemove.onCallWithValue(subject.id);
-                  } else {
-                    model.onSubjectSelect.onCallWithValue(subject.id);
-                  }
-                });
-              }, isSelected: model.learningPlan.subjects.contains(subject.id)));
+                if (isSelected) {
+                  model.onSubjectSelect.onCallWithValue(subject.id);
+                } else {
+                  model.onSubjectRemove.onCallWithValue(subject.id);
+                }
+              }, isSelected: model.selectedSubjects.contains(subject.id)));
             }
             return Wrap(children: widgets);
           }

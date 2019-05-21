@@ -20,19 +20,12 @@ class SubjectsScreenViewModel
   }
 
   void onSubjectSelect(String index) {
-    model.learningPlan.subjects.add(index);
+    model.selectedSubjects.add(index);
     view.updateUI();
   }
 
   void onSubjectRemove(String index) {
-    model.learningPlan.subjects.remove(index);
-    view.updateUI();
-  }
-
-  @override
-  void preferenceInit() async {
-    model.learningPlan = preference.getLearningPlan();
-    if (model.learningPlan == null) model.learningPlan = LearningPlan();
+    model.selectedSubjects.remove(index);
     view.updateUI();
   }
 }

@@ -10,5 +10,5 @@ class TimingScreenModel extends AppModel {
 
   OnCallCommand onNavigateTo = OnCallCommand();
 
-  Function onSaveInfo;
+  Function() onSaveInfo;
 }
