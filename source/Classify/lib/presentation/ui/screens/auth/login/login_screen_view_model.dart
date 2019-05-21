@@ -1,3 +1,4 @@
+import 'package:classify/data/auth/entities/user.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/screens/started/started_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,21 +13,23 @@ class LogInScreenViewModel
   @override
   init() async {
     super.init();
-
     model.onLogIn.addCallback(logIn);
   }
 
   void logIn() async {
     if (validateForm()) {
       model.loadingShow.onCall();
-      FirebaseUser user = await model.firbaseAuth
+      FirebaseUser fbUser = await model.firbaseAuth
           .handleEmailSignIn(
               model.emailTextController.text, model.passwordTextController.text)
           .catchError((onError) {
         showError(error: onError);
       });
-      if (user != null) view.navigateTo(model.context, StartedScreen(), true);
       model.loadingHide.onCall();
+      if (fbUser != null) {
+        await model.firebaseFirestore.createUserFromFirebaseAuth(fbUser);
+        view.navigateTo(model.context, StartedScreen(), true);
+      }
     }
   }
 

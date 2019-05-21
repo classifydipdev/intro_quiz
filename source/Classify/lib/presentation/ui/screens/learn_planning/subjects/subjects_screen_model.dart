@@ -1,3 +1,4 @@
+import 'package:classify/data/auth/entities/subject.dart';
 import 'package:classify/domain/enities/learning_plan.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_model.dart';
 import 'package:flutter/material.dart';
@@ -13,4 +14,6 @@ class SubjectsScreenModel extends AppModel {
   OnCallCommand onSubjectRemove = OnCallCommand();
 
   LearningPlan learningPlan = LearningPlan();
+
+  Stream<List<Subject>> subjectStream;
 }

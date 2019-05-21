@@ -17,12 +17,15 @@ class AuthScreenViewModel
 
   void signInByGoogle() async {
     model.loadingShow.onCall();
-    final FirebaseUser user =
+    final FirebaseUser fbUser =
         await model.firebaseAuth.handleGoogleSignIn().catchError((onError) {
       showError(error: onError);
     });
-    if (user != null) view.navigateTo(model.context, MainScreen(), true);
     model.loadingHide.onCall();
+    if (fbUser != null) {
+      await model.firebaseFirestore.createUserFromFirebaseAuth(fbUser);
+      view.navigateTo(model.context, MainScreen(), true);
+    }
   }
 
   // void signInByFacebook() async {

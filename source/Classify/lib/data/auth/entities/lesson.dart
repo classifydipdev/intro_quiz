@@ -1,24 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class User {
+class Lesson {
   String id;
+  String idUser;
   String name;
-  String photo;
 
-  User(this.id, this.name, {this.photo});
+  Lesson(this.id, this.idUser, this.name);
 
-  User.fromFirestore(DocumentSnapshot document) {
-    assert(document != null);
+  Lesson.fromFirestore(DocumentSnapshot document) {
+    assert(document == null);
     Map<dynamic, dynamic> raw = document.data;
     id = document.documentID;
+    if (raw['idUser'] != null) idUser = raw['idUser'];
     if (raw['name'] != null) name = raw['name'];
-    if (raw['photo'] != null) photo = raw['photo'];
   }
 
   Map<String, dynamic> toFirestore() {
     var json = new Map<String, dynamic>();
+    if (idUser != null) json.putIfAbsent('idUser', () => idUser);
     if (name != null) json.putIfAbsent('name', () => name);
-    if (photo != null) json.putIfAbsent('photo', () => photo);
     return json;
   }
 }

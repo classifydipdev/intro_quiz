@@ -8,12 +8,11 @@ import 'package:package_info/package_info.dart';
 
 import '../auth/auth_screen.dart';
 
-
 class SplashScreenViewModel
     extends AppViewModel<SplashScreenModel, SplashScreenView> {
   SplashScreenViewModel(SplashScreenView view) : super(view);
 
-   @override
+  @override
   init() {
     super.init();
     _setTimer();
@@ -40,6 +39,9 @@ class SplashScreenViewModel
 
   void _checkLogin() async {
     model.isLoggedIn = await model.firbaseAuth.checkLogin();
+    if (model.isLoggedIn)
+      await model.firebaseFirestore
+          .createUserFromFirebaseAuth(model.firbaseAuth.getUser());
     model.userChecked = true;
     _navigate();
   }

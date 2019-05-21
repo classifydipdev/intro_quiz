@@ -9,26 +9,30 @@ class AppFirbaseAuth {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   // final AppFacebookAuth _facebookAuth = AppFacebookAuth();
   final AppGoogleAuth _googleAuth = AppGoogleAuth();
-  FirebaseUser user;
+  FirebaseUser _user;
+
+  FirebaseUser getUser() {
+    return _user;
+  }
 
   Future<bool> checkLogin() async {
-    user = await _auth.currentUser();
-    return user != null;
+    _user = await _auth.currentUser();
+    return _user != null;
   }
 
   Future<FirebaseUser> handleEmailSignIn(String email, String password) async {
-    FirebaseUser user = await _auth.signInWithEmailAndPassword(
+    _user = await _auth.signInWithEmailAndPassword(
         email: email, password: password);
-    return user;
+    return _user;
   }
 
   Future<FirebaseUser> handleEmailSignUn(String email, String password) async {
-    FirebaseUser user = await _auth.createUserWithEmailAndPassword(
+    _user = await _auth.createUserWithEmailAndPassword(
         email: email, password: password);
-    return user;
+    return _user;
   }
 
-  Future sendPasswordReset(String email) async {
+  Future<void> sendPasswordReset(String email) async {
     await _auth.sendPasswordResetEmail(email: email);
   }
 
@@ -43,8 +47,8 @@ class AppFirbaseAuth {
   // }
 
   Future<FirebaseUser> _signInWithCredential(AuthCredential credential) async {
-    FirebaseUser user = await _auth.signInWithCredential(credential);
-    return user;
+    _user = await _auth.signInWithCredential(credential);
+    return _user;
   }
 
   factory AppFirbaseAuth() {
