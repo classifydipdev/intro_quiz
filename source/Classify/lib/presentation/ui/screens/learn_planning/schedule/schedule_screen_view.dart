@@ -132,7 +132,7 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
     for (int i = 0; i < subjects.length; i++) {
       Subject subject = subjects[i];
       subjectsLists[(i / subjects.length * 4).toInt()]
-          .add(getSubjectButton(subject, () {
+          .add(getSubjectButton(subject, (bool isSelected) {
         Navigator.pop(context);
       }, isBorder: false));
     }

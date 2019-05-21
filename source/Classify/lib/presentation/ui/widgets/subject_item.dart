@@ -2,14 +2,13 @@ import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:flutter/material.dart';
 
-Widget getSubjectButton(Subject subject, Function onTap,
+Widget getSubjectButton(Subject subject, Function(bool) onTap,
     {bool isSelected = false, bool isBorder = true}) {
   return Container(
     height: 70,
     child: InkWell(
       onTap: () {
-        isSelected = !isSelected;
-        if (isBorder) onTap(isSelected);
+        if (isBorder) onTap(!isSelected);
       },
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
