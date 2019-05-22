@@ -5,6 +5,7 @@ import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/schedule/schedule_screen_model.dart';
 import 'package:classify/presentation/ui/widgets/subject_item.dart';
+import 'package:classify/presentation/utils/views_states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -40,12 +41,18 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: 5,
-              itemBuilder: (BuildContext context, int index) {
-                return getDay(index);
-              },
-            ),
+            child: model.scheduleLoadingState == LoadingStates.Compleate
+                ? ListView.builder(
+                    itemCount: 5,
+                    itemBuilder: (BuildContext context, int index) {
+                      return getDay(index);
+                    },
+                  )
+                : Center(
+                    child: CircularProgressIndicator(
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(Colors.white)),
+                  ),
           ),
         ],
       ),
@@ -169,9 +176,9 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
       children: <Widget>[
         Padding(
           padding: EdgeInsets.only(
-              top: DimensApp.paddingMiddle,
-              left: DimensApp.paddingMiddle,
-              bottom: DimensApp.paddingSmall),
+            top: DimensApp.paddingMiddle,
+            left: DimensApp.paddingMiddle,
+          ),
           child: Text(
             days[day],
             style: TextStyle(
@@ -181,7 +188,7 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
           ),
         ),
         Container(
-          height: 70.0,
+          height: 90.0,
           width: double.maxFinite,
           margin: EdgeInsets.all(DimensApp.marginMicro),
           child: ListView.builder(
@@ -201,68 +208,66 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
     var lesson = schedule.lesson;
     var subject = schedule.subject;
 
-    return Padding(
-      padding: EdgeInsets.only(left: DimensApp.paddingSmall),
-      child: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(
-                  bottom: DimensApp.paddingMicro,
-                  left: DimensApp.paddingSmallExtra),
-              child: Text(
-                lesson.name,
-                style: TextStyle(
-                  fontSize: DimensApp.textSizeLittle,
-                  color: Colors.white,
-                  fontFamily: 'GoogleSans',
-                  fontWeight: FontWeight.bold,
-                ),
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(
+                bottom: DimensApp.paddingMicro,
+                left: DimensApp.paddingSmallExtra),
+            child: Text(
+              lesson.name,
+              style: TextStyle(
+                fontSize: DimensApp.textSizeLittle,
+                color: Colors.white,
+                fontFamily: 'GoogleSans',
+                fontWeight: FontWeight.bold,
               ),
             ),
-            Container(
-              height: 50.0,
-              padding: EdgeInsets.all(DimensApp.paddingPico),
-              alignment: Alignment.center,
-              child: subject == null ?  getEmptySchedule(schedule) : getSubjectButton(subject, (bool isSelected) {
-       
-        model.onScheduleSelect
-                      .onCallWithValue(schedule);
-                  showSubjectChooser();
-       
-      }, isBorder: false),
-            ),
-          ],
-        ),
+          ),
+          Container(
+            height: 70.0,
+            alignment: Alignment.center,
+            child: subject == null
+                ? getEmptySchedule(schedule)
+                : getSubjectButton(subject, (bool isSelected) {
+                    model.onScheduleSelect.onCallWithValue(schedule);
+                    showSubjectChooser();
+                  }, isBorder: false),
+          ),
+        ],
       ),
     );
   }
 
-  Widget getEmptySchedule(Schedule schedule){
-    return OutlineButton(
-                highlightedBorderColor: Colors.white,
-                borderSide: BorderSide(color: Colors.white, width: 2),
-                shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(DimensApp.borderRadiusMiddleExtra),
-                ),
-                onPressed: () {
-                  model.onScheduleSelect
-                      .onCallWithValue(schedule);
-                  showSubjectChooser();
-                },
-                child: Center(
-                  child: Container(
-                    child: Text(
-                      '+',
-                      style: TextStyle(
-                          fontSize: DimensApp.textSizeNormal,
-                          color: Colors.white,
-                          fontFamily: 'GoogleSans'),
-                    ),
-                  ),
-                ),
-              );
+  Widget getEmptySchedule(Schedule schedule) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: DimensApp.paddingSmall),
+      height: 50,
+      child: OutlineButton(
+        highlightedBorderColor: Colors.white,
+        borderSide: BorderSide(color: Colors.white, width: 2),
+        shape: RoundedRectangleBorder(
+          borderRadius:
+              BorderRadius.circular(DimensApp.borderRadiusMiddleExtra),
+        ),
+        onPressed: () {
+          model.onScheduleSelect.onCallWithValue(schedule);
+          showSubjectChooser();
+        },
+        child: Center(
+          child: Container(
+            child: Text(
+              '+',
+              style: TextStyle(
+                  fontSize: DimensApp.textSizeNormal,
+                  color: Colors.white,
+                  fontFamily: 'GoogleSans'),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

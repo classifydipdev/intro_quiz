@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 Widget getSubjectButton(Subject subject, Function(bool) onTap,
     {bool isSelected = false, bool isBorder = true}) {
   return Container(
-    height: 70,
+    margin: EdgeInsets.symmetric(
+            vertical: DimensApp.paddingSmall),
+    height: 50,
     child: InkWell(
       onTap: () {
         onTap(!isSelected);
@@ -14,8 +16,7 @@ Widget getSubjectButton(Subject subject, Function(bool) onTap,
       highlightColor: Colors.transparent,
       child: Container(
         margin: EdgeInsets.symmetric(
-            horizontal: DimensApp.paddingSmall,
-            vertical: DimensApp.paddingSmall),
+            horizontal: DimensApp.paddingSmall),
         decoration: BoxDecoration(
           gradient:
               LinearGradient(colors: [subject.colorStart, subject.colorEnd]),
