@@ -43,7 +43,9 @@ class TimingScreenView extends AppView<TimingScreenModel> {
                 1,
                 10,
                 1,
-                (position) {}),
+                (int value) {
+                  model.lessonsPerDay = value;
+                }),
           ),
         ],
       ),

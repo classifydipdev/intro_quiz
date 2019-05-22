@@ -25,4 +25,5 @@ class LearnPlanningScreenModel extends AppModel {
   ScheduleScreen scheduleScreen = ScheduleScreen();
 
   List<Subject> selectedSubjects = List();
+  int lessonsPerDay = 6;
 }

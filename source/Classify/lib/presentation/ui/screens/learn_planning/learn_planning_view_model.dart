@@ -33,6 +33,8 @@ class LearnPlanningScreenViewModel
         _navigateToPage(1);
         break;
       case 1:
+        model.lessonsPerDay = model.timingScreen.model.lessonsPerDay;
+        model.scheduleScreen.model.lessonsPerDay = model.lessonsPerDay;
         _navigateToPage(2);
         break;
       case 2:

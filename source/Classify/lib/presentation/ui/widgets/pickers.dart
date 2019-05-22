@@ -3,15 +3,17 @@ import 'package:classify/presentation/res/dimens.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Widget getHorizontalPicker(
-    PageController controller, int from, int to, int step, Function onChange) {
+Widget getHorizontalPicker(PageController controller, int from, int to,
+    int step, Function(int) onChange) {
   return Container(
     width: 280,
     height: 60,
     child: Stack(
       children: <Widget>[
         PageView.builder(
-          onPageChanged: (position) => onChange(position),
+          onPageChanged: (position) {
+            onChange(step * position + from);
+          },
           controller: controller,
           pageSnapping: true,
           itemBuilder: (BuildContext context, int index) {
