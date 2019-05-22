@@ -154,6 +154,14 @@ class AppFirbaseFirestore {
     return await _db.setData(reference, schedule.toFirestore());
   }
 
+  Future<void> updateSchedule(Schedule schedule) async {
+    if (schedule == null || schedule.idUser == null || schedule.id == null)
+      throw Exception("Wrong schedule");
+    var reference =
+        _db.getFS().collection(scheduleCollection).document(schedule.id);
+    return await _db.updateData(reference, schedule.toFirestore());
+  }
+
   Future<List<Schedule>> getSchedules(String idUser, {int day}) async {
     if (idUser == null) throw Exception("Wrong request");
     var query = _db
@@ -170,8 +178,8 @@ class AppFirbaseFirestore {
           var idSubject = docData['idSubject'];
           var idLesson = docData['idLesson'];
 
-          Lesson lesson = null;
-          Subject subject = null;
+          Lesson lesson;
+          Subject subject;
 
           if (idSubject != null) {
             var subjectRef =
