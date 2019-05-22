@@ -3,6 +3,7 @@ import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/schedule/schedule_screen_model.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/schedule/schedule_screen_view.dart';
+import 'package:classify/presentation/utils/views_states.dart';
 
 class ScheduleScreenViewModel
     extends AppViewModel<ScheduleScreenModel, ScheduleScreenView> {
@@ -39,6 +40,7 @@ class ScheduleScreenViewModel
     model.schedules = await model.learningManager
         .createSchedules(model.userManager.user.id, model.lessons);
 
+    model.scheduleLoadingState = LoadingStates.Compleate;
     view.updateUI();
   }
 
