@@ -326,13 +326,17 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                       child: ListView.builder(
                           itemCount: model.schedules.length,
                           itemBuilder: (BuildContext context, int index) {
+
+                            var subject = model.schedules[index].subject;
+                            var lesson =  model.schedules[index].lesson;
+
                             return Container(
                               margin: EdgeInsets.only(top: 10),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Text(
-                                    model.schedules[index].subject.name,
+                                    subject != null ? subject.name : "-",
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
@@ -341,7 +345,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                                         color: Colors.black54),
                                   ),
                                   Text(
-                                    model.schedules[index].lesson.name,
+                                    lesson.name,
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,

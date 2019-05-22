@@ -2,6 +2,7 @@ import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_mod
 import 'package:classify/presentation/ui/screens/learn_planning/learn_planning_model.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/learn_planning_view.dart';
 import 'package:classify/presentation/ui/screens/main/main_screen.dart';
+import 'package:classify/presentation/utils/views_states.dart';
 import 'package:flutter/widgets.dart';
 
 class LearnPlanningScreenViewModel
@@ -25,20 +26,26 @@ class LearnPlanningScreenViewModel
     });
   }
 
-  void onNavigationTapped() {
+  void onNavigationTapped() async {
     switch (model.currentPage) {
       case 0:
         model.scheduleScreen.model.subjects.clear();
-        model.scheduleScreen.model.subjects.addAll(model.subjectsScreen.model.selectedSubjects);
+        model.scheduleScreen.model.subjects
+            .addAll(model.subjectsScreen.model.selectedSubjects);
         model.subjectsScreen.model.selectedSubjects.clear();
         _navigateToPage(1);
         break;
       case 1:
-        model.scheduleScreen.model.lessonsPerDay = model.timingScreen.model.lessonsPerDay;
+        model.scheduleScreen.model.lessonsPerDay =
+            model.timingScreen.model.lessonsPerDay;
         _navigateToPage(2);
         view.updateUI();
         break;
       case 2:
+        model.scheduleScreen.model.scheduleLoadingState = LoadingStates.Loading;
+        model.scheduleScreen.view.updateUI();
+        var schedules = model.scheduleScreen.model.schedules;
+        await model.learningManager.updateSchedules(schedules);
         view.navigateTo(view.context, MainScreen(), true);
         break;
       default:

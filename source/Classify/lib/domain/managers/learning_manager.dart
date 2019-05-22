@@ -34,6 +34,13 @@ class LearningManager {
     return await _firebaseFirestore.getSchedules(idUser);
   }
 
+  Future<void> updateSchedules(List<Schedule> schedules) async {
+    for (var schedule in schedules) {
+      await _firebaseFirestore.updateSchedule(schedule);
+    }
+    return;
+  }
+
   Future<List<Schedule>> getSchedules(String idUser, {int day}) {
     return _firebaseFirestore.getSchedules(idUser, day: day);
   }
