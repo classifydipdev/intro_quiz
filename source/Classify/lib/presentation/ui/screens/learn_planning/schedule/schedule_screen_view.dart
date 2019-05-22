@@ -49,7 +49,9 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
                     },
                   )
                 : Center(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(Colors.white)),
                   ),
           ),
         ],
@@ -174,8 +176,9 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
       children: <Widget>[
         Padding(
           padding: EdgeInsets.only(
-              top: DimensApp.paddingMiddle,
-              left: DimensApp.paddingMiddle,),
+            top: DimensApp.paddingMiddle,
+            left: DimensApp.paddingMiddle,
+          ),
           child: Text(
             days[day],
             style: TextStyle(
@@ -206,35 +209,35 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
     var subject = schedule.subject;
 
     return Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(
-                  bottom: DimensApp.paddingMicro,
-                  left: DimensApp.paddingSmallExtra),
-              child: Text(
-                lesson.name,
-                style: TextStyle(
-                  fontSize: DimensApp.textSizeLittle,
-                  color: Colors.white,
-                  fontFamily: 'GoogleSans',
-                  fontWeight: FontWeight.bold,
-                ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(
+                bottom: DimensApp.paddingMicro,
+                left: DimensApp.paddingSmallExtra),
+            child: Text(
+              lesson.name,
+              style: TextStyle(
+                fontSize: DimensApp.textSizeLittle,
+                color: Colors.white,
+                fontFamily: 'GoogleSans',
+                fontWeight: FontWeight.bold,
               ),
             ),
-            Container(
-              height: 70.0,
-              alignment: Alignment.center,
-              child: subject == null
-                  ? getEmptySchedule(schedule)
-                  : getSubjectButton(subject, (bool isSelected) {
-                      model.onScheduleSelect.onCallWithValue(schedule);
-                      showSubjectChooser();
-                    }, isBorder: false),
-            ),
-          ],
-        ),
+          ),
+          Container(
+            height: 70.0,
+            alignment: Alignment.center,
+            child: subject == null
+                ? getEmptySchedule(schedule)
+                : getSubjectButton(subject, (bool isSelected) {
+                    model.onScheduleSelect.onCallWithValue(schedule);
+                    showSubjectChooser();
+                  }, isBorder: false),
+          ),
+        ],
+      ),
     );
   }
 
