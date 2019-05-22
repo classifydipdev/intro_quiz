@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:classify/data/entities/lesson.dart';
+import 'package:classify/data/entities/schedule.dart';
 import 'package:classify/data/entities/subject.dart';
 import 'package:classify/data/entities/user.dart';
 import 'package:classify/data/helpers/firestore_helper.dart';
@@ -115,6 +116,71 @@ class AppFirbaseFirestore {
       throw Exception("Wrong lesson");
     var reference = _db.getFS().collection(lessonCollection).document();
     return await _db.setData(reference, lesson.toFirestore());
+  }
+
+  Future<List<Lesson>> getLessons(String idUser) async {
+    if (idUser == null) throw Exception("Wrong request");
+    var query = _db
+        .getFS()
+        .collection(lessonCollection)
+        .where("idUser", isEqualTo: idUser);
+    return await _db.getAllDataByQuery(query).then((querySnapshot) {
+      List<Lesson> lessons = List();
+      for (var doc in querySnapshot.documents) {
+        lessons.add(Lesson.fromFirestore(doc));
+      }
+      return lessons;
+    });
+  }
+
+  Future<void> deleteAllLessons(String idUser) async {
+    if (idUser == null) throw Exception("Wrong request");
+    var query = _db
+        .getFS()
+        .collection(lessonCollection)
+        .where("idUser", isEqualTo: idUser);
+    return await _db.getAllDataByQuery(query).then((querySnapshot) async {
+      for (var doc in querySnapshot.documents) {
+        await _db.deleteData(doc.reference);
+      }
+      return;
+    });
+  }
+
+  Future<void> addSchedule(Schedule schedule) async {
+    if (schedule == null || schedule.idUser == null)
+      throw Exception("Wrong schedule");
+    var reference = _db.getFS().collection(scheduleCollection).document();
+    return await _db.setData(reference, schedule.toFirestore());
+  }
+
+  Future<List<Schedule>> getSchedules(String idUser) async {
+    if (idUser == null) throw Exception("Wrong request");
+    var query = _db
+        .getFS()
+        .collection(scheduleCollection)
+        .where("idUser", isEqualTo: idUser);
+    return await _db.getAllDataByQuery(query).then((querySnapshot) {
+      List<Schedule> schedules = List();
+      for (var doc in querySnapshot.documents) {
+        schedules.add(Schedule.fromFirestore(doc));
+      }
+      return schedules;
+    });
+  }
+
+  Future<void> deleteAllSchedules(String idUser) async {
+    if (idUser == null) throw Exception("Wrong request");
+    var query = _db
+        .getFS()
+        .collection(scheduleCollection)
+        .where("idUser", isEqualTo: idUser);
+    return await _db.getAllDataByQuery(query).then((querySnapshot) async {
+      for (var doc in querySnapshot.documents) {
+        await _db.deleteData(doc.reference);
+      }
+      return;
+    });
   }
 
   factory AppFirbaseFirestore() {

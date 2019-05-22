@@ -13,10 +13,5 @@ class ScheduleScreenModel extends AppModel {
   List<Subject> subjects = List();
   List<Lesson> lessons = List();
 
-  List<Schedule> schedulesDey1 = List();
-  List<Schedule> schedulesDey2 = List();
-  List<Schedule> schedulesDey3 = List();
-  List<Schedule> schedulesDey4 = List();
-  List<Schedule> schedulesDey5 = List();
-
+  List<Schedule> schedules = List();
 }

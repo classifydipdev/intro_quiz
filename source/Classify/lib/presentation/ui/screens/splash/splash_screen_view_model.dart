@@ -48,7 +48,7 @@ class SplashScreenViewModel
     });
   }
 
-  void _navigate() {
+  void _navigate() async {
     if (!model.userChecked || !model.timerChecked) return;
     if (model.isLoggedIn) {
       var user = model.userManager.user;
@@ -56,17 +56,17 @@ class SplashScreenViewModel
         var preference = user.prefference;
         if (preference != null) {
           if (preference.firstStart) {
-            view.navigateTo(model.context, StartedScreen(), true);
+            await view.navigateTo(model.context, StartedScreen(), true);
           } else {
-            view.navigateTo(model.context, MainScreen(), true);
+            await view.navigateTo(model.context, MainScreen(), true);
           }
         } else {
-          view.navigateTo(model.context, StartedScreen(), true);
+          await view.navigateTo(model.context, StartedScreen(), true);
         }
       } else {
-        view.navigateTo(model.context, AuthScreen(), true);
+        await view.navigateTo(model.context, AuthScreen(), true);
       }
     } else
-      view.navigateTo(model.context, new AuthScreen(), true);
+      await view.navigateTo(model.context, new AuthScreen(), true);
   }
 }

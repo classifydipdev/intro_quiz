@@ -1,3 +1,4 @@
+import 'package:classify/data/entities/lesson.dart';
 import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
@@ -182,10 +183,10 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
           width: double.maxFinite,
           margin: EdgeInsets.all(DimensApp.marginMicro),
           child: ListView.builder(
-            itemCount: model.lessonsPerDay,
+            itemCount: model.lessons.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext context, int index) {
-              return getAddItem(index);
+              return getItem(model.lessons[index]);
             },
           ),
         ),
@@ -193,7 +194,7 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
     );
   }
 
-  Widget getAddItem(int index) {
+  Widget getItem(Lesson lesson) {
     return Padding(
       padding: EdgeInsets.only(left: DimensApp.paddingSmall),
       child: Container(
@@ -205,7 +206,7 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
                   bottom: DimensApp.paddingMicro,
                   left: DimensApp.paddingSmallExtra),
               child: Text(
-                (index + 1).toString(),
+                lesson.name,
                 style: TextStyle(
                   fontSize: DimensApp.textSizeLittle,
                   color: Colors.white,
