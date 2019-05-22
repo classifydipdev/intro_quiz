@@ -56,8 +56,10 @@ class Usermanager {
           .then((_) async {
         return await _firebaseFirestore.addUserPreference(fbUser.uid);
       });
+      return await _getUser(fbUser.uid);
+    } else {
+      return;
     }
-    return await _getUser(fbUser.uid);
   }
 
   Future<void> _getUser(String id) async {
