@@ -23,7 +23,4 @@ class LearnPlanningScreenModel extends AppModel {
   SubjectsScreen subjectsScreen = SubjectsScreen();
   TimingScreen timingScreen = TimingScreen();
   ScheduleScreen scheduleScreen = ScheduleScreen();
-
-  List<Subject> selectedSubjects = List();
-  int lessonsPerDay = 6;
 }

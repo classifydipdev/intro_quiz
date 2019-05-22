@@ -28,13 +28,13 @@ class LearnPlanningScreenViewModel
   void onNavigationTapped() {
     switch (model.currentPage) {
       case 0:
-        model.selectedSubjects = model.subjectsScreen.model.selectedSubjects;
-        model.scheduleScreen.model.subjects = model.selectedSubjects;
+        model.scheduleScreen.model.subjects.clear();
+        model.scheduleScreen.model.subjects.addAll(model.subjectsScreen.model.selectedSubjects);
+        model.subjectsScreen.model.selectedSubjects.clear();
         _navigateToPage(1);
         break;
       case 1:
-        model.lessonsPerDay = model.timingScreen.model.lessonsPerDay;
-        model.scheduleScreen.model.lessonsPerDay = model.lessonsPerDay;
+        model.scheduleScreen.model.lessonsPerDay = model.timingScreen.model.lessonsPerDay;
         _navigateToPage(2);
         view.updateUI();
         break;

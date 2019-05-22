@@ -160,12 +160,8 @@ class AppFirbaseFirestore {
         .getFS()
         .collection(scheduleCollection)
         .where("idUser", isEqualTo: idUser);
-<<<<<<< HEAD
-    return await _db.getAllDataByQuery(query).then((querySnapshot) async {
-=======
     if (day != null) query = query.where("day", isEqualTo: day);
-    return await _db.getAllDataByQuery(query).then((querySnapshot) {
->>>>>>> ab711143ad6a197db98b2517fad3009d28adf810
+    return await _db.getAllDataByQuery(query).then((querySnapshot) async {
       List<Schedule> schedules = List();
       for (var doc in querySnapshot.documents) {
         var docData = doc.data;
