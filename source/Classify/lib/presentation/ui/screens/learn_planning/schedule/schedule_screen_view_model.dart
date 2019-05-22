@@ -23,7 +23,7 @@ class ScheduleScreenViewModel
     model.lessons = await model.learningManager
         .createLessons(model.userManager.user.id, lessonsPerDay);
     model.schedules = await model.learningManager
-        .createShedules(model.userManager.user.id, model.lessons);
+        .createSchedules(model.userManager.user.id, model.lessons);
 
     view.updateUI();
   }

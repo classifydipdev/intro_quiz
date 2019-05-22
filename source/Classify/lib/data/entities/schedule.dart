@@ -18,6 +18,7 @@ class Schedule {
     if (raw['idUser'] != null) idUser = raw['idUser'];
     //if (raw['idSubject'] != null) idSubject = raw['idSubject'];
     //if (raw['idLesson'] != null) idLesson = raw['idLesson'];
+    if (raw['day'] != null) day = raw['day'];
   }
 
   Map<String, dynamic> toFirestore() {

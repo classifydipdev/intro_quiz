@@ -4,9 +4,9 @@ import 'package:classify/data/entities/lesson.dart';
 import 'package:classify/data/entities/schedule.dart';
 import 'package:classify/data/entities/subject.dart';
 import 'package:classify/data/entities/user.dart';
+import 'package:classify/data/entities/user_preference.dart';
 import 'package:classify/data/helpers/firestore_helper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:classify/data/entities/user_preference.dart';
 
 class AppFirbaseFirestore {
   static final AppFirbaseFirestore _singleton =
@@ -154,12 +154,13 @@ class AppFirbaseFirestore {
     return await _db.setData(reference, schedule.toFirestore());
   }
 
-  Future<List<Schedule>> getSchedules(String idUser) async {
+  Future<List<Schedule>> getSchedules(String idUser, {int day}) async {
     if (idUser == null) throw Exception("Wrong request");
     var query = _db
         .getFS()
         .collection(scheduleCollection)
         .where("idUser", isEqualTo: idUser);
+    if (day != null) query = query.where("day", isEqualTo: day);
     return await _db.getAllDataByQuery(query).then((querySnapshot) {
       List<Schedule> schedules = List();
       for (var doc in querySnapshot.documents) {

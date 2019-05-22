@@ -39,12 +39,12 @@ class Usermanager {
 
   Future<void> signUpEmail(String email, String password, String name) async {
     FirebaseUser fbUser = await _firbaseAuth
-        .handleEmailSignUn(email, password)
+        .handleEmailSignUn(email.trim(), password.trim())
         .catchError((onError) {
       throw onError;
     });
     var userInfo = UserUpdateInfo();
-    userInfo.displayName = name;
+    userInfo.displayName = name.trim();
     await fbUser.updateProfile(userInfo);
     return await _checkUserExist(fbUser);
   }
