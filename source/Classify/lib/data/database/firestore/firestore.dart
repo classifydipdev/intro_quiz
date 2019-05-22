@@ -160,10 +160,35 @@ class AppFirbaseFirestore {
         .getFS()
         .collection(scheduleCollection)
         .where("idUser", isEqualTo: idUser);
-    return await _db.getAllDataByQuery(query).then((querySnapshot) {
+    return await _db.getAllDataByQuery(query).then((querySnapshot) async {
       List<Schedule> schedules = List();
       for (var doc in querySnapshot.documents) {
-        schedules.add(Schedule.fromFirestore(doc));
+        var docData = doc.data;
+
+        if (docData != null) {
+          var idSubject = docData['idSubject'];
+          var idLesson = docData['idLesson'];
+
+          Lesson lesson = null;
+          Subject subject = null;
+
+          if (idSubject != null) {
+            var subjectRef =
+                _db.getFS().collection(subjectCollection).document(idSubject);
+            var doc = await _db.getData(subjectRef);
+            subject = Subject.fromFirestore(doc);
+          }
+
+          if (idLesson != null) {
+            var lessonRef =
+                _db.getFS().collection(lessonCollection).document(idLesson);
+            var doc = await _db.getData(lessonRef);
+            lesson = Lesson.fromFirestore(doc);
+          }
+
+          var schedule = Schedule.fromFirestore(doc, subject, lesson);
+          schedules.add(schedule);
+        }
       }
       return schedules;
     });

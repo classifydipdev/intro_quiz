@@ -11,13 +11,12 @@ class Schedule {
 
   Schedule(this.id, this.idUser, this.subject, this.lesson, this.day);
 
-  Schedule.fromFirestore(DocumentSnapshot document) {
+  Schedule.fromFirestore(DocumentSnapshot document, this.subject, this.lesson) {
     assert(document != null);
     Map<dynamic, dynamic> raw = document.data;
     id = document.documentID;
     if (raw['idUser'] != null) idUser = raw['idUser'];
-    //if (raw['idSubject'] != null) idSubject = raw['idSubject'];
-    //if (raw['idLesson'] != null) idLesson = raw['idLesson'];
+    if (raw['day'] != null) day = raw['day'];
   }
 
   Map<String, dynamic> toFirestore() {

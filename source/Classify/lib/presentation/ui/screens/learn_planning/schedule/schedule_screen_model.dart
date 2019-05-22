@@ -6,6 +6,8 @@ import 'package:classify/data/entities/schedule.dart';
 
 class ScheduleScreenModel extends AppModel {
   OnCallCommand onSubjectSelect = OnCallCommand();
+  OnCallCommand onScheduleSelect = OnCallCommand();
+
   OnCallCommand onLessonsUpdated = OnCallCommand();
   OnCallCommand onSubjectsUpdated = OnCallCommand();
 
@@ -14,4 +16,16 @@ class ScheduleScreenModel extends AppModel {
   List<Lesson> lessons = List();
 
   List<Schedule> schedules = List();
+
+  Schedule selectedSchedule;
+
+  List<Schedule> getSchedulesByDay(int day) {
+    List<Schedule> schedulesPreDay = List();
+    for (var schedule in schedules) {
+      if (schedule.day == day) {
+        schedulesPreDay.add(schedule);
+      }
+    }
+    return schedulesPreDay;
+  }
 }
