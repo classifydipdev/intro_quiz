@@ -1,7 +1,6 @@
 import 'package:classify/data/database/firestore/firestore.dart';
 import 'package:classify/data/entities/lesson.dart';
 import 'package:classify/data/entities/schedule.dart';
-
 import 'package:classify/data/entities/subject.dart';
 
 class LearningManager {
@@ -22,7 +21,7 @@ class LearningManager {
     return await _firebaseFirestore.getLessons(idUser);
   }
 
-  Future<List<Schedule>> createShedules(
+  Future<List<Schedule>> createSchedules(
       String idUser, List<Lesson> lessons) async {
     await _firebaseFirestore.deleteAllSchedules(idUser);
 
@@ -33,6 +32,10 @@ class LearningManager {
       }
     }
     return await _firebaseFirestore.getSchedules(idUser);
+  }
+
+  Future<List<Schedule>> getSchedules(String idUser, {int day}) {
+    return _firebaseFirestore.getSchedules(idUser, day: day);
   }
 
   factory LearningManager() {

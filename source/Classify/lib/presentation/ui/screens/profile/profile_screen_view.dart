@@ -77,16 +77,17 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                             Container(
                                 margin: EdgeInsets.only(bottom: 15),
                                 child: Text(
-                                  "Welcome, Krish",
+                                  "Welcome, ${model.userManager.user.name}",
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 19,
-                                      fontFamily: MainScreenModel.fontFamily,
-                                      color: Colors.white,),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 19,
+                                    fontFamily: MainScreenModel.fontFamily,
+                                    color: Colors.white,
+                                  ),
                                 )),
                             Text(
-                              "JUNE 2, 2019 - 4 HOMEWORKS".toUpperCase(),
+                              "${model.dateNow} - 4 HOMEWORKS".toUpperCase(),
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                   fontSize: 14,
@@ -103,15 +104,12 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                         alignment: Alignment.centerRight,
                         margin: EdgeInsets.all(20),
                         height: 50,
-                        width: 51,
+                        width: 50,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.horizontal(
-                              left: Radius.elliptical(20, 30),
-                              right: Radius.elliptical(20, 30)),
+                          borderRadius: BorderRadius.circular(50),
                           image: DecorationImage(
                             alignment: Alignment.center,
-                            image:
-                                AssetImage('assets/images/profilePicture.webp'),
+                            image: NetworkImage(model.userManager.user.photo),
                             fit: BoxFit.cover,
                           ),
                         ))))
@@ -310,7 +308,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                         alignment: Alignment.center,
                       ),
                       Text(
-                        "\t Monday".toUpperCase(),
+                        "\t ${model.dayNow}".toUpperCase(),
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -322,6 +320,34 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                   ),
                   //TODO: ListView
                   Container(
+                   height: 150,
+                   child: ListView.builder(
+                      itemCount: model.schedules.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Material(
+                            color: Colors.transparent,
+                            child: ListTile(
+                              title: Text(
+                                model.schedules[index].subject.name,
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 17,
+                                    fontFamily: MainScreenModel.fontFamily,
+                                    color: Colors.black54),
+                              ),
+                              trailing : Text(
+                                model.schedules[index].lesson.name,
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                    fontFamily: MainScreenModel.fontFamily,
+                                    color: Color(0xff00ffbb)),
+                              ),
+                            ));
+                      })),
+/*                  Container(
                     margin: EdgeInsets.only(top: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -476,7 +502,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                         )
                       ],
                     ),
-                  ),
+                  ),*/
                 ],
               )),
         ));

@@ -16,6 +16,11 @@ class Schedule {
     Map<dynamic, dynamic> raw = document.data;
     id = document.documentID;
     if (raw['idUser'] != null) idUser = raw['idUser'];
+<<<<<<< HEAD
+=======
+    //if (raw['idSubject'] != null) idSubject = raw['idSubject'];
+    //if (raw['idLesson'] != null) idLesson = raw['idLesson'];
+>>>>>>> ab711143ad6a197db98b2517fad3009d28adf810
     if (raw['day'] != null) day = raw['day'];
   }
 
