@@ -36,6 +36,7 @@ class LearnPlanningScreenViewModel
         model.lessonsPerDay = model.timingScreen.model.lessonsPerDay;
         model.scheduleScreen.model.lessonsPerDay = model.lessonsPerDay;
         _navigateToPage(2);
+        view.updateUI();
         break;
       case 2:
         view.navigateTo(view.context, MainScreen(), true);

@@ -22,6 +22,18 @@ class AppLocalizations {
   String get appName {
     return Intl.message('Classify', name: 'app_name');
   }
+
+  String get navigationButtonNext {
+    return Intl.message('Next', name: 'navigation_next');
+  }
+
+  String get navigationButtonBack {
+    return Intl.message('Back', name: 'navigation_back');
+  }
+
+  String get navigationButtonSave {
+    return Intl.message('Save', name: 'navigation_save');
+  }
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
