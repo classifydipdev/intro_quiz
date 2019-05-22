@@ -1,6 +1,5 @@
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/screens/started/started_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import 'signup_screen_model.dart';
 import 'signup_screen_view.dart';
@@ -20,8 +19,8 @@ class SignUpScreenViewModel
     if (!validateForm()) return;
     model.loadingShow.onCall();
     await model.userManager
-        .signInEmail(
-            model.emailTextController.text, model.passwordTextController.text)
+        .signUpEmail(model.emailTextController.text,
+            model.passwordTextController.text, model.nameTextController.text)
         .then((_) {
       model.loadingHide.onCall();
       view.navigateTo(model.context, StartedScreen(), true);

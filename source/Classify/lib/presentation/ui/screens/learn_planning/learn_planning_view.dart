@@ -3,7 +3,7 @@ import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_screen.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/learn_planning_model.dart';
-import 'package:classify/presentation/ui/screens/main/main_screen.dart';
+import 'package:classify/presentation/utils/localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
@@ -73,11 +73,11 @@ class LearnPlanningScreenView extends AppView<LearnPlanningScreenModel> {
                       child: CupertinoButton(
                         padding: EdgeInsets.all(0),
                         child: Text(
-                          "Back",
+                          AppLocalizations().navigationButtonBack,
                           style: TextStyle(
                             fontFamily: 'GoogleSans',
                             fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                            fontSize: DimensApp.textSizeMiddle,
                             color: Colors.white,
                           ),
                         ),
@@ -110,11 +110,13 @@ class LearnPlanningScreenView extends AppView<LearnPlanningScreenModel> {
                 child: CupertinoButton(
                   padding: EdgeInsets.all(0),
                   child: Text(
-                    model.currentPage != 2 ? "Next" : "Save",
+                    model.currentPage != 2
+                        ? AppLocalizations().navigationButtonNext
+                        : AppLocalizations().navigationButtonSave,
                     style: TextStyle(
                       fontFamily: 'GoogleSans',
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: DimensApp.textSizeMiddle,
                       color: Colors.white,
                     ),
                   ),

@@ -2,7 +2,6 @@ import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/schedule/schedule_screen_model.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/schedule/schedule_screen_view.dart';
-import 'package:classify/data/entities/lesson.dart';
 
 class ScheduleScreenViewModel
     extends AppViewModel<ScheduleScreenModel, ScheduleScreenView> {
@@ -20,14 +19,13 @@ class ScheduleScreenViewModel
 
   void onSubjectSelect(Subject subject) {}
 
-  void onLessonsUpdated(int lessonsPerDay) {
-    for (var i = 1; i <= lessonsPerDay; i++) {
-      var lesson = Lesson(null, model.userManager.user.id, i.toString());
-      model.lessons.add(lesson);
-    }
+  void onLessonsUpdated(int lessonsPerDay) async {
+    model.lessons = await model.learningManager
+        .createLessons(model.userManager.user.id, lessonsPerDay);
+    model.schedules = await model.learningManager
+        .createSchedules(model.userManager.user.id, model.lessons);
 
-
-    
+    view.updateUI();
   }
 
   void onSubjectsUpdated(List<Subject> subjects) {

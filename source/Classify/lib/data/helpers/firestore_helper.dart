@@ -14,10 +14,10 @@ class FirestoreHelper {
   }
 
   Future<QuerySnapshot> getAllDataByCollection(CollectionReference reference) {
-    return _getAllDataByQuery(reference);
+    return getAllDataByQuery(reference);
   }
 
-  Future<QuerySnapshot> _getAllDataByQuery(Query query) {
+  Future<QuerySnapshot> getAllDataByQuery(Query query) {
     return query.getDocuments();
   }
 
