@@ -1,3 +1,4 @@
+import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -9,4 +10,6 @@ class ScheduleScreenModel extends AppModel {
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
   OnCallCommand onNavigateTo = OnCallCommand();
+
+  List<Subject> subjects = List();
 }

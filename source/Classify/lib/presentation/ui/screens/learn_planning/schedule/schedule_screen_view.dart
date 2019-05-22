@@ -112,7 +112,7 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
                   Expanded(
                       child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: generateSubjectsGrid([]),
+                    child: generateSubjectsGrid(model.subjects),
                   ))
                 ],
               ),
@@ -122,6 +122,7 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
   }
 
   Widget generateSubjectsGrid(List<Subject> subjects) {
+
     if (subjects == null) return Container();
     List<List<Widget>> subjectsLists = List();
 

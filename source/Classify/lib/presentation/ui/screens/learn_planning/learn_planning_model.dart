@@ -1,3 +1,4 @@
+import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_model.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_screen.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/schedule/schedule_screen.dart';
@@ -12,14 +13,16 @@ class LearnPlanningScreenModel extends AppModel {
 
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  OnCallCommand navigationTapped = new OnCallCommand();
+  OnCallCommand onNavigationTapped = new OnCallCommand();
   OnCallCommand onPageChanged = new OnCallCommand();
 
   PageController pageController = PageController(initialPage: 0);
   var screens = <AppScreen>[];
-  int page = 0;
+  int currentPage = 0;
 
   SubjectsScreen subjectsScreen = SubjectsScreen();
   TimingScreen timingScreen = TimingScreen();
   ScheduleScreen scheduleScreen = ScheduleScreen();
+
+  List<Subject> selectedSubjects = List();
 }

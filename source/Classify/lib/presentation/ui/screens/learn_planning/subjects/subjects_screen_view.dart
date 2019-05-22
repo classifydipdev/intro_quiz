@@ -30,11 +30,11 @@ class SubjectsScreenView extends AppView<SubjectsScreenModel> {
             for (var subject in asyncSnapshot.data) {
               widgets.add(getSubjectButton(subject, (bool isSelected) {
                 if (isSelected) {
-                  model.onSubjectSelect.onCallWithValue(subject.id);
+                  model.onSubjectSelect.onCallWithValue(subject);
                 } else {
-                  model.onSubjectRemove.onCallWithValue(subject.id);
+                  model.onSubjectRemove.onCallWithValue(subject);
                 }
-              }, isSelected: model.selectedSubjects.contains(subject.id)));
+              }, isSelected: model.selectedSubjects.contains(subject)));
             }
             return Wrap(children: widgets);
           }

@@ -10,7 +10,4 @@ class ScheduleScreenViewModel
   init() async {
     super.init();
   }
-
-  @override
-  void preferenceInit() async {}
 }

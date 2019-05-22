@@ -14,8 +14,6 @@ class LearnPlanningScreenView extends AppView<LearnPlanningScreenModel> {
   @override
   void initState() {
     super.initState();
-    model.onPageChanged.addCallbackObject(onPageChanged);
-
     model.screens = <AppScreen>[
       model.subjectsScreen,
       model.timingScreen,
@@ -51,7 +49,9 @@ class LearnPlanningScreenView extends AppView<LearnPlanningScreenModel> {
   Widget getBody() {
     return PageView(
       physics: new NeverScrollableScrollPhysics(),
-      onPageChanged: onPageChanged,
+      onPageChanged: (page) {
+        model.onPageChanged.onCallWithValue(page);
+      },
       controller: model.pageController,
       children: model.screens,
     );
@@ -65,7 +65,7 @@ class LearnPlanningScreenView extends AppView<LearnPlanningScreenModel> {
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
-            model.page != 0
+            model.currentPage != 0
                 ? Container(
                     width: 70,
                     child: Padding(
@@ -82,7 +82,8 @@ class LearnPlanningScreenView extends AppView<LearnPlanningScreenModel> {
                           ),
                         ),
                         onPressed: () {
-                          model.pageController.animateToPage(model.page - 1,
+                          model.pageController.animateToPage(
+                              model.currentPage - 1,
                               duration: const Duration(milliseconds: 200),
                               curve: Curves.linear);
                         },
@@ -109,7 +110,7 @@ class LearnPlanningScreenView extends AppView<LearnPlanningScreenModel> {
                 child: CupertinoButton(
                   padding: EdgeInsets.all(0),
                   child: Text(
-                    model.page != 2 ? "Next" : "Save",
+                    model.currentPage != 2 ? "Next" : "Save",
                     style: TextStyle(
                       fontFamily: 'GoogleSans',
                       fontWeight: FontWeight.bold,
@@ -118,12 +119,7 @@ class LearnPlanningScreenView extends AppView<LearnPlanningScreenModel> {
                     ),
                   ),
                   onPressed: () {
-                    if (model.page == 2)
-                      navigateTo(context, MainScreen(), true);
-                    else
-                      model.pageController.animateToPage(model.page + 1,
-                        duration: const Duration(milliseconds: 200),
-                        curve: Curves.linear);
+                    model.onNavigationTapped.onCall();
                   },
                 ),
               ),
@@ -132,15 +128,5 @@ class LearnPlanningScreenView extends AppView<LearnPlanningScreenModel> {
         ),
       ),
     );
-  }
-
-  void onPageChanged(int page) {
-    var view = model.screens[model.page].appView;
-    if (view != null && view.keyboardFocusListener()) {
-      FocusScope.of(context).requestFocus(new FocusNode());
-    }
-    updateUI(() {
-      model.page = page;
-    });
   }
 }
