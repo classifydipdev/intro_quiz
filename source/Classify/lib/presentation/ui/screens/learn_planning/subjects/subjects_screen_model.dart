@@ -12,6 +12,6 @@ class SubjectsScreenModel extends AppModel {
   OnCallCommand onSubjectSelect = OnCallCommand();
   OnCallCommand onSubjectRemove = OnCallCommand();
 
-  List<String> selectedSubjects = List();
+  List<Subject> selectedSubjects = List();
   Stream<List<Subject>> subjectStream;
 }

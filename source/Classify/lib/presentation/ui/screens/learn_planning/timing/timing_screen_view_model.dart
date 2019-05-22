@@ -5,12 +5,4 @@ import 'package:classify/presentation/ui/screens/learn_planning/timing/timing_sc
 class TimingScreenViewModel
     extends AppViewModel<TimingScreenModel, TimingScreenView> {
   TimingScreenViewModel(TimingScreenView view) : super(view);
-
-  @override
-  init() async {
-    super.init();
-  }
-
-  @override
-  void preferenceInit() async {}
 }

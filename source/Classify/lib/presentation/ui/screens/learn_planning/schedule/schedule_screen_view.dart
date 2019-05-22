@@ -112,7 +112,7 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
                   Expanded(
                       child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: generateSubjectsGrid([]),
+                    child: generateSubjectsGrid(model.subjects),
                   ))
                 ],
               ),
@@ -131,10 +131,11 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
 
     for (int i = 0; i < subjects.length; i++) {
       Subject subject = subjects[i];
-      subjectsLists[(i / subjects.length * 4).toInt()]
-          .add(getSubjectButton(subject, (bool isSelected) {
+      var subjectWidget = getSubjectButton(subject, (bool isSelected) {
+        model.onSubjectSelect.onCallWithValue(subject);
         Navigator.pop(context);
-      }, isBorder: false));
+      }, isBorder: false);
+      subjectsLists[(i / subjects.length * 4).toInt()].add(subjectWidget);
     }
 
     for (int i = 0; i < 4; i++) {
@@ -177,7 +178,7 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
           width: double.maxFinite,
           margin: EdgeInsets.all(5.0),
           child: ListView.builder(
-            itemCount: 6,
+            itemCount: model.lessons.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext context, int index) {
               return getAddItem(index);

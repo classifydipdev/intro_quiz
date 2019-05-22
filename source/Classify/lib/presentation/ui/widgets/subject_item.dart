@@ -8,7 +8,7 @@ Widget getSubjectButton(Subject subject, Function(bool) onTap,
     height: 70,
     child: InkWell(
       onTap: () {
-        if (isBorder) onTap(!isSelected);
+        onTap(!isSelected);
       },
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
@@ -26,8 +26,7 @@ Widget getSubjectButton(Subject subject, Function(bool) onTap,
           borderRadius: BorderRadius.circular(35.0),
         ),
         child: Padding(
-            padding:
-                EdgeInsets.symmetric(horizontal: DimensApp.paddingMiddle),
+            padding: EdgeInsets.symmetric(horizontal: DimensApp.paddingMiddle),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,

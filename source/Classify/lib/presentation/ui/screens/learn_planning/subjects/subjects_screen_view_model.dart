@@ -1,4 +1,4 @@
-import 'package:classify/domain/enities/learning_plan.dart';
+import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/subjects/subjects_screen_model.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/subjects/subjects_screen_view.dart';
@@ -19,13 +19,13 @@ class SubjectsScreenViewModel
     model.subjectStream = model.learningManager.getSubjects();
   }
 
-  void onSubjectSelect(String index) {
-    model.selectedSubjects.add(index);
+  void onSubjectSelect(Subject subject) {
+    model.selectedSubjects.add(subject);
     view.updateUI();
   }
 
-  void onSubjectRemove(String index) {
-    model.selectedSubjects.remove(index);
+  void onSubjectRemove(Subject subject) {
+    model.selectedSubjects.remove(subject);
     view.updateUI();
   }
 }
