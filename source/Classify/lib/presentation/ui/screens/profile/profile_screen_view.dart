@@ -109,7 +109,10 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                           borderRadius: BorderRadius.circular(50),
                           image: DecorationImage(
                             alignment: Alignment.center,
-                            image: NetworkImage(model.userManager.user.photo),
+                            image: model.userManager.user.photo != null
+                                ? NetworkImage(model.userManager.user.photo)
+                                : AssetImage(
+                                    'assets/images/icons/profileGrey.webp'),
                             fit: BoxFit.cover,
                           ),
                         ))))
@@ -318,35 +321,39 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                       )
                     ],
                   ),
-                  //TODO: ListView
                   Container(
-                   height: 150,
-                   child: ListView.builder(
-                      itemCount: model.schedules.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Material(
-                            color: Colors.transparent,
-                            child: ListTile(
-                              title: Text(
-                                model.schedules[index].subject.name,
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17,
-                                    fontFamily: MainScreenModel.fontFamily,
-                                    color: Colors.black54),
+                      height: 200,
+                      child: ListView.builder(
+                          itemCount: model.schedules.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Container(
+                              margin: EdgeInsets.only(top: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(
+                                    model.schedules[index].subject.name,
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17,
+                                        fontFamily: MainScreenModel.fontFamily,
+                                        color: Colors.black54),
+                                  ),
+                                  Text(
+                                    model.schedules[index].lesson.name,
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14,
+                                        fontFamily: MainScreenModel.fontFamily,
+                                        color: Color(0xff00ffbb)),
+                                  )
+                                ],
                               ),
-                              trailing : Text(
-                                model.schedules[index].lesson.name,
-                                textAlign: TextAlign.right,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
-                                    fontFamily: MainScreenModel.fontFamily,
-                                    color: Color(0xff00ffbb)),
-                              ),
-                            ));
-                      })),
+                            );
+                          })),
+
 /*                  Container(
                     margin: EdgeInsets.only(top: 10),
                     child: Row(
