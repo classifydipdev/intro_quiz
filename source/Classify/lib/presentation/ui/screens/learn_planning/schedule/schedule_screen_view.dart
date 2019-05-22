@@ -1,4 +1,5 @@
 import 'package:classify/data/entities/lesson.dart';
+import 'package:classify/data/entities/schedule.dart';
 import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
@@ -42,14 +43,7 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
             child: ListView.builder(
               itemCount: 5,
               itemBuilder: (BuildContext context, int index) {
-                List<String> days = [
-                  "MONDAY",
-                  "TUESDAY",
-                  "WEDNESDAY",
-                  "THURSDAY",
-                  "FRIDAY"
-                ];
-                return getDay(days[index]);
+                return getDay(index);
               },
             ),
           ),
@@ -161,7 +155,15 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
     );
   }
 
-  Widget getDay(String text) {
+  Widget getDay(int day) {
+    var schedules = model.getSchedulesByDay(day);
+    List<String> days = [
+      "MONDAY",
+      "TUESDAY",
+      "WEDNESDAY",
+      "THURSDAY",
+      "FRIDAY"
+    ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -171,7 +173,7 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
               left: DimensApp.paddingMiddle,
               bottom: DimensApp.paddingSmall),
           child: Text(
-            text,
+            days[day],
             style: TextStyle(
                 color: Colors.white,
                 fontSize: DimensApp.textSizeMiddle,
@@ -183,10 +185,10 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
           width: double.maxFinite,
           margin: EdgeInsets.all(DimensApp.marginMicro),
           child: ListView.builder(
-            itemCount: model.lessons.length,
+            itemCount: schedules.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext context, int index) {
-              return getItem(model.lessons[index]);
+              return getItem(schedules, index);
             },
           ),
         ),
@@ -194,7 +196,11 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
     );
   }
 
-  Widget getItem(Lesson lesson) {
+  Widget getItem(List<Schedule> schedules, int lessonIndex) {
+    var schedule = schedules[lessonIndex];
+    var lesson = schedule.lesson;
+    var subject = schedule.subject;
+
     return Padding(
       padding: EdgeInsets.only(left: DimensApp.paddingSmall),
       child: Container(
@@ -216,11 +222,25 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
               ),
             ),
             Container(
-              width: 130.0,
               height: 50.0,
               padding: EdgeInsets.all(DimensApp.paddingPico),
               alignment: Alignment.center,
-              child: OutlineButton(
+              child: subject == null ?  getEmptySchedule(schedule) : getSubjectButton(subject, (bool isSelected) {
+       
+        model.onScheduleSelect
+                      .onCallWithValue(schedule);
+                  showSubjectChooser();
+       
+      }, isBorder: false),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget getEmptySchedule(Schedule schedule){
+    return OutlineButton(
                 highlightedBorderColor: Colors.white,
                 borderSide: BorderSide(color: Colors.white, width: 2),
                 shape: RoundedRectangleBorder(
@@ -228,6 +248,8 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
                       BorderRadius.circular(DimensApp.borderRadiusMiddleExtra),
                 ),
                 onPressed: () {
+                  model.onScheduleSelect
+                      .onCallWithValue(schedule);
                   showSubjectChooser();
                 },
                 child: Center(
@@ -241,11 +263,6 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
                     ),
                   ),
                 ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+              );
   }
 }
