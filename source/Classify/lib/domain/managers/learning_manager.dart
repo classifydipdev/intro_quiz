@@ -25,17 +25,17 @@ class LearningManager {
         _firebaseFirestore.getLessonCollectionReference();
       var lesson = Lesson(null, idUser, i.toString());
 
-      var batchChat = FirestoreBatch.set(
+      var batch = FirestoreBatch.set(
         lessonsReference,
         lesson.toFirestore(),
         merge: false,
       );
       if (batchList.length < 500) {
-        batchList.add(batchChat);
+        batchList.add(batch);
       } else {
         await _firebaseFirestore.aplyBatch(batchList);
         batchList = List();
-        batchList.add(batchChat);
+        batchList.add(batch);
       }
     }
     await _firebaseFirestore.aplyBatch(batchList);
@@ -53,17 +53,17 @@ class LearningManager {
         _firebaseFirestore.getScheduleCollectionReference();
         var schedule = Schedule(null, idUser, null, lessons[lesson], day);
 
-        var batchChat = FirestoreBatch.set(
+        var batch = FirestoreBatch.set(
           lessonsReference,
           schedule.toFirestore(),
           merge: false,
         );
         if (batchList.length < 500) {
-          batchList.add(batchChat);
+          batchList.add(batch);
         } else {
           await _firebaseFirestore.aplyBatch(batchList);
           batchList = List();
-          batchList.add(batchChat);
+          batchList.add(batch);
         }
       }
     }

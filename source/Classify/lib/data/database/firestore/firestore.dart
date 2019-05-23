@@ -168,13 +168,13 @@ class AppFirbaseFirestore {
     return await _db.getAllDataByQuery(query).then((querySnapshot) async {
       List<FirestoreBatch> batchList = List();
       for (var doc in querySnapshot.documents) {
-        var batchChat = FirestoreBatch.delete(doc.reference);
+        var batch = FirestoreBatch.delete(doc.reference);
         if (batchList.length < 500) {
-          batchList.add(batchChat);
+          batchList.add(batch);
         } else {
           await aplyBatch(batchList);
           batchList = List();
-          batchList.add(batchChat);
+          batchList.add(batch);
         }
       }
       await aplyBatch(batchList);
@@ -247,13 +247,13 @@ class AppFirbaseFirestore {
     return await _db.getAllDataByQuery(query).then((querySnapshot) async {
       List<FirestoreBatch> batchList = List();
       for (var doc in querySnapshot.documents) {
-        var batchChat = FirestoreBatch.delete(doc.reference);
+        var batch = FirestoreBatch.delete(doc.reference);
         if (batchList.length < 500) {
-          batchList.add(batchChat);
+          batchList.add(batch);
         } else {
           await aplyBatch(batchList);
           batchList = List();
-          batchList.add(batchChat);
+          batchList.add(batch);
         }
       }
       await aplyBatch(batchList);
