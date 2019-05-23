@@ -1,11 +1,13 @@
 import 'dart:async';
 
+import 'package:classify/data/entities/firestore_batch.dart';
 import 'package:classify/data/entities/lesson.dart';
 import 'package:classify/data/entities/schedule.dart';
 import 'package:classify/data/entities/subject.dart';
 import 'package:classify/data/entities/user.dart';
 import 'package:classify/data/entities/user_preference.dart';
 import 'package:classify/data/helpers/firestore_helper.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AppFirbaseFirestore {
@@ -19,6 +21,30 @@ class AppFirbaseFirestore {
   static final lessonCollection = "lessons";
 
   static final _db = FirestoreHelper();
+
+  Future<void> aplyBatch(List<FirestoreBatch> operations) async {
+    if (operations.length == 0) return;
+    WriteBatch batch = _db.getFS().batch();
+    for (var operation in operations) {
+      if (operation.type != FirestoreBatchOperationType.DELETE &&
+          operation.data == null) continue;
+      switch (operation.type) {
+        case FirestoreBatchOperationType.SET:
+          batch.setData(operation.document, operation.data,
+              merge: operation.merge);
+          break;
+        case FirestoreBatchOperationType.UPDATE:
+          batch.updateData(operation.document, operation.data);
+          break;
+        case FirestoreBatchOperationType.DELETE:
+          batch.delete(operation.document);
+          break;
+      }
+    }
+    return await batch.commit().catchError((error) {
+      throw error;
+    });
+  }
 
   Future<void> addUser(User user) async {
     if (user == null || user.id == null) throw Exception("Wrong user");
@@ -140,9 +166,18 @@ class AppFirbaseFirestore {
         .collection(lessonCollection)
         .where("idUser", isEqualTo: idUser);
     return await _db.getAllDataByQuery(query).then((querySnapshot) async {
+      List<FirestoreBatch> batchList = List();
       for (var doc in querySnapshot.documents) {
-        await _db.deleteData(doc.reference);
+        var batchChat = FirestoreBatch.delete(doc.reference);
+        if (batchList.length < 500) {
+          batchList.add(batchChat);
+        } else {
+          await aplyBatch(batchList);
+          batchList = List();
+          batchList.add(batchChat);
+        }
       }
+      await aplyBatch(batchList);
       return;
     });
   }
@@ -210,11 +245,28 @@ class AppFirbaseFirestore {
         .collection(scheduleCollection)
         .where("idUser", isEqualTo: idUser);
     return await _db.getAllDataByQuery(query).then((querySnapshot) async {
+      List<FirestoreBatch> batchList = List();
       for (var doc in querySnapshot.documents) {
-        await _db.deleteData(doc.reference);
+        var batchChat = FirestoreBatch.delete(doc.reference);
+        if (batchList.length < 500) {
+          batchList.add(batchChat);
+        } else {
+          await aplyBatch(batchList);
+          batchList = List();
+          batchList.add(batchChat);
+        }
       }
+      await aplyBatch(batchList);
       return;
     });
+  }
+
+  DocumentReference getLessonCollectionReference() {
+    return _db.getFS().collection(lessonCollection).document();
+  }
+
+  DocumentReference getScheduleCollectionReference() {
+    return _db.getFS().collection(scheduleCollection).document();
   }
 
   factory AppFirbaseFirestore() {
