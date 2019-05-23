@@ -41,9 +41,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-  - assets/images/mojave1.webp
-  - assets/images/mojave2.webp
-  - assets/images/mojave3.webp
   - assets/images/icons/homeworkOrange.webp
   - assets/images/icons/homePurple.webp
   - assets/images/icons/profileGrey.webp

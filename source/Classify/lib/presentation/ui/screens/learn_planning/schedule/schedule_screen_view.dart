@@ -2,6 +2,7 @@ import 'package:classify/data/entities/lesson.dart';
 import 'package:classify/data/entities/schedule.dart';
 import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/res/dimens.dart';
+import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/schedule/schedule_screen_model.dart';
 import 'package:classify/presentation/ui/widgets/subject_item.dart';
@@ -33,11 +34,7 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
             child: Text(
               "Timetable",
               textAlign: TextAlign.left,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: DimensApp.textSizeBig,
-                  fontFamily: "GoogleSans",
-                  color: Colors.white),
+              style: ThemeApp.bigWhiteBoldTextStyle,
             ),
           ),
           Expanded(
@@ -103,11 +100,7 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
                     ),
                     child: Text(
                       "Subjects",
-                      style: TextStyle(
-                        fontSize: DimensApp.textSizeMiddleExtra,
-                        color: Colors.black,
-                        fontFamily: 'GoogleSans',
-                      ),
+                      style: ThemeApp.middleExtraBlackTextStyle,
                     ),
                   ),
                   Expanded(
@@ -179,16 +172,10 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
             top: DimensApp.paddingMiddle,
             left: DimensApp.paddingMiddle,
           ),
-          child: Text(
-            days[day],
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: DimensApp.textSizeMiddle,
-                fontWeight: FontWeight.bold),
-          ),
+          child: Text(days[day], style: ThemeApp.middleWhiteBoldTextStyle),
         ),
         Container(
-          height: 90.0,
+          height: 70.0,
           width: double.maxFinite,
           margin: EdgeInsets.all(DimensApp.marginMicro),
           child: ListView.builder(
@@ -209,42 +196,22 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
     var subject = schedule.subject;
 
     return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(
-                bottom: DimensApp.paddingMicro,
-                left: DimensApp.paddingSmallExtra),
-            child: Text(
-              lesson.name,
-              style: TextStyle(
-                fontSize: DimensApp.textSizeLittle,
-                color: Colors.white,
-                fontFamily: 'GoogleSans',
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Container(
-            height: 70.0,
-            alignment: Alignment.center,
-            child: subject == null
-                ? getEmptySchedule(schedule)
-                : getSubjectButton(subject, (bool isSelected) {
-                    model.onScheduleSelect.onCallWithValue(schedule);
-                    showSubjectChooser();
-                  }, isBorder: false),
-          ),
-        ],
-      ),
+      height: 70.0,
+      alignment: Alignment.center,
+      child: subject == null
+          ? getEmptySchedule(schedule)
+          : getSubjectButton(subject, (bool isSelected) {
+              model.onScheduleSelect.onCallWithValue(schedule);
+              showSubjectChooser();
+            }, isBorder: false),
     );
   }
 
   Widget getEmptySchedule(Schedule schedule) {
     return Container(
+      width: DimensApp.sizeBig,
       margin: EdgeInsets.symmetric(horizontal: DimensApp.paddingSmall),
-      height: 50,
+      height: DimensApp.sizeMiddleExtra,
       child: OutlineButton(
         highlightedBorderColor: Colors.white,
         borderSide: BorderSide(color: Colors.white, width: 2),

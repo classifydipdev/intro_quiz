@@ -39,18 +39,25 @@ class AuthScreenView extends AppView<AuthScreenModel> {
                 child: Column(
           children: <Widget>[
             Padding(
-                padding: EdgeInsets.only(top: 50.0, bottom: 25.0),
+                padding: EdgeInsets.only(
+                    top: DimensApp.paddingBig,
+                    bottom: DimensApp.paddingMiddleExtra),
                 child: createLogo()),
             Padding(
-                padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.20),
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.20),
                 child: Column(
                   children: <Widget>[
                     Padding(
-                        padding: EdgeInsets.only(top: 25.0, bottom: 25.0),
+                        padding: EdgeInsets.only(
+                            top: DimensApp.paddingMiddleExtra,
+                            bottom: DimensApp.paddingMiddleExtra),
                         child: createLoginButtonGoogle()),
                     createSingUpButton(),
                     Padding(
-                        padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                        padding: EdgeInsets.only(
+                            top: DimensApp.paddingSmall,
+                            bottom: DimensApp.paddingSmall),
                         child: createLogInButton())
                   ],
                 )),
@@ -84,7 +91,7 @@ class AuthScreenView extends AppView<AuthScreenModel> {
               width: 90.0,
             ),
           ),
-          SizedBox(height: 80.0),
+          SizedBox(height: DimensApp.sizeNormalExtra),
           Text(
             "for students; by students",
             style: TextStyle(
@@ -100,11 +107,15 @@ class AuthScreenView extends AppView<AuthScreenModel> {
 
   Widget createLoginButtonGoogle() {
     return Container(
-      margin: EdgeInsets.only(left: 50.0, right: 50.0),
+      margin: EdgeInsets.only(
+          left: DimensApp.paddingBig, right: DimensApp.paddingBig),
       child: RaisedButton(
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(35.0)),
-        padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+        shape: RoundedRectangleBorder(
+            borderRadius:
+                BorderRadius.circular(DimensApp.borderRadiusMiddleExtra)),
+        padding: EdgeInsets.only(
+            top: DimensApp.paddingSmallExtra,
+            bottom: DimensApp.paddingSmallExtra),
         color: Colors.white,
         onPressed: () {
           model.onSignInByGoogle.onCall();
@@ -114,7 +125,7 @@ class AuthScreenView extends AppView<AuthScreenModel> {
           children: <Widget>[
             Container(
               padding: EdgeInsets.only(left: DimensApp.paddingMiddleExtra),
-              width: 50,
+              width: DimensApp.sizeMiddleExtra,
               child: SvgPicture.asset(
                 'assets/icons/google_icon.svg',
                 width: 24.0,
@@ -133,7 +144,7 @@ class AuthScreenView extends AppView<AuthScreenModel> {
               ),
             ),
             Container(
-              width: 50,
+              width: DimensApp.sizeMiddleExtra,
             ),
           ],
         ),
@@ -167,7 +178,7 @@ class AuthScreenView extends AppView<AuthScreenModel> {
 //              child: Container(
 //                alignment: Alignment.center,
 //                child: Padding(
-//                    padding: EdgeInsets.only(right: 50.0),
+//                    padding: EdgeInsets.only(right: DimensApp.paddingBig),
 //                    child: Text("Sing up with email",
 //                        style: TextStyle(
 //                            color: Colors.white, fontWeight: FontWeight.bold))),
@@ -181,24 +192,28 @@ class AuthScreenView extends AppView<AuthScreenModel> {
 
   Widget createSingUpButton() {
     return Container(
-      margin: EdgeInsets.only(left: 50.0, right: 50.0),
+      margin: EdgeInsets.only(
+          left: DimensApp.paddingBig, right: DimensApp.paddingBig),
       child: OutlineButton(
         borderSide: BorderSide(color: Colors.white),
         highlightedBorderColor: Colors.white,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(35.0),
+          borderRadius:
+              BorderRadius.circular(DimensApp.borderRadiusMiddleExtra),
         ),
         onPressed: () {
           navigateTo(context, SignUpScreen(), false);
         },
         child: Container(
-          padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+          padding: EdgeInsets.only(
+              top: DimensApp.paddingSmallExtra,
+              bottom: DimensApp.paddingSmallExtra),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Container(
                 padding: EdgeInsets.only(left: DimensApp.paddingSmall),
-                width: 50,
+                width: DimensApp.sizeMiddleExtra,
                 child: SvgPicture.asset(
                   'assets/icons/mail_icon.svg',
                   color: Colors.white,
@@ -212,15 +227,14 @@ class AuthScreenView extends AppView<AuthScreenModel> {
                   textAlign: TextAlign.center,
                   maxLines: 1,
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'GoogleSans'
-                  ),
+                      color: Colors.white,
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'GoogleSans'),
                 ),
               ),
               Container(
-                width: 50,
+                width: DimensApp.sizeMiddleExtra,
               ),
             ],
           ),
@@ -231,14 +245,16 @@ class AuthScreenView extends AppView<AuthScreenModel> {
 
   Widget createLogInButton() {
     return Container(
-      margin: EdgeInsets.only(left: 60.0, right: 60.0),
+      margin: EdgeInsets.only(
+          left: DimensApp.paddingBigExtra, right: DimensApp.paddingBigExtra),
       child: CupertinoButton(
         padding: EdgeInsets.all(0),
         onPressed: () {
           navigateTo(context, LogInScreen(), false);
         },
         child: Container(
-          padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+          padding: EdgeInsets.only(
+              top: DimensApp.paddingSmall, bottom: DimensApp.paddingSmall),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
@@ -248,11 +264,10 @@ class AuthScreenView extends AppView<AuthScreenModel> {
                   child: Text(
                     "Log in",
                     style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12.0,
-                      fontFamily: 'GoogleSans'
-                    ),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12.0,
+                        fontFamily: 'GoogleSans'),
                   ),
                 ),
               ),

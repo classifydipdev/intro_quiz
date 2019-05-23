@@ -3,16 +3,68 @@ import 'package:classify/presentation/res/dimens.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Widget getHorizontalPicker(PageController controller, int from, int to,
-    int step, Function(int) onChange) {
+Widget getHorizontalPicker(PageController controller, Function(int) onChange) {
   return Container(
     width: 280,
     height: 60,
     child: Stack(
       children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  controller.animateToPage(controller.page.toInt() - 2,
+                      duration: Duration(microseconds: 500),
+                      curve: Curves.easeIn);
+                },
+              ),
+            ),
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  controller.previousPage(
+                      duration: Duration(microseconds: 500),
+                      curve: Curves.easeIn);
+                },
+              ),
+            ),
+            Container(
+              height: DimensApp.sizeNormal,
+              width: 65,
+              decoration: BoxDecoration(
+                border: new Border.all(
+                    color: ColorsApp.pink,
+                    width: 1.2,
+                    style: BorderStyle.solid),
+                borderRadius:
+                    BorderRadius.circular(DimensApp.borderRadiusLarge),
+              ),
+            ),
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  controller.nextPage(
+                      duration: Duration(microseconds: 500),
+                      curve: Curves.easeIn);
+                },
+              ),
+            ),
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  controller.animateToPage(controller.page.toInt() + 1,
+                      duration: Duration(microseconds: 500),
+                      curve: Curves.easeIn);
+                },
+              ),
+            ),
+          ],
+        ),
         PageView.builder(
-          onPageChanged: (position) {
-            onChange(step * position + from);
+          onPageChanged: (int position) {
+            onChange(position % 10 + 1);
           },
           controller: controller,
           pageSnapping: true,
@@ -22,7 +74,7 @@ Widget getHorizontalPicker(PageController controller, int from, int to,
               child: Container(
                 padding: EdgeInsets.only(top: DimensApp.paddingSmallExtra),
                 child: Text(
-                  (step * index + from).toString(),
+                  (index % 10 + 1).toString(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,
@@ -33,20 +85,52 @@ Widget getHorizontalPicker(PageController controller, int from, int to,
               ),
             );
           },
-          itemCount: (to - from) ~/ step + 1,
+          // itemCount: (to - from) ~/ step + 1,
         ),
-        Align(
-          alignment: Alignment.center,
-          child: Container(
-            height: 50,
-            width: 65,
-            decoration: BoxDecoration(
-              border: new Border.all(
-                  color: ColorsApp.pink, width: 1.2, style: BorderStyle.solid),
-              borderRadius: BorderRadius.circular(80.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  controller.animateToPage(controller.page.toInt() - 2,
+                      duration: Duration(seconds: 1),
+                      curve: Curves.linear);
+                },
+              ),
             ),
-          ),
-        )
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  controller.previousPage(
+                      duration: Duration(seconds: 1),
+                      curve: Curves.linear);
+                },
+              ),
+            ),
+            Container(
+              width: 65,
+            ),
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  controller.nextPage(
+                      duration: Duration(seconds: 1),
+                      curve: Curves.linear);
+                },
+              ),
+            ),
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  controller.animateToPage(controller.page.toInt() + 2,
+                      duration: Duration(seconds: 1),
+                      curve: Curves.linear);
+                },
+              ),
+            ),
+          ],
+        ),
       ],
     ),
   );
@@ -91,11 +175,12 @@ Widget getVerticalPicker(
               alignment: Alignment.center,
               child: Container(
                 height: 65,
-                width: 50,
+                width: DimensApp.sizeMiddleExtra,
                 decoration: BoxDecoration(
                   border: new Border.all(
                       color: Colors.red, width: 1.2, style: BorderStyle.solid),
-                  borderRadius: BorderRadius.circular(80.0),
+                  borderRadius:
+                      BorderRadius.circular(DimensApp.borderRadiusLarge),
                 ),
               ),
             ))

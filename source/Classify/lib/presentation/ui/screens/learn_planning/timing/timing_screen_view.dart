@@ -1,4 +1,5 @@
 import 'package:classify/presentation/res/dimens.dart';
+import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/timing/timing_screen_model.dart';
 import 'package:classify/presentation/ui/widgets/pickers.dart';
@@ -25,27 +26,19 @@ class TimingScreenView extends AppView<TimingScreenModel> {
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.only(top: 20.0),
+            padding: EdgeInsets.only(top: DimensApp.paddingMiddle),
           ),
           Text(
             "Lessons per day",
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'GoogleSans',
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+            style: ThemeApp.bigWhiteBoldTextStyle,
           ),
           Padding(
             padding: EdgeInsets.only(top: DimensApp.paddingSmall),
             child: getHorizontalPicker(
-                PageController(viewportFraction: 0.2, initialPage: 5),
-                1,
-                10,
-                1,
+                PageController(viewportFraction: 0.2, initialPage: 996),
                 (int value) {
-                  model.lessonsPerDay = value;
-                }),
+              model.lessonsPerDay = value;
+            }),
           ),
         ],
       ),
