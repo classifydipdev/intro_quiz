@@ -20,6 +20,15 @@ abstract class AppViewModel<M extends AppModel, V extends BaseView<M>>
   init() async {
     super.init();
 
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.dark.copyWith(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.light,
+          statusBarBrightness:
+              Brightness.dark
+          ),
+    );
+
     model.pushNotided.addCallback(pushNotify);
     model.preferenceInit.addCallback(preferenceInit);
 
@@ -67,7 +76,7 @@ abstract class AppViewModel<M extends AppModel, V extends BaseView<M>>
           text = "Incorrect email or password, try again, please.";
       }
     }
-    
+
     if (text == null || text.length == 0) {
       text = "Unknown error. Try repeating the action again.";
     }

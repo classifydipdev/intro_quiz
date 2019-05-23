@@ -10,6 +10,15 @@ class ThemeApp {
     canvasColor: Colors.transparent,
   );
 
+  static TextStyle get smallFadeWhiteBoldTextStyle {
+    return TextStyle(
+      fontFamily: 'GoogleSans',
+      fontSize: DimensApp.textSizeSmall,
+      color: Colors.white70,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
   static TextStyle get middleWhiteBoldTextStyle {
     return TextStyle(
       fontFamily: 'GoogleSans',
@@ -23,6 +32,15 @@ class ThemeApp {
     return TextStyle(
       fontFamily: 'GoogleSans',
       fontSize: DimensApp.textSizeMiddleExtra,
+      color: Colors.white,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
+  static TextStyle get bigWhiteBoldTextStyle {
+    return TextStyle(
+      fontFamily: 'GoogleSans',
+      fontSize: DimensApp.textSizeBig,
       color: Colors.white,
       fontWeight: FontWeight.bold,
     );

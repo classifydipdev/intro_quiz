@@ -24,6 +24,8 @@ class LearnPlanningScreenView extends AppView<LearnPlanningScreenModel> {
   @override
   Widget getView(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(
+          vertical: screenAspectRatio < 0.5625 ? DimensApp.paddingNormal : 0),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [

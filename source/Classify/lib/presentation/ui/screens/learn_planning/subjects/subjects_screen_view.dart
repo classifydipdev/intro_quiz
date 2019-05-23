@@ -1,5 +1,6 @@
 import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/res/dimens.dart';
+import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/subjects/subjects_screen_model.dart';
 import 'package:classify/presentation/ui/widgets/subject_item.dart';
@@ -24,7 +25,14 @@ class SubjectsScreenView extends AppView<SubjectsScreenModel> {
           if (asyncSnapshot.hasError) {
             return Center(child: Text("Error!"));
           } else if (asyncSnapshot.data == null) {
-            return Center(child: CircularProgressIndicator());
+            return Center(
+              child: Padding(
+                padding: EdgeInsets.only(top: DimensApp.paddingLargeExtra),
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
+              ),
+            );
           } else {
             List<Widget> widgets = [];
             for (var subject in asyncSnapshot.data) {
@@ -50,23 +58,15 @@ class SubjectsScreenView extends AppView<SubjectsScreenModel> {
             child: Text(
               "Subjects",
               textAlign: TextAlign.left,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  fontFamily: "GoogleSans",
-                  color: Colors.white),
+              style: ThemeApp.bigWhiteBoldTextStyle,
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(DimensApp.paddingSmall),
+            padding: EdgeInsets.fromLTRB(DimensApp.paddingSmall, DimensApp.paddingSmall, DimensApp.paddingSmall, DimensApp.paddingMiddle),
             child: Text(
               "All the timetabled subjects, don't fret: you can always edit these later.",
               textAlign: TextAlign.left,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                  fontFamily: "GoogleSans",
-                  color: Colors.white70),
+              style: ThemeApp.smallFadeWhiteBoldTextStyle,
             ),
           ),
           Expanded(

@@ -34,8 +34,8 @@ class StartedScreenView extends AppView<StartedScreenModel> {
         ),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          SizedBox(height: DimensApp.sizeNormal),
           Align(
             alignment: Alignment.center,
             child: SvgPicture.asset(
@@ -69,7 +69,6 @@ class StartedScreenView extends AppView<StartedScreenModel> {
               ),
             ),
           ),
-          SizedBox(height: DimensApp.sizeBigExtra),
         ],
       ),
     );
