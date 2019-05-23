@@ -59,6 +59,7 @@ class DimensApp {
   static const double sizeMiddleExtra = 50.0;
   static const double sizeNormal = 55.0;
   static const double sizeNormalExtra = 80.0;
+  static const double sizeBig = 125.0;
   static const double sizeBigExtra = 150.0;
   static const double sizeLarge = 225.0;
 }

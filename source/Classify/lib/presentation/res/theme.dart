@@ -37,6 +37,14 @@ class ThemeApp {
     );
   }
 
+  static TextStyle get middleExtraBlackTextStyle {
+    return TextStyle(
+      fontFamily: 'GoogleSans',
+      fontSize: DimensApp.textSizeMiddleExtra,
+      color: Colors.black,
+    );
+  }
+
   static TextStyle get bigWhiteBoldTextStyle {
     return TextStyle(
       fontFamily: 'GoogleSans',
