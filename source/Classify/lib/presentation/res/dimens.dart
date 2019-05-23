@@ -6,6 +6,7 @@ class DimensApp {
   static const double iconSizeNormal = 28.0;
   static const double iconSizeBig = 35.0;
   static const double iconSizeLarge = 60.0;
+  static const double iconSizeLargeExtra = 70.0;
 
   //Paddings
   static const double paddingPico = 2.0;
@@ -16,7 +17,7 @@ class DimensApp {
   static const double paddingMiddleExtra = 25.0;
   static const double paddingNormal = 30.0;
   static const double paddingNormalExtra = 40.0;
-  static const double paddingBig = 55.0;
+  static const double paddingBig = 50.0;
   static const double paddingBigExtra = 65.0;
   static const double paddingLarge = 80.0;
   static const double paddingLargeExtra = 100.0;
@@ -44,10 +45,18 @@ class DimensApp {
   static const double borderRadiusNormal = 16.0;
   static const double borderRadiusMiddle = 30.0;
   static const double borderRadiusMiddleExtra = 35.0;
+  static const double borderRadiusNormalExtra = 50.0;
   static const double borderRadiusLarge = 80.0;
 
   //Border size
   static const double borderPico = 2.0;
   static const double borderNormal = 6.0;
   static const double borderMiddle = 15.0;
+
+  //Sized box
+  static const double sizeSmall = 25.0;
+  static const double sizeMiddle = 40.0;
+  static const double sizeMiddleExtra = 50.0;
+  static const double sizeNormal = 80.0;
+  static const double sizeLarge = 225.0;
 }

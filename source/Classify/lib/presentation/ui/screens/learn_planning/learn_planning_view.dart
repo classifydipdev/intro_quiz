@@ -59,7 +59,7 @@ class LearnPlanningScreenView extends AppView<LearnPlanningScreenModel> {
 
   Widget getNavigationBar() {
     return Container(
-      height: 50,
+      height: DimensApp.sizeMiddleExtra,
       width: double.maxFinite,
       child: Center(
         child: Row(

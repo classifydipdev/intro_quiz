@@ -1,3 +1,4 @@
+import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/main/main_screen_model.dart';
 import 'package:classify/presentation/ui/screens/profile/profile_screen_model.dart';
@@ -58,7 +59,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
 
   Widget _userInfo() {
     return Container(
-        margin: EdgeInsets.only(top: 25),
+        margin: EdgeInsets.only(top: DimensApp.paddingMiddleExtra),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -68,7 +69,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                 child: Align(
                     alignment: Alignment.centerLeft,
                     child: Container(
-                        margin: EdgeInsets.all(20),
+                        margin: EdgeInsets.all(DimensApp.paddingMiddle),
                         alignment: Alignment.centerLeft,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -102,11 +103,12 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                     alignment: Alignment.centerRight,
                     child: Container(
                         alignment: Alignment.centerRight,
-                        margin: EdgeInsets.all(20),
-                        height: 50,
-                        width: 50,
+                        margin: EdgeInsets.all(DimensApp.paddingMiddle),
+                        height: DimensApp.sizeMiddleExtra,
+                        width: DimensApp.sizeMiddleExtra,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
+                          borderRadius: BorderRadius.circular(
+                              DimensApp.borderRadiusNormalExtra),
                           image: DecorationImage(
                             alignment: Alignment.center,
                             image: model.userManager.user.photo != null
@@ -123,15 +125,18 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
   Widget _homeWorks() {
     return Container(
         width: double.maxFinite,
-        margin: EdgeInsets.only(top: 10, right: 10, left: 10),
+        margin: EdgeInsets.only(
+            top: DimensApp.paddingSmall,
+            right: DimensApp.paddingSmall,
+            left: DimensApp.paddingSmall),
         child: Card(
           color: Color(0xFFfafafa),
           elevation: 10.0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.0),
+            borderRadius: BorderRadius.circular(DimensApp.borderRadiusMiddle),
           ),
           child: Padding(
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.all(DimensApp.paddingMiddle),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -159,7 +164,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                   ),
                   //TODO: ListView
                   Container(
-                    margin: EdgeInsets.only(top: 10),
+                    margin: EdgeInsets.only(top: DimensApp.paddingSmall),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -199,7 +204,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 10),
+                    margin: EdgeInsets.only(top: DimensApp.paddingSmall),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -239,7 +244,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 10),
+                    margin: EdgeInsets.only(top: DimensApp.paddingSmall),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -286,15 +291,19 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
   Widget _dateHomeWorks() {
     return Container(
         width: double.maxFinite,
-        margin: EdgeInsets.only(top: 20, right: 10, left: 10, bottom: 55),
+        margin: EdgeInsets.only(
+            top: DimensApp.paddingMiddle,
+            right: DimensApp.paddingSmall,
+            left: DimensApp.paddingSmall,
+            bottom: DimensApp.paddingBig),
         child: Card(
           color: Color(0xFFfafafa),
           elevation: 10.0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.0),
+            borderRadius: BorderRadius.circular(DimensApp.borderRadiusMiddle),
           ),
           child: Padding(
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.all(DimensApp.paddingMiddle),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -326,14 +335,15 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                       child: ListView.builder(
                           itemCount: model.schedules.length,
                           itemBuilder: (BuildContext context, int index) {
-
                             var subject = model.schedules[index].subject;
-                            var lesson =  model.schedules[index].lesson;
+                            var lesson = model.schedules[index].lesson;
 
                             return Container(
-                              margin: EdgeInsets.only(top: 10),
+                              margin:
+                                  EdgeInsets.only(top: DimensApp.paddingSmall),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Text(
                                     subject != null ? subject.name : "-",

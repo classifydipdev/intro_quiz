@@ -244,7 +244,7 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
   Widget getEmptySchedule(Schedule schedule) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: DimensApp.paddingSmall),
-      height: 50,
+      height: DimensApp.sizeMiddleExtra,
       child: OutlineButton(
         highlightedBorderColor: Colors.white,
         borderSide: BorderSide(color: Colors.white, width: 2),

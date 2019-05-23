@@ -38,12 +38,12 @@ Widget getHorizontalPicker(PageController controller, int from, int to,
         Align(
           alignment: Alignment.center,
           child: Container(
-            height: 50,
+            height: DimensApp.sizeMiddleExtra,
             width: 65,
             decoration: BoxDecoration(
               border: new Border.all(
                   color: ColorsApp.pink, width: 1.2, style: BorderStyle.solid),
-              borderRadius: BorderRadius.circular(80.0),
+              borderRadius: BorderRadius.circular(DimensApp.borderRadiusLarge),
             ),
           ),
         )
@@ -91,11 +91,12 @@ Widget getVerticalPicker(
               alignment: Alignment.center,
               child: Container(
                 height: 65,
-                width: 50,
+                width: DimensApp.sizeMiddleExtra,
                 decoration: BoxDecoration(
                   border: new Border.all(
                       color: Colors.red, width: 1.2, style: BorderStyle.solid),
-                  borderRadius: BorderRadius.circular(80.0),
+                  borderRadius:
+                      BorderRadius.circular(DimensApp.borderRadiusLarge),
                 ),
               ),
             ))

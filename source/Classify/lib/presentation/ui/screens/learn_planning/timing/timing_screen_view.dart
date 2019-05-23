@@ -25,7 +25,7 @@ class TimingScreenView extends AppView<TimingScreenModel> {
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.only(top: 20.0),
+            padding: EdgeInsets.only(top: DimensApp.paddingMiddle),
           ),
           Text(
             "Lessons per day",

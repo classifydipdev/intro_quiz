@@ -5,9 +5,8 @@ import 'package:flutter/material.dart';
 Widget getSubjectButton(Subject subject, Function(bool) onTap,
     {bool isSelected = false, bool isBorder = true}) {
   return Container(
-    margin: EdgeInsets.symmetric(
-            vertical: DimensApp.paddingSmall),
-    height: 50,
+    margin: EdgeInsets.symmetric(vertical: DimensApp.paddingSmall),
+    height: DimensApp.sizeMiddleExtra,
     child: InkWell(
       onTap: () {
         onTap(!isSelected);
@@ -15,8 +14,7 @@ Widget getSubjectButton(Subject subject, Function(bool) onTap,
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       child: Container(
-        margin: EdgeInsets.symmetric(
-            horizontal: DimensApp.paddingSmall),
+        margin: EdgeInsets.symmetric(horizontal: DimensApp.paddingSmall),
         decoration: BoxDecoration(
           gradient:
               LinearGradient(colors: [subject.colorStart, subject.colorEnd]),
@@ -24,7 +22,8 @@ Widget getSubjectButton(Subject subject, Function(bool) onTap,
               color: Color.fromRGBO(
                   255, 255, 255, isSelected && isBorder ? 1.0 : 0.0),
               width: 2.0),
-          borderRadius: BorderRadius.circular(35.0),
+          borderRadius:
+              BorderRadius.circular(DimensApp.borderRadiusMiddleExtra),
         ),
         child: Padding(
             padding: EdgeInsets.symmetric(horizontal: DimensApp.paddingMiddle),

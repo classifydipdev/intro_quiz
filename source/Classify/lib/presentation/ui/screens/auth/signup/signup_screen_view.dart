@@ -1,4 +1,5 @@
 import 'package:classify/presentation/res/colors.dart';
+import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/utils/field_container.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -20,7 +21,8 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
 
   Widget getBody() {
     return Container(
-      padding:  EdgeInsets.only(top: 20.0, bottom: 20.0),
+      padding: EdgeInsets.only(
+          top: DimensApp.paddingMiddle, bottom: DimensApp.paddingMiddle),
       width: MediaQuery.of(context).size.width,
       decoration: new BoxDecoration(
         gradient: LinearGradient(
@@ -40,10 +42,10 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
             shrinkWrap: true,
             children: <Widget>[
               getLogo(),
-              SizedBox(height: 50.0),
+              SizedBox(height: DimensApp.sizeMiddleExtra),
               getFieldContainer("user", "User", model.userTextController,
                   model.userLoginValidator),
-              SizedBox(height: 25.0),
+              SizedBox(height: DimensApp.sizeSmall),
               getFieldContainer(
                 "password",
                 "Password",
@@ -66,23 +68,26 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
                   ),
                 ),
               ),
-              SizedBox(height: 25.0),
+              SizedBox(height: DimensApp.sizeSmall),
               getFieldContainer("first name", "First Name",
                   model.nameTextController, model.firstNameValidator),
-              SizedBox(height: 25.0),
+              SizedBox(height: DimensApp.sizeSmall),
               getFieldContainer("email", "Email", model.emailTextController,
                   model.emailValidator),
-              SizedBox(height: 40.0),
+              SizedBox(height: DimensApp.sizeMiddle),
               createButton(),
-              SizedBox(height: 45.0),
+              SizedBox(height: DimensApp.sizeMiddleExtra),
               Container(
-                margin: EdgeInsets.only(left: 25.0, right: 25.0),
+                margin: EdgeInsets.only(
+                    left: DimensApp.paddingMiddleExtra,
+                    right: DimensApp.paddingMiddleExtra),
                 child: Text(
                   "by clicking sign up, you agree to our terms of use,"
                   "\nprivacy policy and disclaimer",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
                       fontFamily: 'GoogleSans'),
                 ),
               ),
@@ -101,7 +106,7 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
             alignment: Alignment.center,
             child: SvgPicture.asset(
               'assets/icons/logo_icon.svg',
-              width: 55.0,
+              width: DimensApp.iconSizeLarge,
             ),
           ),
         ],
@@ -111,7 +116,8 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
 
   Widget createButton() {
     return Container(
-      margin: EdgeInsets.only(left: 50.0, right: 50.0),
+      margin: EdgeInsets.only(
+          left: DimensApp.paddingBig, right: DimensApp.paddingBig),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -122,7 +128,11 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
             },
             child: Container(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(10.0, 15.0, 15.0, 20.0),
+                padding: EdgeInsets.fromLTRB(
+                    DimensApp.paddingSmall,
+                    DimensApp.paddingSmallExtra,
+                    DimensApp.paddingSmallExtra,
+                    DimensApp.paddingMiddle),
                 child: Text("switch account",
                     style: TextStyle(
                         color: Colors.white,
@@ -135,13 +145,16 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
             borderSide: BorderSide(color: Colors.white),
             highlightedBorderColor: Colors.white,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(35.0),
+              borderRadius:
+                  BorderRadius.circular(DimensApp.borderRadiusMiddleExtra),
             ),
             onPressed: () {
               model.onSignUp.onCall();
             },
             child: Padding(
-              padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+              padding: EdgeInsets.only(
+                  top: DimensApp.paddingSmallExtra,
+                  bottom: DimensApp.paddingSmallExtra),
               child: Text("sign up",
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold)),

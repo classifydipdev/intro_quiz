@@ -1,14 +1,16 @@
+import 'package:classify/presentation/res/dimens.dart';
 import 'package:flutter/material.dart';
 
 Widget getFieldContainer(String name, String description,
     TextEditingController controller, Function validator,
     {Widget trailingWidget, bool obscureText = false}) {
   return Container(
-    margin: EdgeInsets.only(left: 65.0, right: 65.0),
+    margin: EdgeInsets.only(
+        left: DimensApp.paddingBigExtra, right: DimensApp.paddingBigExtra),
     child: Column(
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.only(left: 20.0, bottom: 5.0),
+          padding: EdgeInsets.only(left: DimensApp.paddingMiddle, bottom: 5.0),
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text(name, style: TextStyle(color: Colors.white)),
@@ -30,18 +32,26 @@ Widget getFieldContainer(String name, String description,
                   ),
             hintText: description,
             focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(35.0),
+                borderRadius:
+                    BorderRadius.circular(DimensApp.borderRadiusMiddleExtra),
                 borderSide: BorderSide(color: Colors.red, width: 1.0)),
             errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(35.0),
+                borderRadius:
+                    BorderRadius.circular(DimensApp.borderRadiusMiddleExtra),
                 borderSide: BorderSide(color: Colors.red, width: 1.0)),
             hintStyle: TextStyle(color: Colors.white),
-            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 25.0, 10.0),
+            contentPadding: EdgeInsets.fromLTRB(
+                DimensApp.paddingMiddle,
+                DimensApp.paddingSmallExtra,
+                DimensApp.paddingMiddleExtra,
+                DimensApp.paddingSmall),
             enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(35.0),
+                borderRadius:
+                    BorderRadius.circular(DimensApp.borderRadiusMiddleExtra),
                 borderSide: BorderSide(color: Colors.white, width: 1.0)),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(35.0),
+                borderRadius:
+                    BorderRadius.circular(DimensApp.borderRadiusMiddleExtra),
                 borderSide: BorderSide(color: Colors.white, width: 1.0)),
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:classify/presentation/res/colors.dart';
+import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/utils/field_container.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -20,7 +21,8 @@ class LogInScreenView extends AppView<LogInScreenModel> {
 
   Widget getBody() {
     return Container(
-      padding:  EdgeInsets.only(top: 20.0, bottom: 20.0),
+      padding: EdgeInsets.only(
+          top: DimensApp.paddingMiddle, bottom: DimensApp.paddingMiddle),
       width: MediaQuery.of(context).size.width,
       decoration: new BoxDecoration(
         gradient: LinearGradient(
@@ -40,10 +42,10 @@ class LogInScreenView extends AppView<LogInScreenModel> {
             shrinkWrap: true,
             children: <Widget>[
               getLogo(),
-              SizedBox(height: 50.0),
+              SizedBox(height: DimensApp.sizeMiddleExtra),
               getFieldContainer("email", "Email", model.emailTextController,
                   model.emailValidator),
-              SizedBox(height: 25.0),
+              SizedBox(height: DimensApp.sizeSmall),
               getFieldContainer(
                 "password",
                 "Password",
@@ -66,11 +68,13 @@ class LogInScreenView extends AppView<LogInScreenModel> {
                   ),
                 ),
               ),
-              SizedBox(height: 40.0),
+              SizedBox(height: DimensApp.sizeMiddle),
               createButton(),
-              SizedBox(height: 45.0),
+              SizedBox(height: DimensApp.sizeMiddleExtra),
               Container(
-                margin: EdgeInsets.only(left: 25.0, right: 25.0),
+                margin: EdgeInsets.only(
+                    left: DimensApp.paddingMiddleExtra,
+                    right: DimensApp.paddingMiddleExtra),
                 child: Text(
                   "by clicking sign up, you agree to our terms of use,"
                   "\nprivacy policy and disclaimer",
@@ -94,7 +98,7 @@ class LogInScreenView extends AppView<LogInScreenModel> {
             alignment: Alignment.center,
             child: SvgPicture.asset(
               'assets/icons/logo_icon.svg',
-              width: 55.0,
+              width: DimensApp.iconSizeLarge,
             ),
           ),
         ],
@@ -104,7 +108,8 @@ class LogInScreenView extends AppView<LogInScreenModel> {
 
   Widget createButton() {
     return Container(
-      margin: EdgeInsets.only(left: 50.0, right: 50.0),
+      margin: EdgeInsets.only(
+          left: DimensApp.paddingBig, right: DimensApp.paddingBig),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -114,7 +119,11 @@ class LogInScreenView extends AppView<LogInScreenModel> {
             },
             child: Container(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(10.0, 15.0, 15.0, 20.0),
+                padding: EdgeInsets.fromLTRB(
+                    DimensApp.paddingSmall,
+                    DimensApp.paddingSmallExtra,
+                    DimensApp.paddingSmallExtra,
+                    DimensApp.paddingMiddle),
                 child: Text("switch account",
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold)),
@@ -125,16 +134,20 @@ class LogInScreenView extends AppView<LogInScreenModel> {
             borderSide: BorderSide(color: Colors.white),
             highlightedBorderColor: Colors.white,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(35.0),
+              borderRadius:
+                  BorderRadius.circular(DimensApp.borderRadiusMiddleExtra),
             ),
             onPressed: () {
               model.onLogIn.onCall();
             },
             child: Padding(
-              padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+              padding: EdgeInsets.only(
+                  top: DimensApp.paddingSmallExtra,
+                  bottom: DimensApp.paddingSmallExtra),
               child: Text("log in",
                   style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
                       fontFamily: 'GoogleSans')),
             ),
           ),
