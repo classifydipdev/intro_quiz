@@ -21,9 +21,8 @@ class LearnPlanningScreenViewModel
     if (view != null && view.keyboardFocusListener()) {
       FocusScope.of(view.context).requestFocus(new FocusNode());
     }
-    view.updateUI(() {
-      model.currentPage = page;
-    });
+    model.currentPage = page;
+    super.view.updateUI();
   }
 
   void onNavigationTapped() async {
