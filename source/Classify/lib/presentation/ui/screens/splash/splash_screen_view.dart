@@ -1,6 +1,5 @@
 import 'package:classify/presentation/res/colors.dart';
 import 'package:classify/presentation/res/dimens.dart';
-import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/splash/splash_screen_model.dart';
 import 'package:flutter/cupertino.dart';

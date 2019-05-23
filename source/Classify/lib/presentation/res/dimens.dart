@@ -7,6 +7,7 @@ class DimensApp {
   static const double iconSizeBig = 35.0;
   static const double iconSizeLarge = 60.0;
   static const double iconSizeLargeExtra = 70.0;
+  static const double bottomIconSize = 17.0;
 
   //Paddings
   static const double paddingPico = 2.0;
@@ -62,4 +63,5 @@ class DimensApp {
   static const double sizeBig = 125.0;
   static const double sizeBigExtra = 150.0;
   static const double sizeLarge = 225.0;
+
 }
