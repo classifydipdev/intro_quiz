@@ -91,7 +91,7 @@ class AuthScreenView extends AppView<AuthScreenModel> {
               width: 90.0,
             ),
           ),
-          SizedBox(height: DimensApp.sizeNormal),
+          SizedBox(height: DimensApp.sizeNormalExtra),
           Text(
             "for students; by students",
             style: TextStyle(

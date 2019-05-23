@@ -35,7 +35,7 @@ class StartedScreenView extends AppView<StartedScreenModel> {
       ),
       child: Column(
         children: <Widget>[
-          SizedBox(height: DimensApp.sizeNormal),
+          SizedBox(height: DimensApp.sizeNormalExtra),
           Align(
             alignment: Alignment.center,
             child: SvgPicture.asset(
@@ -43,14 +43,14 @@ class StartedScreenView extends AppView<StartedScreenModel> {
               width: DimensApp.iconSizeLarge,
             ),
           ),
-          SizedBox(height: DimensApp.sizeNormal),
+          SizedBox(height: DimensApp.sizeNormalExtra),
           Text(
               "We just need to ask you a few"
               "\nquestions to personalize your"
               "\nexperience",
               textAlign: TextAlign.center,
               style: ThemeApp.middleExtraWhiteBoldTextStyle),
-          SizedBox(height: DimensApp.sizeNormal),
+          SizedBox(height: DimensApp.sizeNormalExtra),
           OutlineButton(
             borderSide: BorderSide(color: Colors.white, width: 2),
             highlightedBorderColor: Colors.white,
