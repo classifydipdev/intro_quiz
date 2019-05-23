@@ -1,4 +1,5 @@
 import 'package:classify/presentation/res/dimens.dart';
+import 'package:classify/presentation/res/images.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/main/main_screen_model.dart';
 import 'package:classify/presentation/ui/screens/profile/profile_screen_model.dart';
@@ -114,7 +115,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                             image: model.userManager.user.photo != null
                                 ? NetworkImage(model.userManager.user.photo)
                                 : AssetImage(
-                                    'assets/images/icons/profileGrey.webp'),
+                                    ImagesApp.profileGrey),
                             fit: BoxFit.cover,
                           ),
                         ))))
@@ -145,7 +146,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                     children: <Widget>[
                       Image(
                         image: new AssetImage(
-                            "assets/images/icons/homeworkOrange.webp"),
+                            ImagesApp.homeworkOrange),
                         width: 18,
                         height: 18,
                         fit: BoxFit.contain,
@@ -313,7 +314,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                     children: <Widget>[
                       Image(
                         image: new AssetImage(
-                            "assets/images/icons/calendarGreen.webp"),
+                            ImagesApp.calendarGreen),
                         width: 18,
                         height: 18,
                         fit: BoxFit.contain,

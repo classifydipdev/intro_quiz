@@ -1,4 +1,5 @@
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+import 'package:classify/presentation/res/images.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/main/main_screen_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -45,14 +46,14 @@ class MainScreenView extends AppView<MainScreenModel> {
             BubbleBottomBarItem(
                 backgroundColor: Color(0xffafa2ff),
                 icon: Image.asset(
-                  'assets/images/icons/homePurple.webp',
+                  ImagesApp.homePurple,
                   width: 20,
                   height: 20,
                   alignment: Alignment.center,
                   color: Colors.grey[400],
                 ),
                 activeIcon: Image.asset(
-                  'assets/images/icons/homePurple.webp',
+                  ImagesApp.homePurple,
                   width: 20,
                   height: 20,
                   alignment: Alignment.center,
@@ -69,14 +70,14 @@ class MainScreenView extends AppView<MainScreenModel> {
             BubbleBottomBarItem(
                 backgroundColor: Color(0xffafa2ff),
                 icon: Image.asset(
-                  'assets/images/icons/calendarGreen.webp',
+                  ImagesApp.calendarGreen,
                   width: 20,
                   height: 20,
                   alignment: Alignment.center,
                   color: Colors.grey[400],
                 ),
                 activeIcon: Image.asset(
-                    'assets/images/icons/calendarGreen.webp',
+                    ImagesApp.calendarGreen,
                     width: 20,
                     height: 20,
                     alignment: Alignment.center,
@@ -93,14 +94,14 @@ class MainScreenView extends AppView<MainScreenModel> {
             BubbleBottomBarItem(
                 backgroundColor: Color(0xffafa2ff),
                 icon: Image.asset(
-                  'assets/images/icons/homeworkOrange.webp',
+                  ImagesApp.homeworkOrange,
                   width: 20,
                   height: 20,
                   alignment: Alignment.center,
                   color: Colors.grey[400],
                 ),
                 activeIcon: Image.asset(
-                    'assets/images/icons/homeworkOrange.webp',
+                    ImagesApp.homeworkOrange,
                     width: 20,
                     height: 20,
                     alignment: Alignment.center,
@@ -117,13 +118,13 @@ class MainScreenView extends AppView<MainScreenModel> {
             BubbleBottomBarItem(
                 backgroundColor: Color(0xffafa2ff),
                 icon: Image.asset(
-                  'assets/images/icons/profileGrey.webp',
+                  ImagesApp.profileGrey,
                   width: 20,
                   height: 20,
                   alignment: Alignment.center,
                   color: Colors.grey[400],
                 ),
-                activeIcon: Image.asset('assets/images/icons/profileGrey.webp',
+                activeIcon: Image.asset(ImagesApp.profileGrey,
                     width: 20,
                     height: 20,
                     alignment: Alignment.center,
