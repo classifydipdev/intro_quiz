@@ -1,5 +1,6 @@
 import 'package:classify/presentation/res/colors.dart';
 import 'package:classify/presentation/res/dimens.dart';
+import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/learn_planning_screen.dart';
 import 'package:classify/presentation/ui/screens/main/main_screen.dart';
@@ -33,8 +34,8 @@ class StartedScreenView extends AppView<StartedScreenModel> {
         ),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          SizedBox(height: DimensApp.sizeNormal),
           Align(
             alignment: Alignment.center,
             child: SvgPicture.asset(
@@ -42,17 +43,16 @@ class StartedScreenView extends AppView<StartedScreenModel> {
               width: DimensApp.iconSizeLarge,
             ),
           ),
-          SizedBox(height: DimensApp.sizeMiddleExtra),
+          SizedBox(height: DimensApp.sizeNormal),
           Text(
               "We just need to ask you a few"
               "\nquestions to personalize your"
               "\nexperience",
               textAlign: TextAlign.center,
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-          SizedBox(height: DimensApp.sizeMiddleExtra),
+              style: ThemeApp.middleExtraWhiteBoldTextStyle),
+          SizedBox(height: DimensApp.sizeNormal),
           OutlineButton(
-            borderSide: BorderSide(color: Colors.white),
+            borderSide: BorderSide(color: Colors.white, width: 2),
             highlightedBorderColor: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius:
@@ -62,16 +62,14 @@ class StartedScreenView extends AppView<StartedScreenModel> {
               navigateTo(context, LearnPlanningScreen(), false);
             },
             child: Padding(
-              padding: EdgeInsets.only(
-                  top: DimensApp.paddingSmallExtra,
-                  bottom: DimensApp.paddingSmallExtra),
-              child: Text("Get started",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  )),
+              padding: EdgeInsets.all(DimensApp.paddingSmallExtra),
+              child: Text(
+                "Get started",
+                style: ThemeApp.middleWhiteBoldTextStyle,
+              ),
             ),
           ),
+          SizedBox(height: DimensApp.sizeBigExtra),
         ],
       ),
     );

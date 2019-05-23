@@ -10,13 +10,21 @@ class ThemeApp {
     canvasColor: Colors.transparent,
   );
 
-  static TextStyle get titleSmallItalicTextStyle {
+  static TextStyle get middleWhiteBoldTextStyle {
     return TextStyle(
+      fontFamily: 'GoogleSans',
       fontSize: DimensApp.textSizeMiddle,
-      color: Colors.black,
+      color: Colors.white,
       fontWeight: FontWeight.bold,
-      fontStyle: FontStyle.italic,
-      decoration: TextDecoration.none,
+    );
+  }
+
+  static TextStyle get middleExtraWhiteBoldTextStyle {
+    return TextStyle(
+      fontFamily: 'GoogleSans',
+      fontSize: DimensApp.textSizeMiddleExtra,
+      color: Colors.white,
+      fontWeight: FontWeight.bold,
     );
   }
 }
