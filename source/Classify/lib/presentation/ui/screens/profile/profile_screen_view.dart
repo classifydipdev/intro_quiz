@@ -1,3 +1,4 @@
+import 'package:classify/presentation/res/colors.dart';
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/res/images.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
@@ -17,7 +18,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
               child: Container(
                   height: double.maxFinite,
                   width: double.maxFinite,
-                  color: Color(0xFFf1f2f3),
+                  color: ColorsApp.background,
                   child: Scrollbar(
                       child: SingleChildScrollView(
                           scrollDirection: Axis.vertical,
@@ -43,7 +44,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
 
   Widget _pageHeader() {
     return Container(
-      height: model.screenHeight / 4 + 20,
+      height: model.screenHeight / 3,
       width: double.maxFinite,
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -60,7 +61,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
 
   Widget _userInfo() {
     return Container(
-        margin: EdgeInsets.only(top: DimensApp.paddingMiddleExtra),
+        margin: EdgeInsets.only(top: DimensApp.paddingBigExtra),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -77,13 +78,14 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Container(
-                                margin: EdgeInsets.only(bottom: 15),
+                                margin: EdgeInsets.only(
+                                    bottom: DimensApp.marginSmallExtra),
                                 child: Text(
                                   "Welcome, ${model.userManager.user.name}",
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 19,
+                                    fontSize: DimensApp.textSizeMiddleExtra,
                                     fontFamily: MainScreenModel.fontFamily,
                                     color: Colors.white,
                                   ),
@@ -92,7 +94,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                               "${model.dateNow} - 4 HOMEWORKS".toUpperCase(),
                               textAlign: TextAlign.left,
                               style: TextStyle(
-                                  fontSize: 14,
+                                  fontSize: DimensApp.textSizeSmall,
                                   fontFamily: MainScreenModel.fontFamily,
                                   color: Colors.white),
                             ),
@@ -109,13 +111,12 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                         width: DimensApp.sizeMiddleExtra,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
-                              DimensApp.borderRadiusNormalExtra),
+                              DimensApp.borderRadiusNormal),
                           image: DecorationImage(
                             alignment: Alignment.center,
                             image: model.userManager.user.photo != null
                                 ? NetworkImage(model.userManager.user.photo)
-                                : AssetImage(
-                                    ImagesApp.profileGrey),
+                                : AssetImage(ImagesApp.profileGrey),
                             fit: BoxFit.cover,
                           ),
                         ))))
@@ -131,8 +132,8 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
             right: DimensApp.paddingSmall,
             left: DimensApp.paddingSmall),
         child: Card(
-          color: Color(0xFFfafafa),
-          elevation: 10.0,
+          color: ColorsApp.cardBackground,
+          elevation: 3.0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(DimensApp.borderRadiusMiddle),
           ),
@@ -145,10 +146,9 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Image(
-                        image: new AssetImage(
-                            ImagesApp.homeworkOrange),
-                        width: 18,
-                        height: 18,
+                        image: new AssetImage(ImagesApp.homeworkOrange),
+                        width: DimensApp.bottomIconSize,
+                        height: DimensApp.bottomIconSize,
                         fit: BoxFit.contain,
                         alignment: Alignment.center,
                       ),
@@ -157,9 +157,9 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 14,
+                            fontSize: DimensApp.textSizeSmall,
                             fontFamily: MainScreenModel.fontFamily,
-                            color: Color(0xffff8600)),
+                            color: ColorsApp.textCardOrange),
                       )
                     ],
                   ),
@@ -178,7 +178,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 17,
+                                  fontSize: DimensApp.textSizeMiddleExtra,
                                   fontFamily: MainScreenModel.fontFamily,
                                   color: Colors.black54),
                             ),
@@ -186,9 +186,9 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                               "Read chapter 1 of palabra book",
                               textAlign: TextAlign.left,
                               style: TextStyle(
-                                  fontSize: 13,
+                                  fontSize: DimensApp.textSizeSmall,
                                   fontFamily: MainScreenModel.fontFamily,
-                                  color: Color(0xffb8b7b6)),
+                                  color: Colors.grey[400]),
                             )
                           ],
                         ),
@@ -197,9 +197,9 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                           textAlign: TextAlign.right,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 14,
+                              fontSize: DimensApp.textSizeSmall,
                               fontFamily: MainScreenModel.fontFamily,
-                              color: Color(0xffff8600)),
+                              color: ColorsApp.textCardOrange),
                         )
                       ],
                     ),
@@ -218,7 +218,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 17,
+                                  fontSize: DimensApp.textSizeMiddleExtra,
                                   fontFamily: MainScreenModel.fontFamily,
                                   color: Colors.black54),
                             ),
@@ -226,9 +226,9 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                               "Finsh reading",
                               textAlign: TextAlign.left,
                               style: TextStyle(
-                                  fontSize: 13,
+                                  fontSize: DimensApp.textSizeSmall,
                                   fontFamily: MainScreenModel.fontFamily,
-                                  color: Color(0xffb8b7b6)),
+                                  color: Colors.grey[400]),
                             )
                           ],
                         ),
@@ -237,9 +237,9 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                           textAlign: TextAlign.right,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 14,
+                              fontSize: DimensApp.textSizeSmall,
                               fontFamily: MainScreenModel.fontFamily,
-                              color: Color(0xffff8600)),
+                              color: ColorsApp.textCardOrange),
                         )
                       ],
                     ),
@@ -258,7 +258,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 17,
+                                  fontSize: DimensApp.textSizeMiddleExtra,
                                   fontFamily: MainScreenModel.fontFamily,
                                   color: Colors.black54),
                             ),
@@ -266,9 +266,9 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                               "Read chapter 58",
                               textAlign: TextAlign.left,
                               style: TextStyle(
-                                  fontSize: 13,
+                                  fontSize: DimensApp.textSizeSmall,
                                   fontFamily: MainScreenModel.fontFamily,
-                                  color: Color(0xffb8b7b6)),
+                                  color: Colors.grey[400]),
                             )
                           ],
                         ),
@@ -277,9 +277,9 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                           textAlign: TextAlign.right,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 14,
+                              fontSize: DimensApp.textSizeSmall,
                               fontFamily: MainScreenModel.fontFamily,
-                              color: Color(0xffff8600)),
+                              color: ColorsApp.textCardOrange),
                         )
                       ],
                     ),
@@ -293,13 +293,13 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
     return Container(
         width: double.maxFinite,
         margin: EdgeInsets.only(
-            top: DimensApp.paddingMiddle,
+            top: DimensApp.marginSmallExtra,
             right: DimensApp.paddingSmall,
             left: DimensApp.paddingSmall,
             bottom: DimensApp.paddingBig),
         child: Card(
-          color: Color(0xFFfafafa),
-          elevation: 10.0,
+          color: ColorsApp.cardBackground,
+          elevation: 3.0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(DimensApp.borderRadiusMiddle),
           ),
@@ -313,10 +313,9 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Image(
-                        image: new AssetImage(
-                            ImagesApp.calendarGreen),
-                        width: 18,
-                        height: 18,
+                        image: new AssetImage(ImagesApp.calendarGreen),
+                        width: DimensApp.bottomIconSize,
+                        height: DimensApp.bottomIconSize,
                         fit: BoxFit.contain,
                         alignment: Alignment.center,
                       ),
@@ -325,23 +324,21 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 14,
+                            fontSize: DimensApp.textSizeSmall,
                             fontFamily: MainScreenModel.fontFamily,
-                            color: Color(0xff00ffbb)),
+                            color: ColorsApp.textCardGreen),
                       )
                     ],
                   ),
-                  Container(
-                      height: 200,
-                      child: ListView.builder(
+                  model.schedules.length != null
+                      ? ListView.builder(
+                          shrinkWrap: true,
                           itemCount: model.schedules.length,
+                          physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
                             var subject = model.schedules[index].subject;
                             var lesson = model.schedules[index].lesson;
-
                             return Container(
-                              margin:
-                                  EdgeInsets.only(top: DimensApp.paddingSmall),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -351,7 +348,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 17,
+                                        fontSize: DimensApp.textSizeMiddleExtra,
                                         fontFamily: MainScreenModel.fontFamily,
                                         color: Colors.black54),
                                   ),
@@ -360,171 +357,23 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 14,
+                                        fontSize: DimensApp.textSizeSmall,
                                         fontFamily: MainScreenModel.fontFamily,
-                                        color: Color(0xff00ffbb)),
+                                        color: ColorsApp.textCardGreen),
                                   )
                                 ],
                               ),
                             );
-                          })),
-
-/*                  Container(
-                    margin: EdgeInsets.only(top: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          "Spanish",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17,
-                              fontFamily: MainScreenModel.fontFamily,
-                              color: Colors.black54),
-                        ),
-                        Text(
-                          "1".toUpperCase(),
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              fontFamily: MainScreenModel.fontFamily,
-                              color: Color(0xff00ffbb)),
+                          })
+                      : Center(
+                          child: Container(
+                            height: DimensApp.sizeMiddleExtra,
+                            width: DimensApp.sizeMiddleExtra,
+                            child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    ColorsApp.blue)),
+                          ),
                         )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          "Latin",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17,
-                              fontFamily: MainScreenModel.fontFamily,
-                              color: Colors.black54),
-                        ),
-                        Text(
-                          "2".toUpperCase(),
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              fontFamily: MainScreenModel.fontFamily,
-                              color: Color(0xff00ffbb)),
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          "English",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17,
-                              fontFamily: MainScreenModel.fontFamily,
-                              color: Colors.black54),
-                        ),
-                        Text(
-                          "3".toUpperCase(),
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              fontFamily: MainScreenModel.fontFamily,
-                              color: Color(0xff00ffbb)),
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          "Biology",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17,
-                              fontFamily: MainScreenModel.fontFamily,
-                              color: Colors.black54),
-                        ),
-                        Text(
-                          "7".toUpperCase(),
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              fontFamily: MainScreenModel.fontFamily,
-                              color: Color(0xff00ffbb)),
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          "Theory of Knowledge",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17,
-                              fontFamily: MainScreenModel.fontFamily,
-                              color: Colors.black54),
-                        ),
-                        Text(
-                          "8".toUpperCase(),
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              fontFamily: MainScreenModel.fontFamily,
-                              color: Color(0xff00ffbb)),
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          "TP",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17,
-                              fontFamily: MainScreenModel.fontFamily,
-                              color: Colors.black54),
-                        ),
-                        Text(
-                          "10".toUpperCase(),
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              fontFamily: MainScreenModel.fontFamily,
-                              color: Color(0xff00ffbb)),
-                        )
-                      ],
-                    ),
-                  ),*/
                 ],
               )),
         ));

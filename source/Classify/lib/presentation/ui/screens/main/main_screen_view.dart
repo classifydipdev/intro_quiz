@@ -1,4 +1,6 @@
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+import 'package:classify/presentation/res/colors.dart';
+import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/res/images.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/main/main_screen_model.dart';
@@ -16,14 +18,8 @@ class MainScreenView extends AppView<MainScreenModel> {
               child: Container(
         height: double.maxFinite,
         width: double.maxFinite,
-        color: Color(0xFFf1f2f3),
-        child: PageView(
-          onPageChanged: (int index) {
-            model.onNavigateToPage.onCallWithValue(index);
-          },
-          controller: model.pageController,
-          children: model.pageChildren,
-        ),
+        color: ColorsApp.background,
+        child: model.pageChildren[model.currentPageIndex],
       ))),
       bottomNavigationBar: _bottomToolBar(),
     );
@@ -31,110 +27,108 @@ class MainScreenView extends AppView<MainScreenModel> {
 
   Widget _bottomToolBar() {
     return Container(
-        color: Color(0xFFf1f2f3),
+        color: ColorsApp.background,
         child: BubbleBottomBar(
           opacity: .7,
           currentIndex: model.currentPageIndex,
           onTap: (int index) {
             model.onNavigateToPage.onCallWithValue(index);
           },
-          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(DimensApp.borderRadiusNormal)),
           elevation: 15,
           hasInk: true,
           inkColor: Colors.black12,
           items: <BubbleBottomBarItem>[
             BubbleBottomBarItem(
-                backgroundColor: Color(0xffafa2ff),
+                backgroundColor: ColorsApp.iconBottomBar,
                 icon: Image.asset(
                   ImagesApp.homePurple,
-                  width: 20,
-                  height: 20,
+                  width: DimensApp.bottomIconSize,
+                  height: DimensApp.bottomIconSize,
                   alignment: Alignment.center,
                   color: Colors.grey[400],
                 ),
                 activeIcon: Image.asset(
                   ImagesApp.homePurple,
-                  width: 20,
-                  height: 20,
+                  width: DimensApp.bottomIconSize,
+                  height: DimensApp.bottomIconSize,
                   alignment: Alignment.center,
                 ),
                 title: Text(
                   "Home",
                   style: TextStyle(
-                    color: Color(0xff6565f3),
+                    color: ColorsApp.textBottomBar,
                     fontWeight: FontWeight.bold,
-                    fontSize: 15,
+                    fontSize: DimensApp.textSizeSmall,
                     fontFamily: MainScreenModel.fontFamily,
                   ),
                 )),
             BubbleBottomBarItem(
-                backgroundColor: Color(0xffafa2ff),
+                backgroundColor: ColorsApp.iconBottomBar,
                 icon: Image.asset(
                   ImagesApp.calendarGreen,
-                  width: 20,
-                  height: 20,
+                  width: DimensApp.bottomIconSize,
+                  height: DimensApp.bottomIconSize,
                   alignment: Alignment.center,
                   color: Colors.grey[400],
                 ),
-                activeIcon: Image.asset(
-                    ImagesApp.calendarGreen,
-                    width: 20,
-                    height: 20,
+                activeIcon: Image.asset(ImagesApp.calendarGreen,
+                    width: DimensApp.bottomIconSize,
+                    height: DimensApp.bottomIconSize,
                     alignment: Alignment.center,
-                    color: Color(0xff6565f3)),
+                    color: ColorsApp.textBottomBar),
                 title: Text(
                   "Timetable",
                   style: TextStyle(
-                    color: Color(0xff6565f3),
+                    color: ColorsApp.textBottomBar,
                     fontWeight: FontWeight.bold,
-                    fontSize: 15,
+                    fontSize: DimensApp.textSizeSmall,
                     fontFamily: MainScreenModel.fontFamily,
                   ),
                 )),
             BubbleBottomBarItem(
-                backgroundColor: Color(0xffafa2ff),
+                backgroundColor: ColorsApp.iconBottomBar,
                 icon: Image.asset(
                   ImagesApp.homeworkOrange,
-                  width: 20,
-                  height: 20,
+                  width: DimensApp.bottomIconSize,
+                  height: DimensApp.bottomIconSize,
                   alignment: Alignment.center,
                   color: Colors.grey[400],
                 ),
-                activeIcon: Image.asset(
-                    ImagesApp.homeworkOrange,
-                    width: 20,
-                    height: 20,
+                activeIcon: Image.asset(ImagesApp.homeworkOrange,
+                    width: DimensApp.bottomIconSize,
+                    height: DimensApp.bottomIconSize,
                     alignment: Alignment.center,
-                    color: Color(0xff6565f3)),
+                    color: ColorsApp.textBottomBar),
                 title: Text(
                   "Homework",
                   style: TextStyle(
-                    color: Color(0xff6565f3),
+                    color: ColorsApp.textBottomBar,
                     fontWeight: FontWeight.bold,
-                    fontSize: 15,
+                    fontSize: DimensApp.textSizeSmall,
                     fontFamily: MainScreenModel.fontFamily,
                   ),
                 )),
             BubbleBottomBarItem(
-                backgroundColor: Color(0xffafa2ff),
+                backgroundColor: ColorsApp.iconBottomBar,
                 icon: Image.asset(
                   ImagesApp.profileGrey,
-                  width: 20,
-                  height: 20,
+                  width: DimensApp.bottomIconSize,
+                  height: DimensApp.bottomIconSize,
                   alignment: Alignment.center,
                   color: Colors.grey[400],
                 ),
                 activeIcon: Image.asset(ImagesApp.profileGrey,
-                    width: 20,
-                    height: 20,
+                    width: DimensApp.bottomIconSize,
+                    height: DimensApp.bottomIconSize,
                     alignment: Alignment.center,
-                    color: Color(0xff6565f3)),
+                    color: ColorsApp.textBottomBar),
                 title: Text(
                   "Profile",
                   style: TextStyle(
-                    color: Color(0xff6565f3),
+                    color: ColorsApp.textBottomBar,
                     fontWeight: FontWeight.bold,
-                    fontSize: 15,
+                    fontSize: DimensApp.textSizeSmall,
                     fontFamily: MainScreenModel.fontFamily,
                   ),
                 ))

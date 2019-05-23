@@ -2,11 +2,10 @@ import 'package:classify/presentation/res/colors.dart';
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/learn_planning_screen.dart';
-import 'package:classify/presentation/ui/screens/main/main_screen.dart';
 import 'package:classify/presentation/ui/screens/started/started_screen_model.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class StartedScreenView extends AppView<StartedScreenModel> {
   StartedScreenView(StartedScreenModel model) : super(model);
