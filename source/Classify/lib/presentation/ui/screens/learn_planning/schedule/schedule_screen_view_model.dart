@@ -36,7 +36,8 @@ class ScheduleScreenViewModel
   }
 
   void onLessonsUpdated(int lessonsPerDay) async {
-    model.schedules = await AppFirbaseFirestore().createLessonsAndSchedules(model.userManager.user.id, lessonsPerDay);
+    model.schedules = await AppFirbaseFirestore()
+        .createLessonsAndSchedules(model.userManager.user.id, lessonsPerDay);
     model.scheduleLoadingState = LoadingStates.Compleate;
     view.updateUI();
   }

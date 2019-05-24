@@ -21,7 +21,7 @@ class LearningManager {
 
     for (var i = 1; i <= lessonsPerDay; i++) {
       DocumentReference lessonsReference =
-        _firebaseFirestore.getLessonCollectionReference();
+          _firebaseFirestore.getLessonCollectionReference();
       var lesson = Lesson(null, idUser, i.toString());
 
       var batch = FirestoreBatch.set(
@@ -49,7 +49,7 @@ class LearningManager {
     for (var day = 0; day < 5; day++) {
       for (var lesson = 0; lesson < lessons.length; lesson++) {
         DocumentReference lessonsReference =
-        _firebaseFirestore.getScheduleCollectionReference();
+            _firebaseFirestore.getScheduleCollectionReference();
         var schedule = Schedule(null, idUser, null, lessons[lesson], day);
 
         var batch = FirestoreBatch.set(
