@@ -1,4 +1,3 @@
-import 'package:classify/data/entities/lesson.dart';
 import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_model.dart';
 import 'package:classify/presentation/utils/views_states.dart';
@@ -16,7 +15,6 @@ class ScheduleScreenModel extends AppModel {
 
   int lessonsPerDay = 6;
   List<Subject> subjects = List();
-  List<Lesson> lessons = List();
 
   List<Schedule> schedules = List();
 

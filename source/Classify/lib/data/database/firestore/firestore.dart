@@ -46,6 +46,18 @@ class AppFirbaseFirestore {
     });
   }
 
+  Future<List<FirestoreBatch>> addToBatchList(
+      List<FirestoreBatch> batchList, FirestoreBatch batch) async {
+    if (batchList.length < 500) {
+      batchList.add(batch);
+    } else {
+      await aplyBatch(batchList);
+      batchList = List();
+      batchList.add(batch);
+    }
+    return batchList;
+  }
+
   Future<void> addUser(User user) async {
     if (user == null || user.id == null) throw Exception("Wrong user");
     var reference = _db.getFS().collection(userCollection).document(user.id);
@@ -168,14 +180,7 @@ class AppFirbaseFirestore {
     return await _db.getAllDataByQuery(query).then((querySnapshot) async {
       List<FirestoreBatch> batchList = List();
       for (var doc in querySnapshot.documents) {
-        var batch = FirestoreBatch.delete(doc.reference);
-        if (batchList.length < 500) {
-          batchList.add(batch);
-        } else {
-          await aplyBatch(batchList);
-          batchList = List();
-          batchList.add(batch);
-        }
+        addToBatchList(batchList, FirestoreBatch.delete(doc.reference));
       }
       await aplyBatch(batchList);
       return;
@@ -207,35 +212,38 @@ class AppFirbaseFirestore {
     return await _db.getAllDataByQuery(query).then((querySnapshot) async {
       List<Schedule> schedules = List();
       for (var doc in querySnapshot.documents) {
-        var docData = doc.data;
-
-        if (docData != null) {
-          var idSubject = docData['idSubject'];
-          var idLesson = docData['idLesson'];
-
-          Lesson lesson;
-          Subject subject;
-
-          if (idSubject != null) {
-            var subjectRef =
-                _db.getFS().collection(subjectCollection).document(idSubject);
-            var doc = await _db.getData(subjectRef);
-            subject = Subject.fromFirestore(doc);
-          }
-
-          if (idLesson != null) {
-            var lessonRef =
-                _db.getFS().collection(lessonCollection).document(idLesson);
-            var doc = await _db.getData(lessonRef);
-            lesson = Lesson.fromFirestore(doc);
-          }
-
-          var schedule = Schedule.fromFirestore(doc, subject, lesson);
-          schedules.add(schedule);
-        }
+        var schedule = await getScheduleFromDoc(doc);
+        if (schedule != null) schedules.add(schedule);
       }
       return schedules;
     });
+  }
+
+  Future<Schedule> getScheduleFromDoc(DocumentSnapshot doc) async {
+    var docData = doc.data;
+
+    if (docData == null) return null;
+    var idSubject = docData['idSubject'];
+    var idLesson = docData['idLesson'];
+
+    Lesson lesson;
+    Subject subject;
+
+    if (idSubject != null) {
+      var subjectRef =
+          _db.getFS().collection(subjectCollection).document(idSubject);
+      var doc = await _db.getData(subjectRef);
+      subject = Subject.fromFirestore(doc);
+    }
+
+    if (idLesson != null) {
+      var lessonRef =
+          _db.getFS().collection(lessonCollection).document(idLesson);
+      var doc = await _db.getData(lessonRef);
+      lesson = Lesson.fromFirestore(doc);
+    }
+
+    return Schedule.fromFirestore(doc, subject, lesson);
   }
 
   Future<void> deleteAllSchedules(String idUser) async {
@@ -259,6 +267,77 @@ class AppFirbaseFirestore {
       await aplyBatch(batchList);
       return;
     });
+  }
+
+  Future<List<Schedule>> createLessonsAndSchedules(
+      String idUser, int lessonsPerDay) async {
+    if (idUser == null || lessonsPerDay == null) throw Exception("Wrong data");
+    List<FirestoreBatch> batchList = List();
+
+    var query = _db
+        .getFS()
+        .collection(lessonCollection)
+        .where("idUser", isEqualTo: idUser);
+    await _db.getAllDataByQuery(query).then((querySnapshot) async {
+      for (var doc in querySnapshot.documents) {
+        batchList = await addToBatchList(
+            batchList, FirestoreBatch.delete(doc.reference));
+      }
+    });
+
+    List<Lesson> lessons = List();
+    for (var i = 1; i <= lessonsPerDay; i++) {
+      DocumentReference lessonsReference = getLessonCollectionReference();
+      lessons.add(Lesson(lessonsReference.documentID, idUser, i.toString()));
+      batchList = await addToBatchList(
+        batchList,
+        FirestoreBatch.set(
+          lessonsReference,
+          lessons.last.toFirestore(),
+          merge: false,
+        ),
+      );
+    }
+
+    query = _db
+        .getFS()
+        .collection(scheduleCollection)
+        .where("idUser", isEqualTo: idUser);
+    await _db.getAllDataByQuery(query).then((querySnapshot) async {
+      for (var doc in querySnapshot.documents) {
+        batchList = await addToBatchList(
+            batchList, FirestoreBatch.delete(doc.reference));
+      }
+    });
+
+    List<DocumentReference> scheduleReferences = List();
+
+    for (var day = 0; day < 5; day++) {
+      for (var lesson = 0; lesson < lessons.length; lesson++) {
+        scheduleReferences.add(getScheduleCollectionReference());
+        var schedule = Schedule(null, idUser, null, lessons[lesson], day);
+        batchList = await addToBatchList(
+          batchList,
+          FirestoreBatch.set(
+            scheduleReferences.last,
+            schedule.toFirestore(),
+            merge: false,
+          ),
+        );
+      }
+    }
+
+    await aplyBatch(batchList);
+
+    List<Schedule> schedulesList = List();
+    for (DocumentReference scheduleReference in scheduleReferences) {
+      await _db.getData(scheduleReference).then((doc) async {
+        var schedule = await getScheduleFromDoc(doc);
+        if (schedule != null) schedulesList.add(schedule);
+      });
+    }
+
+    return schedulesList;
   }
 
   DocumentReference getLessonCollectionReference() {
