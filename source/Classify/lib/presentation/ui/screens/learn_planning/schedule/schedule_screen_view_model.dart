@@ -23,15 +23,39 @@ class ScheduleScreenViewModel
   }
 
   void onSubjectSelect(Subject subject) {
-    print(subject.id);
     if (model.selectedSchedule != null) {
       model.selectedSchedule.subject = subject;
+
+      Schedule nextSchedule = getNextSchedule();
+      if (nextSchedule == null) return;
+
+      model.selectedSchedule = nextSchedule;
+      changeScheduleListPosition();
       view.updateUI();
     }
   }
 
+  Schedule getNextSchedule(){
+    Schedule nextSchedule;
+    int currentDay = model.selectedSchedule.day;
+    int foundLessonIndex = model.selectedSchedule.lesson.index+1;
+    if (foundLessonIndex+1>model.lessonsPerDay) foundLessonIndex = 0;
+
+    for (Schedule schedule in model.schedules) {
+      if (schedule.day == currentDay && schedule.lesson.index == foundLessonIndex){
+        nextSchedule = schedule;
+      }
+    }
+    return nextSchedule;
+  }
+
+  //TODO go to current position
+  void changeScheduleListPosition(){
+    int currentDay = model.selectedSchedule.day;
+    // model.scrollControllersList[currentDay].animateTo(0, curve: null, duration: null);
+  }
+
   void onScheduleSelect(Schedule schedule) {
-    print(schedule.id);
     model.selectedSchedule = schedule;
   }
 

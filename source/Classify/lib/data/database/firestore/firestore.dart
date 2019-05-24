@@ -288,7 +288,7 @@ class AppFirbaseFirestore {
     List<Lesson> lessons = List();
     for (var i = 1; i <= lessonsPerDay; i++) {
       DocumentReference lessonsReference = getLessonCollectionReference();
-      lessons.add(Lesson(lessonsReference.documentID, idUser, i.toString()));
+      lessons.add(Lesson(lessonsReference.documentID, idUser, i.toString(), i-1));
       batchList = await addToBatchList(
         batchList,
         FirestoreBatch.set(

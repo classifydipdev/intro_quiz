@@ -22,6 +22,9 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
   }
 
   Widget getBody() {
+    for (var i = 0; i < 5; i++) {
+      model.scrollControllersList.add(ScrollController());
+    }
     return Container(
       width: double.maxFinite,
       height: double.maxFinite,
@@ -127,7 +130,6 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
       Subject subject = subjects[i];
       var subjectWidget = getSubjectButton(subject, (bool isSelected) {
         model.onSubjectSelect.onCallWithValue(subject);
-        Navigator.pop(context);
       }, isBorder: false);
       subjectsLists[(i / subjects.length * 4).toInt()].add(subjectWidget);
     }
@@ -179,6 +181,7 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
           width: double.maxFinite,
           margin: EdgeInsets.all(DimensApp.marginMicro),
           child: ListView.builder(
+            controller: model.scrollControllersList[day],
             itemCount: schedules.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext context, int index) {
