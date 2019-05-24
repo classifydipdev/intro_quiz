@@ -18,7 +18,6 @@ class LearningManager {
     await _firebaseFirestore.deleteAllLessons(idUser);
 
     List<FirestoreBatch> batchList = List();
-    
 
     for (var i = 1; i <= lessonsPerDay; i++) {
       DocumentReference lessonsReference =

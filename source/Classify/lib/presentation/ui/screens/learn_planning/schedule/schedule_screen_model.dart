@@ -16,7 +16,7 @@ class ScheduleScreenModel extends AppModel {
 
   int lessonsPerDay = 6;
   List<Subject> subjects = List();
-  List<Lesson> lessons = List();
+  // List<Lesson> lessons = List();
 
   List<Schedule> schedules = List();
 

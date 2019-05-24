@@ -1,3 +1,4 @@
+import 'package:classify/data/database/firestore/firestore.dart';
 import 'package:classify/data/entities/schedule.dart';
 import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
@@ -35,11 +36,7 @@ class ScheduleScreenViewModel
   }
 
   void onLessonsUpdated(int lessonsPerDay) async {
-    model.lessons = await model.learningManager
-        .createLessons(model.userManager.user.id, lessonsPerDay);
-    model.schedules = await model.learningManager
-        .createSchedules(model.userManager.user.id, model.lessons);
-
+    model.schedules = await AppFirbaseFirestore().createLessonsAndSchedules(model.userManager.user.id, lessonsPerDay);
     model.scheduleLoadingState = LoadingStates.Compleate;
     view.updateUI();
   }
