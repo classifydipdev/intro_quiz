@@ -206,6 +206,8 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
           : getSubjectButton(subject, (bool isSelected) {
               model.onScheduleSelect.onCallWithValue(schedule);
               showSubjectChooser();
+            }, onLongPress: () {
+              model.onScheduleRemove.onCallWithValue(schedule);
             }, isBorder: false),
     );
   }

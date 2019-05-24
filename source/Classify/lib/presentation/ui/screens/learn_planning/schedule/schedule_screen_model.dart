@@ -8,6 +8,7 @@ import 'package:classify/data/entities/schedule.dart';
 class ScheduleScreenModel extends AppModel {
   OnCallCommand onSubjectSelect = OnCallCommand();
   OnCallCommand onScheduleSelect = OnCallCommand();
+  OnCallCommand onScheduleRemove = OnCallCommand();
 
   OnCallCommand onLessonsUpdated = OnCallCommand();
   OnCallCommand onSubjectsUpdated = OnCallCommand();

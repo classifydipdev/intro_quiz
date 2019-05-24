@@ -15,6 +15,7 @@ class ScheduleScreenViewModel
     super.init();
     model.onSubjectSelect.addCallbackObject(onSubjectSelect);
     model.onScheduleSelect.addCallbackObject(onScheduleSelect);
+    model.onScheduleRemove.addCallbackObject(onScheduleRemove);
 
     model.onLessonsUpdated.addCallbackObject(onLessonsUpdated);
     model.onSubjectsUpdated.addCallbackObject(onSubjectsUpdated);
@@ -57,6 +58,12 @@ class ScheduleScreenViewModel
 
   void onScheduleSelect(Schedule schedule) {
     model.selectedSchedule = schedule;
+  }
+
+  void onScheduleRemove(Schedule schedule) {
+    model.selectedSchedule = schedule;
+    model.selectedSchedule.subject = null;
+    view.updateUI();
   }
 
   void onLessonsUpdated(int lessonsPerDay) async {
