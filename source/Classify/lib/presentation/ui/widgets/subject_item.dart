@@ -3,7 +3,7 @@ import 'package:classify/presentation/res/dimens.dart';
 import 'package:flutter/material.dart';
 
 Widget getSubjectButton(Subject subject, Function(bool) onTap,
-    {bool isSelected = false, bool isBorder = true}) {
+    {bool isSelected = false, bool isBorder = true, Function onLongPress}) {
   return Container(
     margin: EdgeInsets.symmetric(vertical: DimensApp.paddingSmall),
     height: DimensApp.sizeMiddleExtra,
@@ -11,6 +11,7 @@ Widget getSubjectButton(Subject subject, Function(bool) onTap,
       onTap: () {
         onTap(!isSelected);
       },
+      onLongPress: onLongPress,
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       child: Container(

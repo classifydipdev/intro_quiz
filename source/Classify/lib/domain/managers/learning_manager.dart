@@ -22,7 +22,7 @@ class LearningManager {
     for (var i = 1; i <= lessonsPerDay; i++) {
       DocumentReference lessonsReference =
           _firebaseFirestore.getLessonCollectionReference();
-      var lesson = Lesson(null, idUser, i.toString());
+      var lesson = Lesson(null, idUser, i.toString(), i);
 
       var batch = FirestoreBatch.set(
         lessonsReference,
