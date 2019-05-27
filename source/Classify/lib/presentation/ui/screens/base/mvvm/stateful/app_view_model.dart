@@ -29,8 +29,8 @@ abstract class AppViewModel<M extends AppModel, V extends BaseView<M>>
           ),
     );
 
-    model.pushNotided.addCallback(pushNotify);
-    model.preferenceInit.addCallback(preferenceInit);
+    model.pushNotided.setCallback(pushNotify);
+    model.preferenceInit.setCallback(preferenceInit);
 
     await preference.init();
     model.isNotifications = preference.getNotify();

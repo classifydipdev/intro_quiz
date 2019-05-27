@@ -12,7 +12,7 @@ class LogInScreenViewModel
   @override
   init() async {
     super.init();
-    model.onLogIn.addCallback(logIn);
+    model.onLogIn.setCallback(logIn);
   }
 
   void logIn() async {

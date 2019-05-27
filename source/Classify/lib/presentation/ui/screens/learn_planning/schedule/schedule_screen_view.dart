@@ -1,4 +1,3 @@
-import 'package:classify/data/entities/lesson.dart';
 import 'package:classify/data/entities/schedule.dart';
 import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/res/dimens.dart';
@@ -10,7 +9,8 @@ import 'package:classify/presentation/utils/views_states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ScheduleScreenView extends AppView<ScheduleScreenModel> {
+class ScheduleScreenView extends AppView<ScheduleScreenModel>
+    with TickerProviderStateMixin {
   ScheduleScreenView(ScheduleScreenModel model) : super(model);
 
   @override
@@ -22,8 +22,10 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
   }
 
   Widget getBody() {
+    model.scrollControllersList.clear();
     for (var i = 0; i < 5; i++) {
-      model.scrollControllersList.add(ScrollController());
+      model.scrollControllersList
+          .add(ScrollController(initialScrollOffset: 0.0));
     }
     return Container(
       width: double.maxFinite,
@@ -159,6 +161,7 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
 
   Widget getDay(int day) {
     var schedules = model.getSchedulesByDay(day);
+
     List<String> days = [
       "MONDAY",
       "TUESDAY",
@@ -197,8 +200,8 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel> {
     var schedule = schedules[lessonIndex];
     var lesson = schedule.lesson;
     var subject = schedule.subject;
-
     return Container(
+      key: model.subjectKey,
       height: 70.0,
       alignment: Alignment.center,
       child: subject == null

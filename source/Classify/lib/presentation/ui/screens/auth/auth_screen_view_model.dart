@@ -10,7 +10,7 @@ class AuthScreenViewModel
   @override
   init() async {
     super.init();
-    model.onSignInByGoogle.addCallback(signInByGoogle);
+    model.onSignInByGoogle.setCallback(signInByGoogle);
   }
 
   void signInByGoogle() async {

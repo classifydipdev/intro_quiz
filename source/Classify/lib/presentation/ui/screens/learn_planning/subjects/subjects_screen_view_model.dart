@@ -10,8 +10,8 @@ class SubjectsScreenViewModel
   @override
   init() async {
     super.init();
-    model.onSubjectSelect.addCallbackObject(onSubjectSelect);
-    model.onSubjectRemove.addCallbackObject(onSubjectRemove);
+    model.onSubjectSelect.setCallbackObject(onSubjectSelect);
+    model.onSubjectRemove.setCallbackObject(onSubjectRemove);
     getSubjects();
   }
 

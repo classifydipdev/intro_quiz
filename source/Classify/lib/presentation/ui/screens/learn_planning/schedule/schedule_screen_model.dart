@@ -24,6 +24,8 @@ class ScheduleScreenModel extends AppModel {
 
   List<ScrollController> scrollControllersList = List();
 
+  GlobalKey subjectKey =  GlobalKey();
+
   List<Schedule> getSchedulesByDay(int day) {
     List<Schedule> schedulesPreDay = List();
     for (var schedule in schedules) {

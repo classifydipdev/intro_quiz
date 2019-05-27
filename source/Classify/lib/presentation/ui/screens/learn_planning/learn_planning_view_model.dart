@@ -12,8 +12,8 @@ class LearnPlanningScreenViewModel
   @override
   init() async {
     super.init();
-    model.onPageChanged.addCallbackObject(onPageChanged);
-    model.onNavigationTapped.addCallback(onNavigationTapped);
+    model.onPageChanged.setCallbackObject(onPageChanged);
+    model.onNavigationTapped.setCallback(onNavigationTapped);
   }
 
   void onPageChanged(int page) {
