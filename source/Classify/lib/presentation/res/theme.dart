@@ -3,6 +3,15 @@ import 'package:classify/presentation/res/dimens.dart';
 import 'package:flutter/material.dart';
 
 class ThemeApp {
+
+  static TextStyle get picoGreyTextStyle {
+    return TextStyle(
+      fontFamily: 'GoogleSans',
+      fontSize: DimensApp.textSizePico,
+      color: Colors.grey[400],
+    );
+  }
+
   static ThemeData data = ThemeData(
     primaryColorDark: ColorsApp.primaryDark,
     primaryColor: ColorsApp.primary,
@@ -10,12 +19,65 @@ class ThemeApp {
     canvasColor: Colors.transparent,
   );
 
+  static TextStyle get littleWhiteTextStyle {
+    return TextStyle(
+      fontFamily: 'GoogleSans',
+      fontSize: DimensApp.textSizeLittle,
+      color: Colors.white,
+      fontWeight: FontWeight.w600,
+    );
+  }
+
+  static TextStyle get littleOrangeTextStyle {
+    return TextStyle(
+      fontFamily: 'GoogleSans',
+      fontSize: DimensApp.textSizeLittle,
+      color: ColorsApp.textCardOrange,
+      fontWeight: FontWeight.w600,
+    );
+  }
+
+  static TextStyle get littleGreenTextStyle {
+    return TextStyle(
+      fontFamily: 'GoogleSans',
+      fontSize: DimensApp.textSizeLittle,
+      color: ColorsApp.textCardGreen,
+      fontWeight: FontWeight.w600,
+    );
+  }
+
   static TextStyle get smallFadeWhiteBoldTextStyle {
     return TextStyle(
       fontFamily: 'GoogleSans',
       fontSize: DimensApp.textSizeSmall,
       color: Colors.white70,
       fontWeight: FontWeight.bold,
+    );
+  }
+
+  static TextStyle get smallWhiteTextStyle {
+    return TextStyle(
+      fontFamily: 'GoogleSans',
+      fontSize: DimensApp.textSizeSmall,
+      color: Colors.white,
+      fontWeight: FontWeight.w600,
+    );
+  }
+
+  static TextStyle get smallBlackTextStyle {
+    return TextStyle(
+      fontFamily: 'GoogleSans',
+      fontSize: DimensApp.textSizeSmall,
+      color: Colors.black,
+    );
+  }
+
+  static TextStyle get middleGreyBoldTextStyle {
+    return TextStyle(
+      fontFamily: 'GoogleSans',
+      fontSize: DimensApp.textSizeMiddle,
+      color: Colors.black54,
+      fontWeight: FontWeight.w600,
     );
   }
 
@@ -42,6 +104,7 @@ class ThemeApp {
       fontFamily: 'GoogleSans',
       fontSize: DimensApp.textSizeMiddleExtra,
       color: Colors.black,
+      fontWeight: FontWeight.w500,
     );
   }
 

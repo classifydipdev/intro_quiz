@@ -1,4 +1,5 @@
 import 'package:classify/presentation/res/dimens.dart';
+import 'package:classify/presentation/res/theme.dart';
 import 'package:flutter/material.dart';
 
 Widget getFieldContainer(String name, String description,
@@ -6,24 +7,25 @@ Widget getFieldContainer(String name, String description,
     {Widget trailingWidget, bool obscureText = false}) {
   return Container(
     margin: EdgeInsets.only(
-        left: DimensApp.paddingBigExtra, right: DimensApp.paddingBigExtra),
+        left: DimensApp.paddingLarge, right: DimensApp.paddingLarge),
     child: Column(
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.only(left: DimensApp.paddingMiddle, bottom: 5.0),
+          padding: EdgeInsets.only(left: DimensApp.paddingMiddle, bottom: 7.0),
           child: Align(
             alignment: Alignment.centerLeft,
-            child: Text(name, style: TextStyle(color: Colors.white)),
+            child: Text(name, style: ThemeApp.smallWhiteTextStyle),
           ),
         ),
         TextFormField(
-          style: TextStyle(color: Colors.white),
+          style: ThemeApp.smallWhiteTextStyle,
           autofocus: false,
           validator: validator,
           controller: controller,
           obscureText: obscureText,
           cursorColor: Colors.white,
           decoration: InputDecoration(
+            
             suffix: trailingWidget != null
                 ? trailingWidget
                 : Container(
