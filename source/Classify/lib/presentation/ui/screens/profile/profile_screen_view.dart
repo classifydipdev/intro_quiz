@@ -4,6 +4,7 @@ import 'package:classify/presentation/res/images.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/main/main_screen_model.dart';
 import 'package:classify/presentation/ui/screens/profile/profile_screen_model.dart';
+import 'package:classify/presentation/ui/widgets/squircle_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +52,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
             colors: [Color(0xff65cfff), Color(0xff6e63f9)],
             begin: Alignment.centerRight,
             end: Alignment.bottomLeft,
-            stops: [0.0, 1.0],
+            stops: [0.11, 1.0],
             tileMode: TileMode.clamp,
           ),
           borderRadius:
@@ -105,21 +106,29 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                 child: Align(
                     alignment: Alignment.centerRight,
                     child: Container(
-                        alignment: Alignment.centerRight,
                         margin: EdgeInsets.all(DimensApp.paddingMiddle),
-                        height: DimensApp.sizeMiddleExtra,
-                        width: DimensApp.sizeMiddleExtra,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                              DimensApp.borderRadiusNormal),
-                          image: DecorationImage(
-                            alignment: Alignment.center,
-                            image: model.userManager.user.photo != null
-                                ? NetworkImage(model.userManager.user.photo)
-                                : AssetImage(ImagesApp.profileGrey),
-                            fit: BoxFit.cover,
-                          ),
-                        ))))
+                        child: Material(
+                            color: Color(0xff65cfff),
+                            shape: SquircleBorder(
+                              side: BorderSide(
+                                  color: Color(0xff65cfff), width: 3.0),
+                            ),
+                            child: Container(
+                                alignment: Alignment.centerRight,
+                                height: DimensApp.sizeMiddleExtra,
+                                width: DimensApp.sizeMiddleExtra,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                      DimensApp.borderRadiusNormal),
+                                  image: DecorationImage(
+                                    alignment: Alignment.center,
+                                    image: model.userManager.user.photo != null
+                                        ? NetworkImage(
+                                            model.userManager.user.photo)
+                                        : AssetImage(ImagesApp.profileGrey),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ))))))
           ],
         ));
   }
