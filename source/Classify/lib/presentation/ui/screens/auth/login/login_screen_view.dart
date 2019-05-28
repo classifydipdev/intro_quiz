@@ -1,5 +1,6 @@
 import 'package:classify/presentation/res/colors.dart';
 import 'package:classify/presentation/res/dimens.dart';
+import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/utils/field_container.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -42,7 +43,7 @@ class LogInScreenView extends AppView<LogInScreenModel> {
             shrinkWrap: true,
             children: <Widget>[
               getLogo(),
-              SizedBox(height: DimensApp.sizeMiddleExtra),
+              SizedBox(height: 60),
               getFieldContainer("email", "Email", model.emailTextController,
                   model.emailValidator),
               SizedBox(height: DimensApp.sizeSmall),
@@ -68,9 +69,9 @@ class LogInScreenView extends AppView<LogInScreenModel> {
                   ),
                 ),
               ),
-              SizedBox(height: DimensApp.sizeMiddle),
+              SizedBox(height: DimensApp.sizeNormal),
               createButton(),
-              SizedBox(height: DimensApp.sizeMiddleExtra),
+              SizedBox(height: DimensApp.sizeNormal),
               Container(
                 margin: EdgeInsets.only(
                     left: DimensApp.paddingMiddleExtra,
@@ -79,8 +80,7 @@ class LogInScreenView extends AppView<LogInScreenModel> {
                   "by clicking sign up, you agree to our terms of use,"
                   "\nprivacy policy and disclaimer",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
+                  style: ThemeApp.littleWhiteTextStyle,
                 ),
               ),
             ],
@@ -113,42 +113,49 @@ class LogInScreenView extends AppView<LogInScreenModel> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          InkWell(
-            onTap: () {
-              navigateBack(context);
-            },
-            child: Container(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(
-                    DimensApp.paddingSmall,
-                    DimensApp.paddingSmallExtra,
-                    DimensApp.paddingSmallExtra,
-                    DimensApp.paddingMiddle),
-                child: Text("switch account",
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold)),
+          Padding(
+            padding: EdgeInsets.only(left: DimensApp.paddingNormal),
+            child: CupertinoButton(
+              padding: EdgeInsets.all(0),
+              onPressed: () {
+                navigateBack(context);
+              },
+              child: Container(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(
+                      DimensApp.paddingSmall,
+                      DimensApp.paddingSmallExtra,
+                      DimensApp.paddingSmallExtra,
+                      DimensApp.paddingMiddle),
+                  child: Text("switch account",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14)),
+                ),
               ),
             ),
           ),
-          OutlineButton(
-            borderSide: BorderSide(color: Colors.white),
-            highlightedBorderColor: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.circular(DimensApp.borderRadiusMiddleExtra),
-            ),
-            onPressed: () {
-              model.onLogIn.onCall();
-            },
-            child: Padding(
-              padding: EdgeInsets.only(
-                  top: DimensApp.paddingSmallExtra,
-                  bottom: DimensApp.paddingSmallExtra),
-              child: Text("log in",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'GoogleSans')),
+          Padding(
+            padding: EdgeInsets.only(right: DimensApp.paddingNormalExtra),
+            child: OutlineButton(
+              borderSide: BorderSide(color: Colors.white),
+              highlightedBorderColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.circular(DimensApp.borderRadiusMiddleExtra),
+              ),
+              onPressed: () {
+                model.onLogIn.onCall();
+              },
+              child: Padding(
+                padding: EdgeInsets.only(
+                    top: DimensApp.paddingSmallExtra,
+                    bottom: DimensApp.paddingSmallExtra),
+                child: Text("sign up",
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold)),
+              ),
             ),
           ),
         ],

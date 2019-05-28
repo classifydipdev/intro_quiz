@@ -33,6 +33,7 @@ class DimensApp {
   static const double marginNormal = 30.0;
 
   //Text sizes
+  static const double textSizePico = 10.0;
   static const double textSizeLittle = 12.0;
   static const double textSizeSmall = 14.0;
   static const double textSizeMiddle = 16.0;
@@ -43,6 +44,7 @@ class DimensApp {
 
   //BorderRadius
   static const double borderRadiusSmall = 10.0;
+  static const double borderRadiusSmallExtra = 20.0;
   static const double borderRadiusNormal = 16.0;
   static const double borderRadiusMiddle = 30.0;
   static const double borderRadiusMiddleExtra = 35.0;

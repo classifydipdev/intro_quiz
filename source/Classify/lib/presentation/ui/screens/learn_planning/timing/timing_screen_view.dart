@@ -25,9 +25,6 @@ class TimingScreenView extends AppView<TimingScreenModel> {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(top: DimensApp.paddingMiddle),
-          ),
           Text(
             "Lessons per day",
             style: ThemeApp.bigWhiteBoldTextStyle,
@@ -40,6 +37,7 @@ class TimingScreenView extends AppView<TimingScreenModel> {
               model.lessonsPerDay = value;
             }),
           ),
+          SizedBox(height: DimensApp.sizeNormal,)
         ],
       ),
     );

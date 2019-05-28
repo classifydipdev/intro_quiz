@@ -1,6 +1,7 @@
 import 'package:classify/presentation/res/colors.dart';
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/res/images.dart';
+import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/main/main_screen_model.dart';
 import 'package:classify/presentation/ui/screens/profile/profile_screen_model.dart';
@@ -44,7 +45,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
 
   Widget _pageHeader() {
     return Container(
-      height: model.screenHeight / 3,
+      height: model.screenHeight / 4,
       width: double.maxFinite,
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -61,7 +62,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
 
   Widget _userInfo() {
     return Container(
-        margin: EdgeInsets.only(top: DimensApp.paddingBigExtra),
+        margin: EdgeInsets.only(top: DimensApp.paddingBig),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -83,20 +84,30 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                                 child: Text(
                                   "Welcome, ${model.userManager.user.name}",
                                   textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: DimensApp.textSizeMiddleExtra,
-                                    fontFamily: MainScreenModel.fontFamily,
-                                    color: Colors.white,
-                                  ),
+                                  style: ThemeApp.bigWhiteBoldTextStyle,
                                 )),
-                            Text(
-                              "${model.dateNow} - 4 HOMEWORKS".toUpperCase(),
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  fontSize: DimensApp.textSizeSmall,
-                                  fontFamily: MainScreenModel.fontFamily,
-                                  color: Colors.white),
+                            Row(
+                              children: <Widget>[
+                                Text(
+                                  "${model.dateNow}".toUpperCase(),
+                                  textAlign: TextAlign.left,
+                                  style: ThemeApp.littleWhiteTextStyle,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: DimensApp.paddingMiddle),
+                                  child: Text(
+                                    "·",
+                                    textAlign: TextAlign.left,
+                                    style: ThemeApp.littleWhiteTextStyle,
+                                  ),
+                                ),
+                                Text(
+                                  "4 HOMEWORKS",
+                                  textAlign: TextAlign.left,
+                                  style: ThemeApp.littleWhiteTextStyle,
+                                ),
+                              ],
                             ),
                           ],
                         )))),
@@ -135,7 +146,8 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
           color: ColorsApp.cardBackground,
           elevation: 3.0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(DimensApp.borderRadiusMiddle),
+            borderRadius:
+                BorderRadius.circular(DimensApp.borderRadiusSmallExtra),
           ),
           child: Padding(
               padding: EdgeInsets.all(DimensApp.paddingMiddle),
@@ -147,25 +159,25 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                     children: <Widget>[
                       Image(
                         image: new AssetImage(ImagesApp.homeworkOrange),
-                        width: DimensApp.bottomIconSize,
-                        height: DimensApp.bottomIconSize,
+                        width: DimensApp.iconSizeSmall,
+                        height: DimensApp.iconSizeSmall,
                         fit: BoxFit.contain,
                         alignment: Alignment.center,
                       ),
-                      Text(
-                        "\t HomeWork".toUpperCase(),
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: DimensApp.textSizeSmall,
-                            fontFamily: MainScreenModel.fontFamily,
-                            color: ColorsApp.textCardOrange),
-                      )
+                      Padding(
+                        padding: EdgeInsets.only(left: DimensApp.paddingSmall),
+                        child: Text(
+                          "HomeWork".toUpperCase(),
+                          textAlign: TextAlign.left,
+                          style: ThemeApp.littleOrangeTextStyle,
+                        ),
+                      ),
                     ],
                   ),
                   //TODO: ListView
                   Container(
-                    margin: EdgeInsets.only(top: DimensApp.paddingSmall),
+                    margin: EdgeInsets.symmetric(
+                        vertical: DimensApp.paddingSmallExtra),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -176,36 +188,30 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                             Text(
                               "Spanish",
                               textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: DimensApp.textSizeMiddleExtra,
-                                  fontFamily: MainScreenModel.fontFamily,
-                                  color: Colors.black54),
+                              style: ThemeApp.middleGreyBoldTextStyle,
                             ),
-                            Text(
-                              "Read chapter 1 of palabra book",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  fontSize: DimensApp.textSizeSmall,
-                                  fontFamily: MainScreenModel.fontFamily,
-                                  color: Colors.grey[400]),
-                            )
+                            Padding(
+                              padding:
+                                  EdgeInsets.only(top: DimensApp.paddingSmall),
+                              child: Text(
+                                "Read chapter 1 of palabra book",
+                                textAlign: TextAlign.left,
+                                style: ThemeApp.picoGreyTextStyle,
+                              ),
+                            ),
                           ],
                         ),
                         Text(
                           "Tomorrow".toUpperCase(),
                           textAlign: TextAlign.right,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: DimensApp.textSizeSmall,
-                              fontFamily: MainScreenModel.fontFamily,
-                              color: ColorsApp.textCardOrange),
+                          style: ThemeApp.littleOrangeTextStyle,
                         )
                       ],
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: DimensApp.paddingSmall),
+                    margin: EdgeInsets.symmetric(
+                        vertical: DimensApp.paddingSmallExtra),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -216,36 +222,30 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                             Text(
                               "English",
                               textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: DimensApp.textSizeMiddleExtra,
-                                  fontFamily: MainScreenModel.fontFamily,
-                                  color: Colors.black54),
+                              style: ThemeApp.middleGreyBoldTextStyle,
                             ),
-                            Text(
-                              "Finsh reading",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  fontSize: DimensApp.textSizeSmall,
-                                  fontFamily: MainScreenModel.fontFamily,
-                                  color: Colors.grey[400]),
-                            )
+                            Padding(
+                              padding:
+                                  EdgeInsets.only(top: DimensApp.paddingSmall),
+                              child: Text(
+                                "Finsh reading",
+                                textAlign: TextAlign.left,
+                                style: ThemeApp.picoGreyTextStyle,
+                              ),
+                            ),
                           ],
                         ),
                         Text(
                           "2 days".toUpperCase(),
                           textAlign: TextAlign.right,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: DimensApp.textSizeSmall,
-                              fontFamily: MainScreenModel.fontFamily,
-                              color: ColorsApp.textCardOrange),
+                          style: ThemeApp.littleOrangeTextStyle,
                         )
                       ],
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: DimensApp.paddingSmall),
+                    margin: EdgeInsets.symmetric(
+                        vertical: DimensApp.paddingSmallExtra),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -256,30 +256,23 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                             Text(
                               "Maths",
                               textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: DimensApp.textSizeMiddleExtra,
-                                  fontFamily: MainScreenModel.fontFamily,
-                                  color: Colors.black54),
+                              style: ThemeApp.middleGreyBoldTextStyle,
                             ),
-                            Text(
-                              "Read chapter 58",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  fontSize: DimensApp.textSizeSmall,
-                                  fontFamily: MainScreenModel.fontFamily,
-                                  color: Colors.grey[400]),
-                            )
+                            Padding(
+                              padding:
+                                  EdgeInsets.only(top: DimensApp.paddingSmall),
+                              child: Text(
+                                "Read chapter 58",
+                                textAlign: TextAlign.left,
+                                style: ThemeApp.picoGreyTextStyle,
+                              ),
+                            ),
                           ],
                         ),
                         Text(
                           "3 days".toUpperCase(),
                           textAlign: TextAlign.right,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: DimensApp.textSizeSmall,
-                              fontFamily: MainScreenModel.fontFamily,
-                              color: ColorsApp.textCardOrange),
+                          style: ThemeApp.littleOrangeTextStyle,
                         )
                       ],
                     ),
@@ -301,7 +294,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
           color: ColorsApp.cardBackground,
           elevation: 3.0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(DimensApp.borderRadiusMiddle),
+            borderRadius: BorderRadius.circular(DimensApp.borderRadiusSmallExtra),
           ),
           child: Padding(
               padding: EdgeInsets.all(DimensApp.paddingMiddle),
@@ -310,28 +303,28 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                 children: <Widget>[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Image(
                         image: new AssetImage(ImagesApp.calendarGreen),
-                        width: DimensApp.bottomIconSize,
-                        height: DimensApp.bottomIconSize,
+                        width: DimensApp.iconSizeSmall,
+                        height: DimensApp.iconSizeSmall,
                         fit: BoxFit.contain,
                         alignment: Alignment.center,
                       ),
-                      Text(
-                        "\t ${model.dayNow}".toUpperCase(),
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: DimensApp.textSizeSmall,
-                            fontFamily: MainScreenModel.fontFamily,
-                            color: ColorsApp.textCardGreen),
-                      )
+                      Padding(
+                        padding: EdgeInsets.only(left: DimensApp.paddingSmall),
+                        child: Text(
+                          "\t ${model.dayNow}".toUpperCase(),
+                          textAlign: TextAlign.left,
+                          style: ThemeApp.littleGreenTextStyle,
+                        ),
+                      ),
                     ],
                   ),
                   model.schedules.length != null
                       ? ListView.builder(
+                        padding: EdgeInsets.all(0),
                           shrinkWrap: true,
                           itemCount: model.schedules.length,
                           physics: const NeverScrollableScrollPhysics(),
@@ -339,6 +332,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                             var subject = model.schedules[index].subject;
                             var lesson = model.schedules[index].lesson;
                             return Container(
+                              padding: EdgeInsets.symmetric(vertical: DimensApp.paddingSmall),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -346,20 +340,12 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                                   Text(
                                     subject != null ? subject.name : "-",
                                     textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: DimensApp.textSizeMiddleExtra,
-                                        fontFamily: MainScreenModel.fontFamily,
-                                        color: Colors.black54),
+                                    style: ThemeApp.middleGreyBoldTextStyle,
                                   ),
                                   Text(
                                     lesson.name,
                                     textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: DimensApp.textSizeSmall,
-                                        fontFamily: MainScreenModel.fontFamily,
-                                        color: ColorsApp.textCardGreen),
+                                    style: ThemeApp.littleGreenTextStyle,
                                   )
                                 ],
                               ),
