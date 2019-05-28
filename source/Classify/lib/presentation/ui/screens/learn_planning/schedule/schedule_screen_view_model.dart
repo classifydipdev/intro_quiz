@@ -40,31 +40,30 @@ class ScheduleScreenViewModel
     int foundLessonIndex = model.selectedSchedule.lesson.index + 1;
     if (foundLessonIndex + 1 > model.lessonsPerDay) foundLessonIndex = 0;
 
-    for (Schedule schedule in model.schedules) {
-      if (schedule.day == currentDay &&
-          schedule.lesson.index == foundLessonIndex) {
+    for (Schedule schedule in model.getSchedulesByDay(currentDay)) {
+      if (schedule.lesson.index == foundLessonIndex) {
         nextSchedule = schedule;
       }
     }
-    changeScheduleListPosition();
+    changeScheduleListPosition(model.selectedSchedule);
     return nextSchedule;
   }
 
-  //TODO go to current position
-  void changeScheduleListPosition() {
-     // WidgetsBinding.instance.addPostFrameCallback(getPositions());
-    final keyContext = model.subjectKey.currentContext;
-    if (keyContext != null) {
-      int currentDay = model.selectedSchedule.day;
-      model.scrollControllersList[currentDay].jumpTo(getPositions());
+  void changeScheduleListPosition(Schedule schedule) async {
+    var currentDay = schedule.day;
+    var scheduleId = schedule.id;
+    var key = model.listOfKeys[scheduleId];
+    if (key == null) return;
+    var scheduleContext = key.currentContext;
+    if (scheduleContext != null) {
+      model.scrollControllersList[currentDay]
+          .jumpTo(getPositions(scheduleContext));
     }
-    view.updateUI();
   }
 
-  getPositions() {
-    final RenderBox renderBoxRed =
-        model.subjectKey.currentContext.findRenderObject();
-    final positionRed = renderBoxRed.localToGlobal(Offset.zero);
+  double getPositions(BuildContext currentContext) {
+    RenderBox renderBoxRed = currentContext.findRenderObject();
+    var positionRed = renderBoxRed.localToGlobal(Offset.zero);
     view.updateUI();
     return positionRed.dx;
   }
