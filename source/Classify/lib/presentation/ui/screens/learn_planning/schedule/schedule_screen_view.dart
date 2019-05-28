@@ -27,6 +27,7 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel>
       model.scrollControllersList
           .add(ScrollController(initialScrollOffset: 0.0));
     }
+    model.listOfKeys.clear();
     return Container(
       width: double.maxFinite,
       height: double.maxFinite,
@@ -161,7 +162,6 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel>
 
   Widget getDay(int day) {
     var schedules = model.getSchedulesByDay(day);
-
     List<String> days = [
       "MONDAY",
       "TUESDAY",
@@ -198,10 +198,11 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel>
 
   Widget getItem(List<Schedule> schedules, int lessonIndex) {
     var schedule = schedules[lessonIndex];
-    var lesson = schedule.lesson;
     var subject = schedule.subject;
+    var key = GlobalKey(debugLabel: schedule.id);
+    model.listOfKeys[schedule.id] = key;
     return Container(
-      key: model.subjectKey,
+      key: key,
       height: 70.0,
       alignment: Alignment.center,
       child: subject == null
