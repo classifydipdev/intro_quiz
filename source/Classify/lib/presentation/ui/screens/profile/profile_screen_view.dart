@@ -382,7 +382,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
   Widget _floatingActionButton() {
     return FloatingActionButton(
       onPressed: () {
-        //TODO: Add home works
+        model.onLogOut.onCall();
       },
       child: Container(
           height: double.maxFinite,

@@ -1,3 +1,5 @@
+import 'package:classify/data/auth/firebase/auth.dart';
+import 'package:classify/presentation/ui/screens/auth/auth_screen.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/screens/profile/profile_screen_model.dart';
 import 'package:classify/presentation/ui/screens/profile/profile_screen_view.dart';
@@ -9,6 +11,8 @@ class ProfileScreenViewModel
   @override
   init() async {
     super.init();
+
+    model.onLogOut.addCallback(logOut);
 
     getSchedule();
   }
@@ -25,4 +29,9 @@ class ProfileScreenViewModel
 
   @override
   void preferenceInit() async {}
+
+  Future<void> logOut() async {
+    await AppFirbaseAuth().signOut();
+    view.navigateTo(view.context, AuthScreen(), true);
+  }
 }

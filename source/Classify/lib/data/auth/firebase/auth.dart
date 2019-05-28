@@ -51,6 +51,10 @@ class AppFirbaseAuth {
     return _user;
   }
 
+  Future<void> signOut() async {
+    await _auth.signOut();
+  }
+
   factory AppFirbaseAuth() {
     return _singleton;
   }
