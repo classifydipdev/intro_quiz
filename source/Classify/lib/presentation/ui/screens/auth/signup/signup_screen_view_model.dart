@@ -12,7 +12,7 @@ class SignUpScreenViewModel
   init() async {
     super.init();
 
-    model.onSignUp.addCallback(signUp);
+    model.onSignUp.setCallback(signUp);
   }
 
   void signUp() async {

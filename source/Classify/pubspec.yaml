@@ -14,7 +14,7 @@ dependencies:
   flutter_svg: ^0.13.0+1
   flutter_advanced_networkimage: ^0.5.0-alpha.3
   shared_preferences: ^0.5.2
-  flutter_arhitecture_helper: ^0.4.2
+  flutter_arhitecture_helper: ^0.4.3
   permission_handler: ^3.0.0
   # flutter_facebook_login: ^2.0.0
   firebase_core: ^0.4.0
@@ -32,6 +32,7 @@ dependencies:
   flutter_page_indicator: ^0.0.3
   flutter_platform_widgets: ^0.10.0
   bubble_bottom_bar: ^1.2.0
+
 
 dev_dependencies:
   flutter_test:

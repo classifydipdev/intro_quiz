@@ -9,7 +9,7 @@ class MainScreenViewModel
   @override
   init() async {
     super.init();
-    model.onNavigateToPage.addCallbackObject(changePageIndex);
+    model.onNavigateToPage.setCallbackObject(changePageIndex);
   }
 
   @override
