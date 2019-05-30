@@ -70,6 +70,23 @@ class LearningManager {
     return await _firebaseFirestore.getSchedules(idUser);
   }
 
+  List<Schedule> createSchedulesLocaly(String idUser, int lessonsPerDay) {
+    List<Schedule> scheduleList = List();
+    for (var day = 0; day < 5; day++) {
+      for (var lesson = 0; lesson < lessonsPerDay; lesson++) {
+        scheduleList.add(Schedule(
+            null, idUser, null, Lesson(null, null, null, lesson), day));
+      }
+    }
+    return scheduleList;
+  }
+
+  Future<void> createCompleateSchedules(
+      String idUser, List<Schedule> schedules) async {
+    await AppFirbaseFirestore()
+        .createLessonsAndSchedules(idUser, compleateScheduleList: schedules);
+  }
+
   Future<void> updateSchedules(List<Schedule> schedules) async {
     for (var schedule in schedules) {
       await _firebaseFirestore.updateSchedule(schedule);

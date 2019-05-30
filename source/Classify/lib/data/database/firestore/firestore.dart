@@ -269,10 +269,19 @@ class AppFirbaseFirestore {
     });
   }
 
-  Future<List<Schedule>> createLessonsAndSchedules(
-      String idUser, int lessonsPerDay) async {
-    if (idUser == null || lessonsPerDay == null) throw Exception("Wrong data");
+  Future<List<Schedule>> createLessonsAndSchedules(String idUser,
+      {int lessonsPerDay, List<Schedule> compleateScheduleList}) async {
+    if (idUser == null) throw Exception("Wrong data");
     List<FirestoreBatch> batchList = List();
+
+    if (compleateScheduleList != null) {
+      lessonsPerDay = 0;
+      for (Schedule schedule in compleateScheduleList) {
+        if (schedule.day == 0) {
+          lessonsPerDay++;
+        }
+      }
+    }
 
     var query = _db
         .getFS()
@@ -288,7 +297,8 @@ class AppFirbaseFirestore {
     List<Lesson> lessons = List();
     for (var i = 1; i <= lessonsPerDay; i++) {
       DocumentReference lessonsReference = getLessonCollectionReference();
-      lessons.add(Lesson(lessonsReference.documentID, idUser, i.toString(), i-1));
+      lessons.add(
+          Lesson(lessonsReference.documentID, idUser, i.toString(), i - 1));
       batchList = await addToBatchList(
         batchList,
         FirestoreBatch.set(
@@ -312,22 +322,46 @@ class AppFirbaseFirestore {
 
     List<DocumentReference> scheduleReferences = List();
 
-    for (var day = 0; day < 5; day++) {
-      for (var lesson = 0; lesson < lessons.length; lesson++) {
+    if (compleateScheduleList != null) {
+      int lessonIndex = 0;
+      int day = 0;
+      for (int i = 0; i < compleateScheduleList.length; i++) {
+        if (compleateScheduleList[i].day != day) {
+          lessonIndex = 0;
+          day = compleateScheduleList[i].day;
+        }
+        compleateScheduleList[i].lesson = lessons[lessonIndex];
         scheduleReferences.add(getScheduleCollectionReference());
-        var schedule = Schedule(null, idUser, null, lessons[lesson], day);
         batchList = await addToBatchList(
           batchList,
           FirestoreBatch.set(
             scheduleReferences.last,
-            schedule.toFirestore(),
+            compleateScheduleList[i].toFirestore(),
             merge: false,
           ),
         );
+        lessonIndex++;
+      }
+    } else {
+      for (var day = 0; day < 5; day++) {
+        for (var lesson = 0; lesson < lessons.length; lesson++) {
+          scheduleReferences.add(getScheduleCollectionReference());
+          var schedule = Schedule(null, idUser, null, lessons[lesson], day);
+          batchList = await addToBatchList(
+            batchList,
+            FirestoreBatch.set(
+              scheduleReferences.last,
+              schedule.toFirestore(),
+              merge: false,
+            ),
+          );
+        }
       }
     }
 
     await aplyBatch(batchList);
+
+    if (compleateScheduleList != null) return compleateScheduleList;
 
     List<Schedule> schedulesList = List();
     for (DocumentReference scheduleReference in scheduleReferences) {
