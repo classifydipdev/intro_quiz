@@ -35,12 +35,21 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.fromLTRB(
-                DimensApp.paddingMiddle, DimensApp.paddingMiddle, 0, 0),
+            padding: EdgeInsets.fromLTRB(DimensApp.paddingMiddle,
+                DimensApp.paddingMiddle, DimensApp.paddingSmall, 0),
             child: Text(
               "Timetable",
               textAlign: TextAlign.left,
               style: ThemeApp.bigWhiteBoldTextStyle,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(DimensApp.paddingMiddle,
+                DimensApp.paddingSmall, DimensApp.paddingMiddle, 0),
+            child: Text(
+              "All the timetabled subjects, don't fret: you can always edit these later.",
+              textAlign: TextAlign.left,
+              style: ThemeApp.smallFadeWhiteBoldTextStyle,
             ),
           ),
           Expanded(
@@ -52,9 +61,24 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel>
                     },
                   )
                 : Center(
-                    child: CircularProgressIndicator(
-                        valueColor:
-                            AlwaysStoppedAnimation<Color>(Colors.white)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding:
+                              EdgeInsets.only(bottom: DimensApp.paddingSmall),
+                          child: Text(
+                            "This should only take a second",
+                            textAlign: TextAlign.left,
+                            style: ThemeApp.smallFadeWhiteBoldTextStyle,
+                          ),
+                        ),
+                        CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.white),
+                        ),
+                      ],
+                    ),
                   ),
           ),
         ],
