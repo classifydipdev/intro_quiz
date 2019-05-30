@@ -7,6 +7,7 @@ import 'package:classify/data/entities/subject.dart';
 import 'package:classify/data/entities/user.dart';
 import 'package:classify/data/entities/user_preference.dart';
 import 'package:classify/data/helpers/firestore_helper.dart';
+import 'package:classify/data/util/data_utility.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -69,7 +70,9 @@ class AppFirbaseFirestore {
     return await getUser(fbUser.uid).then((user) async {
       if (user == null) {
         var photouser = photo != null ? photo : fbUser.photoUrl;
-        var nameUser = name != null ? name : fbUser.displayName;
+        var nameUser = name != null
+            ? name
+            : DataUtility.formatFirestoreName(fbUser.displayName);
         var user = User(fbUser.uid, nameUser, photo: photouser);
         return await addUser(user);
       } else

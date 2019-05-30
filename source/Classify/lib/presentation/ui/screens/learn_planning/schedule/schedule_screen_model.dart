@@ -15,7 +15,7 @@ class ScheduleScreenModel extends AppModel {
 
   LoadingStates scheduleLoadingState = LoadingStates.Loading;
 
-  int lessonsPerDay = 6;
+  int lessonsPerDay = 7;
   List<Subject> subjects = List();
 
   List<Schedule> schedules = List();

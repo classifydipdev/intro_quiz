@@ -81,7 +81,7 @@ class AuthScreenView extends AppView<AuthScreenModel> {
               width: 100,
             ),
           ),
-          SizedBox(height: 90),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.1),
           Text(
             "for students; by students",
             style: ThemeApp.middleWhiteBoldTextStyle,
