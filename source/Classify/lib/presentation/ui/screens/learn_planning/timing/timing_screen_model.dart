@@ -7,5 +7,5 @@ class TimingScreenModel extends AppModel {
 
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  int lessonsPerDay = 6;
+  int lessonsPerDay = 7;
 }

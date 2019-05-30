@@ -88,20 +88,17 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                                   style: ThemeApp.bigWhiteBoldTextStyle,
                                 )),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Text(
                                   "${model.dateNow}".toUpperCase(),
                                   textAlign: TextAlign.left,
                                   style: ThemeApp.littleWhiteTextStyle,
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: DimensApp.paddingMiddle),
-                                  child: Text(
-                                    "·",
-                                    textAlign: TextAlign.left,
-                                    style: ThemeApp.littleWhiteTextStyle,
-                                  ),
+                                Text(
+                                  "·",
+                                  textAlign: TextAlign.left,
+                                  style: ThemeApp.littleWhiteTextStyle,
                                 ),
                                 Text(
                                   "4 HOMEWORKS",
@@ -303,7 +300,8 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
           color: ColorsApp.cardBackground,
           elevation: 3.0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(DimensApp.borderRadiusSmallExtra),
+            borderRadius:
+                BorderRadius.circular(DimensApp.borderRadiusSmallExtra),
           ),
           child: Padding(
               padding: EdgeInsets.all(DimensApp.paddingMiddle),
@@ -333,7 +331,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                   ),
                   model.schedules.length != null
                       ? ListView.builder(
-                        padding: EdgeInsets.all(0),
+                          padding: EdgeInsets.all(0),
                           shrinkWrap: true,
                           itemCount: model.schedules.length,
                           physics: const NeverScrollableScrollPhysics(),
@@ -341,7 +339,8 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                             var subject = model.schedules[index].subject;
                             var lesson = model.schedules[index].lesson;
                             return Container(
-                              padding: EdgeInsets.symmetric(vertical: DimensApp.paddingSmall),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: DimensApp.paddingSmall),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
