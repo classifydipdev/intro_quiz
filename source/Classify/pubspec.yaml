@@ -1,7 +1,7 @@
 name: classify
 description: A new Flutter application.
 
-version: 1.0.0+5
+version: 1.0.0+6
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -15,7 +15,7 @@ dependencies:
   flutter_advanced_networkimage: ^0.4.15
   shared_preferences: ^0.5.2
   flutter_arhitecture_helper: ^0.4.3
-  permission_handler: ^3.0.0
+  permission_handler: ^3.1.0
   # flutter_facebook_login: ^2.0.0
   firebase_core: ^0.4.0
   firebase_crashlytics: ^0.0.4+3

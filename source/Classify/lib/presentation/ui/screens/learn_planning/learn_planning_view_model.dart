@@ -44,7 +44,8 @@ class LearnPlanningScreenViewModel
         model.scheduleScreen.model.scheduleLoadingState = LoadingStates.Loading;
         model.scheduleScreen.view.updateUI();
         var schedules = model.scheduleScreen.model.schedules;
-        await model.learningManager.updateSchedules(schedules);
+        await model.learningManager
+            .createCompleateSchedules(model.userManager.user.id, schedules);
         view.navigateTo(view.context, MainScreen(), true);
         break;
       default:

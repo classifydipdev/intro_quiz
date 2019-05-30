@@ -18,10 +18,10 @@ class ScheduleScreenViewModel
     model.onScheduleSelect.setCallbackObject(onScheduleSelect);
     model.onScheduleRemove.setCallbackObject(onScheduleRemove);
 
-    model.onLessonsUpdated.setCallbackObject(onLessonsUpdated);
+    model.onLessonsUpdated.setCallbackObject(onSchedulesCreateLocaly);
     model.onSubjectsUpdated.setCallbackObject(onSubjectsUpdated);
 
-    onLessonsUpdated(model.lessonsPerDay);
+    onSchedulesCreateLocaly(model.lessonsPerDay);
   }
 
   void onSubjectSelect(Subject subject) {
@@ -78,9 +78,9 @@ class ScheduleScreenViewModel
     view.updateUI();
   }
 
-  void onLessonsUpdated(int lessonsPerDay) async {
-    model.schedules = await AppFirbaseFirestore()
-        .createLessonsAndSchedules(model.userManager.user.id, lessonsPerDay);
+  void onSchedulesCreateLocaly(int lessonsPerDay) async {
+    model.schedules = model.learningManager
+        .createSchedulesLocaly(model.userManager.user.id, lessonsPerDay);
     model.scheduleLoadingState = LoadingStates.Compleate;
     view.updateUI();
   }
