@@ -1,5 +1,5 @@
-import 'package:classify/data/entities/schedule.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_model.dart';
+import 'package:classify/presentation/ui/screens/learn_planning/schedule/schedule_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_arhitecture_helper/presentation/ui/mvvm/utils/base_model_utils.dart';
@@ -15,5 +15,5 @@ class ProfileScreenModel extends AppModel {
   }
   String dateNow = new DateFormat("MMM dd, yyyy").format(DateTime.now());
   String dayNow = new DateFormat.EEEE().format(DateTime.now());
-  List<Schedule> schedules = List();
+  List<ScheduleItem> scheduleItems = List();
 }

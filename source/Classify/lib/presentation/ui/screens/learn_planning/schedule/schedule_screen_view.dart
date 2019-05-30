@@ -63,13 +63,14 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel>
                 : Center(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         Padding(
                           padding:
-                              EdgeInsets.only(bottom: DimensApp.paddingSmall),
+                              EdgeInsets.only(bottom: DimensApp.paddingSmallExtra),
                           child: Text(
-                            "This should only take a second",
-                            textAlign: TextAlign.left,
+                            "This should only\ntake a second",
+                            textAlign: TextAlign.center,
                             style: ThemeApp.smallFadeWhiteBoldTextStyle,
                           ),
                         ),
