@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:classify/data/entities/schedule.dart';
 import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/res/dimens.dart';
@@ -8,6 +10,7 @@ import 'package:classify/presentation/ui/widgets/subject_item.dart';
 import 'package:classify/presentation/utils/views_states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class ScheduleScreenView extends AppView<ScheduleScreenModel>
     with TickerProviderStateMixin {
@@ -35,26 +38,59 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.fromLTRB(
-                DimensApp.paddingMiddle, DimensApp.paddingMiddle, 0, 0),
+            padding: EdgeInsets.fromLTRB(DimensApp.paddingMiddle,
+                DimensApp.paddingMiddle, DimensApp.paddingSmall, 0),
             child: Text(
               "Timetable",
               textAlign: TextAlign.left,
               style: ThemeApp.bigWhiteBoldTextStyle,
             ),
           ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(DimensApp.paddingMiddle,
+                DimensApp.paddingSmall, DimensApp.paddingMiddle, 0),
+            child: Text(
+              "All the timetabled subjects, don't fret: you can always edit these later.",
+              textAlign: TextAlign.left,
+              style: ThemeApp.smallFadeWhiteBoldTextStyle,
+            ),
+          ),
           Expanded(
             child: model.scheduleLoadingState == LoadingStates.Compleate
                 ? ListView.builder(
-                    itemCount: 5,
+                    controller: model.mainScrollController,
+                    itemCount: 6,
                     itemBuilder: (BuildContext context, int index) {
+                      if (index == 5)
+                        return SizedBox(
+                          height: model.navigationBarState ==
+                                  NavigationBarStates.Opened
+                              ? 300
+                              : 0,
+                        );
                       return getDay(index);
                     },
                   )
                 : Center(
-                    child: CircularProgressIndicator(
-                        valueColor:
-                            AlwaysStoppedAnimation<Color>(Colors.white)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(
+                              bottom: DimensApp.paddingSmallExtra),
+                          child: Text(
+                            "This should only\ntake a second",
+                            textAlign: TextAlign.center,
+                            style: ThemeApp.smallFadeWhiteBoldTextStyle,
+                          ),
+                        ),
+                        CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.white),
+                        ),
+                      ],
+                    ),
                   ),
           ),
         ],
@@ -62,7 +98,10 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel>
     );
   }
 
-  void showSubjectChooser() {
+  void showSubjectChooser(int day) {
+    model.navigationBarState = NavigationBarStates.Opened;
+    updateUI();
+
     showModalBottomSheet(
         context: context,
         builder: (builder) {
@@ -118,7 +157,17 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel>
               ),
             ),
           );
-        });
+        }).whenComplete(() {
+      model.navigationBarState = NavigationBarStates.Closed;
+      updateUI();
+    });
+
+    Timer(Duration(milliseconds: 100), () {
+      model.mainScrollController.animateTo(
+          model.mainScrollController.position.maxScrollExtent - (4 - day) * 120,
+          duration: Duration(milliseconds: 500),
+          curve: Curves.linear);
+    });
   }
 
   Widget generateSubjectsGrid(List<Subject> subjects) {
@@ -209,7 +258,7 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel>
           ? getEmptySchedule(schedule)
           : getSubjectButton(subject, (bool isSelected) {
               model.onScheduleSelect.onCallWithValue(schedule);
-              showSubjectChooser();
+              showSubjectChooser(schedule.day);
             }, onLongPress: () {
               model.onScheduleRemove.onCallWithValue(schedule);
             }, isBorder: false),
@@ -230,7 +279,7 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel>
         ),
         onPressed: () {
           model.onScheduleSelect.onCallWithValue(schedule);
-          showSubjectChooser();
+          showSubjectChooser(schedule.day);
         },
         child: Center(
           child: Container(

@@ -3,11 +3,11 @@ import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/res/images.dart';
 import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
-import 'package:classify/presentation/ui/screens/main/main_screen_model.dart';
 import 'package:classify/presentation/ui/screens/profile/profile_screen_model.dart';
 import 'package:classify/presentation/ui/widgets/squircle_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class ProfileScreenView extends AppView<ProfileScreenModel> {
   ProfileScreenView(ProfileScreenModel model) : super(model);
@@ -23,6 +23,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                   color: ColorsApp.background,
                   child: Scrollbar(
                       child: SingleChildScrollView(
+                          physics: ClampingScrollPhysics(),
                           scrollDirection: Axis.vertical,
                           child: Stack(
                             children: <Widget>[
@@ -146,14 +147,19 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
         width: double.maxFinite,
         margin: EdgeInsets.only(
             top: DimensApp.paddingSmall,
-            right: DimensApp.paddingSmall,
-            left: DimensApp.paddingSmall),
-        child: Card(
-          color: ColorsApp.cardBackground,
-          elevation: 3.0,
-          shape: RoundedRectangleBorder(
+            right: DimensApp.paddingSmallExtra,
+            left: DimensApp.paddingSmallExtra),
+        child: Container(
+          decoration: BoxDecoration(
+            color: ColorsApp.cardBackground,
             borderRadius:
                 BorderRadius.circular(DimensApp.borderRadiusSmallExtra),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 20.0,
+              ),
+            ],
           ),
           child: Padding(
               padding: EdgeInsets.all(DimensApp.paddingMiddle),
@@ -250,8 +256,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(
-                        vertical: DimensApp.paddingSmallExtra),
+                    margin: EdgeInsets.only(top: DimensApp.paddingSmallExtra),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -292,16 +297,21 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
     return Container(
         width: double.maxFinite,
         margin: EdgeInsets.only(
-            top: DimensApp.marginSmallExtra,
-            right: DimensApp.paddingSmall,
-            left: DimensApp.paddingSmall,
+            top: DimensApp.marginMiddleExtra,
+            right: DimensApp.paddingSmallExtra,
+            left: DimensApp.paddingSmallExtra,
             bottom: DimensApp.paddingBig),
-        child: Card(
-          color: ColorsApp.cardBackground,
-          elevation: 3.0,
-          shape: RoundedRectangleBorder(
+        child: Container(
+          decoration: BoxDecoration(
+            color: ColorsApp.cardBackground,
             borderRadius:
                 BorderRadius.circular(DimensApp.borderRadiusSmallExtra),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 20.0,
+              ),
+            ],
           ),
           child: Padding(
               padding: EdgeInsets.all(DimensApp.paddingMiddle),
@@ -329,15 +339,13 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                       ),
                     ],
                   ),
-                  model.schedules.length != null
+                  model.scheduleItems.length != null
                       ? ListView.builder(
-                          padding: EdgeInsets.all(0),
+                          padding: EdgeInsets.only(top: DimensApp.paddingSmall),
                           shrinkWrap: true,
-                          itemCount: model.schedules.length,
+                          itemCount: model.scheduleItems.length,
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
-                            var subject = model.schedules[index].subject;
-                            var lesson = model.schedules[index].lesson;
                             return Container(
                               padding: EdgeInsets.symmetric(
                                   vertical: DimensApp.paddingSmall),
@@ -346,12 +354,12 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
                                     MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Text(
-                                    subject != null ? subject.name : "-",
+                                    model.scheduleItems[index].name,
                                     textAlign: TextAlign.left,
                                     style: ThemeApp.middleGreyBoldTextStyle,
                                   ),
                                   Text(
-                                    lesson.name,
+                                    model.scheduleItems[index].position,
                                     textAlign: TextAlign.right,
                                     style: ThemeApp.littleGreenTextStyle,
                                   )
@@ -378,6 +386,7 @@ class ProfileScreenView extends AppView<ProfileScreenModel> {
       onPressed: () {
         model.onLogOut.onCall();
       },
+      elevation: 0,
       child: Container(
           height: double.maxFinite,
           width: double.maxFinite,

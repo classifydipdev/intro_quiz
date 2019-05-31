@@ -152,7 +152,7 @@ class LogInScreenView extends AppView<LogInScreenModel> {
                 padding: EdgeInsets.only(
                     top: DimensApp.paddingSmallExtra,
                     bottom: DimensApp.paddingSmallExtra),
-                child: Text("sign up",
+                child: Text("sign in",
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold)),
               ),
