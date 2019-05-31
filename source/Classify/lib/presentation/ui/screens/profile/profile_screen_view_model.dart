@@ -45,7 +45,7 @@ class ProfileScreenViewModel
 
         if (sameSubjectPosition != i + 1) {
           scheduleItem.position += "-$sameSubjectPosition";
-          i = sameSubjectPosition;
+          i = sameSubjectPosition - 1;
         }
 
         model.scheduleItems.add(scheduleItem);
