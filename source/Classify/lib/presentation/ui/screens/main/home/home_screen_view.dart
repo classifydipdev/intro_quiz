@@ -56,7 +56,7 @@ class HomeScreenView extends AppView<HomeScreenModel> {
       width: double.maxFinite,
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Color(0xff65cfff), Color(0xff6e63f9)],
+          colors: [ColorsApp.startHomeScreen, ColorsApp.endHomeScreen],
           begin: Alignment.centerRight,
           end: Alignment.bottomLeft,
           stops: [0.11, 1.0],
@@ -423,7 +423,7 @@ class HomeScreenView extends AppView<HomeScreenModel> {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           gradient: LinearGradient(
-            colors: [Color(0xff65cfff), Color(0xff6e63f9)],
+            colors: [ColorsApp.startHomeScreen, ColorsApp.centerHomeScreen],
             begin: Alignment.bottomRight,
             end: Alignment.topLeft,
             stops: [0.0, 1.0],

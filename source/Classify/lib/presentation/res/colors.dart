@@ -9,8 +9,20 @@ class ColorsApp {
   static const Color pink = Color(0xFFebbde4);
   static const Color background = Color(0xFFf1f2f3);
   static const Color cardBackground = Color(0xFFfafafa);
-  static const Color iconBottomBar = Color(0xffafa2ff);
-  static const Color textBottomBar = Color(0xff6565f3);
+
+  static const Color startHomeScreen = Color(0xff65cfff);
+  static const Color centerHomeScreen = Color(0xff627ef9);
+  static const Color endHomeScreen = Color(0xff6e63f9);
+
+  static const Color startTimetableScreen = Color(0xffb0ffaa);
+  static const Color centerTimetableScreen = Color(0xff41d87d);
+  static const Color endTimetableScreen = Color(0xff6ffda7);
+
+  static const Color startHomeworkScreen = Color(0xfffdd874);
+  static const Color centerHomeworkScreen = Color(0xffedae3b);
+  static const Color endHomeworkScreen = Color(0xfff7ce47);
+  
+  
   static const Color textCardOrange = Color(0xffff8600);
   static const Color textCardGreen = Color(0xff00ffbb);
 }

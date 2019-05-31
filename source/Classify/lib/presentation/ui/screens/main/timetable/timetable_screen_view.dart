@@ -51,7 +51,7 @@ class TimetableScreenView extends AppView<TimetableScreenModel> {
       width: double.maxFinite,
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Color(0xff65cfff), Color(0xff6e63f9)],
+          colors: [ColorsApp.startTimetableScreen, ColorsApp.endTimetableScreen],
           begin: Alignment.centerRight,
           end: Alignment.bottomLeft,
           stops: [0.11, 1.0],
@@ -82,7 +82,7 @@ class TimetableScreenView extends AppView<TimetableScreenModel> {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           gradient: LinearGradient(
-            colors: [Color(0xff65cfff), Color(0xff6e63f9)],
+            colors: [ColorsApp.startTimetableScreen, ColorsApp.endTimetableScreen],
             begin: Alignment.bottomRight,
             end: Alignment.topLeft,
             stops: [0.0, 1.0],

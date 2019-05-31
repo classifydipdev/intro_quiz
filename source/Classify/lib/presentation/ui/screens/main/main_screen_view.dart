@@ -44,7 +44,7 @@ class MainScreenView extends AppView<MainScreenModel> {
             inkColor: Colors.black12,
             items: <BubbleBottomBarItem>[
               BubbleBottomBarItem(
-                  backgroundColor: ColorsApp.iconBottomBar,
+                  backgroundColor: ColorsApp.startHomeScreen,
                   icon: Image.asset(
                     ImagesApp.homePurple,
                     width: DimensApp.bottomIconSize,
@@ -57,18 +57,19 @@ class MainScreenView extends AppView<MainScreenModel> {
                     width: DimensApp.bottomIconSize,
                     height: DimensApp.bottomIconSize,
                     alignment: Alignment.center,
+                    color: ColorsApp.centerHomeScreen,
                   ),
                   title: Text(
                     "Home",
                     style: TextStyle(
-                      color: ColorsApp.textBottomBar,
+                      color: ColorsApp.centerHomeScreen,
                       fontWeight: FontWeight.bold,
                       fontSize: DimensApp.textSizeSmall,
                       fontFamily: MainScreenModel.fontFamily,
                     ),
                   )),
               BubbleBottomBarItem(
-                  backgroundColor: ColorsApp.iconBottomBar,
+                  backgroundColor: ColorsApp.startTimetableScreen,
                   icon: Image.asset(
                     ImagesApp.calendarGreen,
                     width: DimensApp.bottomIconSize,
@@ -80,18 +81,18 @@ class MainScreenView extends AppView<MainScreenModel> {
                       width: DimensApp.bottomIconSize,
                       height: DimensApp.bottomIconSize,
                       alignment: Alignment.center,
-                      color: ColorsApp.textBottomBar),
+                      color: ColorsApp.centerTimetableScreen),
                   title: Text(
                     "Timetable",
                     style: TextStyle(
-                      color: ColorsApp.textBottomBar,
+                      color: ColorsApp.centerTimetableScreen,
                       fontWeight: FontWeight.bold,
                       fontSize: DimensApp.textSizeSmall,
                       fontFamily: MainScreenModel.fontFamily,
                     ),
                   )),
               BubbleBottomBarItem(
-                  backgroundColor: ColorsApp.iconBottomBar,
+                  backgroundColor: ColorsApp.startHomeworkScreen,
                   icon: Image.asset(
                     ImagesApp.homeworkOrange,
                     width: DimensApp.bottomIconSize,
@@ -103,18 +104,18 @@ class MainScreenView extends AppView<MainScreenModel> {
                       width: DimensApp.bottomIconSize,
                       height: DimensApp.bottomIconSize,
                       alignment: Alignment.center,
-                      color: ColorsApp.textBottomBar),
+                      color: ColorsApp.centerHomeworkScreen),
                   title: Text(
                     "Homework",
                     style: TextStyle(
-                      color: ColorsApp.textBottomBar,
+                      color: ColorsApp.centerHomeworkScreen,
                       fontWeight: FontWeight.bold,
                       fontSize: DimensApp.textSizeSmall,
                       fontFamily: MainScreenModel.fontFamily,
                     ),
                   )),
               BubbleBottomBarItem(
-                  backgroundColor: ColorsApp.iconBottomBar,
+                  backgroundColor: ColorsApp.centerHomeScreen,
                   icon: Image.asset(
                     ImagesApp.profileGrey,
                     width: DimensApp.bottomIconSize,
@@ -126,11 +127,11 @@ class MainScreenView extends AppView<MainScreenModel> {
                       width: DimensApp.bottomIconSize,
                       height: DimensApp.bottomIconSize,
                       alignment: Alignment.center,
-                      color: ColorsApp.textBottomBar),
+                      color: ColorsApp.endHomeScreen),
                   title: Text(
                     "Profile",
                     style: TextStyle(
-                      color: ColorsApp.textBottomBar,
+                      color: ColorsApp.endHomeScreen,
                       fontWeight: FontWeight.bold,
                       fontSize: DimensApp.textSizeSmall,
                       fontFamily: MainScreenModel.fontFamily,
