@@ -51,7 +51,7 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
       width: double.maxFinite,
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Color(0xfffdd874), Color(0xfff7ce47)],
+          colors: [ColorsApp.startHomeworkScreen, ColorsApp.endHomeworkScreen],
           begin: Alignment.centerRight,
           end: Alignment.bottomLeft,
           stops: [0.11, 1.0],
@@ -82,7 +82,10 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           gradient: LinearGradient(
-            colors: [Color(0xfffdd874), Color(0xfff7ce47)],
+            colors: [
+              ColorsApp.startHomeworkScreen,
+              ColorsApp.endHomeworkScreen
+            ],
             begin: Alignment.bottomRight,
             end: Alignment.topLeft,
             stops: [0.0, 1.0],
