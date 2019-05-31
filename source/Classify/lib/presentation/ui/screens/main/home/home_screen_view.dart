@@ -3,14 +3,14 @@ import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/res/images.dart';
 import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
-import 'package:classify/presentation/ui/screens/profile/profile_screen_model.dart';
+import 'package:classify/presentation/ui/screens/main/home/home_screen_model.dart';
 import 'package:classify/presentation/ui/widgets/squircle_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class ProfileScreenView extends AppView<ProfileScreenModel> {
-  ProfileScreenView(ProfileScreenModel model) : super(model);
+class HomeScreenView extends AppView<HomeScreenModel> {
+  HomeScreenView(HomeScreenModel model) : super(model);
 
   @override
   Widget getView(BuildContext context) {
