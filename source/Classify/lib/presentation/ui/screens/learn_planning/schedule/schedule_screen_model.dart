@@ -15,6 +15,8 @@ class ScheduleScreenModel extends AppModel {
 
   LoadingStates scheduleLoadingState = LoadingStates.Loading;
 
+  NavigationBarStates navigationBarState = NavigationBarStates.Closed;
+
   int lessonsPerDay = 7;
   List<Subject> subjects = List();
 
@@ -22,6 +24,7 @@ class ScheduleScreenModel extends AppModel {
 
   Schedule selectedSchedule;
 
+  ScrollController mainScrollController = ScrollController();
   List<ScrollController> scrollControllersList = List();
 
   Map<String, GlobalKey> listOfKeys = Map();
