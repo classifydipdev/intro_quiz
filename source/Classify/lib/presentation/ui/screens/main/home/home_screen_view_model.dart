@@ -3,12 +3,12 @@ import 'package:classify/data/entities/schedule.dart';
 import 'package:classify/presentation/ui/screens/auth/auth_screen.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/schedule/schedule_item.dart';
-import 'package:classify/presentation/ui/screens/profile/profile_screen_model.dart';
-import 'package:classify/presentation/ui/screens/profile/profile_screen_view.dart';
+import 'package:classify/presentation/ui/screens/main/home/home_screen_model.dart';
+import 'package:classify/presentation/ui/screens/main/home/home_screen_view.dart';
 
-class ProfileScreenViewModel
-    extends AppViewModel<ProfileScreenModel, ProfileScreenView> {
-  ProfileScreenViewModel(ProfileScreenView view) : super(view);
+class HomeScreenViewModel
+    extends AppViewModel<HomeScreenModel, HomeScreenView> {
+  HomeScreenViewModel(HomeScreenView view) : super(view);
 
   @override
   init() async {
