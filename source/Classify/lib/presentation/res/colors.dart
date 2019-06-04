@@ -25,4 +25,5 @@ class ColorsApp {
   
   static const Color textCardOrange = Color(0xffff8600);
   static const Color textCardGreen = Color(0xff00ffbb);
+  static const Color textCardYellow = Color(0xffffd200);
 }

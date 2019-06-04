@@ -37,6 +37,15 @@ class ThemeApp {
     );
   }
 
+  static TextStyle get littleYellowTextStyle {
+    return TextStyle(
+      fontFamily: 'GoogleSans',
+      fontSize: DimensApp.textSizeLittle,
+      color: ColorsApp.textCardYellow,
+      fontWeight: FontWeight.w600,
+    );
+  }
+
   static TextStyle get littleGreenTextStyle {
     return TextStyle(
       fontFamily: 'GoogleSans',
