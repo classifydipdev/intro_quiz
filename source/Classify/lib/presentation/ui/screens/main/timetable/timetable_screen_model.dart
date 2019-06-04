@@ -6,7 +6,7 @@ import 'package:flutter_arhitecture_helper/presentation/ui/mvvm/utils/base_model
 class TimetableScreenModel extends AppModel {
   OnCallCommand onTap = OnCallCommand();
 
-  List<List<ScheduleItem>> scheduleDaysItems;
+  List<List<ScheduleItem>> scheduleDaysItems = List();
 
   double scheduleListHeight = 0;
   

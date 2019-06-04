@@ -143,7 +143,7 @@ class TimetableScreenView extends AppView<TimetableScreenModel> {
                     ),
                   ],
                 ),
-                model.scheduleDaysItems != null
+                model.scheduleDaysItems.length > 0
                     ? Container(
                         height: model.scheduleListHeight,
                         child: TabBarView(
@@ -157,7 +157,16 @@ class TimetableScreenView extends AppView<TimetableScreenModel> {
                           ],
                         ),
                       )
-                    : Container(),
+                    : Container(
+                        height: DimensApp.sizeMiddle,
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              ColorsApp.textCardGreen,
+                            ),
+                          ),
+                        ),
+                      ),
               ],
             ),
           ),
@@ -167,35 +176,44 @@ class TimetableScreenView extends AppView<TimetableScreenModel> {
   }
 
   Widget getDaySchedule(int day) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      child: ListView.builder(
-        padding: EdgeInsets.all(0),
-        shrinkWrap: true,
-        itemCount: model.scheduleDaysItems[day].length,
-        physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            padding: EdgeInsets.symmetric(vertical: DimensApp.paddingSmall),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  model.scheduleDaysItems[day][index].name,
-                  textAlign: TextAlign.left,
-                  style: ThemeApp.middleGreyBoldTextStyle,
-                ),
-                Text(
-                  model.scheduleDaysItems[day][index].position,
-                  textAlign: TextAlign.right,
-                  style: ThemeApp.littleGreenTextStyle,
-                )
-              ],
+    return model.scheduleDaysItems[day].length > 0
+        ? Container(
+            width: MediaQuery.of(context).size.width,
+            child: ListView.builder(
+              padding: EdgeInsets.all(0),
+              shrinkWrap: true,
+              itemCount: model.scheduleDaysItems[day].length,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  padding:
+                      EdgeInsets.symmetric(vertical: DimensApp.paddingSmall),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        model.scheduleDaysItems[day][index].name,
+                        textAlign: TextAlign.left,
+                        style: ThemeApp.middleGreyBoldTextStyle,
+                      ),
+                      Text(
+                        model.scheduleDaysItems[day][index].position,
+                        textAlign: TextAlign.right,
+                        style: ThemeApp.littleGreenTextStyle,
+                      )
+                    ],
+                  ),
+                );
+              },
+            ),
+          )
+        : Center(
+            child: Text(
+              "No subjects today",
+              textAlign: TextAlign.left,
+              style: ThemeApp.middleGreyBoldTextStyle,
             ),
           );
-        },
-      ),
-    );
   }
 
   Widget _todayEvents() {
