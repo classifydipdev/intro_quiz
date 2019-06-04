@@ -1,7 +1,10 @@
 import 'package:classify/presentation/res/colors.dart';
 import 'package:classify/presentation/res/dimens.dart';
+import 'package:classify/presentation/res/images.dart';
+import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/main/homework/homework_screen_model.dart';
+import 'package:classify/presentation/utils/views_states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -26,12 +29,19 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
                   children: <Widget>[
                     _pageHeader(),
                     Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          _topBlock(),
-                        ],
+                      child: DefaultTabController(
+                        initialIndex: 1,
+                        length: 3,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            _topBlock(),
+                            model.tabBarState == HomeworkTabBarState.Opened
+                                ? _tabBar()
+                                : Container(),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -66,7 +76,63 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
 
   Widget _topBlock() {
     return Container(
-        margin: EdgeInsets.only(top: DimensApp.paddingBig), child: Container());
+      margin: EdgeInsets.only(
+          top: DimensApp.paddingBigExtra, bottom: DimensApp.paddingSmallExtra),
+      child: CupertinoButton(
+        onPressed: () {
+          if (model.tabBarState == HomeworkTabBarState.Closed) {
+            model.tabBarState = HomeworkTabBarState.Opened;
+          } else {
+            model.tabBarState = HomeworkTabBarState.Closed;
+          }
+          updateUI();
+        },
+        padding: EdgeInsets.all(0),
+        minSize: 20,
+        child: Container(
+          child: Image.asset(
+            ImagesApp.homeworkOrange,
+            width: DimensApp.iconSizeMiddle,
+            height: DimensApp.iconSizeMiddle,
+            alignment: Alignment.center,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _tabBar() {
+    return Container(
+      margin: EdgeInsets.only(top: DimensApp.paddingMiddleExtra),
+      width: 260,
+      child: TabBar(
+        indicator: UnderlineTabIndicator(
+          borderSide: BorderSide(width: 2, color: Colors.white),
+          insets: EdgeInsets.symmetric(horizontal: 52),
+        ),
+        tabs: <Widget>[
+          Container(
+            padding: EdgeInsets.only(bottom: DimensApp.paddingMicro),
+            child: Text("Date",
+              style: ThemeApp.smallWhiteTextStyle,
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(bottom: DimensApp.paddingMicro),
+            child: Text("Subject",
+              style: ThemeApp.smallWhiteTextStyle,
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(bottom: DimensApp.paddingMicro),
+            child: Text("Test",
+              style: ThemeApp.smallWhiteTextStyle,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _floatingActionButton() {
