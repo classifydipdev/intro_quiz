@@ -143,37 +143,57 @@ class TimetableScreenView extends AppView<TimetableScreenModel> {
                     ),
                   ],
                 ),
-                ListView.builder(
-                  padding: EdgeInsets.all(0),
-                  shrinkWrap: true,
-                  itemCount: 1,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      padding: EdgeInsets.symmetric(
-                          vertical: DimensApp.paddingSmall),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            "Spanish",
-                            textAlign: TextAlign.left,
-                            style: ThemeApp.middleGreyBoldTextStyle,
-                          ),
-                          Text(
-                            "1",
-                            textAlign: TextAlign.right,
-                            style: ThemeApp.littleGreenTextStyle,
-                          )
-                        ],
-                      ),
-                    );
-                  },
-                ),
+                model.scheduleDaysItems != null
+                    ? Container(
+                        height: model.scheduleListHeight,
+                        child: TabBarView(
+                          physics: NeverScrollableScrollPhysics(),
+                          children: <Widget>[
+                            getDaySchedule(0),
+                            getDaySchedule(1),
+                            getDaySchedule(2),
+                            getDaySchedule(3),
+                            getDaySchedule(4),
+                          ],
+                        ),
+                      )
+                    : Container(),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget getDaySchedule(int day) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      child: ListView.builder(
+        padding: EdgeInsets.all(0),
+        shrinkWrap: true,
+        itemCount: model.scheduleDaysItems[day].length,
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            padding: EdgeInsets.symmetric(vertical: DimensApp.paddingSmall),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  model.scheduleDaysItems[day][index].name,
+                  textAlign: TextAlign.left,
+                  style: ThemeApp.middleGreyBoldTextStyle,
+                ),
+                Text(
+                  model.scheduleDaysItems[day][index].position,
+                  textAlign: TextAlign.right,
+                  style: ThemeApp.littleGreenTextStyle,
+                )
+              ],
+            ),
+          );
+        },
       ),
     );
   }
