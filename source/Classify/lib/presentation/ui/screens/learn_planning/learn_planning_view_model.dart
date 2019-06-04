@@ -46,6 +46,8 @@ class LearnPlanningScreenViewModel
         var schedules = model.scheduleScreen.model.schedules;
         await model.learningManager
             .createCompleateSchedules(model.userManager.user.id, schedules);
+
+        model.userManager.user.prefference.firstStart = false;
         view.navigateTo(view.context, MainScreen(), true);
         break;
       default:

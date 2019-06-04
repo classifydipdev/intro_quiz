@@ -356,6 +356,7 @@ class HomeScreenView extends AppView<HomeScreenModel> {
                       padding: EdgeInsets.only(top: DimensApp.paddingSmall),
                       child: model.scheduleItems.length > 0
                           ? ListView.builder(
+                            padding: EdgeInsets.all(0),
                               shrinkWrap: true,
                               itemCount: model.scheduleItems.length,
                               physics: const NeverScrollableScrollPhysics(),
