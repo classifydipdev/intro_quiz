@@ -11,4 +11,8 @@ class HomeworkScreenModel extends AppModel {
   double get screenHeight {
     return MediaQuery.of(view.context).size.height;
   }
+
+  double get screenWidth {
+    return MediaQuery.of(view.context).size.width;
+  }
 }

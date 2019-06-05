@@ -8,6 +8,7 @@ import 'package:classify/presentation/utils/views_states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class HomeworkScreenView extends AppView<HomeworkScreenModel> {
   HomeworkScreenView(HomeworkScreenModel model) : super(model);
@@ -30,41 +31,42 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
                 child: Stack(
                   children: <Widget>[
                     Container(
-                      height: model.screenHeight / 4 - 30,
-                      width: double.maxFinite,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            ColorsApp.startHomeworkScreen,
-                            ColorsApp.endHomeworkScreen
-                          ],
-                          begin: Alignment.centerRight,
-                          end: Alignment.bottomLeft,
-                          stops: [0.11, 1.0],
-                          tileMode: TileMode.clamp,
-                        ),
-                      ),
-                    ),
-                    Container(
                       height: model.screenHeight,
-                      child: Column(children: <Widget>[
-                        Container(
-                          child: _pageHeader(),
-                        ),
-                        Container(
-                          height: model.screenHeight -
-                              (model.screenHeight / 4 -
-                                  85 +
-                                  (model.tabBarState ==
-                                          HomeworkTabBarState.Opened
-                                      ? 15
-                                      : 0)),
-                          child: ListView(
-                            padding: EdgeInsets.all(0),
-                            children: _homeworkList(),
+                      child: DefaultTabController(
+                        initialIndex: 1,
+                        length: 3,
+                        child: Column(children: <Widget>[
+                          Container(
+                            child: _pageHeader(),
                           ),
-                        ),
-                      ]),
+                          Container(
+                            height: model.screenHeight -
+                                (model.screenHeight / 4 -
+                                    85 +
+                                    (model.tabBarState ==
+                                            HomeworkTabBarState.Opened
+                                        ? 15
+                                        : 0)),
+                            child: TabBarView(
+                              physics: NeverScrollableScrollPhysics(),
+                              children: <Widget>[
+                                ListView(
+                                  padding: EdgeInsets.all(0),
+                                  children: _homeworkList(),
+                                ),
+                                ListView(
+                                  padding: EdgeInsets.all(0),
+                                  children: _homeworkList(),
+                                ),
+                                ListView(
+                                  padding: EdgeInsets.all(0),
+                                  children: _homeworkList(),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ]),
+                      ),
                     ),
                   ],
                 ),
@@ -95,19 +97,15 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
       child: Column(
         children: <Widget>[
           Center(
-            child: DefaultTabController(
-              initialIndex: 1,
-              length: 3,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  _topBlock(),
-                  model.tabBarState == HomeworkTabBarState.Opened
-                      ? _tabBar()
-                      : Container(),
-                ],
-              ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                _topBlock(),
+                model.tabBarState == HomeworkTabBarState.Opened
+                    ? _tabBar()
+                    : Container(),
+              ],
             ),
           ),
         ],
@@ -183,6 +181,13 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
     return [
       _homeworkTopItem(),
       _homeworkItem(),
+      _homeworkItem(),
+      _homeworkItem(),
+      _homeworkItem(),
+      _homeworkItem(),
+      _homeworkItem(),
+      _homeworkItem(),
+      _homeworkItem(),
     ];
   }
 
@@ -216,7 +221,7 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
 
   Widget _homeworkItem() {
     return Container(
-      width: double.maxFinite,
+      width: model.screenWidth - 30,
       margin: EdgeInsets.only(
           top: DimensApp.marginMiddleExtra,
           right: DimensApp.paddingSmallExtra,
@@ -224,7 +229,7 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
       child: Container(
         decoration: BoxDecoration(
           color: ColorsApp.cardBackground,
-          borderRadius: BorderRadius.circular(DimensApp.borderRadiusMiddle),
+          borderRadius: BorderRadius.circular(25),
           boxShadow: [
             BoxShadow(
               color: Colors.black12,
@@ -232,8 +237,74 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
             ),
           ],
         ),
-        child: Container(
-          height: 100,
+        child: Slidable(
+          actionPane: SlidableBehindActionPane(),
+          actionExtentRatio: 0.2,
+          child: Container(
+            decoration: BoxDecoration(
+              color: ColorsApp.cardBackground,
+              borderRadius: BorderRadius.circular(25),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 20.0,
+                ),
+              ],
+            ),
+            child: Container(
+              margin: EdgeInsets.symmetric(
+                  vertical: DimensApp.paddingMiddleExtra,
+                  horizontal: DimensApp.paddingMiddle),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Spanish",
+                        textAlign: TextAlign.left,
+                        style: ThemeApp.middleGreyBoldTextStyle,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: DimensApp.paddingSmall),
+                        child: Text(
+                          "Read chapter 1 of palabra book",
+                          textAlign: TextAlign.left,
+                          style: ThemeApp.picoGreyTextStyle,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    "Tomorrow".toUpperCase(),
+                    textAlign: TextAlign.right,
+                    style: ThemeApp.littleOrangeTextStyle,
+                  )
+                ],
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            IconSlideAction(
+              color: Colors.transparent,
+              foregroundColor: Colors.red,
+              icon: Icons.delete,
+              onTap: () {},
+            ),
+          ],
+          secondaryActions: <Widget>[
+            IconSlideAction(
+              color: Colors.transparent,
+              iconWidget: Icon(
+                Icons.done,
+                size: DimensApp.iconSizeNormal,
+                color: Colors.blueAccent,
+              ),
+              onTap: () {},
+            ),
+          ],
         ),
       ),
     );
