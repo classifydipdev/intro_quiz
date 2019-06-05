@@ -12,6 +12,8 @@ import 'package:flutter/widgets.dart';
 class HomeworkScreenView extends AppView<HomeworkScreenModel> {
   HomeworkScreenView(HomeworkScreenModel model) : super(model);
 
+  ScrollController scrollController = ScrollController(initialScrollOffset: 0);
+
   @override
   Widget getView(BuildContext context) {
     return Scaffold(
@@ -27,22 +29,42 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
                 scrollDirection: Axis.vertical,
                 child: Stack(
                   children: <Widget>[
-                    _pageHeader(),
-                    Center(
-                      child: DefaultTabController(
-                        initialIndex: 1,
-                        length: 3,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            _topBlock(),
-                            model.tabBarState == HomeworkTabBarState.Opened
-                                ? _tabBar()
-                                : Container(),
+                    Container(
+                      height: model.screenHeight / 4 - 30,
+                      width: double.maxFinite,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            ColorsApp.startHomeworkScreen,
+                            ColorsApp.endHomeworkScreen
                           ],
+                          begin: Alignment.centerRight,
+                          end: Alignment.bottomLeft,
+                          stops: [0.11, 1.0],
+                          tileMode: TileMode.clamp,
                         ),
                       ),
+                    ),
+                    Container(
+                      height: model.screenHeight,
+                      child: Column(children: <Widget>[
+                        Container(
+                          child: _pageHeader(),
+                        ),
+                        Container(
+                          height: model.screenHeight -
+                              (model.screenHeight / 4 -
+                                  85 +
+                                  (model.tabBarState ==
+                                          HomeworkTabBarState.Opened
+                                      ? 15
+                                      : 0)),
+                          child: ListView(
+                            padding: EdgeInsets.all(0),
+                            children: _homeworkList(),
+                          ),
+                        ),
+                      ]),
                     ),
                   ],
                 ),
@@ -57,7 +79,9 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
 
   Widget _pageHeader() {
     return Container(
-      height: model.screenHeight / 4,
+      height: model.screenHeight / 4 -
+          85 +
+          (model.tabBarState == HomeworkTabBarState.Opened ? 40 : 0),
       width: double.maxFinite,
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -67,9 +91,26 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
           stops: [0.11, 1.0],
           tileMode: TileMode.clamp,
         ),
-        borderRadius: BorderRadius.vertical(
-          bottom: Radius.elliptical(300, 20),
-        ),
+      ),
+      child: Column(
+        children: <Widget>[
+          Center(
+            child: DefaultTabController(
+              initialIndex: 1,
+              length: 3,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  _topBlock(),
+                  model.tabBarState == HomeworkTabBarState.Opened
+                      ? _tabBar()
+                      : Container(),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -104,7 +145,7 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
 
   Widget _tabBar() {
     return Container(
-      margin: EdgeInsets.only(top: DimensApp.paddingMiddleExtra),
+      margin: EdgeInsets.only(top: DimensApp.paddingSmallExtra),
       width: 260,
       child: TabBar(
         indicator: UnderlineTabIndicator(
@@ -114,23 +155,86 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
         tabs: <Widget>[
           Container(
             padding: EdgeInsets.only(bottom: DimensApp.paddingMicro),
-            child: Text("Date",
+            child: Text(
+              "Date",
               style: ThemeApp.smallWhiteTextStyle,
             ),
           ),
           Container(
             padding: EdgeInsets.only(bottom: DimensApp.paddingMicro),
-            child: Text("Subject",
+            child: Text(
+              "Subject",
               style: ThemeApp.smallWhiteTextStyle,
             ),
           ),
           Container(
             padding: EdgeInsets.only(bottom: DimensApp.paddingMicro),
-            child: Text("Test",
+            child: Text(
+              "Test",
               style: ThemeApp.smallWhiteTextStyle,
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  List<Widget> _homeworkList() {
+    return [
+      _homeworkTopItem(),
+      _homeworkItem(),
+    ];
+  }
+
+  Widget _homeworkTopItem() {
+    return Stack(
+      children: <Widget>[
+        Container(
+          height:
+              75.0 - (model.tabBarState == HomeworkTabBarState.Opened ? 40 : 0),
+          width: double.maxFinite,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                ColorsApp.startHomeworkScreen,
+                ColorsApp.endHomeworkScreen
+              ],
+              begin: Alignment.centerRight,
+              end: Alignment.bottomLeft,
+              stops: [0.11, 1.0],
+              tileMode: TileMode.clamp,
+            ),
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.elliptical(300, 20),
+            ),
+          ),
+        ),
+        _homeworkItem(),
+      ],
+    );
+  }
+
+  Widget _homeworkItem() {
+    return Container(
+      width: double.maxFinite,
+      margin: EdgeInsets.only(
+          top: DimensApp.marginMiddleExtra,
+          right: DimensApp.paddingSmallExtra,
+          left: DimensApp.paddingSmallExtra),
+      child: Container(
+        decoration: BoxDecoration(
+          color: ColorsApp.cardBackground,
+          borderRadius: BorderRadius.circular(DimensApp.borderRadiusMiddle),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 20.0,
+            ),
+          ],
+        ),
+        child: Container(
+          height: 100,
+        ),
       ),
     );
   }
