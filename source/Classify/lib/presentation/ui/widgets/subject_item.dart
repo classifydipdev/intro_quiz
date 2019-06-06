@@ -47,3 +47,45 @@ Widget getSubjectButton(Subject subject, Function(bool) onTap,
     ),
   );
 }
+
+Widget getSmallSubjectButton(
+    Subject subject, Color mainColor, Function(bool) onTap,
+    {bool isSelected = false}) {
+  return Container(
+    margin: EdgeInsets.symmetric(vertical: DimensApp.paddingSmall),
+    height: 40,
+    child: InkWell(
+      onTap: () {
+        onTap(!isSelected);
+      },
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: DimensApp.paddingSmall),
+        decoration: BoxDecoration(
+          color: !isSelected ? mainColor : Colors.white,
+          border: Border.all(
+              color: isSelected ? mainColor : Colors.transparent, width: 2.0),
+          borderRadius:
+              BorderRadius.circular(DimensApp.borderRadiusMiddleExtra),
+        ),
+        child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: DimensApp.paddingMiddle),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Text(
+                  subject.name,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: isSelected ? mainColor : Colors.white,
+                    fontFamily: 'GoogleSans',
+                  ),
+                ),
+              ],
+            )),
+      ),
+    ),
+  );
+}
