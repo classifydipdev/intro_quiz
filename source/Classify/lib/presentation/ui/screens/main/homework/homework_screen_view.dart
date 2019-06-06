@@ -40,25 +40,26 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
                             child: _pageHeader(),
                           ),
                           Container(
-                            height: model.screenHeight -
-                                (model.screenHeight / 4 -
-                                    85 +
-                                    (model.tabBarState ==
+                            height: model.screenHeight / 4 * 3 -
+                                (model.tabBarState ==
                                             HomeworkTabBarState.Opened
-                                        ? 15
-                                        : 0)),
+                                        ? 40
+                                        : 0),
                             child: TabBarView(
                               physics: NeverScrollableScrollPhysics(),
                               children: <Widget>[
                                 ListView(
+                                  physics: ClampingScrollPhysics(),
                                   padding: EdgeInsets.all(0),
                                   children: _homeworkList(),
                                 ),
                                 ListView(
+                                  physics: ClampingScrollPhysics(),
                                   padding: EdgeInsets.all(0),
                                   children: _homeworkList(),
                                 ),
                                 ListView(
+                                  physics: ClampingScrollPhysics(),
                                   padding: EdgeInsets.all(0),
                                   children: _homeworkList(),
                                 ),
@@ -82,7 +83,7 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
   Widget _pageHeader() {
     return Container(
       height: model.screenHeight / 4 -
-          85 +
+          75 +
           (model.tabBarState == HomeworkTabBarState.Opened ? 40 : 0),
       width: double.maxFinite,
       decoration: BoxDecoration(
@@ -127,14 +128,17 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
           updateUI();
         },
         padding: EdgeInsets.all(0),
-        minSize: 20,
+        minSize: 30,
         child: Container(
-          child: Image.asset(
+          child: Container(
+            width: 60,
+            child: Image.asset(
             ImagesApp.homeworkOrange,
             width: DimensApp.iconSizeMiddle,
             height: DimensApp.iconSizeMiddle,
             alignment: Alignment.center,
             color: Colors.white,
+          ),
           ),
         ),
       ),
@@ -187,7 +191,7 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
       _homeworkItem(),
       _homeworkItem(),
       _homeworkItem(),
-      _homeworkItem(),
+      _homeworkItem(isLast: true),
     ];
   }
 
@@ -219,13 +223,14 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
     );
   }
 
-  Widget _homeworkItem() {
+  Widget _homeworkItem({bool isLast = false}) {
     return Container(
-      width: model.screenWidth - 30,
+      width: model.screenWidth - DimensApp.paddingNormal,
       margin: EdgeInsets.only(
-          top: DimensApp.marginMiddleExtra,
+          top: DimensApp.marginMiddle,
           right: DimensApp.paddingSmallExtra,
-          left: DimensApp.paddingSmallExtra),
+          left: DimensApp.paddingSmallExtra,
+          bottom: isLast?DimensApp.paddingLargeExtra :DimensApp.paddingMicro),
       child: Container(
         decoration: BoxDecoration(
           color: ColorsApp.cardBackground,
