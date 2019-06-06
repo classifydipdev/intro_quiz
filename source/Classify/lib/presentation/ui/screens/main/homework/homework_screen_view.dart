@@ -41,10 +41,9 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
                           ),
                           Container(
                             height: model.screenHeight / 4 * 3 -
-                                (model.tabBarState ==
-                                            HomeworkTabBarState.Opened
-                                        ? 40
-                                        : 0),
+                                (model.tabBarState == HomeworkTabBarState.Opened
+                                    ? DimensApp.sizeMiddle
+                                    : 0),
                             child: TabBarView(
                               physics: NeverScrollableScrollPhysics(),
                               children: <Widget>[
@@ -84,7 +83,7 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
     return Container(
       height: model.screenHeight / 4 -
           75 +
-          (model.tabBarState == HomeworkTabBarState.Opened ? 40 : 0),
+          (model.tabBarState == HomeworkTabBarState.Opened ? DimensApp.sizeMiddle : 0),
       width: double.maxFinite,
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -133,12 +132,12 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
           child: Container(
             width: 60,
             child: Image.asset(
-            ImagesApp.homeworkOrange,
-            width: DimensApp.iconSizeMiddle,
-            height: DimensApp.iconSizeMiddle,
-            alignment: Alignment.center,
-            color: Colors.white,
-          ),
+              ImagesApp.homeworkOrange,
+              width: DimensApp.iconSizeMiddle,
+              height: DimensApp.iconSizeMiddle,
+              alignment: Alignment.center,
+              color: Colors.white,
+            ),
           ),
         ),
       ),
@@ -200,7 +199,7 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
       children: <Widget>[
         Container(
           height:
-              75.0 - (model.tabBarState == HomeworkTabBarState.Opened ? 40 : 0),
+              75.0 - (model.tabBarState == HomeworkTabBarState.Opened ? DimensApp.sizeMiddle : 0),
           width: double.maxFinite,
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -230,7 +229,8 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
           top: DimensApp.marginMiddle,
           right: DimensApp.paddingSmallExtra,
           left: DimensApp.paddingSmallExtra,
-          bottom: isLast?DimensApp.paddingLargeExtra :DimensApp.paddingMicro),
+          bottom:
+              isLast ? DimensApp.paddingLargeExtra : DimensApp.paddingMicro),
       child: Container(
         decoration: BoxDecoration(
           color: ColorsApp.cardBackground,
