@@ -5,6 +5,7 @@ import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/main/homework/homework_screen_model.dart';
 import 'package:classify/presentation/ui/widgets/homework_add_dialog/homework_add_dialog_screen.dart';
+import 'package:classify/presentation/ui/widgets/homework_add_dialog/modal_bottom_sheet_app.dart';
 import 'package:classify/presentation/utils/views_states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -348,7 +349,7 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
   }
 
   void showAddHomeworkDialog() {
-    showModalBottomSheet(
+    showModalBottomSheetApp(
       context: context,
       builder: (BuildContext buildContext) {
         return HomeworkAddDialogScreen();

@@ -11,7 +11,8 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
   @override
   Widget getView(BuildContext context) {
     return Container(
-      height: 500,
+      // margin: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      height: 400,
       width: double.maxFinite,
       color: Colors.white,
       child: Stack(
@@ -52,11 +53,19 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  Text(
-                    "Add new homework...",
-                    textAlign: TextAlign.left,
-                    style: ThemeApp.middleGreyTextStyle,
+                  TextField(
+                    decoration: InputDecoration(
+                      hintText: "Add new homework...",
+                      hintStyle: ThemeApp.middleGreyTextStyle,
+                      contentPadding: EdgeInsets.all(0),
+                      border: InputBorder.none,
+                    ),
                   ),
+                  // Text(
+                  //   "Add new homework...",
+                  //   textAlign: TextAlign.left,
+                  //   style: ThemeApp.middleGreyTextStyle,
+                  // ),
                 ],
               ),
             ),
