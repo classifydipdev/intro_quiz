@@ -4,6 +4,7 @@ import 'package:classify/presentation/res/images.dart';
 import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/main/homework/homework_screen_model.dart';
+import 'package:classify/presentation/ui/widgets/homework_add_dialog/homework_add_dialog_screen.dart';
 import 'package:classify/presentation/utils/views_states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -83,7 +84,9 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
     return Container(
       height: model.screenHeight / 4 -
           75 +
-          (model.tabBarState == HomeworkTabBarState.Opened ? DimensApp.sizeMiddle : 0),
+          (model.tabBarState == HomeworkTabBarState.Opened
+              ? DimensApp.sizeMiddle
+              : 0),
       width: double.maxFinite,
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -198,8 +201,10 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
     return Stack(
       children: <Widget>[
         Container(
-          height:
-              75.0 - (model.tabBarState == HomeworkTabBarState.Opened ? DimensApp.sizeMiddle : 0),
+          height: 75.0 -
+              (model.tabBarState == HomeworkTabBarState.Opened
+                  ? DimensApp.sizeMiddle
+                  : 0),
           width: double.maxFinite,
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -318,7 +323,7 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
   Widget _floatingActionButton() {
     return FloatingActionButton(
       onPressed: () {
-        model.onTap.onCall();
+        showAddHomeworkDialog();
       },
       elevation: 0,
       child: Container(
@@ -339,6 +344,15 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
           ),
         ),
       ),
+    );
+  }
+
+  void showAddHomeworkDialog() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext buildContext) {
+        return HomeworkAddDialogScreen();
+      },
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:classify/presentation/res/colors.dart';
 import 'package:classify/presentation/res/dimens.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ThemeApp {
@@ -87,6 +88,15 @@ class ThemeApp {
       fontSize: DimensApp.textSizeMiddle,
       color: Colors.black54,
       fontWeight: FontWeight.w600,
+    );
+  }
+
+  static TextStyle get middleGreyTextStyle {
+    return TextStyle(
+      fontFamily: 'GoogleSans',
+      fontSize: DimensApp.textSizeMiddle,
+      color: Colors.black26,
+      fontWeight: FontWeight.w500,
     );
   }
 
