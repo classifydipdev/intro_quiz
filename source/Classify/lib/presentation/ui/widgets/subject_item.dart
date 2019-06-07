@@ -49,11 +49,10 @@ Widget getSubjectButton(Subject subject, Function(bool) onTap,
 }
 
 Widget getSmallSubjectButton(
-    Subject subject, Color mainColor, Function(bool) onTap,
-    {bool isSelected = false}) {
+    Subject subject, Color mainColor, bool isSelected, Function(bool) onTap) {
   return Container(
     margin: EdgeInsets.symmetric(vertical: DimensApp.paddingSmall),
-    height: 40,
+    height: 35,
     child: InkWell(
       onTap: () {
         onTap(!isSelected);
@@ -61,7 +60,7 @@ Widget getSmallSubjectButton(
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: DimensApp.paddingSmall),
+        margin: EdgeInsets.symmetric(horizontal: DimensApp.paddingMicro),
         decoration: BoxDecoration(
           color: !isSelected ? mainColor : Colors.white,
           border: Border.all(

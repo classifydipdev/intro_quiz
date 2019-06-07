@@ -5,8 +5,10 @@ import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/widgets/homework_add_dialog/homework_add_dialog_model.dart';
 import 'package:classify/presentation/ui/widgets/subject_item.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
   HomeworkAddDialogView(HomeworkAddDialogModel model) : super(model);
@@ -15,13 +17,13 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
   Widget getView(BuildContext context) {
     List<Subject> subjectsList = [
       Subject("id", "Geography", null, null),
-      Subject("id", "English", null, null),
-      Subject("id", "Latin", null, null),
-      Subject("id", "Physics", null, null),
-      Subject("id", "Computer Science", null, null),
-      Subject("id", "History", null, null),
-      Subject("id", "DT", null, null),
-      Subject("id", "Math", null, null),
+      Subject("id1", "English", null, null),
+      Subject("id2", "Latin", null, null),
+      Subject("id3", "Physics", null, null),
+      Subject("id4", "Computer Science", null, null),
+      Subject("id5", "History", null, null),
+      Subject("id6", "DT", null, null),
+      Subject("id7", "Math", null, null),
     ];
 
     return Container(
@@ -60,18 +62,17 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
                     scrollDirection: Axis.horizontal,
                     child: generateSubjectsGrid(subjectsList),
                   ),
-                )
+                ),
               ],
             ),
           ),
           Positioned(
             bottom: 0,
             child: Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: DimensApp.paddingNormal,
-                  vertical: DimensApp.paddingMiddle),
+              padding: EdgeInsets.fromLTRB(
+                  DimensApp.paddingNormal, DimensApp.paddingMiddle, 0, 0),
               width: MediaQuery.of(context).size.width,
-              height: 150,
+              height: 160,
               decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: [
@@ -96,6 +97,88 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
                       border: InputBorder.none,
                     ),
                   ),
+                  Container(
+                    height: 35,
+                    width: MediaQuery.of(context).size.width,
+                    margin:
+                        EdgeInsets.symmetric(vertical: DimensApp.paddingMiddle),
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: <Widget>[
+                        homeworkParametersItem("14 June", () {}),
+                        model.selectedSubject != null
+                            ? homeworkParametersItem(model.selectedSubject.name,
+                                () {
+                                model.selectedSubject = null;
+                                updateUI();
+                              })
+                            : Container(),
+                        homeworkParametersItem("13 June, 19:40", () {},
+                            icon: FontAwesomeIcons.solidBell),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    children: <Widget>[
+                      CupertinoButton(
+                        child: Icon(FontAwesomeIcons.solidStar,
+                            size: 20, color: Colors.grey[350]),
+                        padding: EdgeInsets.only(
+                            right: DimensApp.paddingMiddle,
+                            left: DimensApp.paddingMicro),
+                        minSize: 20,
+                        onPressed: () {},
+                      ),
+                      CupertinoButton(
+                        child: Icon(FontAwesomeIcons.calendarCheck,
+                            size: 20, color: ColorsApp.centerHomeworkScreen),
+                        padding:
+                            EdgeInsets.only(right: DimensApp.paddingMiddle),
+                        minSize: 20,
+                        onPressed: () {},
+                      ),
+                      CupertinoButton(
+                        child: Icon(FontAwesomeIcons.archive,
+                            size: 20, color: ColorsApp.centerHomeworkScreen),
+                        padding:
+                            EdgeInsets.only(right: DimensApp.paddingMiddle),
+                        minSize: 20,
+                        onPressed: () {},
+                      ),
+                      CupertinoButton(
+                        child: Icon(FontAwesomeIcons.solidBell,
+                            size: 20, color: ColorsApp.centerHomeworkScreen),
+                        padding:
+                            EdgeInsets.only(right: DimensApp.paddingMiddle),
+                        minSize: 20,
+                        onPressed: () {},
+                      ),
+                      CupertinoButton(
+                        child: Icon(FontAwesomeIcons.list,
+                            size: 20, color: Colors.grey[350]),
+                        padding:
+                            EdgeInsets.only(right: DimensApp.paddingMiddle),
+                        minSize: 20,
+                        onPressed: () {},
+                      ),
+                      Expanded(
+                        child: Container(),
+                      ),
+                      CupertinoButton(
+                        child: Icon(
+                          Icons.check_circle,
+                          size: 25,
+                          color: Colors.blue[600],
+                        ),
+                        padding:
+                            EdgeInsets.only(right: DimensApp.paddingMiddle),
+                        minSize: 20,
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -116,8 +199,12 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
     for (int i = 0; i < subjects.length; i++) {
       Subject subject = subjects[i];
       var subjectWidget = getSmallSubjectButton(
-          subject, ColorsApp.centerHomeworkScreen, (bool isSelected) {
-        // model.onSubjectSelect.onCallWithValue(subject);
+          subject,
+          ColorsApp.centerHomeworkScreen,
+          (model.selectedSubject != null &&
+              model.selectedSubject.id == subject.id), (bool isSelected) {
+        model.selectedSubject = subject;
+        updateUI();
       });
       subjectsLists[(i / subjects.length * 4).toInt()].add(subjectWidget);
     }
@@ -142,6 +229,60 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
           children: subjectsLists[3],
         ),
       ],
+    );
+  }
+
+  Widget homeworkParametersItem(String name, VoidCallback onCancel,
+      {IconData icon}) {
+    return Container(
+      margin: EdgeInsets.only(right: DimensApp.paddingSmallExtra),
+      height: 35,
+      decoration: BoxDecoration(
+        color: Colors.blue[600],
+        borderRadius: BorderRadius.circular(DimensApp.borderRadiusMiddleExtra),
+      ),
+      child: Padding(
+        padding: EdgeInsets.only(
+            left: DimensApp.paddingSmallExtra, right: DimensApp.paddingSmall),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            icon != null
+                ? Padding(
+                    padding: EdgeInsets.only(right: DimensApp.paddingMicro),
+                    child: Icon(
+                      icon,
+                      size: 15,
+                      color: Colors.white,
+                    ),
+                  )
+                : Container(),
+            Text(
+              name,
+              style: ThemeApp.smallWhiteThinkTextStyle,
+            ),
+            Container(
+              width: 15,
+              height: 15,
+              margin: EdgeInsets.only(left: DimensApp.paddingSmall),
+              child: RawMaterialButton(
+                onPressed: onCancel,
+                child: Icon(
+                  Icons.clear,
+                  color: Colors.white,
+                  size: 10.0,
+                ),
+                shape: CircleBorder(),
+                elevation: 0,
+                fillColor: Colors.black26,
+                padding: EdgeInsets.all(0),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

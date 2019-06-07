@@ -74,6 +74,14 @@ class ThemeApp {
     );
   }
 
+  static TextStyle get smallWhiteThinkTextStyle {
+    return TextStyle(
+      fontFamily: 'GoogleSans',
+      fontSize: 13,
+      color: Colors.white,
+    );
+  }
+
   static TextStyle get smallBlackTextStyle {
     return TextStyle(
       fontFamily: 'GoogleSans',
