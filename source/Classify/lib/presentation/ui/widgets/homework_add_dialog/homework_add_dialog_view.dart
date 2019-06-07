@@ -97,88 +97,8 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
                       border: InputBorder.none,
                     ),
                   ),
-                  Container(
-                    height: 35,
-                    width: MediaQuery.of(context).size.width,
-                    margin:
-                        EdgeInsets.symmetric(vertical: DimensApp.paddingMiddle),
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: <Widget>[
-                        homeworkParametersItem("14 June", () {}),
-                        model.selectedSubject != null
-                            ? homeworkParametersItem(model.selectedSubject.name,
-                                () {
-                                model.selectedSubject = null;
-                                updateUI();
-                              })
-                            : Container(),
-                        homeworkParametersItem("13 June, 19:40", () {},
-                            icon: FontAwesomeIcons.solidBell),
-                      ],
-                    ),
-                  ),
-                  Row(
-                    children: <Widget>[
-                      CupertinoButton(
-                        child: Icon(FontAwesomeIcons.solidStar,
-                            size: 20, color: Colors.grey[350]),
-                        padding: EdgeInsets.only(
-                            right: DimensApp.paddingMiddle,
-                            left: DimensApp.paddingMicro),
-                        minSize: 20,
-                        onPressed: () {},
-                      ),
-                      CupertinoButton(
-                        child: Icon(FontAwesomeIcons.calendarCheck,
-                            size: 20, color: ColorsApp.centerHomeworkScreen),
-                        padding:
-                            EdgeInsets.only(right: DimensApp.paddingMiddle),
-                        minSize: 20,
-                        onPressed: () {},
-                      ),
-                      CupertinoButton(
-                        child: Icon(FontAwesomeIcons.archive,
-                            size: 20, color: ColorsApp.centerHomeworkScreen),
-                        padding:
-                            EdgeInsets.only(right: DimensApp.paddingMiddle),
-                        minSize: 20,
-                        onPressed: () {},
-                      ),
-                      CupertinoButton(
-                        child: Icon(FontAwesomeIcons.solidBell,
-                            size: 20, color: ColorsApp.centerHomeworkScreen),
-                        padding:
-                            EdgeInsets.only(right: DimensApp.paddingMiddle),
-                        minSize: 20,
-                        onPressed: () {},
-                      ),
-                      CupertinoButton(
-                        child: Icon(FontAwesomeIcons.list,
-                            size: 20, color: Colors.grey[350]),
-                        padding:
-                            EdgeInsets.only(right: DimensApp.paddingMiddle),
-                        minSize: 20,
-                        onPressed: () {},
-                      ),
-                      Expanded(
-                        child: Container(),
-                      ),
-                      CupertinoButton(
-                        child: Icon(
-                          Icons.check_circle,
-                          size: 25,
-                          color: Colors.blue[600],
-                        ),
-                        padding:
-                            EdgeInsets.only(right: DimensApp.paddingMiddle),
-                        minSize: 20,
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  ),
+                  _homeworkParamentersPanel(),
+                  _iconPanel(),
                 ],
               ),
             ),
@@ -232,7 +152,29 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
     );
   }
 
-  Widget homeworkParametersItem(String name, VoidCallback onCancel,
+  Widget _homeworkParamentersPanel() {
+    return Container(
+      height: 35,
+      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.symmetric(vertical: DimensApp.paddingMiddle),
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: <Widget>[
+          _homeworkParametersItem("14 June", () {}),
+          model.selectedSubject != null
+              ? _homeworkParametersItem(model.selectedSubject.name, () {
+                  model.selectedSubject = null;
+                  updateUI();
+                })
+              : Container(),
+          _homeworkParametersItem("13 June, 19:40", () {},
+              icon: FontAwesomeIcons.solidBell),
+        ],
+      ),
+    );
+  }
+
+  Widget _homeworkParametersItem(String name, VoidCallback onCancel,
       {IconData icon}) {
     return Container(
       margin: EdgeInsets.only(right: DimensApp.paddingSmallExtra),
@@ -283,6 +225,63 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _iconPanel() {
+    return Row(
+      children: <Widget>[
+        CupertinoButton(
+          child: Icon(FontAwesomeIcons.solidStar,
+              size: 20, color: Colors.grey[350]),
+          padding: EdgeInsets.only(
+              right: DimensApp.paddingMiddle, left: DimensApp.paddingMicro),
+          minSize: 20,
+          onPressed: () {},
+        ),
+        CupertinoButton(
+          child: Icon(FontAwesomeIcons.calendarCheck,
+              size: 20, color: ColorsApp.centerHomeworkScreen),
+          padding: EdgeInsets.only(right: DimensApp.paddingMiddle),
+          minSize: 20,
+          onPressed: () {},
+        ),
+        CupertinoButton(
+          child: Icon(FontAwesomeIcons.archive,
+              size: 20, color: ColorsApp.centerHomeworkScreen),
+          padding: EdgeInsets.only(right: DimensApp.paddingMiddle),
+          minSize: 20,
+          onPressed: () {},
+        ),
+        CupertinoButton(
+          child: Icon(FontAwesomeIcons.solidBell,
+              size: 20, color: ColorsApp.centerHomeworkScreen),
+          padding: EdgeInsets.only(right: DimensApp.paddingMiddle),
+          minSize: 20,
+          onPressed: () {},
+        ),
+        CupertinoButton(
+          child: Icon(FontAwesomeIcons.list, size: 20, color: Colors.grey[350]),
+          padding: EdgeInsets.only(right: DimensApp.paddingMiddle),
+          minSize: 20,
+          onPressed: () {},
+        ),
+        Expanded(
+          child: Container(),
+        ),
+        CupertinoButton(
+          child: Icon(
+            Icons.check_circle,
+            size: 25,
+            color: Colors.blue[600],
+          ),
+          padding: EdgeInsets.only(right: DimensApp.paddingMiddle),
+          minSize: 20,
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
     );
   }
 }
