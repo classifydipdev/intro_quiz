@@ -22,8 +22,7 @@ abstract class AppView<M extends AppModel> extends BaseView<M> {
   }
 
   double get screenAspectRatio {
-    return MediaQuery.of(context).size.width /
-        MediaQuery.of(context).size.height;
+    return model.screenWidth / model.screenHeight;
   }
 
   void showSnackBar(
