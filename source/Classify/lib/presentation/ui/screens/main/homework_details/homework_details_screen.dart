@@ -1,7 +1,7 @@
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_screen.dart';
-import 'package:classify/presentation/ui/screens/homework_details/homework_details_model.dart';
-import 'package:classify/presentation/ui/screens/homework_details/homework_details_view.dart';
-import 'package:classify/presentation/ui/screens/homework_details/homework_details_view_model.dart';
+import 'package:classify/presentation/ui/screens/main/homework_details/homework_details_model.dart';
+import 'package:classify/presentation/ui/screens/main/homework_details/homework_details_view.dart';
+import 'package:classify/presentation/ui/screens/main/homework_details/homework_details_view_model.dart';
 
 class HomeworkDetailsScreen extends AppScreen<HomeworkDetailsModel,
     HomeworkDetailsView, HomeworkDetailsViewModel> {

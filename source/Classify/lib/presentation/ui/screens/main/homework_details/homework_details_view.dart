@@ -1,5 +1,5 @@
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
-import 'package:classify/presentation/ui/screens/homework_details/homework_details_model.dart';
+import 'package:classify/presentation/ui/screens/main/homework_details/homework_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
