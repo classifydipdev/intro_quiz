@@ -149,10 +149,11 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel>
                     ),
                   ),
                   Expanded(
-                      child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: generateSubjectsGrid(model.subjects),
-                  ))
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: generateSubjectsGrid(model.subjects),
+                    ),
+                  )
                 ],
               ),
             ),
