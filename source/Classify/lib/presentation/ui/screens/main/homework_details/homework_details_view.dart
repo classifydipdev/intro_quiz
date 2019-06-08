@@ -7,6 +7,7 @@ import 'package:classify/presentation/ui/screens/main/homework_details/homework_
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeworkDetailsView extends AppView<HomeworkDetailsModel> {
@@ -34,8 +35,7 @@ class HomeworkDetailsView extends AppView<HomeworkDetailsModel> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           _topBlock(),
-                          _todaySubjects(),
-                          _todayEvents(),
+                          _infoBlock(),
                         ],
                       ),
                     ),
@@ -57,8 +57,8 @@ class HomeworkDetailsView extends AppView<HomeworkDetailsModel> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            ColorsApp.startHomeworkDetails,
-            ColorsApp.endHomeworkDetails
+            ColorsApp.startHomeworkScreen,
+            ColorsApp.endHomeworkScreen,
           ],
           begin: Alignment.centerRight,
           end: Alignment.bottomLeft,
@@ -77,18 +77,43 @@ class HomeworkDetailsView extends AppView<HomeworkDetailsModel> {
       margin: EdgeInsets.only(
           top: DimensApp.paddingBigExtra, bottom: DimensApp.paddingSmallExtra),
       child: Container(
-        child: Image.asset(
-          ImagesApp.calendarGreen,
-          width: DimensApp.iconSizeMiddle,
-          height: DimensApp.iconSizeMiddle,
-          alignment: Alignment.center,
-          color: Colors.white,
+        margin: EdgeInsets.symmetric(horizontal: DimensApp.paddingSmall),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              width: 50,
+              child: CupertinoButton(
+                padding: EdgeInsets.all(0),
+                minSize: DimensApp.sizeSmall,
+                onPressed: () {
+                  navigateBack(context);
+                },
+                child: SvgPicture.asset(
+                  ImagesApp.arrowLeft,
+                  width: DimensApp.iconSizeSmall,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            Expanded(
+              child: Text(
+                "Spanish".toUpperCase(),
+                style: ThemeApp.middleExtraWhiteBoldTextStyle,
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Container(
+              width: 50,
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Widget _todaySubjects() {
+  Widget _infoBlock() {
     return Container(
       width: double.maxFinite,
       margin: EdgeInsets.only(
@@ -106,229 +131,101 @@ class HomeworkDetailsView extends AppView<HomeworkDetailsModel> {
             ),
           ],
         ),
-        child: DefaultTabController(
-          length: 5,
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(
-              DimensApp.paddingMiddle,
-              DimensApp.paddingSmall,
-              DimensApp.paddingMiddle,
-              DimensApp.paddingMiddle,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                TabBar(
-                  labelPadding: EdgeInsets.all(0),
-                  labelStyle: ThemeApp.littleGreenTextStyle,
-                  unselectedLabelStyle: ThemeApp.littleGreenTextStyle,
-                  labelColor: ColorsApp.textCardGreen,
-                  unselectedLabelColor: CupertinoColors.lightBackgroundGray,
-                  indicator: BoxDecoration(),
-                  tabs: [
-                    Tab(
-                      text: "MONDAY",
+        child: Padding(
+          padding: EdgeInsets.all(DimensApp.paddingMiddle),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                      width: 205,
+                      child: Text(
+                        "Read chapter 1 of palabra book and then go to Farenheit 451 on that mofo",
+                        style: ThemeApp.smallGrayBoldTextStyle,
+                      ),
                     ),
-                    Tab(
-                      text: "TUESDAY",
-                    ),
-                    Tab(
-                      text: "WENSDAY",
-                    ),
-                    Tab(
-                      text: "THURSDAY",
-                    ),
-                    Tab(
-                      text: "FRIDAY",
+                    Text(
+                      "Details".toUpperCase(),
+                      textAlign: TextAlign.right,
+                      style: ThemeApp.littleOrangeTextStyle,
                     ),
                   ],
                 ),
-                model.scheduleDaysItems.length > 0
-                    ? Container(
-                        height: model.scheduleListHeight,
-                        child: TabBarView(
-                          physics: NeverScrollableScrollPhysics(),
-                          children: <Widget>[
-                            getDaySchedule(0),
-                            getDaySchedule(1),
-                            getDaySchedule(2),
-                            getDaySchedule(3),
-                            getDaySchedule(4),
-                          ],
-                        ),
-                      )
-                    : Container(
-                        height: DimensApp.sizeMiddle,
-                        child: Center(
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              ColorsApp.textCardGreen,
-                            ),
-                          ),
-                        ),
-                      ),
-              ],
-            ),
+              ),
+              _infoItem("Type", "Vocab"),
+              _infoItem("Due Date", "Every Friday, 12:45"),
+              _infoItem("Reminder", "Weekdays, 12:45",
+                  icon: FontAwesomeIcons.solidBell),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget getDaySchedule(int day) {
-    return model.scheduleDaysItems[day].length > 0
-        ? Container(
-            width: model.screenWidth,
-            child: ListView.builder(
-              padding: EdgeInsets.all(0),
-              shrinkWrap: true,
-              itemCount: model.scheduleDaysItems[day].length,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  padding:
-                      EdgeInsets.symmetric(vertical: DimensApp.paddingSmall),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        model.scheduleDaysItems[day][index].name,
-                        textAlign: TextAlign.left,
-                        style: ThemeApp.middleGreyBoldTextStyle,
-                      ),
-                      Text(
-                        model.scheduleDaysItems[day][index].position,
-                        textAlign: TextAlign.right,
-                        style: ThemeApp.littleGreenTextStyle,
-                      )
-                    ],
-                  ),
-                );
-              },
-            ),
-          )
-        : Center(
-            child: Text(
-              "No subjects today",
-              textAlign: TextAlign.left,
-              style: ThemeApp.middleGreyBoldTextStyle,
-            ),
-          );
+  Widget _infoItem(String title, String text, {IconData icon}) {
+    return Container(
+      margin: EdgeInsets.only(
+          top: DimensApp.paddingNormal, bottom: DimensApp.paddingSmall),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Container(
+            child: _textBlock(text, icon: icon),
+          ),
+          Text(
+            title.toUpperCase(),
+            textAlign: TextAlign.right,
+            style: ThemeApp.littleOrangeTextStyle,
+          ),
+        ],
+      ),
+    );
   }
 
-  Widget _todayEvents() {
+  Widget _textBlock(String text, {IconData icon}) {
     return Container(
-      width: double.maxFinite,
-      margin: EdgeInsets.only(
-          top: DimensApp.marginMiddleExtra,
-          right: DimensApp.paddingSmallExtra,
-          left: DimensApp.paddingSmallExtra,
-          bottom: DimensApp.paddingBig),
-      child: Container(
-        decoration: BoxDecoration(
-          color: ColorsApp.cardBackground,
-          borderRadius: BorderRadius.circular(DimensApp.borderRadiusSmallExtra),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 20.0,
+      height: 40,
+      decoration: BoxDecoration(
+        color: ColorsApp.centerHomeworkScreen,
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(DimensApp.borderRadiusMiddleExtra),
+          bottomLeft: Radius.circular(DimensApp.borderRadiusMiddleExtra),
+          bottomRight: Radius.circular(DimensApp.borderRadiusMiddleExtra),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.orange[200],
+            blurRadius: 20.0,
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: icon == null
+            ? EdgeInsets.symmetric(horizontal: DimensApp.paddingMiddle)
+            : EdgeInsets.only(
+                left: DimensApp.paddingSmall,
+                right: DimensApp.paddingMiddle,
+              ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            icon != null
+                ? Padding(
+                    padding: EdgeInsets.only(right: DimensApp.paddingSmall, bottom: DimensApp.paddingPico),
+                    child: Icon(icon,
+                        size: 15, color: Colors.white),
+                  )
+                : Container(),
+            Text(
+              text,
+              style: ThemeApp.smallWhiteTextStyle,
             ),
           ],
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(DimensApp.paddingMiddle),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Icon(
-                    FontAwesomeIcons.medal,
-                    size: DimensApp.iconSizeSmall,
-                    color: ColorsApp.textCardGreen,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: DimensApp.paddingSmall),
-                    child: Text(
-                      "Events".toUpperCase(),
-                      textAlign: TextAlign.left,
-                      style: ThemeApp.littleGreenTextStyle,
-                    ),
-                  ),
-                ],
-              ),
-              //TODO: ListView
-              Container(
-                margin: EdgeInsets.only(top: DimensApp.paddingSmallExtra),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Expanded(
-                      child: Text(
-                        "House Play",
-                        textAlign: TextAlign.left,
-                        style: ThemeApp.middleGreyBoldTextStyle,
-                      ),
-                    ),
-                    Text(
-                      "12:45",
-                      textAlign: TextAlign.right,
-                      style: ThemeApp.littleYellowTextStyle,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: DimensApp.paddingSmall),
-                      child: Text(
-                        "·",
-                        textAlign: TextAlign.right,
-                        style: ThemeApp.littleYellowTextStyle,
-                      ),
-                    ),
-                    Text(
-                      "09 FEB",
-                      textAlign: TextAlign.right,
-                      style: ThemeApp.littleGreenTextStyle,
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: DimensApp.paddingSmallExtra),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Expanded(
-                      child: Text(
-                        "Report Reading",
-                        textAlign: TextAlign.left,
-                        style: ThemeApp.middleGreyBoldTextStyle,
-                      ),
-                    ),
-                    Text(
-                      "09:10",
-                      textAlign: TextAlign.right,
-                      style: ThemeApp.littleYellowTextStyle,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: DimensApp.paddingSmall),
-                      child: Text(
-                        "·",
-                        textAlign: TextAlign.right,
-                        style: ThemeApp.littleYellowTextStyle,
-                      ),
-                    ),
-                    Text(
-                      "12 MAY",
-                      textAlign: TextAlign.right,
-                      style: ThemeApp.littleGreenTextStyle,
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );
@@ -343,13 +240,13 @@ class HomeworkDetailsView extends AppView<HomeworkDetailsModel> {
       child: Container(
         height: double.maxFinite,
         width: double.maxFinite,
-        child: Icon(Icons.add),
+        child: Icon(Icons.edit),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           gradient: LinearGradient(
             colors: [
-              ColorsApp.startHomeworkDetails,
-              ColorsApp.endHomeworkDetails
+              ColorsApp.startHomeworkScreen,
+              ColorsApp.endHomeworkScreen,
             ],
             begin: Alignment.bottomRight,
             end: Alignment.topLeft,

@@ -90,6 +90,15 @@ class ThemeApp {
     );
   }
 
+  static TextStyle get smallGrayBoldTextStyle {
+    return TextStyle(
+      fontFamily: 'GoogleSans',
+      fontSize: DimensApp.textSizeSmall,
+      color: Colors.grey[400],
+      fontWeight: FontWeight.bold,
+    );
+  }
+
   static TextStyle get middleGreyBoldTextStyle {
     return TextStyle(
       fontFamily: 'GoogleSans',

@@ -52,6 +52,7 @@ flutter:
   - assets/icons/google_icon.svg
   - assets/icons/mail_icon.svg
   - assets/icons/password_icon.svg
+  - assets/icons/left_arrow.svg
 
   fonts:
       - family: GoogleSans
