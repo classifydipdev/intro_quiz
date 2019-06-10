@@ -20,7 +20,7 @@ class StartedScreenView extends AppView<StartedScreenModel> {
 
   Widget getBody() {
     return Container(
-      width: MediaQuery.of(context).size.width,
+      width: model.screenWidth,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [

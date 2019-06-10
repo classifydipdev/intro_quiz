@@ -126,7 +126,7 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel>
                     child: Align(
                       alignment: Alignment.center,
                       child: Container(
-                        width: MediaQuery.of(context).size.width * 0.35,
+                        width: model.screenWidth * 0.35,
                         height: 4,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(

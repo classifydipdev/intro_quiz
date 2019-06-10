@@ -71,7 +71,7 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
             child: Container(
               padding: EdgeInsets.fromLTRB(
                   DimensApp.paddingNormal, DimensApp.paddingMiddle, 0, 0),
-              width: MediaQuery.of(context).size.width,
+              width: model.screenWidth,
               height: 160,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -155,7 +155,7 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
   Widget _homeworkParamentersPanel() {
     return Container(
       height: 35,
-      width: MediaQuery.of(context).size.width,
+      width: model.screenWidth,
       margin: EdgeInsets.symmetric(vertical: DimensApp.paddingMiddle),
       child: ListView(
         scrollDirection: Axis.horizontal,

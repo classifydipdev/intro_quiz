@@ -1,7 +1,7 @@
 name: classify
 description: A new Flutter application.
 
-version: 1.0.0+9
+version: 1.0.0+10
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -52,6 +52,7 @@ flutter:
   - assets/icons/google_icon.svg
   - assets/icons/mail_icon.svg
   - assets/icons/password_icon.svg
+  - assets/icons/left_arrow.svg
 
   fonts:
       - family: GoogleSans

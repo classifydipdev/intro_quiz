@@ -46,7 +46,7 @@ class AuthScreenView extends AppView<AuthScreenModel> {
                   child: createLogo()),
               Padding(
                 padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.32),
+                    top: model.screenHeight * 0.32),
                 child: Column(
                   children: <Widget>[
                     Padding(
@@ -81,7 +81,7 @@ class AuthScreenView extends AppView<AuthScreenModel> {
               width: 100,
             ),
           ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+          SizedBox(height: model.screenHeight * 0.1),
           Text(
             "for students; by students",
             style: ThemeApp.middleWhiteBoldTextStyle,

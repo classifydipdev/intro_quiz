@@ -178,7 +178,7 @@ class TimetableScreenView extends AppView<TimetableScreenModel> {
   Widget getDaySchedule(int day) {
     return model.scheduleDaysItems[day].length > 0
         ? Container(
-            width: MediaQuery.of(context).size.width,
+            width: model.screenWidth,
             child: ListView.builder(
               padding: EdgeInsets.all(0),
               shrinkWrap: true,

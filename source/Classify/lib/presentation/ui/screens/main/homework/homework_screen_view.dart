@@ -4,6 +4,7 @@ import 'package:classify/presentation/res/images.dart';
 import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/main/homework/homework_screen_model.dart';
+import 'package:classify/presentation/ui/screens/main/homework_details/homework_details_screen.dart';
 import 'package:classify/presentation/ui/widgets/homework_add_dialog/homework_add_dialog_screen.dart';
 import 'package:classify/presentation/ui/widgets/homework_add_dialog/modal_bottom_sheet_app.dart';
 import 'package:classify/presentation/utils/views_states.dart';
@@ -37,37 +38,41 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
                       child: DefaultTabController(
                         initialIndex: 1,
                         length: 3,
-                        child: Column(children: <Widget>[
-                          Container(
-                            child: _pageHeader(),
-                          ),
-                          Container(
-                            height: model.screenHeight / 4 * 3 -
-                                (model.tabBarState == HomeworkTabBarState.Opened
-                                    ? DimensApp.sizeMiddle
-                                    : 0),
-                            child: TabBarView(
-                              physics: NeverScrollableScrollPhysics(),
-                              children: <Widget>[
-                                ListView(
-                                  physics: ClampingScrollPhysics(),
-                                  padding: EdgeInsets.all(0),
-                                  children: _homeworkList(),
-                                ),
-                                ListView(
-                                  physics: ClampingScrollPhysics(),
-                                  padding: EdgeInsets.all(0),
-                                  children: _homeworkList(),
-                                ),
-                                ListView(
-                                  physics: ClampingScrollPhysics(),
-                                  padding: EdgeInsets.all(0),
-                                  children: _homeworkList(),
-                                ),
-                              ],
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              child: _pageHeader(),
                             ),
-                          ),
-                        ]),
+                            Container(
+                              height: model.screenHeight / 4 * 3 +
+                                  20 -
+                                  (model.tabBarState ==
+                                          HomeworkTabBarState.Opened
+                                      ? DimensApp.sizeMiddle
+                                      : 0),
+                              child: TabBarView(
+                                physics: NeverScrollableScrollPhysics(),
+                                children: <Widget>[
+                                  ListView(
+                                    physics: ClampingScrollPhysics(),
+                                    padding: EdgeInsets.all(0),
+                                    children: _homeworkList(),
+                                  ),
+                                  ListView(
+                                    physics: ClampingScrollPhysics(),
+                                    padding: EdgeInsets.all(0),
+                                    children: _homeworkList(),
+                                  ),
+                                  ListView(
+                                    physics: ClampingScrollPhysics(),
+                                    padding: EdgeInsets.all(0),
+                                    children: _homeworkList(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -237,85 +242,91 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
           left: DimensApp.paddingSmallExtra,
           bottom:
               isLast ? DimensApp.paddingLargeExtra : DimensApp.paddingMicro),
-      child: Container(
-        decoration: BoxDecoration(
-          color: ColorsApp.cardBackground,
-          borderRadius: BorderRadius.circular(25),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 20.0,
-            ),
-          ],
-        ),
-        child: Slidable(
-          actionPane: SlidableBehindActionPane(),
-          actionExtentRatio: 0.2,
-          child: Container(
-            decoration: BoxDecoration(
-              color: ColorsApp.cardBackground,
-              borderRadius: BorderRadius.circular(25),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black12,
-                  blurRadius: 20.0,
-                ),
-              ],
-            ),
+      child: CupertinoButton(
+        padding: EdgeInsets.all(0),
+        onPressed: () {
+          navigateTo(context, HomeworkDetailsScreen(), false);
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            color: ColorsApp.cardBackground,
+            borderRadius: BorderRadius.circular(25),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 20.0,
+              ),
+            ],
+          ),
+          child: Slidable(
+            actionPane: SlidableBehindActionPane(),
+            actionExtentRatio: 0.2,
             child: Container(
-              margin: EdgeInsets.symmetric(
-                  vertical: DimensApp.paddingMiddleExtra,
-                  horizontal: DimensApp.paddingMiddle),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        "Spanish",
-                        textAlign: TextAlign.left,
-                        style: ThemeApp.middleGreyBoldTextStyle,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: DimensApp.paddingSmall),
-                        child: Text(
-                          "Read chapter 1 of palabra book",
-                          textAlign: TextAlign.left,
-                          style: ThemeApp.picoGreyTextStyle,
-                        ),
-                      ),
-                    ],
+              decoration: BoxDecoration(
+                color: ColorsApp.cardBackground,
+                borderRadius: BorderRadius.circular(25),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 20.0,
                   ),
-                  Text(
-                    "Tomorrow".toUpperCase(),
-                    textAlign: TextAlign.right,
-                    style: ThemeApp.littleOrangeTextStyle,
-                  )
                 ],
               ),
-            ),
-          ),
-          actions: <Widget>[
-            IconSlideAction(
-              color: Colors.transparent,
-              foregroundColor: Colors.red,
-              icon: Icons.delete,
-              onTap: () {},
-            ),
-          ],
-          secondaryActions: <Widget>[
-            IconSlideAction(
-              color: Colors.transparent,
-              iconWidget: Icon(
-                Icons.done,
-                size: DimensApp.iconSizeNormal,
-                color: Colors.blueAccent,
+              child: Container(
+                margin: EdgeInsets.symmetric(
+                    vertical: DimensApp.paddingMiddleExtra,
+                    horizontal: DimensApp.paddingMiddle),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Spanish",
+                          textAlign: TextAlign.left,
+                          style: ThemeApp.middleGreyBoldTextStyle,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: DimensApp.paddingSmall),
+                          child: Text(
+                            "Read chapter 1 of palabra book",
+                            textAlign: TextAlign.left,
+                            style: ThemeApp.picoGreyTextStyle,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      "Tomorrow".toUpperCase(),
+                      textAlign: TextAlign.right,
+                      style: ThemeApp.littleOrangeTextStyle,
+                    )
+                  ],
+                ),
               ),
-              onTap: () {},
             ),
-          ],
+            actions: <Widget>[
+              IconSlideAction(
+                color: Colors.transparent,
+                foregroundColor: Colors.red,
+                icon: Icons.delete,
+                onTap: () {},
+              ),
+            ],
+            secondaryActions: <Widget>[
+              IconSlideAction(
+                color: Colors.transparent,
+                iconWidget: Icon(
+                  Icons.done,
+                  size: DimensApp.iconSizeNormal,
+                  color: Colors.blueAccent,
+                ),
+                onTap: () {},
+              ),
+            ],
+          ),
         ),
       ),
     );

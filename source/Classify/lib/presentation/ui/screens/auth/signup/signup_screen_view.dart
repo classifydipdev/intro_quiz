@@ -24,7 +24,7 @@ class SignUpScreenView extends AppView<SignUpScreenModel> {
     return Container(
       padding: EdgeInsets.only(
           top: DimensApp.paddingMiddle, bottom: DimensApp.paddingMiddle),
-      width: MediaQuery.of(context).size.width,
+      width: model.screenWidth,
       decoration: new BoxDecoration(
         gradient: LinearGradient(
           colors: [
