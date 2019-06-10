@@ -38,37 +38,41 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
                       child: DefaultTabController(
                         initialIndex: 1,
                         length: 3,
-                        child: Column(children: <Widget>[
-                          Container(
-                            child: _pageHeader(),
-                          ),
-                          Container(
-                            height: model.screenHeight / 4 * 3 -
-                                (model.tabBarState == HomeworkTabBarState.Opened
-                                    ? DimensApp.sizeMiddle
-                                    : 0),
-                            child: TabBarView(
-                              physics: NeverScrollableScrollPhysics(),
-                              children: <Widget>[
-                                ListView(
-                                  physics: ClampingScrollPhysics(),
-                                  padding: EdgeInsets.all(0),
-                                  children: _homeworkList(),
-                                ),
-                                ListView(
-                                  physics: ClampingScrollPhysics(),
-                                  padding: EdgeInsets.all(0),
-                                  children: _homeworkList(),
-                                ),
-                                ListView(
-                                  physics: ClampingScrollPhysics(),
-                                  padding: EdgeInsets.all(0),
-                                  children: _homeworkList(),
-                                ),
-                              ],
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              child: _pageHeader(),
                             ),
-                          ),
-                        ]),
+                            Container(
+                              height: model.screenHeight / 4 * 3 +
+                                  20 -
+                                  (model.tabBarState ==
+                                          HomeworkTabBarState.Opened
+                                      ? DimensApp.sizeMiddle
+                                      : 0),
+                              child: TabBarView(
+                                physics: NeverScrollableScrollPhysics(),
+                                children: <Widget>[
+                                  ListView(
+                                    physics: ClampingScrollPhysics(),
+                                    padding: EdgeInsets.all(0),
+                                    children: _homeworkList(),
+                                  ),
+                                  ListView(
+                                    physics: ClampingScrollPhysics(),
+                                    padding: EdgeInsets.all(0),
+                                    children: _homeworkList(),
+                                  ),
+                                  ListView(
+                                    physics: ClampingScrollPhysics(),
+                                    padding: EdgeInsets.all(0),
+                                    children: _homeworkList(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],

@@ -36,6 +36,7 @@ class HomeworkDetailsView extends AppView<HomeworkDetailsModel> {
                         children: <Widget>[
                           _topBlock(),
                           _infoBlock(),
+                          _buttonsBlock(),
                         ],
                       ),
                     ),
@@ -216,9 +217,10 @@ class HomeworkDetailsView extends AppView<HomeworkDetailsModel> {
           children: <Widget>[
             icon != null
                 ? Padding(
-                    padding: EdgeInsets.only(right: DimensApp.paddingSmall, bottom: DimensApp.paddingPico),
-                    child: Icon(icon,
-                        size: 15, color: Colors.white),
+                    padding: EdgeInsets.only(
+                        right: DimensApp.paddingSmall,
+                        bottom: DimensApp.paddingPico),
+                    child: Icon(icon, size: 15, color: Colors.white),
                   )
                 : Container(),
             Text(
@@ -227,6 +229,69 @@ class HomeworkDetailsView extends AppView<HomeworkDetailsModel> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buttonsBlock() {
+    return Container(
+      margin: EdgeInsets.only(top: DimensApp.paddingNormal),
+      padding: EdgeInsets.symmetric(horizontal: DimensApp.paddingNormal),
+      height: 50,
+      width: 250,
+      decoration: BoxDecoration(
+        color: ColorsApp.cardBackground,
+        borderRadius: BorderRadius.circular(DimensApp.borderRadiusMiddle),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 20.0,
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          CupertinoButton(
+            onPressed: () {},
+            padding: EdgeInsets.all(0),
+            minSize: 20,
+            child: Icon(
+              Icons.delete,
+              color: Colors.red[600],
+            ),
+          ),
+          CupertinoButton(
+            onPressed: () {},
+            padding: EdgeInsets.all(0),
+            minSize: 20,
+            child: Icon(
+              FontAwesomeIcons.solidBellSlash,
+              color: Colors.grey[400],
+              size: 20,
+            ),
+          ),
+          CupertinoButton(
+            onPressed: () {},
+            padding: EdgeInsets.all(0),
+            minSize: 20,
+            child: Icon(
+              FontAwesomeIcons.archive,
+              color: Colors.grey[400],
+              size: 20,
+            ),
+          ),
+          CupertinoButton(
+            onPressed: () {},
+            padding: EdgeInsets.all(0),
+            minSize: 20,
+            child: Icon(
+              Icons.check,
+              color: Colors.blue,
+              size: 30,
+            ),
+          ),
+        ],
       ),
     );
   }
