@@ -1,6 +1,6 @@
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
-import 'package:classify/presentation/ui/screens/main/homework_details/homework_details_model.dart';
-import 'package:classify/presentation/ui/screens/main/homework_details/homework_details_view.dart';
+import 'package:classify/presentation/ui/screens/main/homework/homework_details/homework_details_model.dart';
+import 'package:classify/presentation/ui/screens/main/homework/homework_details/homework_details_view.dart';
 
 class HomeworkDetailsViewModel
     extends AppViewModel<HomeworkDetailsModel, HomeworkDetailsView> {

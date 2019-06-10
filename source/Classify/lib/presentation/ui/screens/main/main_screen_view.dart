@@ -14,13 +14,15 @@ class MainScreenView extends AppView<MainScreenModel> {
   Widget getView(BuildContext context) {
     return Scaffold(
       body: Center(
+        child: Container(
           child: Container(
-              child: Container(
-        height: double.maxFinite,
-        width: double.maxFinite,
-        color: ColorsApp.background,
-        child: model.pageChildren[model.currentPageIndex],
-      ))),
+            height: double.maxFinite,
+            width: double.maxFinite,
+            color: ColorsApp.background,
+            child: model.pageChildren[model.currentPageIndex],
+          ),
+        ),
+      ),
       bottomNavigationBar: _bottomToolBar(),
     );
   }
