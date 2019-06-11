@@ -107,6 +107,8 @@ class TimetableScreenView extends AppView<TimetableScreenModel> {
           ],
         ),
         child: DefaultTabController(
+          initialIndex:
+              DateTime.now().weekday < 6 ? DateTime.now().weekday - 1 : 0,
           length: 5,
           child: Padding(
             padding: EdgeInsets.fromLTRB(
@@ -133,7 +135,7 @@ class TimetableScreenView extends AppView<TimetableScreenModel> {
                       text: "TUESDAY",
                     ),
                     Tab(
-                      text: "WENSDAY",
+                      text: "WEDNESDAY",
                     ),
                     Tab(
                       text: "THURSDAY",
