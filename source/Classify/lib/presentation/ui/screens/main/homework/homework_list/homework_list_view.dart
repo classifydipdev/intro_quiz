@@ -3,8 +3,7 @@ import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/res/images.dart';
 import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
-import 'package:classify/presentation/ui/screens/main/homework/homework_screen_model.dart';
-import 'package:classify/presentation/ui/screens/main/homework_details/homework_details_screen.dart';
+import 'package:classify/presentation/ui/screens/main/homework/homework_list/homework_list_model.dart';
 import 'package:classify/presentation/ui/widgets/homework_add_dialog/homework_add_dialog_screen.dart';
 import 'package:classify/presentation/ui/widgets/homework_add_dialog/modal_bottom_sheet_app.dart';
 import 'package:classify/presentation/utils/views_states.dart';
@@ -13,8 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-class HomeworkScreenView extends AppView<HomeworkScreenModel> {
-  HomeworkScreenView(HomeworkScreenModel model) : super(model);
+class HomeworkListScreenView extends AppView<HomeworkListScreenModel> {
+  HomeworkListScreenView(HomeworkListScreenModel model) : super(model);
 
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
 
@@ -245,7 +244,7 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
       child: CupertinoButton(
         padding: EdgeInsets.all(0),
         onPressed: () {
-          navigateTo(context, HomeworkDetailsScreen(), false);
+          model.onNavigateToDetails();
         },
         child: Container(
           decoration: BoxDecoration(
