@@ -8,7 +8,7 @@ class HomeScreenModel extends AppModel {
   OnCallCommand onLogOut = OnCallCommand();
 
   static const String fontFamily = "GoogleSans";
-  String dateNow = new DateFormat("MMM dd, yyyy").format(DateTime.now());
+  String dateNow = new DateFormat("MMMM dd, yyyy").format(DateTime.now());
   String dayNow = new DateFormat.EEEE().format(DateTime.now());
   List<ScheduleItem> scheduleItems = List();
 }
