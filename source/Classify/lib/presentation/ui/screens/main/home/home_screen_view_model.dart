@@ -1,11 +1,9 @@
 import 'package:classify/data/auth/firebase/auth.dart';
-import 'package:classify/data/entities/schedule.dart';
 import 'package:classify/presentation/ui/screens/auth/auth_screen.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/schedule/schedule_item.dart';
 import 'package:classify/presentation/ui/screens/main/home/home_screen_model.dart';
 import 'package:classify/presentation/ui/screens/main/home/home_screen_view.dart';
-import 'package:classify/presentation/utils/utility.dart';
 
 class HomeScreenViewModel
     extends AppViewModel<HomeScreenModel, HomeScreenView> {
@@ -21,14 +19,12 @@ class HomeScreenViewModel
   }
 
   Future<void> setSchedule() async {
-    var day = DateTime.now().weekday;
-    List<Schedule> scheduleList = await model.learningManager
-        .getSchedules(model.userManager.user.id, day: day - 1);
+    model.scheduleItems.clear();
+    List<ScheduleItem> todayScheduleItems =
+        model.scheduleManager.getTodayScheduleItems();
 
-    if (scheduleList != null) {
-      model.scheduleItems.clear();
-      model.scheduleItems
-          .addAll(Utility().generateScheduleItemsList(scheduleList));
+    if (todayScheduleItems != null) {
+      model.scheduleItems.addAll(todayScheduleItems);
       view.updateUI();
     }
   }

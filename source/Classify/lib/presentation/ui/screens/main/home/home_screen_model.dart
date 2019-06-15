@@ -1,3 +1,4 @@
+import 'package:classify/domain/managers/schedule_manager.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_model.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/schedule/schedule_item.dart';
 import 'package:flutter_arhitecture_helper/presentation/ui/mvvm/utils/base_model_utils.dart';
@@ -11,4 +12,6 @@ class HomeScreenModel extends AppModel {
   String dateNow = new DateFormat("MMMM dd, yyyy").format(DateTime.now());
   String dayNow = new DateFormat.EEEE().format(DateTime.now());
   List<ScheduleItem> scheduleItems = List();
+
+  ScheduleManager scheduleManager = ScheduleManager();
 }

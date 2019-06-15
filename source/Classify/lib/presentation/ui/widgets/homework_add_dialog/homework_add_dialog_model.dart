@@ -9,4 +9,6 @@ class HomeworkAddDialogModel extends AppModel {
   OnCallCommand onTap = new OnCallCommand();
 
   Subject selectedSubject;
+
+  List<Subject> subjects;
 }

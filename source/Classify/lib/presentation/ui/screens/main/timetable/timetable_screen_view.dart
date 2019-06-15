@@ -145,7 +145,7 @@ class TimetableScreenView extends AppView<TimetableScreenModel> {
                     ),
                   ],
                 ),
-                model.scheduleDaysItems.length > 0
+                model.scheduleDaysItems != null
                     ? Container(
                         height: model.scheduleListHeight,
                         child: TabBarView(
