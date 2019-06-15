@@ -10,10 +10,13 @@ class HomeworkAddDialogViewModel
   init() {
     super.init();
     model.onTap.setCallback(onTap);
+    setNearestUniqueScheduleList();
   }
 
-  void generateSubjectsList(){
-    
+  void setNearestUniqueScheduleList() {
+    model.nearestUniqueSchedules =
+        model.scheduleManager.getNearestUniqueSubjectSchedules();
+    view.updateUI();
   }
 
   void onTap() {}

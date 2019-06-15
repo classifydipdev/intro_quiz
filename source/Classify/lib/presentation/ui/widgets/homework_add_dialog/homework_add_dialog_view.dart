@@ -1,3 +1,4 @@
+import 'package:classify/data/entities/schedule.dart';
 import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/res/colors.dart';
 import 'package:classify/presentation/res/dimens.dart';
@@ -15,16 +16,6 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
 
   @override
   Widget getView(BuildContext context) {
-    List<Subject> subjectsList = [
-      Subject("id", "Geography", null, null),
-      Subject("id1", "English", null, null),
-      Subject("id2", "Latin", null, null),
-      Subject("id3", "Physics", null, null),
-      Subject("id4", "Computer Science", null, null),
-      Subject("id5", "History", null, null),
-      Subject("id6", "DT", null, null),
-      Subject("id7", "Math", null, null),
-    ];
 
     return Container(
       // margin: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -60,7 +51,7 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
                       vertical: DimensApp.paddingSmall),
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: generateSubjectsGrid(subjectsList),
+                    child: generateSubjectsGrid(model.nearestUniqueSchedules),
                   ),
                 ),
               ],
@@ -108,16 +99,16 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
     );
   }
 
-  Widget generateSubjectsGrid(List<Subject> subjects) {
-    if (subjects == null) return Container();
+  Widget generateSubjectsGrid(List<Schedule> sheduleList) {
+    if (sheduleList == null) return Container();
     List<List<Widget>> subjectsLists = List();
 
     for (int i = 0; i < 4; i++) {
       subjectsLists.add(List());
     }
 
-    for (int i = 0; i < subjects.length; i++) {
-      Subject subject = subjects[i];
+    for (int i = 0; i < sheduleList.length; i++) {
+      Subject subject = sheduleList[i].subject;
       var subjectWidget = getSmallSubjectButton(
           subject,
           ColorsApp.centerHomeworkScreen,
@@ -126,7 +117,7 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
         model.selectedSubject = subject;
         updateUI();
       });
-      subjectsLists[(i / subjects.length * 4).toInt()].add(subjectWidget);
+      subjectsLists[(i / sheduleList.length * 4).toInt()].add(subjectWidget);
     }
 
     for (int i = 0; i < 4; i++) {
