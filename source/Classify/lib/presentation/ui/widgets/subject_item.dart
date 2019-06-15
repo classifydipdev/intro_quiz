@@ -1,3 +1,4 @@
+import 'package:classify/data/entities/schedule.dart';
 import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,7 @@ Widget getSubjectButton(Subject subject, Function(bool) onTap,
 }
 
 Widget getSmallSubjectButton(
-    Subject subject, Color mainColor, bool isSelected, Function(bool) onTap) {
+    Schedule schedule, Color mainColor, bool isSelected, Function(bool) onTap) {
   return Container(
     margin: EdgeInsets.symmetric(vertical: DimensApp.paddingSmall),
     height: 35,
@@ -75,7 +76,7 @@ Widget getSmallSubjectButton(
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 Text(
-                  subject.name,
+                  schedule.subject.name,
                   style: TextStyle(
                     fontSize: 14.0,
                     color: isSelected ? mainColor : Colors.white,

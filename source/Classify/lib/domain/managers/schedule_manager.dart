@@ -105,10 +105,10 @@ class ScheduleManager {
       if (position != null) {
         var currentGapBeteenDays =
             nearestUniqueSubjectSchedules[position].day - nextDay;
-        if (currentGapBeteenDays < 0) currentGapBeteenDays += 8;
+        if (currentGapBeteenDays < 0) currentGapBeteenDays += 7;
 
         var proposedGapBeteenDays = schedule.day - nextDay;
-        if (proposedGapBeteenDays < 0) proposedGapBeteenDays += 8;
+        if (proposedGapBeteenDays < 0) proposedGapBeteenDays += 7;
 
         if (proposedGapBeteenDays < currentGapBeteenDays)
           nearestUniqueSubjectSchedules[position] = schedule;

@@ -1,3 +1,4 @@
+import 'package:classify/data/entities/schedule.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/widgets/homework_add_dialog/homework_add_dialog_model.dart';
 import 'package:classify/presentation/ui/widgets/homework_add_dialog/homework_add_dialog_view.dart';
@@ -9,7 +10,8 @@ class HomeworkAddDialogViewModel
   @override
   init() {
     super.init();
-    model.onTap.setCallback(onTap);
+    model.onScheduleSelected.setCallbackObject(scheduleSelected);
+    model.onScheduleRemoved.setCallback(scheduleRemoved);
     setNearestUniqueScheduleList();
   }
 
@@ -19,5 +21,26 @@ class HomeworkAddDialogViewModel
     view.updateUI();
   }
 
-  void onTap() {}
+  void scheduleSelected(Schedule schedule) {
+    model.selectedSchedule = schedule;
+
+    model.currentHomework.scheduleId = schedule.id;
+    model.currentHomework.dateTime = getNearestDayDate(schedule.day);
+  }
+
+  void scheduleRemoved() {
+    model.selectedSchedule = null;
+    model.currentHomework.dateTime = null;
+    view.updateUI();
+  }
+
+  DateTime getNearestDayDate(int day) {
+    DateTime todayDateTime = DateTime.now();
+    var currentDay = todayDateTime.weekday - 1;
+
+    var gapBeteenDays = day - currentDay;
+    if (gapBeteenDays < 0) gapBeteenDays += 7;
+
+    return todayDateTime.add(Duration(days: gapBeteenDays));
+  }
 }

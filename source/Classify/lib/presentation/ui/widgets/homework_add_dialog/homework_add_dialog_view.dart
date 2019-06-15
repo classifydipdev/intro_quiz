@@ -10,13 +10,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 
 class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
   HomeworkAddDialogView(HomeworkAddDialogModel model) : super(model);
 
   @override
   Widget getView(BuildContext context) {
-
     return Container(
       // margin: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       decoration: BoxDecoration(
@@ -108,13 +108,13 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
     }
 
     for (int i = 0; i < sheduleList.length; i++) {
-      Subject subject = sheduleList[i].subject;
+      Schedule schedule = sheduleList[i];
       var subjectWidget = getSmallSubjectButton(
-          subject,
+          schedule,
           ColorsApp.centerHomeworkScreen,
-          (model.selectedSubject != null &&
-              model.selectedSubject.id == subject.id), (bool isSelected) {
-        model.selectedSubject = subject;
+          (model.selectedSchedule != null &&
+              model.selectedSchedule.id == schedule.id), (bool isSelected) {
+        model.onScheduleSelected.onCallWithValue(schedule);
         updateUI();
       });
       subjectsLists[(i / sheduleList.length * 4).toInt()].add(subjectWidget);
@@ -151,11 +151,15 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: <Widget>[
-          _homeworkParametersItem("14 June", () {}),
-          model.selectedSubject != null
-              ? _homeworkParametersItem(model.selectedSubject.name, () {
-                  model.selectedSubject = null;
-                  updateUI();
+          model.currentHomework.dateTime != null
+              ? _homeworkParametersItem(
+                  DateFormat("dd MMMM").format(model.currentHomework.dateTime),
+                  () {})
+              : Container(),
+          model.selectedSchedule != null
+              ? _homeworkParametersItem(model.selectedSchedule.subject.name,
+                  () {
+                  model.onScheduleRemoved.onCall();
                 })
               : Container(),
           _homeworkParametersItem("13 June, 19:40", () {},
@@ -284,7 +288,7 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
       initialDate: DateTime.now().add(Duration(hours: 24)),
       firstDate: DateTime.now(),
       lastDate: DateTime.now().add(Duration(hours: 8760)),
-      selectableDayPredicate: (DateTime dateTime){
+      selectableDayPredicate: (DateTime dateTime) {
         return true;
       },
       builder: (BuildContext context, Widget child) {
