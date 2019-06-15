@@ -26,11 +26,14 @@ class HomeworkAddDialogViewModel
 
     model.currentHomework.scheduleId = schedule.id;
     model.currentHomework.dateTime = getNearestDayDate(schedule.day);
+
+    model.validHomeworkDays = model.scheduleManager.getScheduleDays(schedule);
   }
 
   void scheduleRemoved() {
     model.selectedSchedule = null;
     model.currentHomework.dateTime = null;
+    model.validHomeworkDays = null;
     view.updateUI();
   }
 

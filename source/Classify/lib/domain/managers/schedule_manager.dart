@@ -127,4 +127,14 @@ class ScheduleManager {
     }
     return position;
   }
+
+  List<int> getScheduleDays(Schedule schedule) {
+    Set<int> scheduleDaysSet = Set();
+    for (Schedule listSchedule in scheduleList) {
+      if (listSchedule.subject != null &&
+          listSchedule.subject.id == schedule.subject.id)
+        scheduleDaysSet.add(listSchedule.day);
+    }
+    return scheduleDaysSet.toList();
+  }
 }

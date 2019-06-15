@@ -283,13 +283,29 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
   }
 
   void showDateTimePicker() {
+    DateTime initialDateTime = DateTime.now();
+
+    if (model.currentHomework.dateTime != null) {
+      initialDateTime = model.currentHomework.dateTime;
+    } else {
+      if (initialDateTime.weekday == 6 || initialDateTime.weekday == 7) {
+        if (initialDateTime.weekday == 6) {
+          initialDateTime = DateTime.now().add(Duration(days: 2));
+        } else {
+          initialDateTime = DateTime.now().add(Duration(days: 1));
+        }
+      }
+    }
+
     Future<DateTime> selectedDate = showDatePicker(
       context: context,
-      initialDate: DateTime.now().add(Duration(hours: 24)),
-      firstDate: DateTime.now(),
+      initialDate: initialDateTime,
+      firstDate: initialDateTime,
       lastDate: DateTime.now().add(Duration(hours: 8760)),
       selectableDayPredicate: (DateTime dateTime) {
-        return true;
+        if (model.validHomeworkDays == null)
+          return dateTime.weekday != 6 && dateTime.weekday != 7;
+        return model.validHomeworkDays.contains(dateTime.weekday - 1);
       },
       builder: (BuildContext context, Widget child) {
         return Theme(

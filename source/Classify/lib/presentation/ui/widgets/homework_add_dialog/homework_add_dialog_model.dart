@@ -18,4 +18,6 @@ class HomeworkAddDialogModel extends AppModel {
   Homework currentHomework = Homework();
 
   ScheduleManager scheduleManager = ScheduleManager();
+
+  List<int> validHomeworkDays;
 }
