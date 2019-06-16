@@ -154,7 +154,9 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
           model.currentHomework.dateTime != null
               ? _homeworkParametersItem(
                   DateFormat("dd MMMM").format(model.currentHomework.dateTime),
-                  () {})
+                  () {
+                    model.onScheduleDateRemoved.onCall();
+                  })
               : Container(),
           model.selectedSchedule != null
               ? _homeworkParametersItem(model.selectedSchedule.subject.name,

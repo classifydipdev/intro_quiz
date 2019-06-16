@@ -13,6 +13,7 @@ class HomeworkAddDialogViewModel
     model.onScheduleSelected.setCallbackObject(scheduleSelected);
     model.onScheduleRemoved.setCallback(scheduleRemoved);
     model.onScheduleDateSelected.setCallbackObject(scheduleDateSelected);
+    model.onScheduleDateRemoved.setCallback(scheduleDateRemoved);
     setNearestUniqueScheduleList();
   }
 
@@ -24,8 +25,8 @@ class HomeworkAddDialogViewModel
 
   void scheduleSelected(Schedule schedule) {
     model.selectedSchedule = schedule;
-
     model.currentHomework.scheduleId = schedule.id;
+
     model.currentHomework.dateTime = getNearestDayDate(schedule.day);
 
     model.validHomeworkDays = model.scheduleManager.getScheduleDays(schedule);
@@ -33,8 +34,29 @@ class HomeworkAddDialogViewModel
 
   void scheduleRemoved() {
     model.selectedSchedule = null;
-    model.currentHomework.dateTime = null;
+    model.currentHomework.scheduleId = null;
     model.validHomeworkDays = null;
+    view.updateUI();
+  }
+
+  void scheduleDateSelected(DateTime dateTime) {
+    model.currentHomework.dateTime = dateTime;
+    model.nearestUniqueSchedules = model.scheduleManager
+        .getNearestUniqueSubjectSchedules(
+            day: model.currentHomework.dateTime.weekday - 1);
+
+    if (model.selectedSchedule != null) {
+      model.selectedSchedule = model.scheduleManager.getDaySchedule(
+          model.selectedSchedule, model.currentHomework.dateTime.weekday - 1);
+      model.currentHomework.scheduleId = model.selectedSchedule.id;
+    }
+    view.updateUI();
+  }
+
+  void scheduleDateRemoved() {
+    model.currentHomework.dateTime = null;
+    model.nearestUniqueSchedules =
+        model.scheduleManager.getNearestUniqueSubjectSchedules();
     view.updateUI();
   }
 
@@ -46,10 +68,5 @@ class HomeworkAddDialogViewModel
     if (gapBeteenDays < 0) gapBeteenDays += 7;
 
     return todayDateTime.add(Duration(days: gapBeteenDays));
-  }
-
-  void scheduleDateSelected(DateTime dateTime){
-    model.currentHomework.dateTime = dateTime;
-    view.updateUI();
   }
 }

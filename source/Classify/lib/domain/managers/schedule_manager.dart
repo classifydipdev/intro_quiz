@@ -92,13 +92,14 @@ class ScheduleManager {
     return scheduleDaysItems;
   }
 
-  List<Schedule> getNearestUniqueSubjectSchedules() {
+  List<Schedule> getNearestUniqueSubjectSchedules({int day}) {
     //next coz here day starts with 1, but in schedule model with 0
     var nextDay = DateTime.now().weekday;
     List<Schedule> nearestUniqueSubjectSchedules = List();
 
     for (Schedule schedule in scheduleList) {
       if (schedule.subject == null) continue;
+      if (day != null && schedule.day != day) continue;
 
       int position =
           scheduleContainsOnUniqueList(schedule, nearestUniqueSubjectSchedules);
@@ -136,5 +137,18 @@ class ScheduleManager {
         scheduleDaysSet.add(listSchedule.day);
     }
     return scheduleDaysSet.toList();
+  }
+
+  Schedule getDaySchedule(Schedule currentSchedule, int day) {
+    Schedule soughtForSchedule;
+    for (Schedule schedule in scheduleList) {
+      if (schedule.subject == null) continue;
+      if (schedule.subject.id == currentSchedule.subject.id &&
+          schedule.day == day) {
+        soughtForSchedule = schedule;
+        break;
+      }
+    }
+    return soughtForSchedule;
   }
 }
