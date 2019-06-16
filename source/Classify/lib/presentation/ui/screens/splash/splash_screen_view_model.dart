@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:classify/domain/managers/schedule_manager.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/screens/main/main_screen.dart';
 import 'package:classify/presentation/ui/screens/splash/splash_screen_model.dart';
@@ -39,9 +40,11 @@ class SplashScreenViewModel
   }
 
   void _checkLogin() async {
-    await model.userManager.checkSignIn().then((isLoggedIn) {
+    await model.userManager.checkSignIn().then((isLoggedIn) async {
       model.isLoggedIn = isLoggedIn;
       model.userChecked = true;
+      if (model.userManager.user != null)
+        await ScheduleManager().setActualSchedule();
       _navigate();
     }).catchError((onError) {
       showError(error: onError);

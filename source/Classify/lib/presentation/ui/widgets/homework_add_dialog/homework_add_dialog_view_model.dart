@@ -12,5 +12,9 @@ class HomeworkAddDialogViewModel
     model.onTap.setCallback(onTap);
   }
 
+  void generateSubjectsList(){
+    
+  }
+
   void onTap() {}
 }

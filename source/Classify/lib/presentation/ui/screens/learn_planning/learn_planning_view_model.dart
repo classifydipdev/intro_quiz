@@ -1,3 +1,4 @@
+import 'package:classify/domain/managers/schedule_manager.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/learn_planning_model.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/learn_planning_view.dart';
@@ -48,6 +49,8 @@ class LearnPlanningScreenViewModel
             .createCompleateSchedules(model.userManager.user.id, schedules);
 
         model.userManager.user.prefference.firstStart = false;
+        if (model.userManager.user != null)
+          await ScheduleManager().setActualSchedule();
         view.navigateTo(view.context, MainScreen(), true);
         break;
       default:

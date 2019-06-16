@@ -244,7 +244,9 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
               size: 20, color: ColorsApp.centerHomeworkScreen),
           padding: EdgeInsets.only(right: DimensApp.paddingMiddle),
           minSize: 20,
-          onPressed: () {},
+          onPressed: () {
+            showDateTimePicker();
+          },
         ),
         CupertinoButton(
           child: Icon(FontAwesomeIcons.archive,
@@ -282,6 +284,24 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
           },
         ),
       ],
+    );
+  }
+
+  void showDateTimePicker() {
+    Future<DateTime> selectedDate = showDatePicker(
+      context: context,
+      initialDate: DateTime.now().add(Duration(hours: 24)),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(Duration(hours: 8760)),
+      selectableDayPredicate: (DateTime dateTime){
+        return true;
+      },
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeApp.data,
+          child: child,
+        );
+      },
     );
   }
 }

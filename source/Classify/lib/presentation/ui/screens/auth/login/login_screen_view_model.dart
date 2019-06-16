@@ -1,3 +1,4 @@
+import 'package:classify/domain/managers/schedule_manager.dart';
 import 'package:classify/presentation/ui/screens/auth/auth_screen.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/screens/main/main_screen.dart';
@@ -30,6 +31,7 @@ class LogInScreenViewModel
             if (preference.firstStart) {
               view.navigateTo(model.context, StartedScreen(), true);
             } else {
+              ScheduleManager().setActualSchedule();
               view.navigateTo(model.context, MainScreen(), true);
             }
           } else {
