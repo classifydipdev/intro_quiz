@@ -8,8 +8,9 @@ class HomeworkAddDialogModel extends AppModel {
 
   HomeworkAddDialogModel();
 
-  OnCallCommand onScheduleSelected = new OnCallCommand();
-  OnCallCommand onScheduleRemoved = new OnCallCommand();
+  OnCallCommand onScheduleSelected = OnCallCommand();
+  OnCallCommand onScheduleRemoved = OnCallCommand();
+  OnCallCommand onScheduleDateSelected = OnCallCommand();
 
   Schedule selectedSchedule;
 

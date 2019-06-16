@@ -12,6 +12,7 @@ class HomeworkAddDialogViewModel
     super.init();
     model.onScheduleSelected.setCallbackObject(scheduleSelected);
     model.onScheduleRemoved.setCallback(scheduleRemoved);
+    model.onScheduleDateSelected.setCallbackObject(scheduleDateSelected);
     setNearestUniqueScheduleList();
   }
 
@@ -45,5 +46,10 @@ class HomeworkAddDialogViewModel
     if (gapBeteenDays < 0) gapBeteenDays += 7;
 
     return todayDateTime.add(Duration(days: gapBeteenDays));
+  }
+
+  void scheduleDateSelected(DateTime dateTime){
+    model.currentHomework.dateTime = dateTime;
+    view.updateUI();
   }
 }
