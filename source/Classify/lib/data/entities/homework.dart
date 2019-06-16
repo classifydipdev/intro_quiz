@@ -9,6 +9,8 @@ class Homework {
   bool isFavourite;
   HomeworkType type;
 
+  Homework();
+
   Homework.fromFirestore(DocumentSnapshot document) {
     assert(document != null, "Document is null!");
     assert(document.data != null, "Homework not found!");

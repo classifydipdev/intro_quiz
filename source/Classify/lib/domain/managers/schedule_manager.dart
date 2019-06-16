@@ -82,7 +82,7 @@ class ScheduleManager {
       }
 
       scheduleDaysItems = List();
-      
+
       for (var i = 0; i < 5; i++) {
         scheduleDaysItems.add(List());
         scheduleDaysItems[i].addAll(getDayScheduleItems(dayScheduleList[i]));
@@ -90,5 +90,51 @@ class ScheduleManager {
     }
 
     return scheduleDaysItems;
+  }
+
+  List<Schedule> getNearestUniqueSubjectSchedules() {
+    //next coz here day starts with 1, but in schedule model with 0
+    var nextDay = DateTime.now().weekday;
+    List<Schedule> nearestUniqueSubjectSchedules = List();
+
+    for (Schedule schedule in scheduleList) {
+      if (schedule.subject == null) continue;
+
+      int position =
+          scheduleContainsOnUniqueList(schedule, nearestUniqueSubjectSchedules);
+      if (position != null) {
+        var currentGapBeteenDays =
+            nearestUniqueSubjectSchedules[position].day - nextDay;
+        if (currentGapBeteenDays < 0) currentGapBeteenDays += 7;
+
+        var proposedGapBeteenDays = schedule.day - nextDay;
+        if (proposedGapBeteenDays < 0) proposedGapBeteenDays += 7;
+
+        if (proposedGapBeteenDays < currentGapBeteenDays)
+          nearestUniqueSubjectSchedules[position] = schedule;
+      } else {
+        nearestUniqueSubjectSchedules.add(schedule);
+      }
+    }
+    return nearestUniqueSubjectSchedules;
+  }
+
+  int scheduleContainsOnUniqueList(
+      Schedule schedule, List<Schedule> scheduleList) {
+    int position;
+    for (var i = 0; i < scheduleList.length; i++) {
+      if (scheduleList[i].subject.id == schedule.subject.id) position = i;
+    }
+    return position;
+  }
+
+  List<int> getScheduleDays(Schedule schedule) {
+    Set<int> scheduleDaysSet = Set();
+    for (Schedule listSchedule in scheduleList) {
+      if (listSchedule.subject != null &&
+          listSchedule.subject.id == schedule.subject.id)
+        scheduleDaysSet.add(listSchedule.day);
+    }
+    return scheduleDaysSet.toList();
   }
 }

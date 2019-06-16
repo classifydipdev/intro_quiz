@@ -1,3 +1,4 @@
+import 'package:classify/data/entities/schedule.dart';
 import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/res/colors.dart';
 import 'package:classify/presentation/res/dimens.dart';
@@ -9,23 +10,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 
 class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
   HomeworkAddDialogView(HomeworkAddDialogModel model) : super(model);
 
   @override
   Widget getView(BuildContext context) {
-    List<Subject> subjectsList = [
-      Subject("id", "Geography", null, null),
-      Subject("id1", "English", null, null),
-      Subject("id2", "Latin", null, null),
-      Subject("id3", "Physics", null, null),
-      Subject("id4", "Computer Science", null, null),
-      Subject("id5", "History", null, null),
-      Subject("id6", "DT", null, null),
-      Subject("id7", "Math", null, null),
-    ];
-
     return Container(
       // margin: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       decoration: BoxDecoration(
@@ -60,7 +51,7 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
                       vertical: DimensApp.paddingSmall),
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: generateSubjectsGrid(subjectsList),
+                    child: generateSubjectsGrid(model.nearestUniqueSchedules),
                   ),
                 ),
               ],
@@ -108,25 +99,25 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
     );
   }
 
-  Widget generateSubjectsGrid(List<Subject> subjects) {
-    if (subjects == null) return Container();
+  Widget generateSubjectsGrid(List<Schedule> sheduleList) {
+    if (sheduleList == null) return Container();
     List<List<Widget>> subjectsLists = List();
 
     for (int i = 0; i < 4; i++) {
       subjectsLists.add(List());
     }
 
-    for (int i = 0; i < subjects.length; i++) {
-      Subject subject = subjects[i];
+    for (int i = 0; i < sheduleList.length; i++) {
+      Schedule schedule = sheduleList[i];
       var subjectWidget = getSmallSubjectButton(
-          subject,
+          schedule,
           ColorsApp.centerHomeworkScreen,
-          (model.selectedSubject != null &&
-              model.selectedSubject.id == subject.id), (bool isSelected) {
-        model.selectedSubject = subject;
+          (model.selectedSchedule != null &&
+              model.selectedSchedule.id == schedule.id), (bool isSelected) {
+        model.onScheduleSelected.onCallWithValue(schedule);
         updateUI();
       });
-      subjectsLists[(i / subjects.length * 4).toInt()].add(subjectWidget);
+      subjectsLists[(i / sheduleList.length * 4).toInt()].add(subjectWidget);
     }
 
     for (int i = 0; i < 4; i++) {
@@ -160,11 +151,15 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: <Widget>[
-          _homeworkParametersItem("14 June", () {}),
-          model.selectedSubject != null
-              ? _homeworkParametersItem(model.selectedSubject.name, () {
-                  model.selectedSubject = null;
-                  updateUI();
+          model.currentHomework.dateTime != null
+              ? _homeworkParametersItem(
+                  DateFormat("dd MMMM").format(model.currentHomework.dateTime),
+                  () {})
+              : Container(),
+          model.selectedSchedule != null
+              ? _homeworkParametersItem(model.selectedSchedule.subject.name,
+                  () {
+                  model.onScheduleRemoved.onCall();
                 })
               : Container(),
           _homeworkParametersItem("13 June, 19:40", () {},
@@ -288,13 +283,29 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
   }
 
   void showDateTimePicker() {
+    DateTime initialDateTime = DateTime.now();
+
+    if (model.currentHomework.dateTime != null) {
+      initialDateTime = model.currentHomework.dateTime;
+    } else {
+      if (initialDateTime.weekday == 6 || initialDateTime.weekday == 7) {
+        if (initialDateTime.weekday == 6) {
+          initialDateTime = DateTime.now().add(Duration(days: 2));
+        } else {
+          initialDateTime = DateTime.now().add(Duration(days: 1));
+        }
+      }
+    }
+
     Future<DateTime> selectedDate = showDatePicker(
       context: context,
-      initialDate: DateTime.now().add(Duration(hours: 24)),
-      firstDate: DateTime.now(),
+      initialDate: initialDateTime,
+      firstDate: initialDateTime,
       lastDate: DateTime.now().add(Duration(hours: 8760)),
-      selectableDayPredicate: (DateTime dateTime){
-        return true;
+      selectableDayPredicate: (DateTime dateTime) {
+        if (model.validHomeworkDays == null)
+          return dateTime.weekday != 6 && dateTime.weekday != 7;
+        return model.validHomeworkDays.contains(dateTime.weekday - 1);
       },
       builder: (BuildContext context, Widget child) {
         return Theme(
