@@ -6,8 +6,8 @@ class Homework {
   String userId;
   String text;
   DateTime dateTime;
-  bool isFavourite;
-  HomeworkType type;
+  bool isFavourite = false;
+  HomeworkType type = HomeworkType.Simple;
 
   Homework();
 

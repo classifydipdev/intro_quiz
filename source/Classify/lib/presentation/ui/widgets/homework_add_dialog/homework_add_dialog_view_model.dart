@@ -1,3 +1,4 @@
+import 'package:classify/data/entities/homework.dart';
 import 'package:classify/data/entities/schedule.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/widgets/homework_add_dialog/homework_add_dialog_model.dart';
@@ -14,6 +15,10 @@ class HomeworkAddDialogViewModel
     model.onScheduleRemoved.setCallback(scheduleRemoved);
     model.onScheduleDateSelected.setCallbackObject(scheduleDateSelected);
     model.onScheduleDateRemoved.setCallback(scheduleDateRemoved);
+
+    model.onFavouriteSet.addCallback(favouriteSet);
+    model.onTestSet.addCallback(testSet);
+
     setNearestUniqueScheduleList();
   }
 
@@ -68,5 +73,19 @@ class HomeworkAddDialogViewModel
     if (gapBeteenDays < 0) gapBeteenDays += 7;
 
     return todayDateTime.add(Duration(days: gapBeteenDays));
+  }
+
+  void favouriteSet() {
+    model.currentHomework.isFavourite = !model.currentHomework.isFavourite;
+    view.updateUI();
+  }
+
+  void testSet() {
+    if (model.currentHomework.type == HomeworkType.Test)
+      model.currentHomework.type = HomeworkType.Simple;
+    else
+      model.currentHomework.type = HomeworkType.Test;
+
+    view.updateUI();
   }
 }

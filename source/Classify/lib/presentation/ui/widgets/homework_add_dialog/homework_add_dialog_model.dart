@@ -13,6 +13,9 @@ class HomeworkAddDialogModel extends AppModel {
   OnCallCommand onScheduleDateSelected = OnCallCommand();
   OnCallCommand onScheduleDateRemoved = OnCallCommand();
 
+  OnCallCommand onFavouriteSet = OnCallCommand();
+  OnCallCommand onTestSet = OnCallCommand();
+
   Schedule selectedSchedule;
 
   List<Schedule> nearestUniqueSchedules;

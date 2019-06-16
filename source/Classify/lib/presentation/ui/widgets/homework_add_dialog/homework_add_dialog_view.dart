@@ -1,3 +1,4 @@
+import 'package:classify/data/entities/homework.dart';
 import 'package:classify/data/entities/schedule.dart';
 import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/res/colors.dart';
@@ -49,10 +50,21 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
                   margin: EdgeInsets.symmetric(
                       horizontal: DimensApp.paddingMiddle,
                       vertical: DimensApp.paddingSmall),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: generateSubjectsGrid(model.nearestUniqueSchedules),
-                  ),
+                  child: model.nearestUniqueSchedules.length != 0
+                      ? SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: generateSubjectsGrid(
+                              model.nearestUniqueSchedules),
+                        )
+                      : Center(
+                          child: Padding(
+                            padding:
+                                EdgeInsets.only(bottom: DimensApp.paddingBig),
+                            child: Text("You haven't any\n subject on this day",
+                                style: ThemeApp.middleGreyBoldTextStyle,
+                                textAlign: TextAlign.center),
+                          ),
+                        ),
                 ),
               ],
             ),
@@ -155,8 +167,8 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
               ? _homeworkParametersItem(
                   DateFormat("dd MMMM").format(model.currentHomework.dateTime),
                   () {
-                    model.onScheduleDateRemoved.onCall();
-                  })
+                  model.onScheduleDateRemoved.onCall();
+                })
               : Container(),
           model.selectedSchedule != null
               ? _homeworkParametersItem(model.selectedSchedule.subject.name,
@@ -230,15 +242,23 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
       children: <Widget>[
         CupertinoButton(
           child: Icon(FontAwesomeIcons.solidStar,
-              size: 20, color: Colors.grey[350]),
+              size: 20,
+              color: model.currentHomework.isFavourite
+                  ? ColorsApp.centerHomeworkScreen
+                  : Colors.grey[350]),
           padding: EdgeInsets.only(
               right: DimensApp.paddingMiddle, left: DimensApp.paddingMicro),
           minSize: 20,
-          onPressed: () {},
+          onPressed: () {
+            model.onFavouriteSet.onCall();
+          },
         ),
         CupertinoButton(
           child: Icon(FontAwesomeIcons.calendarCheck,
-              size: 20, color: ColorsApp.centerHomeworkScreen),
+              size: 20,
+              color: model.currentHomework.dateTime != null
+                  ? ColorsApp.centerHomeworkScreen
+                  : Colors.grey[350]),
           padding: EdgeInsets.only(right: DimensApp.paddingMiddle),
           minSize: 20,
           onPressed: () {
@@ -246,8 +266,8 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
           },
         ),
         CupertinoButton(
-          child: Icon(FontAwesomeIcons.archive,
-              size: 20, color: ColorsApp.centerHomeworkScreen),
+          child:
+              Icon(FontAwesomeIcons.archive, size: 20, color: Colors.grey[350]),
           padding: EdgeInsets.only(right: DimensApp.paddingMiddle),
           minSize: 20,
           onPressed: () {},
@@ -260,10 +280,16 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
           onPressed: () {},
         ),
         CupertinoButton(
-          child: Icon(FontAwesomeIcons.list, size: 20, color: Colors.grey[350]),
+          child: Icon(FontAwesomeIcons.list,
+              size: 20,
+              color: model.currentHomework.type == HomeworkType.Test
+                  ? ColorsApp.centerHomeworkScreen
+                  : Colors.grey[350]),
           padding: EdgeInsets.only(right: DimensApp.paddingMiddle),
           minSize: 20,
-          onPressed: () {},
+          onPressed: () {
+            model.onTestSet.onCall();
+          },
         ),
         Expanded(
           child: Container(),
@@ -286,6 +312,24 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
 
   void showDateTimePicker() {
     DateTime initialDateTime = DateTime.now();
+
+    if (model.validHomeworkDays != null) {
+      var currentDay = initialDateTime.weekday - 1;
+      var validDay;
+
+      for (int validDayIndex in model.validHomeworkDays) {
+        if (currentDay <= validDayIndex) validDay = validDayIndex;
+      }
+
+      if (validDay == null) validDay = model.validHomeworkDays[0];
+
+      var addInterval = validDay - currentDay;
+      if (addInterval < 0) addInterval += 7;
+
+      if (addInterval != 0)
+        initialDateTime = DateTime.now().add(Duration(days: addInterval));
+    }
+
     DateTime firstDateTime = DateTime.fromMillisecondsSinceEpoch(
         initialDateTime.millisecondsSinceEpoch);
 
