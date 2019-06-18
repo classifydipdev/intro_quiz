@@ -1,12 +1,12 @@
 import 'package:classify/data/entities/homework.dart';
 import 'package:classify/data/entities/schedule.dart';
-import 'package:classify/data/entities/subject.dart';
 import 'package:classify/presentation/res/colors.dart';
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/widgets/homework_add_dialog/homework_add_dialog_model.dart';
 import 'package:classify/presentation/ui/widgets/subject_item.dart';
+import 'package:classify/presentation/utils/views_states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -29,85 +29,113 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
       ),
       height: 450,
       width: double.maxFinite,
-      child: Stack(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.symmetric(vertical: DimensApp.paddingMiddle),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      child: model.loadingState == LoadingStates.Compleate
+          ? Stack(
               children: <Widget>[
-                Padding(
+                Container(
                   padding:
-                      EdgeInsets.symmetric(horizontal: DimensApp.paddingNormal),
-                  child: Text(
-                    "Subjects",
-                    textAlign: TextAlign.left,
-                    style: ThemeApp.middleGreyTextStyle,
+                      EdgeInsets.symmetric(vertical: DimensApp.paddingMiddle),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: DimensApp.paddingNormal),
+                        child: Text(
+                          "Subjects",
+                          textAlign: TextAlign.left,
+                          style: ThemeApp.middleGreyTextStyle,
+                        ),
+                      ),
+                      Container(
+                        height: 300,
+                        margin: EdgeInsets.symmetric(
+                            horizontal: DimensApp.paddingMiddle,
+                            vertical: DimensApp.paddingSmall),
+                        child: model.nearestUniqueSchedules.length != 0
+                            ? SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: generateSubjectsGrid(
+                                    model.nearestUniqueSchedules),
+                              )
+                            : Center(
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                      bottom: DimensApp.paddingBig),
+                                  child: Text(
+                                      "You haven't any\n subject on this day",
+                                      style: ThemeApp.middleGreyBoldTextStyle,
+                                      textAlign: TextAlign.center),
+                                ),
+                              ),
+                      ),
+                    ],
                   ),
                 ),
-                Container(
-                  height: 300,
-                  margin: EdgeInsets.symmetric(
-                      horizontal: DimensApp.paddingMiddle,
-                      vertical: DimensApp.paddingSmall),
-                  child: model.nearestUniqueSchedules.length != 0
-                      ? SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: generateSubjectsGrid(
-                              model.nearestUniqueSchedules),
-                        )
-                      : Center(
-                          child: Padding(
-                            padding:
-                                EdgeInsets.only(bottom: DimensApp.paddingBig),
-                            child: Text("You haven't any\n subject on this day",
-                                style: ThemeApp.middleGreyBoldTextStyle,
-                                textAlign: TextAlign.center),
+                Positioned(
+                  bottom: 0,
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(
+                        DimensApp.paddingNormal, DimensApp.paddingMiddle, 0, 0),
+                    width: model.screenWidth,
+                    height: 160,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 20.0,
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        TextField(
+                          style: ThemeApp.middleExtraBlackTextStyle,
+                          decoration: InputDecoration(
+                            hintText: "Add new homework...",
+                            hintStyle: ThemeApp.middleGreyTextStyle,
+                            labelStyle: ThemeApp.middleExtraBlackTextStyle,
+                            contentPadding: EdgeInsets.all(0),
+                            border: InputBorder.none,
                           ),
                         ),
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            bottom: 0,
-            child: Container(
-              padding: EdgeInsets.fromLTRB(
-                  DimensApp.paddingNormal, DimensApp.paddingMiddle, 0, 0),
-              width: model.screenWidth,
-              height: 160,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 20.0,
-                  ),
-                ],
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  TextField(
-                    style: ThemeApp.middleExtraBlackTextStyle,
-                    decoration: InputDecoration(
-                      hintText: "Add new homework...",
-                      hintStyle: ThemeApp.middleGreyTextStyle,
-                      labelStyle: ThemeApp.middleExtraBlackTextStyle,
-                      contentPadding: EdgeInsets.all(0),
-                      border: InputBorder.none,
+                        _homeworkParamentersPanel(),
+                        Container(
+                          width: model.screenWidth,
+                          child: _iconPanel(),
+                        ),
+                      ],
                     ),
                   ),
-                  _homeworkParamentersPanel(),
-                  _iconPanel(),
-                ],
+                )
+              ],
+            )
+          : Container(
+              child: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Padding(
+                      padding:
+                          EdgeInsets.only(bottom: DimensApp.paddingSmallExtra),
+                      child: Text(
+                        "This should only\ntake a second",
+                        textAlign: TextAlign.center,
+                        style: ThemeApp.smallFadeWhiteBoldTextStyle,
+                      ),
+                    ),
+                    CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    ),
+                  ],
+                ),
               ),
             ),
-          )
-        ],
-      ),
     );
   }
 
@@ -176,8 +204,13 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
                   model.onScheduleRemoved.onCall();
                 })
               : Container(),
-          _homeworkParametersItem("13 June, 19:40", () {},
-              icon: FontAwesomeIcons.solidBell),
+          model.currentReminder != null
+              ? _homeworkParametersItem(
+                  DateFormat("dd MMMM, HH:MM")
+                      .format(model.currentHomework.dateTime),
+                  () => model.onReminderRemoved.onCall(),
+                  icon: FontAwesomeIcons.solidBell)
+              : Container(),
         ],
       ),
     );
@@ -261,9 +294,7 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
                   : Colors.grey[350]),
           padding: EdgeInsets.only(right: DimensApp.paddingMiddle),
           minSize: 20,
-          onPressed: () {
-            showDateTimePicker();
-          },
+          onPressed: () => showHomeworkDatePicker(),
         ),
         CupertinoButton(
           child:
@@ -274,10 +305,13 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
         ),
         CupertinoButton(
           child: Icon(FontAwesomeIcons.solidBell,
-              size: 20, color: ColorsApp.centerHomeworkScreen),
+              size: 20,
+              color: model.currentReminder != null
+                  ? ColorsApp.centerHomeworkScreen
+                  : Colors.grey[350]),
           padding: EdgeInsets.only(right: DimensApp.paddingMiddle),
           minSize: 20,
-          onPressed: () {},
+          onPressed: () => showRemiderDateTimePicker(),
         ),
         CupertinoButton(
           child: Icon(FontAwesomeIcons.list,
@@ -287,9 +321,7 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
                   : Colors.grey[350]),
           padding: EdgeInsets.only(right: DimensApp.paddingMiddle),
           minSize: 20,
-          onPressed: () {
-            model.onTestSet.onCall();
-          },
+          onPressed: () => model.onTestSet.onCall(),
         ),
         Expanded(
           child: Container(),
@@ -302,15 +334,13 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
           ),
           padding: EdgeInsets.only(right: DimensApp.paddingMiddle),
           minSize: 20,
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+          onPressed: () => model.onValidateAndSaveHomework.onCall(),
         ),
       ],
     );
   }
 
-  void showDateTimePicker() {
+  void showHomeworkDatePicker() {
     DateTime initialDateTime = DateTime.now();
 
     if (model.validHomeworkDays != null) {
@@ -340,10 +370,7 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
         firstDateTime = DateTime.now().add(Duration(days: 1));
     }
 
-    if (model.currentHomework.dateTime != null)
-      initialDateTime = model.currentHomework.dateTime;
-    else
-      initialDateTime = firstDateTime;
+    initialDateTime = firstDateTime;
 
     showDatePicker(
       context: context,
@@ -364,6 +391,35 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
     ).then((DateTime dateTime) {
       if (dateTime != null)
         model.onScheduleDateSelected.onCallWithValue(dateTime);
+    });
+  }
+
+  void showRemiderDateTimePicker() {
+    TimeOfDay currentTime = TimeOfDay.now();
+    DateTime currentDateTime = DateTime.now().subtract(
+        Duration(hours: currentTime.hour, minutes: currentTime.minute));
+    showDatePicker(
+      context: context,
+      initialDate: currentDateTime,
+      firstDate: currentDateTime.subtract(Duration(days: 1)),
+      lastDate: DateTime.now().add(Duration(hours: 8760)),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeApp.data,
+          child: child,
+        );
+      },
+    ).then((DateTime dateTime) {
+      if (dateTime != null) {
+        showTimePicker(context: context, initialTime: currentTime)
+            .then((TimeOfDay time) {
+          if (time != null) {
+            DateTime finalDateTime =
+                dateTime.add(Duration(hours: time.hour, minutes: time.minute));
+            model.onReminderSet.onCallWithValue(finalDateTime);
+          }
+        });
+      }
     });
   }
 }

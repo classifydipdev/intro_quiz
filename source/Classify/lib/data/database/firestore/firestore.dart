@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:classify/data/entities/firestore_batch.dart';
+import 'package:classify/data/entities/homework.dart';
 import 'package:classify/data/entities/lesson.dart';
+import 'package:classify/data/entities/reminder.dart';
 import 'package:classify/data/entities/schedule.dart';
 import 'package:classify/data/entities/subject.dart';
 import 'package:classify/data/entities/user.dart';
@@ -20,6 +22,8 @@ class AppFirbaseFirestore {
   static final subjectCollection = "subjects";
   static final scheduleCollection = "shedules";
   static final lessonCollection = "lessons";
+  static final homeworkCollection = "homeworks";
+  static final reminderCollection = "reminders";
 
   static final _db = FirestoreHelper();
 
@@ -375,6 +379,19 @@ class AppFirbaseFirestore {
     }
 
     return schedulesList;
+  }
+
+  Future<void> addHomework(Homework homework, {Reminder reminder}) async {
+    if (homework == null) throw Exception("Wrong homework");
+    if (reminder != null && reminder.dateTime == null) throw Exception("Wrong reminder");
+    var reference = _db.getFS().collection(homeworkCollection).document();
+    await _db.setData(reference, homework.toFirestore());
+    if (reminder != null){
+      reminder.homeworkId = reference.documentID;
+      reference = _db.getFS().collection(reminderCollection).document();
+      return await _db.setData(reference, reminder.toFirestore());
+    }
+    return;
   }
 
   DocumentReference getLessonCollectionReference() {

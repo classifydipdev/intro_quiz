@@ -5,6 +5,8 @@ class Reminder {
   String homeworkId;
   DateTime dateTime;
 
+  Reminder(this.dateTime);
+
   Reminder.fromFirestore(DocumentSnapshot document) {
     assert(document != null, "Document is null!");
     assert(document.data != null, "Reminder not found!");

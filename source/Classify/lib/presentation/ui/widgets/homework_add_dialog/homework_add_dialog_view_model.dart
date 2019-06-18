@@ -1,8 +1,11 @@
 import 'package:classify/data/entities/homework.dart';
+import 'package:classify/data/entities/reminder.dart';
 import 'package:classify/data/entities/schedule.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/widgets/homework_add_dialog/homework_add_dialog_model.dart';
 import 'package:classify/presentation/ui/widgets/homework_add_dialog/homework_add_dialog_view.dart';
+import 'package:classify/presentation/utils/views_states.dart';
+import 'package:flutter/widgets.dart';
 
 class HomeworkAddDialogViewModel
     extends AppViewModel<HomeworkAddDialogModel, HomeworkAddDialogView> {
@@ -18,6 +21,10 @@ class HomeworkAddDialogViewModel
 
     model.onFavouriteSet.addCallback(favouriteSet);
     model.onTestSet.addCallback(testSet);
+    model.onReminderSet.setCallbackObject(reminderSet);
+    model.onReminderRemoved.addCallback(remidnerRemoved);
+
+    model.onValidateAndSaveHomework.addCallback(validateAndSaveHomework);
 
     setNearestUniqueScheduleList();
   }
@@ -87,5 +94,33 @@ class HomeworkAddDialogViewModel
       model.currentHomework.type = HomeworkType.Test;
 
     view.updateUI();
+  }
+
+  void reminderSet(DateTime dateTime) {
+    model.currentReminder = Reminder(dateTime);
+    view.updateUI();
+  }
+
+  void remidnerRemoved() {
+    model.currentReminder = null;
+    view.updateUI();
+  }
+
+  Future validateAndSaveHomework() async {
+    String errorString = "";
+    if (model.currentHomework.scheduleId == null)
+      errorString = "Select a subject, please\n";
+    if (model.currentHomework.dateTime == null)
+      errorString += "Select a date of homework, please\n";
+
+    if (errorString.length > 0) {
+      showError(text: errorString);
+      return;
+    }
+    model.loadingState = LoadingStates.Loading;
+    view.updateUI();
+    await model.firestore
+        .addHomework(model.currentHomework, reminder: model.currentReminder);
+    Navigator.of(view.context).pop();
   }
 }
