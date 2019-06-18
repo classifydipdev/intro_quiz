@@ -154,7 +154,9 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
           model.currentHomework.dateTime != null
               ? _homeworkParametersItem(
                   DateFormat("dd MMMM").format(model.currentHomework.dateTime),
-                  () {})
+                  () {
+                    model.onScheduleDateRemoved.onCall();
+                  })
               : Container(),
           model.selectedSchedule != null
               ? _homeworkParametersItem(model.selectedSchedule.subject.name,
@@ -284,23 +286,25 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
 
   void showDateTimePicker() {
     DateTime initialDateTime = DateTime.now();
+    DateTime firstDateTime = DateTime.fromMillisecondsSinceEpoch(
+        initialDateTime.millisecondsSinceEpoch);
 
-    if (model.currentHomework.dateTime != null) {
-      initialDateTime = model.currentHomework.dateTime;
-    } else {
-      if (initialDateTime.weekday == 6 || initialDateTime.weekday == 7) {
-        if (initialDateTime.weekday == 6) {
-          initialDateTime = DateTime.now().add(Duration(days: 2));
-        } else {
-          initialDateTime = DateTime.now().add(Duration(days: 1));
-        }
-      }
+    if (firstDateTime.weekday == 6 || firstDateTime.weekday == 7) {
+      if (firstDateTime.weekday == 6)
+        firstDateTime = DateTime.now().add(Duration(days: 2));
+      else
+        firstDateTime = DateTime.now().add(Duration(days: 1));
     }
 
-    Future<DateTime> selectedDate = showDatePicker(
+    if (model.currentHomework.dateTime != null)
+      initialDateTime = model.currentHomework.dateTime;
+    else
+      initialDateTime = firstDateTime;
+
+    showDatePicker(
       context: context,
       initialDate: initialDateTime,
-      firstDate: initialDateTime,
+      firstDate: firstDateTime.subtract(Duration(days: 1)),
       lastDate: DateTime.now().add(Duration(hours: 8760)),
       selectableDayPredicate: (DateTime dateTime) {
         if (model.validHomeworkDays == null)
@@ -313,6 +317,9 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
           child: child,
         );
       },
-    );
+    ).then((DateTime dateTime) {
+      if (dateTime != null)
+        model.onScheduleDateSelected.onCallWithValue(dateTime);
+    });
   }
 }
