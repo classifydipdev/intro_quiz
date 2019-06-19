@@ -94,6 +94,7 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         TextField(
+                          controller: model.textEditController,
                           style: ThemeApp.middleExtraBlackTextStyle,
                           decoration: InputDecoration(
                             hintText: "Add new homework...",
@@ -103,11 +104,8 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
                             border: InputBorder.none,
                           ),
                         ),
-                        _homeworkParamentersPanel(),
-                        Container(
-                          width: model.screenWidth,
-                          child: _iconPanel(),
-                        ),
+                        _homeworkParametersPanel(),
+                        _iconPanel(),
                       ],
                     ),
                   ),
@@ -115,9 +113,10 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
               ],
             )
           : Container(
+              height: model.screenHeight,
+              width: model.screenWidth,
               child: Center(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Padding(
@@ -126,11 +125,12 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
                       child: Text(
                         "This should only\ntake a second",
                         textAlign: TextAlign.center,
-                        style: ThemeApp.smallFadeWhiteBoldTextStyle,
+                        style: ThemeApp.smallGrayBoldTextStyle,
                       ),
                     ),
                     CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                          ColorsApp.centerHomeworkScreen),
                     ),
                   ],
                 ),
@@ -183,7 +183,7 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
     );
   }
 
-  Widget _homeworkParamentersPanel() {
+  Widget _homeworkParametersPanel() {
     return Container(
       height: 35,
       width: model.screenWidth,
@@ -207,7 +207,7 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
           model.currentReminder != null
               ? _homeworkParametersItem(
                   DateFormat("dd MMMM, HH:MM")
-                      .format(model.currentHomework.dateTime),
+                      .format(model.currentReminder.dateTime),
                   () => model.onReminderRemoved.onCall(),
                   icon: FontAwesomeIcons.solidBell)
               : Container(),
@@ -272,6 +272,8 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
 
   Widget _iconPanel() {
     return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         CupertinoButton(
           child: Icon(FontAwesomeIcons.solidStar,
@@ -311,7 +313,7 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
                   : Colors.grey[350]),
           padding: EdgeInsets.only(right: DimensApp.paddingMiddle),
           minSize: 20,
-          onPressed: () => showRemiderDateTimePicker(),
+          onPressed: () => showReminderDateTimePicker(),
         ),
         CupertinoButton(
           child: Icon(FontAwesomeIcons.list,
@@ -394,7 +396,7 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
     });
   }
 
-  void showRemiderDateTimePicker() {
+  void showReminderDateTimePicker() {
     TimeOfDay currentTime = TimeOfDay.now();
     DateTime currentDateTime = DateTime.now().subtract(
         Duration(hours: currentTime.hour, minutes: currentTime.minute));

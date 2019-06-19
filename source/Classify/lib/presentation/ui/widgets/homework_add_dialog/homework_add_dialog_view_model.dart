@@ -107,16 +107,22 @@ class HomeworkAddDialogViewModel
   }
 
   Future validateAndSaveHomework() async {
+    model.currentHomework.text = model.textEditController.text;
+
     String errorString = "";
     if (model.currentHomework.scheduleId == null)
       errorString = "Select a subject, please\n";
     if (model.currentHomework.dateTime == null)
       errorString += "Select a date of homework, please\n";
+    if (model.currentHomework.text == null ||
+        model.currentHomework.text.length < 1)
+      errorString += "Add some description, please\n";
 
     if (errorString.length > 0) {
       showError(text: errorString);
       return;
     }
+
     model.loadingState = LoadingStates.Loading;
     view.updateUI();
     await model.firestore
