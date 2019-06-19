@@ -381,17 +381,53 @@ class AppFirbaseFirestore {
     return schedulesList;
   }
 
-  Future<void> addHomework(Homework homework, {Reminder reminder}) async {
+  Future<String> addHomework(Homework homework) async {
     if (homework == null) throw Exception("Wrong homework");
-    if (reminder != null && reminder.dateTime == null) throw Exception("Wrong reminder");
     var reference = _db.getFS().collection(homeworkCollection).document();
     await _db.setData(reference, homework.toFirestore());
-    if (reminder != null){
-      reminder.homeworkId = reference.documentID;
-      reference = _db.getFS().collection(reminderCollection).document();
-      return await _db.setData(reference, reminder.toFirestore());
-    }
-    return;
+    return reference.documentID;
+  }
+
+  Future<void> addReminder(Reminder reminder) async {
+    if (reminder != null &&
+        reminder.dateTime == null &&
+        reminder.homeworkId == null) throw Exception("Wrong reminder");
+    var reference = _db.getFS().collection(reminderCollection).document();
+    return await _db.setData(reference, reminder.toFirestore());
+  }
+
+  Future<List<Homework>> getHomeworks(String userId) async {
+    if (userId == null) throw Exception("Wrong request");
+    var query = _db
+        .getFS()
+        .collection(homeworkCollection)
+        .where("userId", isEqualTo: userId);
+    return await _db.getAllDataByQuery(query).then((querySnapshot) {
+      List<Homework> homeworks = List();
+      for (var doc in querySnapshot.documents) {
+        Homework homework = Homework.fromFirestore(doc);
+        homework.homeworkId = doc.documentID;
+        homeworks.add(homework);
+      }
+      return homeworks;
+    });
+  }
+
+  Future<List<Reminder>> getReminders(String userId) async {
+    if (userId == null) throw Exception("Wrong request");
+    var query = _db
+        .getFS()
+        .collection(reminderCollection)
+        .where("userId", isEqualTo: userId);
+    return await _db.getAllDataByQuery(query).then((querySnapshot) {
+      List<Reminder> reminders = List();
+      for (var doc in querySnapshot.documents) {
+        Reminder reminder = Reminder.fromFirestore(doc);
+        reminder.reminderId = doc.documentID;
+        reminders.add(reminder);
+      }
+      return reminders;
+    });
   }
 
   DocumentReference getLessonCollectionReference() {

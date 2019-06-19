@@ -22,7 +22,7 @@ class HomeworkAddDialogViewModel
     model.onFavouriteSet.addCallback(favouriteSet);
     model.onTestSet.addCallback(testSet);
     model.onReminderSet.setCallbackObject(reminderSet);
-    model.onReminderRemoved.addCallback(remidnerRemoved);
+    model.onReminderRemoved.addCallback(reminderRemoved);
 
     model.onValidateAndSaveHomework.addCallback(validateAndSaveHomework);
 
@@ -97,11 +97,11 @@ class HomeworkAddDialogViewModel
   }
 
   void reminderSet(DateTime dateTime) {
-    model.currentReminder = Reminder(dateTime);
+    model.currentReminder = Reminder(dateTime, model.userManager.user.id);
     view.updateUI();
   }
 
-  void remidnerRemoved() {
+  void reminderRemoved() {
     model.currentReminder = null;
     view.updateUI();
   }
@@ -125,8 +125,8 @@ class HomeworkAddDialogViewModel
 
     model.loadingState = LoadingStates.Loading;
     view.updateUI();
-    await model.firestore
-        .addHomework(model.currentHomework, reminder: model.currentReminder);
+    await model.homeworkManager
+        .addNewHomework(model.currentHomework, reminder: model.currentReminder);
     Navigator.of(view.context).pop();
   }
 }

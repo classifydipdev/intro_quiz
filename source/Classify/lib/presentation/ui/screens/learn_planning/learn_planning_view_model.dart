@@ -46,7 +46,7 @@ class LearnPlanningScreenViewModel
         model.scheduleScreen.view.updateUI();
         var schedules = model.scheduleScreen.model.schedules;
         await model.learningManager
-            .createCompleateSchedules(model.userManager.user.id, schedules);
+            .createCompleteSchedules(model.userManager.user.id, schedules);
 
         model.userManager.user.prefference.firstStart = false;
         if (model.userManager.user != null)

@@ -1,7 +1,7 @@
-import 'package:classify/data/database/firestore/firestore.dart';
 import 'package:classify/data/entities/homework.dart';
 import 'package:classify/data/entities/reminder.dart';
 import 'package:classify/data/entities/schedule.dart';
+import 'package:classify/domain/managers/homework_manager.dart';
 import 'package:classify/domain/managers/schedule_manager.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_model.dart';
 import 'package:classify/presentation/utils/views_states.dart';
@@ -33,7 +33,7 @@ class HomeworkAddDialogModel extends AppModel {
   Reminder currentReminder;
 
   ScheduleManager scheduleManager = ScheduleManager();
-  AppFirbaseFirestore firestore = AppFirbaseFirestore();
+  HomeworkManager homeworkManager = HomeworkManager();
 
   LoadingStates loadingState = LoadingStates.Compleate;
 
