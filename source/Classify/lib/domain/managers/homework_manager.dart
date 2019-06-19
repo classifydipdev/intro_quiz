@@ -16,6 +16,36 @@ class HomeworkManager {
     }
   }
 
+  Future<List<List<Homework>>> getHomeworkSortLists(String userId) async {
+    List<List<Homework>> homeworkSortLists = List();
+    List<Homework> homeworkList = await getHomeworks(userId);
+
+    homeworkList
+        .sort((Homework a, Homework b) => a.dateTime.compareTo(b.dateTime));
+    homeworkSortLists.add(homeworkList);
+
+    homeworkList.sort(homeworkComparator);
+    homeworkSortLists.add(homeworkList);
+
+    List<Homework> testHomework = List();
+
+    for (Homework homework in homeworkList){
+      if (homework.type == HomeworkType.Test)
+        testHomework.add(homework);
+    }
+    homeworkSortLists.add(testHomework);
+
+    return homeworkSortLists;
+  }
+
+  int homeworkComparator(Homework a, Homework b) {
+    if (a.isFavourite && b.isFavourite)
+      return a.dateTime.compareTo(b.dateTime);
+    else if (a.isFavourite || b.isFavourite) return a.isFavourite ? 1 : -1;
+
+    return a.dateTime.compareTo(b.dateTime);
+  }
+
   Future<List<Homework>> getHomeworks(String userId) async {
     List<Homework> homeworks = await _firebaseFirestore.getHomeworks(userId);
     List<Reminder> reminders = await _firebaseFirestore.getReminders(userId);

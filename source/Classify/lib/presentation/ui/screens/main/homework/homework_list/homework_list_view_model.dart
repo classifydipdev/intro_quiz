@@ -9,8 +9,9 @@ class HomeworkListScreenViewModel
   @override
   init() async {
     super.init();
-  }
 
-  @override
-  void preferenceInit() async {}
+    model.homeworkSortLists = await model.homeworkManager
+        .getHomeworkSortLists(model.userManager.user.id);
+    view.updateUI();
+  }
 }
