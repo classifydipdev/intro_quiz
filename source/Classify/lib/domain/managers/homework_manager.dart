@@ -29,9 +29,8 @@ class HomeworkManager {
 
     List<Homework> testHomework = List();
 
-    for (Homework homework in homeworkList){
-      if (homework.type == HomeworkType.Test)
-        testHomework.add(homework);
+    for (Homework homework in homeworkList) {
+      if (homework.type == HomeworkType.Test) testHomework.add(homework);
     }
     homeworkSortLists.add(testHomework);
 

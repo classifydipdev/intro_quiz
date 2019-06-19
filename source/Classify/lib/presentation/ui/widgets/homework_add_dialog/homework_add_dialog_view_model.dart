@@ -125,6 +125,11 @@ class HomeworkAddDialogViewModel
 
     model.loadingState = LoadingStates.Loading;
     view.updateUI();
+
+    model.currentHomework.userId = model.userManager.user.id;
+    if (model.currentReminder != null)
+      model.currentReminder.userId = model.userManager.user.id;
+
     await model.homeworkManager
         .addNewHomework(model.currentHomework, reminder: model.currentReminder);
     Navigator.of(view.context).pop();
