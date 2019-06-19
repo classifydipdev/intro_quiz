@@ -7,7 +7,7 @@ class UserPreference {
 
   UserPreference(this.idUser, this.notification, this.firstStart);
 
-  UserPreference.fromFirestore(DocumentSnapshot document) {
+  UserPreference.fromFireStore(DocumentSnapshot document) {
     assert(document != null, "Document is null!");
     assert(document.data != null, "User and Preference not found!");
     Map<dynamic, dynamic> raw = document.data;
@@ -16,7 +16,7 @@ class UserPreference {
     if (raw['firstStart'] != null) firstStart = raw['firstStart'];
   }
 
-  Map<String, dynamic> toFirestore() {
+  Map<String, dynamic> toFireStore() {
     var json = new Map<String, dynamic>();
     if (notification != null)
       json.putIfAbsent('notification', () => notification);

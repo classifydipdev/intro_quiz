@@ -5,11 +5,11 @@ class User {
   String id;
   String name;
   String photo;
-  UserPreference prefference;
+  UserPreference preference;
 
-  User(this.id, this.name, {this.photo, this.prefference});
+  User(this.id, this.name, {this.photo, this.preference});
 
-  User.fromFirestore(DocumentSnapshot document) {
+  User.fromFireStore(DocumentSnapshot document) {
     assert(document != null, "Document is null!");
     assert(document.data != null, "User not found!");
     Map<dynamic, dynamic> raw = document.data;
@@ -18,7 +18,7 @@ class User {
     if (raw['photo'] != null) photo = raw['photo'];
   }
 
-  Map<String, dynamic> toFirestore() {
+  Map<String, dynamic> toFireStore() {
     var json = new Map<String, dynamic>();
     if (name != null) json.putIfAbsent('name', () => name);
     if (photo != null) json.putIfAbsent('photo', () => photo);

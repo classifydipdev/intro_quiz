@@ -10,7 +10,7 @@ class AppModel extends BaseModel {
   AppViewModel appViewModel;
   AppView appView;
 
-  final Usermanager userManager = Usermanager();
+  final UserManager userManager = UserManager();
   final LearningManager learningManager = LearningManager();
 
   OnCallCommand preferenceInit = new OnCallCommand();

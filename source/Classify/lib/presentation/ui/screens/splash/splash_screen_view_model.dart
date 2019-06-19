@@ -15,8 +15,9 @@ class SplashScreenViewModel
   SplashScreenViewModel(SplashScreenView view) : super(view);
 
   @override
-  init() {
+  init() async {
     super.init();
+    await model.preference.init();
     _setTimer();
     _checkLogin();
     _updateVersionApp();
@@ -56,9 +57,10 @@ class SplashScreenViewModel
     if (model.isLoggedIn) {
       var user = model.userManager.user;
       if (user != null) {
-        var preference = user.prefference;
+        var preference = model.preference;
         if (preference != null) {
-          if (preference.firstStart) {
+          var isFirstStart = preference.isFirstStart();
+          if (isFirstStart == null || isFirstStart) {
             await view.navigateTo(model.context, StartedScreen(), true);
           } else {
             await view.navigateTo(model.context, MainScreen(), true);

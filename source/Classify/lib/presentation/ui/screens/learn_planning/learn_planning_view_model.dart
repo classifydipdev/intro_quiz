@@ -1,3 +1,4 @@
+import 'package:classify/data/entities/user_preference.dart';
 import 'package:classify/domain/managers/schedule_manager.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/learn_planning_model.dart';
@@ -13,6 +14,7 @@ class LearnPlanningScreenViewModel
   @override
   init() async {
     super.init();
+    await model.preference.init();
     model.onPageChanged.setCallbackObject(onPageChanged);
     model.onNavigationTapped.setCallback(onNavigationTapped);
   }
@@ -48,7 +50,14 @@ class LearnPlanningScreenViewModel
         await model.learningManager
             .createCompleateSchedules(model.userManager.user.id, schedules);
 
-        model.userManager.user.prefference.firstStart = false;
+        //TODO: when set Notifications will be in profile, use model.isNotifications
+        // var isNotification = model.isNotifications;
+        var isNotification = true;
+        model.preference.setIsFirstStart(false);
+        var preference =
+            UserPreference(model.userManager.user.id, isNotification, false);
+        await model.userManager.updateUserPreference(preference);
+
         if (model.userManager.user != null)
           await ScheduleManager().setActualSchedule();
         view.navigateTo(view.context, MainScreen(), true);
