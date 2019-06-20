@@ -1,3 +1,4 @@
+import 'package:classify/data/entities/reminder.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Homework {
@@ -8,6 +9,7 @@ class Homework {
   DateTime dateTime;
   bool isFavourite = false;
   HomeworkType type = HomeworkType.Simple;
+  Reminder reminder;
 
   Homework();
 

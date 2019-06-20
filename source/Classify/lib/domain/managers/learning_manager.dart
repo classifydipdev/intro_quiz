@@ -81,7 +81,7 @@ class LearningManager {
     return scheduleList;
   }
 
-  Future<void> createCompleateSchedules(
+  Future<void> createCompleteSchedules(
       String idUser, List<Schedule> schedules) async {
     await AppFirbaseFirestore()
         .createLessonsAndSchedules(idUser, compleateScheduleList: schedules);

@@ -48,7 +48,7 @@ class LearnPlanningScreenViewModel
         model.scheduleScreen.view.updateUI();
         var schedules = model.scheduleScreen.model.schedules;
         await model.learningManager
-            .createCompleateSchedules(model.userManager.user.id, schedules);
+            .createCompleteSchedules(model.userManager.user.id, schedules);
 
         //TODO: when set Notifications will be in profile, use model.isNotifications
         // var isNotification = model.isNotifications;

@@ -1,3 +1,4 @@
+import 'package:classify/data/entities/homework.dart';
 import 'package:classify/presentation/res/colors.dart';
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/res/images.dart';
@@ -49,26 +50,25 @@ class HomeworkListScreenView extends AppView<HomeworkListScreenModel> {
                                           HomeworkTabBarState.Opened
                                       ? DimensApp.sizeMiddle
                                       : 0),
-                              child: TabBarView(
-                                physics: NeverScrollableScrollPhysics(),
-                                children: <Widget>[
-                                  ListView(
-                                    physics: ClampingScrollPhysics(),
-                                    padding: EdgeInsets.all(0),
-                                    children: _homeworkList(),
-                                  ),
-                                  ListView(
-                                    physics: ClampingScrollPhysics(),
-                                    padding: EdgeInsets.all(0),
-                                    children: _homeworkList(),
-                                  ),
-                                  ListView(
-                                    physics: ClampingScrollPhysics(),
-                                    padding: EdgeInsets.all(0),
-                                    children: _homeworkList(),
-                                  ),
-                                ],
-                              ),
+                              child: model.homeworkSortLists != null
+                                  ? TabBarView(
+                                      physics: NeverScrollableScrollPhysics(),
+                                      children: <Widget>[
+                                        _homeworkListView(
+                                            model.homeworkSortLists[0]),
+                                        _homeworkListView(
+                                            model.homeworkSortLists[1]),
+                                        _homeworkListView(
+                                            model.homeworkSortLists[2]),
+                                      ],
+                                    )
+                                  : Center(
+                                      child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                                ColorsApp.centerHomeworkScreen),
+                                      ),
+                                    ),
                             ),
                           ],
                         ),
@@ -188,21 +188,24 @@ class HomeworkListScreenView extends AppView<HomeworkListScreenModel> {
     );
   }
 
-  List<Widget> _homeworkList() {
-    return [
-      _homeworkTopItem(),
-      _homeworkItem(),
-      _homeworkItem(),
-      _homeworkItem(),
-      _homeworkItem(),
-      _homeworkItem(),
-      _homeworkItem(),
-      _homeworkItem(),
-      _homeworkItem(isLast: true),
-    ];
+  ListView _homeworkListView(List<Homework> homeworkList) {
+    var homeworkListLenght = homeworkList.length;
+    return ListView.builder(
+      physics: ClampingScrollPhysics(),
+      padding: EdgeInsets.all(0),
+      itemBuilder: (BuildContext context, int index) {
+        if (index == 0) return _homeworkTopItem(homeworkList[index]);
+
+        if (index == homeworkListLenght - 1)
+          return _homeworkItem(homeworkList[index], isLast: true);
+
+        return _homeworkItem(homeworkList[index]);
+      },
+      itemCount: homeworkListLenght,
+    );
   }
 
-  Widget _homeworkTopItem() {
+  Widget _homeworkTopItem(Homework homework) {
     return Stack(
       children: <Widget>[
         Container(
@@ -227,12 +230,12 @@ class HomeworkListScreenView extends AppView<HomeworkListScreenModel> {
             ),
           ),
         ),
-        _homeworkItem(),
+        _homeworkItem(homework),
       ],
     );
   }
 
-  Widget _homeworkItem({bool isLast = false}) {
+  Widget _homeworkItem(Homework homework, {bool isLast = false}) {
     return Container(
       width: model.screenWidth - DimensApp.paddingNormal,
       margin: EdgeInsets.only(
