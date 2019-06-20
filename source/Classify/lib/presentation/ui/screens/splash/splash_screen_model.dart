@@ -1,3 +1,4 @@
+import 'package:classify/domain/managers/preference_manager.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_model.dart';
 
 class SplashScreenModel extends AppModel {
@@ -5,4 +6,5 @@ class SplashScreenModel extends AppModel {
   bool userChecked = false;
   bool timerChecked = true;
   bool isLoggedIn = false;
+  PreferenceManager preference = PreferenceManager();
 }

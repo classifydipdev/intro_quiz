@@ -1,3 +1,4 @@
+import 'package:classify/domain/managers/preference_manager.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_model.dart';
 import 'package:classify/presentation/utils/validators.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,7 +14,7 @@ class LogInScreenModel extends AppModel {
 
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
-
+  PreferenceManager preference = PreferenceManager();
   bool passwordShow = false;
 
   String emailValidator(String email) {

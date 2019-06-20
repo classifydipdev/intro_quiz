@@ -5,7 +5,7 @@ import 'package:classify/presentation/ui/screens/learn_planning/schedule/schedul
 
 class ScheduleManager {
   LearningManager _learningManager = LearningManager();
-  Usermanager _userManager = Usermanager();
+  UserManager _userManager = UserManager();
 
   static final ScheduleManager _singleton = new ScheduleManager._internal();
 
