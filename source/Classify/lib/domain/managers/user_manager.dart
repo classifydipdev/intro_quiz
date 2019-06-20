@@ -1,15 +1,17 @@
 import 'package:classify/data/auth/firebase/auth.dart';
 import 'package:classify/data/database/firestore/firestore.dart';
 import 'package:classify/data/entities/user.dart';
+import 'package:classify/data/entities/user_preference.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class Usermanager {
-  static final Usermanager _singleton = new Usermanager._internal();
+class UserManager {
+  static final UserManager _singleton = new UserManager._internal();
 
   final AppFirbaseAuth _firbaseAuth = AppFirbaseAuth();
   final AppFirbaseFirestore _firebaseFirestore = AppFirbaseFirestore();
 
   User _user;
+
   User get user {
     return _user;
   }
@@ -65,12 +67,17 @@ class Usermanager {
   Future<void> _getUser(String id) async {
     assert(id != null, 'Wrong id');
     _user = await _firebaseFirestore.getUser(id);
-    _user.prefference = await _firebaseFirestore.getUserPreference(id);
+    _user.preference = await _firebaseFirestore.getUserPreference(id);
   }
 
-  factory Usermanager() {
+  Future<void> updateUserPreference(UserPreference preference) async {
+    assert(preference != null, 'Wrong preference');
+    await _firebaseFirestore.updateUserPreference(preference);
+  }
+
+  factory UserManager() {
     return _singleton;
   }
 
-  Usermanager._internal();
+  UserManager._internal();
 }

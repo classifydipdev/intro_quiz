@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:classify/domain/enities/learning_plan.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,6 +20,14 @@ class PreferenceManager {
     return preferences.getBool(NOTIFY);
   }
 
+  setIsFirstStart(bool enable) {
+    if (enable != null) preferences.setBool(FIRST_START, enable);
+  }
+
+  bool isFirstStart() {
+    return preferences.getBool(FIRST_START);
+  }
+
   LearningPlan getLearningPlan() {
     if (preferences.getString(LEARNING_PLAN) == null) return null;
     return LearningPlan()
@@ -31,6 +40,7 @@ class PreferenceManager {
 
   static const String NOTIFY = "notify";
   static const String LEARNING_PLAN = "learning_plan";
+  static const String FIRST_START = "first_start";
 
   static final PreferenceManager _singleton = new PreferenceManager._internal();
 

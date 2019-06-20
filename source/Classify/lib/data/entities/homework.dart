@@ -13,7 +13,7 @@ class Homework {
 
   Homework();
 
-  Homework.fromFirestore(DocumentSnapshot document) {
+  Homework.fromFireStore(DocumentSnapshot document) {
     assert(document != null, "Document is null!");
     assert(document.data != null, "Homework not found!");
     Map<dynamic, dynamic> raw = document.data;
@@ -43,7 +43,7 @@ class Homework {
     }
   }
 
-  Map<String, dynamic> toFirestore() {
+  Map<String, dynamic> toFireStore() {
     var json = new Map<String, dynamic>();
     if (scheduleId != null) json.putIfAbsent('scheduleId', () => scheduleId);
 

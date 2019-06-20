@@ -3,6 +3,7 @@ import 'package:classify/presentation/ui/screens/auth/auth_screen.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/screens/main/main_screen.dart';
 import 'package:classify/presentation/ui/screens/started/started_screen.dart';
+
 import 'login_screen_model.dart';
 import 'login_screen_view.dart';
 
@@ -13,6 +14,7 @@ class LogInScreenViewModel
   @override
   init() async {
     super.init();
+    await model.preference.init();
     model.onLogIn.setCallback(logIn);
   }
 
@@ -26,9 +28,10 @@ class LogInScreenViewModel
         model.loadingHide.onCall();
         var user = model.userManager.user;
         if (user != null) {
-          var preference = user.prefference;
+          var preference = model.preference;
           if (preference != null) {
-            if (preference.firstStart) {
+            var isFirstStart = preference.isFirstStart();
+            if (isFirstStart == null || isFirstStart) {
               view.navigateTo(model.context, StartedScreen(), true);
             } else {
               ScheduleManager().setActualSchedule();

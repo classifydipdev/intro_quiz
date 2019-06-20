@@ -66,7 +66,7 @@ class AppFirbaseFirestore {
   Future<void> addUser(User user) async {
     if (user == null || user.id == null) throw Exception("Wrong user");
     var reference = _db.getFS().collection(userCollection).document(user.id);
-    return await _db.setData(reference, user.toFirestore());
+    return await _db.setData(reference, user.toFireStore());
   }
 
   Future<void> createUserFromFirebaseAuth(FirebaseUser fbUser,
@@ -87,14 +87,14 @@ class AppFirbaseFirestore {
   Future<void> updateUser(User user) async {
     if (user == null || user.id == null) throw Exception("Wrong user");
     var reference = _db.getFS().collection(userCollection).document(user.id);
-    return await _db.updateData(reference, user.toFirestore());
+    return await _db.updateData(reference, user.toFireStore());
   }
 
   Future<User> getUser(String id) async {
     var reference = _db.getFS().collection(userCollection).document(id);
     return await _db.getData(reference).then((value) {
       if (value.data != null) {
-        return User.fromFirestore(value);
+        return User.fromFireStore(value);
       } else {
         return null;
       }
@@ -109,7 +109,7 @@ class AppFirbaseFirestore {
             .getFS()
             .collection(userPreferenceCollection)
             .document(preference.idUser);
-        return await _db.setData(reference, preference.toFirestore());
+        return await _db.setData(reference, preference.toFireStore());
       } else
         return;
     });
@@ -122,7 +122,7 @@ class AppFirbaseFirestore {
         .getFS()
         .collection(userPreferenceCollection)
         .document(preference.idUser);
-    return await _db.updateData(reference, preference.toFirestore());
+    return await _db.updateData(reference, preference.toFireStore());
   }
 
   Future<UserPreference> getUserPreference(String idUser) async {
@@ -130,7 +130,7 @@ class AppFirbaseFirestore {
         _db.getFS().collection(userPreferenceCollection).document(idUser);
     return await _db.getData(reference).then((value) {
       if (value.data != null) {
-        return UserPreference.fromFirestore(value);
+        return UserPreference.fromFireStore(value);
       } else {
         return null;
       }
