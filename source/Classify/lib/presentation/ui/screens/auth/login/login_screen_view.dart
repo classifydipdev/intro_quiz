@@ -3,10 +3,11 @@ import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/utils/field_container.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:classify/presentation/utils/localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'login_screen_model.dart';
 
@@ -44,11 +45,11 @@ class LogInScreenView extends AppView<LogInScreenModel> {
             children: <Widget>[
               getLogo(),
               SizedBox(height: 60),
-              getFieldContainer("email", "Email", model.emailTextController,
-                  model.emailValidator),
+              getFieldContainer(AppLocalizations().email, "Email",
+                  model.emailTextController, model.emailValidator),
               SizedBox(height: DimensApp.sizeSmall),
               getFieldContainer(
-                "password",
+                AppLocalizations().password,
                 "Password",
                 model.passwordTextController,
                 model.passwordValidator,
@@ -77,8 +78,7 @@ class LogInScreenView extends AppView<LogInScreenModel> {
                     left: DimensApp.paddingMiddleExtra,
                     right: DimensApp.paddingMiddleExtra),
                 child: Text(
-                  "by clicking sign up, you agree to our terms of use,"
-                  "\nprivacy policy and disclaimer",
+                  AppLocalizations().privacyPolicy,
                   textAlign: TextAlign.center,
                   style: ThemeApp.littleWhiteTextStyle,
                 ),
@@ -127,7 +127,7 @@ class LogInScreenView extends AppView<LogInScreenModel> {
                       DimensApp.paddingSmallExtra,
                       DimensApp.paddingSmallExtra,
                       DimensApp.paddingMiddle),
-                  child: Text("switch account",
+                  child: Text(AppLocalizations().switchAccount,
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -152,7 +152,7 @@ class LogInScreenView extends AppView<LogInScreenModel> {
                 padding: EdgeInsets.only(
                     top: DimensApp.paddingSmallExtra,
                     bottom: DimensApp.paddingSmallExtra),
-                child: Text("sign in",
+                child: Text(AppLocalizations().signIn,
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold)),
               ),

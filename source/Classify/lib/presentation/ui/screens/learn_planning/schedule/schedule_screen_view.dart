@@ -7,6 +7,7 @@ import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/schedule/schedule_screen_model.dart';
 import 'package:classify/presentation/ui/widgets/subject_item.dart';
+import 'package:classify/presentation/utils/localizations.dart';
 import 'package:classify/presentation/utils/views_states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -144,7 +145,7 @@ class ScheduleScreenView extends AppView<ScheduleScreenModel>
                       DimensApp.paddingSmall,
                     ),
                     child: Text(
-                      "Subjects",
+                      AppLocalizations().subjects,
                       style: ThemeApp.middleExtraBlackTextStyle,
                     ),
                   ),

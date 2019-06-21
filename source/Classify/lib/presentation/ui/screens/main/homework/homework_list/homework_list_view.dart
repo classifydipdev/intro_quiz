@@ -87,7 +87,7 @@ class HomeworkListScreenView extends AppView<HomeworkListScreenModel> {
 
   Widget _pageHeader() {
     return Container(
-      height: model.screenHeight / 4 -
+      height: model.screenHeight / 3.6 -
           75 +
           (model.tabBarState == HomeworkTabBarState.Opened
               ? DimensApp.sizeMiddle

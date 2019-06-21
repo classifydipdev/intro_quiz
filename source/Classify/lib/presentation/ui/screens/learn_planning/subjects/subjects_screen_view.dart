@@ -4,6 +4,7 @@ import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/subjects/subjects_screen_model.dart';
 import 'package:classify/presentation/ui/widgets/subject_item.dart';
+import 'package:classify/presentation/utils/localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +24,7 @@ class SubjectsScreenView extends AppView<SubjectsScreenModel> {
         stream: model.subjectStream,
         builder: (context, asyncSnapshot) {
           if (asyncSnapshot.hasError) {
-            return Center(child: Text("Error!"));
+            return Center(child: Text(AppLocalizations().error));
           } else if (asyncSnapshot.data == null) {
             return Center(
               child: Padding(
@@ -56,13 +57,17 @@ class SubjectsScreenView extends AppView<SubjectsScreenModel> {
             padding: EdgeInsets.fromLTRB(DimensApp.paddingSmall,
                 DimensApp.paddingMiddle, DimensApp.paddingSmall, 0),
             child: Text(
-              "Subjects",
+              AppLocalizations().subjects,
               textAlign: TextAlign.left,
               style: ThemeApp.bigWhiteBoldTextStyle,
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(DimensApp.paddingSmall, DimensApp.paddingSmall, DimensApp.paddingSmall, DimensApp.paddingMiddle),
+            padding: EdgeInsets.fromLTRB(
+                DimensApp.paddingSmall,
+                DimensApp.paddingSmall,
+                DimensApp.paddingSmall,
+                DimensApp.paddingMiddle),
             child: Text(
               "All the timetabled subjects, don't fret: you can always edit these later.",
               textAlign: TextAlign.left,
