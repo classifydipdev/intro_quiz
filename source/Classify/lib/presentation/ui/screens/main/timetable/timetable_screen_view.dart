@@ -149,7 +149,7 @@ class TimetableScreenView extends AppView<TimetableScreenModel> {
                     ? Container(
                         height: model.scheduleListHeight,
                         child: TabBarView(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: PageScrollPhysics(),
                           children: <Widget>[
                             getDaySchedule(0),
                             getDaySchedule(1),
@@ -193,16 +193,22 @@ class TimetableScreenView extends AppView<TimetableScreenModel> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text(
-                        model.scheduleDaysItems[day][index].name,
-                        textAlign: TextAlign.left,
-                        style: ThemeApp.middleGreyBoldTextStyle,
+                      Padding(
+                          padding: EdgeInsets.only(left: 8.0),
+                          child: Text(
+                            model.scheduleDaysItems[day][index].name,
+                            textAlign: TextAlign.left,
+                            style: ThemeApp.middleGreyBoldTextStyle,
+                          )),
+                      Padding(
+                        padding:
+                            EdgeInsets.only(right: DimensApp.paddingSmallExtra),
+                        child: Text(
+                          model.scheduleDaysItems[day][index].position,
+                          textAlign: TextAlign.right,
+                          style: ThemeApp.littleGreenTextStyle,
+                        ),
                       ),
-                      Text(
-                        model.scheduleDaysItems[day][index].position,
-                        textAlign: TextAlign.right,
-                        style: ThemeApp.littleGreenTextStyle,
-                      )
                     ],
                   ),
                 );

@@ -384,7 +384,7 @@ class AppFirbaseFirestore {
   Future<String> addHomework(Homework homework) async {
     if (homework == null) throw Exception("Wrong homework");
     var reference = _db.getFS().collection(homeworkCollection).document();
-    await _db.setData(reference, homework.toFirestore());
+    await _db.setData(reference, homework.toFireStore());
     return reference.documentID;
   }
 
@@ -405,7 +405,7 @@ class AppFirbaseFirestore {
     return await _db.getAllDataByQuery(query).then((querySnapshot) {
       List<Homework> homeworks = List();
       for (var doc in querySnapshot.documents) {
-        Homework homework = Homework.fromFirestore(doc);
+        Homework homework = Homework.fromFireStore(doc);
         homework.homeworkId = doc.documentID;
         homeworks.add(homework);
       }
