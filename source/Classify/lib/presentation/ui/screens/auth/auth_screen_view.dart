@@ -3,6 +3,7 @@ import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/auth/auth_screen_model.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
+import 'package:classify/presentation/utils/localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -45,8 +46,7 @@ class AuthScreenView extends AppView<AuthScreenModel> {
                       bottom: DimensApp.paddingMiddleExtra),
                   child: createLogo()),
               Padding(
-                padding: EdgeInsets.only(
-                    top: model.screenHeight * 0.32),
+                padding: EdgeInsets.only(top: model.screenHeight * 0.32),
                 child: Column(
                   children: <Widget>[
                     Padding(
@@ -83,7 +83,7 @@ class AuthScreenView extends AppView<AuthScreenModel> {
           ),
           SizedBox(height: model.screenHeight * 0.1),
           Text(
-            "for students; by students",
+            AppLocalizations().forStudents,
             style: ThemeApp.middleWhiteBoldTextStyle,
           )
         ],
@@ -205,7 +205,7 @@ class AuthScreenView extends AppView<AuthScreenModel> {
               ),
               Expanded(
                 child: Text(
-                  "Sign up with email",
+                  AppLocalizations().signUpWithEmail,
                   textAlign: TextAlign.center,
                   maxLines: 1,
                   style: ThemeApp.smallWhiteTextStyle,
@@ -240,7 +240,7 @@ class AuthScreenView extends AppView<AuthScreenModel> {
                 child: Container(
                   alignment: Alignment.center,
                   child: Text(
-                    "Log in",
+                    AppLocalizations().logIn,
                     style: ThemeApp.smallWhiteTextStyle,
                   ),
                 ),

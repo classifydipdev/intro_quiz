@@ -23,6 +23,44 @@ class AppLocalizations {
     return Intl.message('Classify', name: 'app_name');
   }
 
+  String get forStudents {
+    return Intl.message('for students; by students', name: 'forStudents');
+  }
+
+  String get signUpWithEmail {
+    return Intl.message('Sign up with email', name: 'signUpWithEmail');
+  }
+
+  String get signUp {
+    return Intl.message('sign up', name: 'signUp');
+  }
+
+  String get signIn {
+    return Intl.message('sign in', name: 'signIn');
+  }
+
+  String get logIn {
+    return Intl.message('Log in', name: 'logIn');
+  }
+
+  String get privacyPolicy {
+    return Intl.message(
+        'by clicking sign up, you agree to our terms of use, \nprivacy policy and disclaimer',
+        name: 'privacyPolicy');
+  }
+
+  String get switchAccount {
+    return Intl.message('switch account', name: 'switchAccount');
+  }
+
+  String get email {
+    return Intl.message('email', name: 'email');
+  }
+
+  String get password {
+    return Intl.message('password', name: 'password');
+  }
+
   String get navigationButtonNext {
     return Intl.message('Next', name: 'navigation_next');
   }
@@ -33,6 +71,14 @@ class AppLocalizations {
 
   String get navigationButtonSave {
     return Intl.message('Save', name: 'navigation_save');
+  }
+
+  String get error {
+    return Intl.message('Error!', name: 'error');
+  }
+
+  String get subjects {
+    return Intl.message('Subjects', name: 'sublects');
   }
 }
 
