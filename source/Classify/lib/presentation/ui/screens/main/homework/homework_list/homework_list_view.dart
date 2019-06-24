@@ -247,7 +247,7 @@ class HomeworkListScreenView extends AppView<HomeworkListScreenModel> {
       child: CupertinoButton(
         padding: EdgeInsets.all(0),
         onPressed: () {
-          model.onNavigateToDetails();
+          model.onNavigateToDetails(homework);
         },
         child: Container(
           decoration: BoxDecoration(

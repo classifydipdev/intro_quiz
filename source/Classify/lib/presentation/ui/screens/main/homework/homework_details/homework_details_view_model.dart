@@ -9,8 +9,8 @@ class HomeworkDetailsViewModel
   @override
   init() {
     super.init();
-    model.onTap.setCallback(onTap);
-  }
 
-  void onTap() {}
+    model.currentSchedule =
+        model.scheduleManager.getScheduleById(model.homework.scheduleId);
+  }
 }

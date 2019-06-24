@@ -1,3 +1,4 @@
+import 'package:classify/data/entities/homework.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/main/homework/homework_details/homework_details_screen.dart';
 import 'package:classify/presentation/ui/screens/main/homework/homework_list/homework_list_screen.dart';
@@ -13,16 +14,18 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
   Widget getView(BuildContext context) {
     return model.screenState == HomeworkScreenState.List
         ? HomeworkListScreen(navigateToDetails)
-        : HomeworkDetailsScreen(navigateToList);
+        : HomeworkDetailsScreen(model.selectedHomework, navigateToList);
   }
 
-  void navigateToDetails(){
+  void navigateToDetails(Homework homework){
     model.screenState = HomeworkScreenState.Details;
+    model.selectedHomework = homework;
     updateUI();
   }
 
   void navigateToList(){
     model.screenState = HomeworkScreenState.List;
+    model.selectedHomework = null;
     updateUI();
   }
 }

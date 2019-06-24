@@ -1,3 +1,4 @@
+import 'package:classify/data/entities/homework.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_screen.dart';
 import 'package:classify/presentation/ui/screens/main/homework/homework_details/homework_details_model.dart';
 import 'package:classify/presentation/ui/screens/main/homework/homework_details/homework_details_view.dart';
@@ -6,8 +7,8 @@ import 'package:classify/presentation/ui/screens/main/homework/homework_details/
 class HomeworkDetailsScreen extends AppScreen<HomeworkDetailsModel,
     HomeworkDetailsView, HomeworkDetailsViewModel> {
 
-  HomeworkDetailsScreen(Function onNavigateToList)
-      : super(new HomeworkDetailsModel(onNavigateToList));
+  HomeworkDetailsScreen(Homework homework, Function onNavigateToList)
+      : super(new HomeworkDetailsModel(homework, onNavigateToList));
 
   @override
   HomeworkDetailsView initView(HomeworkDetailsModel model) {
