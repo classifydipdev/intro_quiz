@@ -29,7 +29,8 @@ class Homework {
     if (raw['text'] != null) text = raw['text'];
 
     if (raw['dateTime'] != null)
-      dateTime = DateTime.fromMillisecondsSinceEpoch(raw['dateTime']);
+      dateTime = DateTime.fromMillisecondsSinceEpoch(
+          raw['dateTime'].millisecondsSinceEpoch);
 
     if (raw['isFavourite'] != null) isFavourite = raw['isFavourite'];
 

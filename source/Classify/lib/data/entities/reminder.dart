@@ -20,7 +20,8 @@ class Reminder {
     if (raw['userId'] != null) userId = raw['userId'];
 
     if (raw['dateTime'] != null)
-      dateTime = DateTime.fromMillisecondsSinceEpoch(raw['dateTime']);
+      dateTime = DateTime.fromMillisecondsSinceEpoch(
+          raw['dateTime'].millisecondsSinceEpoch);
   }
 
   Map<String, dynamic> toFirestore() {
