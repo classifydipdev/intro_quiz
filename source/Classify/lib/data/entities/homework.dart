@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:classify/data/entities/reminder.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -72,3 +74,7 @@ class Homework {
 }
 
 enum HomeworkType { Simple, Test }
+
+List<Homework> parseHomeworks(List<DocumentSnapshot> docs) {
+  return docs.map<Homework>((json) => Homework.fromFireStore(json)).toList();
+}

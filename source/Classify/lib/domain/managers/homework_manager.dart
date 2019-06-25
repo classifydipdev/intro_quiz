@@ -17,24 +17,23 @@ class HomeworkManager {
   }
 
   Future<List<List<Homework>>> getHomeworkSortLists(String userId) async {
-    List<List<Homework>> homeworkSortLists = List();
-    List<Homework> homeworkList = await getHomeworks(userId);
+    return getHomeworks(userId).then((List<Homework> homeworkList) {
+      List<List<Homework>> homeworkSortLists = List();
 
-    homeworkList
-        .sort((Homework a, Homework b) => a.dateTime.compareTo(b.dateTime));
-    homeworkSortLists.add(homeworkList);
+      homeworkList
+          .sort((Homework a, Homework b) => a.dateTime.compareTo(b.dateTime));
+      homeworkSortLists.add(homeworkList);
 
-    homeworkList.sort(homeworkComparator);
-    homeworkSortLists.add(homeworkList);
+      homeworkList.sort(homeworkComparator);
+      homeworkSortLists.add(homeworkList);
 
-    List<Homework> testHomework = List();
+      List<Homework> testHomework = List();
 
-    for (Homework homework in homeworkList) {
-      if (homework.type == HomeworkType.Test) testHomework.add(homework);
-    }
-    homeworkSortLists.add(testHomework);
-
-    return homeworkSortLists;
+      for (Homework homework in homeworkList) {
+        if (homework.type == HomeworkType.Test) testHomework.add(homework);
+      }
+      homeworkSortLists.add(testHomework);
+    });
   }
 
   int homeworkComparator(Homework a, Homework b) {

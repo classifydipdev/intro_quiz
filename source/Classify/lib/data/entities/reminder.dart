@@ -35,3 +35,7 @@ class Reminder {
     return json;
   }
 }
+
+List<Reminder> parseReminders(List<DocumentSnapshot> docs) {
+  return docs.map<Reminder>((json) => Reminder.fromFirestore(json)).toList();
+}
