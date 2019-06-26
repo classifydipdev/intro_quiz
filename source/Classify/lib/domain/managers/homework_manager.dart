@@ -33,6 +33,8 @@ class HomeworkManager {
         if (homework.type == HomeworkType.Test) testHomework.add(homework);
       }
       homeworkSortLists.add(testHomework);
+
+      return homeworkSortLists;
     });
   }
 

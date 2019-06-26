@@ -62,12 +62,17 @@ class HomeworkListScreenView extends AppView<HomeworkListScreenModel> {
                                             model.homeworkSortLists[2]),
                                       ],
                                     )
-                                  : Center(
-                                      child: CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
+                                  : Stack(
+                                      children: <Widget>[
+                                        _topArc(),
+                                        Center(
+                                          child: CircularProgressIndicator(
+                                            valueColor: AlwaysStoppedAnimation<
+                                                    Color>(
                                                 ColorsApp.centerHomeworkScreen),
-                                      ),
+                                          ),
+                                        )
+                                      ],
                                     ),
                             ),
                           ],
@@ -188,50 +193,60 @@ class HomeworkListScreenView extends AppView<HomeworkListScreenModel> {
     );
   }
 
-  ListView _homeworkListView(List<Homework> homeworkList) {
+  Widget _homeworkListView(List<Homework> homeworkList) {
     var homeworkListLenght = homeworkList.length;
-    return ListView.builder(
-      physics: ClampingScrollPhysics(),
-      padding: EdgeInsets.all(0),
-      itemBuilder: (BuildContext context, int index) {
-        if (index == 0) return _homeworkTopItem(homeworkList[index]);
+    return homeworkListLenght > 0
+        ? ListView.builder(
+            physics: ClampingScrollPhysics(),
+            padding: EdgeInsets.all(0),
+            itemBuilder: (BuildContext context, int index) {
+              if (index == 0) return _homeworkTopItem(homeworkList[index]);
 
-        if (index == homeworkListLenght - 1)
-          return _homeworkItem(homeworkList[index], isLast: true);
+              if (index == homeworkListLenght - 1)
+                return _homeworkItem(homeworkList[index], isLast: true);
 
-        return _homeworkItem(homeworkList[index]);
-      },
-      itemCount: homeworkListLenght,
-    );
+              return _homeworkItem(homeworkList[index]);
+            },
+            itemCount: homeworkListLenght,
+          )
+        : Column(
+            children: <Widget>[
+              _topArc(),
+              Expanded(
+                child: Container(),
+              )
+            ],
+          );
   }
 
   Widget _homeworkTopItem(Homework homework) {
     return Stack(
       children: <Widget>[
-        Container(
-          height: 75.0 -
-              (model.tabBarState == HomeworkTabBarState.Opened
-                  ? DimensApp.sizeMiddle
-                  : 0),
-          width: double.maxFinite,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                ColorsApp.startHomeworkScreen,
-                ColorsApp.endHomeworkScreen
-              ],
-              begin: Alignment.centerRight,
-              end: Alignment.bottomLeft,
-              stops: [0.11, 1.0],
-              tileMode: TileMode.clamp,
-            ),
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.elliptical(300, 20),
-            ),
-          ),
-        ),
+        _topArc(),
         _homeworkItem(homework),
       ],
+    );
+  }
+
+  Widget _topArc() {
+    return Container(
+      height: 75.0 -
+          (model.tabBarState == HomeworkTabBarState.Opened
+              ? DimensApp.sizeMiddle
+              : 0),
+      width: double.maxFinite,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [ColorsApp.startHomeworkScreen, ColorsApp.endHomeworkScreen],
+          begin: Alignment.centerRight,
+          end: Alignment.bottomLeft,
+          stops: [0.11, 1.0],
+          tileMode: TileMode.clamp,
+        ),
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.elliptical(300, 20),
+        ),
+      ),
     );
   }
 
@@ -239,9 +254,9 @@ class HomeworkListScreenView extends AppView<HomeworkListScreenModel> {
     return Container(
       width: model.screenWidth - DimensApp.paddingNormal,
       margin: EdgeInsets.only(
-          top: DimensApp.marginMiddle,
+          top: DimensApp.marginMiddleExtra,
           right: DimensApp.paddingSmallExtra,
-          left: DimensApp.paddingSmallExtra,
+          left: DimensApp.paddingSmall,
           bottom:
               isLast ? DimensApp.paddingLargeExtra : DimensApp.paddingMicro),
       child: CupertinoButton(
