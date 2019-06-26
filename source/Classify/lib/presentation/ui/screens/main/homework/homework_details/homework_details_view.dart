@@ -104,9 +104,7 @@ class HomeworkDetailsView extends AppView<HomeworkDetailsModel> {
             ),
             Expanded(
               child: Text(
-                model.currentSchedule != null
-                    ? model.currentSchedule.subject.name.toUpperCase()
-                    : "",
+                model.homework.schedule.subject.name,
                 style: ThemeApp.middleExtraWhiteBoldTextStyle,
                 textAlign: TextAlign.center,
               ),

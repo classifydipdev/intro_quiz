@@ -14,6 +14,4 @@ class HomeworkDetailsModel extends AppModel {
   HomeworkDetailsModel(this.homework, this.onNavigateToList);
 
   ScheduleManager scheduleManager = ScheduleManager();
-
-  Schedule currentSchedule;
 }

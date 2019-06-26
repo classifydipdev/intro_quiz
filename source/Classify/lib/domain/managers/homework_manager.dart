@@ -1,11 +1,14 @@
 import 'package:classify/data/database/firestore/firestore.dart';
 import 'package:classify/data/entities/homework.dart';
 import 'package:classify/data/entities/reminder.dart';
+import 'package:classify/data/entities/schedule.dart';
+import 'package:classify/domain/managers/schedule_manager.dart';
 
 class HomeworkManager {
   static final HomeworkManager _singleton = new HomeworkManager._internal();
 
   final AppFirbaseFirestore _firebaseFirestore = AppFirbaseFirestore();
+  final ScheduleManager _scheduleManager = ScheduleManager();
 
   Future<void> addNewHomework(Homework homework, {Reminder reminder}) async {
     var homeworkId = await _firebaseFirestore.addHomework(homework);
@@ -58,6 +61,16 @@ class HomeworkManager {
         }
       }
     }
+
+    for (Schedule schedule in _scheduleManager.scheduleList) {
+      for (var i = 0; i < homeworks.length; i++) {
+        if (homeworks[i].scheduleId == schedule.id) {
+          homeworks[i].schedule = schedule;
+          break;
+        }
+      }
+    }
+
     return homeworks;
   }
 

@@ -7,6 +7,7 @@ import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dar
 import 'package:classify/presentation/ui/screens/main/homework/homework_list/homework_list_model.dart';
 import 'package:classify/presentation/ui/widgets/homework_add_dialog/homework_add_dialog_screen.dart';
 import 'package:classify/presentation/ui/widgets/homework_add_dialog/modal_bottom_sheet_app.dart';
+import 'package:classify/presentation/utils/utility.dart';
 import 'package:classify/presentation/utils/views_states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -301,14 +302,14 @@ class HomeworkListScreenView extends AppView<HomeworkListScreenModel> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "Spanish",
+                          homework.schedule.subject.name,
                           textAlign: TextAlign.left,
                           style: ThemeApp.middleGreyBoldTextStyle,
                         ),
                         Padding(
                           padding: EdgeInsets.only(top: DimensApp.paddingSmall),
                           child: Text(
-                            "Read chapter 1 of palabra book",
+                            homework.text,
                             textAlign: TextAlign.left,
                             style: ThemeApp.picoGreyTextStyle,
                           ),
@@ -316,7 +317,7 @@ class HomeworkListScreenView extends AppView<HomeworkListScreenModel> {
                       ],
                     ),
                     Text(
-                      "Tomorrow".toUpperCase(),
+                      Utility.getDateRange(homework.dateTime),
                       textAlign: TextAlign.right,
                       style: ThemeApp.littleOrangeTextStyle,
                     )

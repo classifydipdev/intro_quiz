@@ -9,8 +9,5 @@ class HomeworkDetailsViewModel
   @override
   init() {
     super.init();
-
-    model.currentSchedule =
-        model.scheduleManager.getScheduleById(model.homework.scheduleId);
   }
 }

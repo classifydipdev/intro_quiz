@@ -1,6 +1,5 @@
-import 'dart:convert';
-
 import 'package:classify/data/entities/reminder.dart';
+import 'package:classify/data/entities/schedule.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Homework {
@@ -11,6 +10,8 @@ class Homework {
   DateTime dateTime;
   bool isFavourite = false;
   HomeworkType type = HomeworkType.Simple;
+
+  Schedule schedule;
   Reminder reminder;
 
   Homework();
@@ -48,7 +49,7 @@ class Homework {
 
   Map<String, dynamic> toFireStore() {
     var json = new Map<String, dynamic>();
-    if (scheduleId != null) json.putIfAbsent('scheduleId', () => scheduleId);
+    if (schedule != null) json.putIfAbsent('scheduleId', () => schedule.id);
 
     if (userId != null) json.putIfAbsent('userId', () => userId);
 
