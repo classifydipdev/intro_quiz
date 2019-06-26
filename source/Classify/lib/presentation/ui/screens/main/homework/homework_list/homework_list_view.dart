@@ -51,7 +51,7 @@ class HomeworkListScreenView extends AppView<HomeworkListScreenModel> {
                                           HomeworkTabBarState.Opened
                                       ? DimensApp.sizeMiddle
                                       : 0),
-                              child: model.homeworkSortLists != null
+                              child: model.loadingState == LoadingStates.Compleate
                                   ? TabBarView(
                                       physics: NeverScrollableScrollPhysics(),
                                       children: <Widget>[

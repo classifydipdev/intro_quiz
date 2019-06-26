@@ -16,4 +16,6 @@ class HomeworkListScreenModel extends AppModel {
   List<List<Homework>> homeworkSortLists;
 
   HomeworkManager homeworkManager = HomeworkManager();
+
+  LoadingStates loadingState = LoadingStates.Loading;
 }
