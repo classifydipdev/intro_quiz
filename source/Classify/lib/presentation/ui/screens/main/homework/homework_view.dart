@@ -13,19 +13,28 @@ class HomeworkScreenView extends AppView<HomeworkScreenModel> {
   @override
   Widget getView(BuildContext context) {
     return model.screenState == HomeworkScreenState.List
-        ? HomeworkListScreen(navigateToDetails)
+        ? model.homeworkListScreen != null
+            ? model.homeworkListScreen
+            : Container()
         : HomeworkDetailsScreen(model.selectedHomework, navigateToList);
   }
 
-  void navigateToDetails(Homework homework){
+  void navigateToDetails(Homework homework) {
     model.screenState = HomeworkScreenState.Details;
     model.selectedHomework = homework;
     updateUI();
   }
 
-  void navigateToList(){
+  void navigateToList() {
     model.screenState = HomeworkScreenState.List;
     model.selectedHomework = null;
+    updateUI();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    model.homeworkListScreen = HomeworkListScreen(navigateToDetails);
     updateUI();
   }
 }

@@ -18,6 +18,9 @@ class HomeworkListScreenViewModel
       model.homeworkSortLists = homeworkSort;
       model.loadingState = LoadingStates.Compleate;
       view.updateUI();
+    }).whenComplete(() {
+      model.loadingState = LoadingStates.Compleate;
+      view.updateUI();
     });
   }
 }
