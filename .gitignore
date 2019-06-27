@@ -9,3 +9,6 @@ source/Classify/ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
 source/Classify/ios/Runner.xcworkspace/contents.xcworkspacedata
 source/Classify/ios/Runner/Runner.entitlements
 source/Classify/android/.idea/workspace.xml
+source/Classify/ios/Podfile.lock
+documents/key/ios/.DS_Store
+.DS_Store
