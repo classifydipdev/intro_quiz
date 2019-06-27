@@ -20,3 +20,5 @@ class HomeworkAddDialogScreen extends AppScreen<HomeworkAddDialogModel,
     return HomeworkAddDialogViewModel(view);
   }
 }
+
+enum HomeworkAddDialogType{ Add, Edit }

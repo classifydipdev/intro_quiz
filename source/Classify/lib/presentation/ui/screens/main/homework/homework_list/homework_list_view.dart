@@ -51,7 +51,8 @@ class HomeworkListScreenView extends AppView<HomeworkListScreenModel> {
                                           HomeworkTabBarState.Opened
                                       ? DimensApp.sizeMiddle
                                       : 0),
-                              child: model.loadingState == LoadingStates.Compleate
+                              child: model.loadingState ==
+                                      LoadingStates.Compleate
                                   ? TabBarView(
                                       physics: NeverScrollableScrollPhysics(),
                                       children: <Widget>[
@@ -377,12 +378,14 @@ class HomeworkListScreenView extends AppView<HomeworkListScreenModel> {
     );
   }
 
-  void showAddHomeworkDialog() {
-    showModalBottomSheetApp(
+  Future showAddHomeworkDialog() async {
+    Homework homework = await showModalBottomSheetApp(
       context: context,
       builder: (BuildContext buildContext) {
         return HomeworkAddDialogScreen();
       },
     );
+
+    if (homework != null) model.onHomeworkAdded.onCallWithValue(homework);
   }
 }

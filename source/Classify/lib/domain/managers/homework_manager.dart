@@ -10,35 +10,50 @@ class HomeworkManager {
   final AppFirbaseFirestore _firebaseFirestore = AppFirbaseFirestore();
   final ScheduleManager _scheduleManager = ScheduleManager();
 
-  Future<void> addNewHomework(Homework homework, {Reminder reminder}) async {
+  List<Homework> homeworkList;
+
+  Future<void> addNewHomework(Homework homework) async {
     var homeworkId = await _firebaseFirestore.addHomework(homework);
 
-    if (reminder != null) {
-      reminder.homeworkId = homeworkId;
-      await _firebaseFirestore.addReminder(reminder);
+    if (homework.reminder != null) {
+      homework.reminder.homeworkId = homeworkId;
+      await _firebaseFirestore.addReminder(homework.reminder);
     }
   }
 
-  Future<List<List<Homework>>> getHomeworkSortLists(String userId) async {
-    return getHomeworks(userId).then((List<Homework> homeworkList) {
-      List<List<Homework>> homeworkSortLists = List();
-
-      homeworkList
-          .sort((Homework a, Homework b) => a.dateTime.compareTo(b.dateTime));
-      homeworkSortLists.add(homeworkList);
-
-      homeworkList.sort(homeworkComparator);
-      homeworkSortLists.add(homeworkList);
-
-      List<Homework> testHomework = List();
-
-      for (Homework homework in homeworkList) {
-        if (homework.type == HomeworkType.Test) testHomework.add(homework);
+  Future<void> editHomework(Homework homework) async {
+    return _firebaseFirestore.editHomework(homework).then((s) async {
+      if (homework.reminder != null) {
+        return await _firebaseFirestore.addReminder(homework.reminder);
       }
-      homeworkSortLists.add(testHomework);
-
-      return homeworkSortLists;
     });
+  }
+
+  Future<List<List<Homework>>> getHomeworkSortLists(String userId) async {
+    return getHomeworks(userId).then((List<Homework> homeworks) {
+      homeworkList = homeworks;
+      return sortHomeworkLists();
+    });
+  }
+
+  List<List<Homework>> sortHomeworkLists() {
+    List<List<Homework>> homeworkSortLists = List();
+
+    homeworkList
+        .sort((Homework a, Homework b) => a.dateTime.compareTo(b.dateTime));
+    homeworkSortLists.add(homeworkList);
+
+    homeworkList.sort(homeworkComparator);
+    homeworkSortLists.add(homeworkList);
+
+    List<Homework> testHomework = List();
+
+    for (Homework homework in homeworkList) {
+      if (homework.type == HomeworkType.Test) testHomework.add(homework);
+    }
+    homeworkSortLists.add(testHomework);
+
+    return homeworkSortLists;
   }
 
   int homeworkComparator(Homework a, Homework b) {
@@ -66,12 +81,17 @@ class HomeworkManager {
       for (var i = 0; i < homeworks.length; i++) {
         if (homeworks[i].scheduleId == schedule.id) {
           homeworks[i].schedule = schedule;
-          break;
         }
       }
     }
 
     return homeworks;
+  }
+
+  List<List<Homework>> addHomeworkAndSortLists(Homework homework) {
+    if (homeworkList == null) homeworkList = List();
+    homeworkList.add(homework);
+    return sortHomeworkLists();
   }
 
   factory HomeworkManager() {

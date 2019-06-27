@@ -3,6 +3,7 @@ import 'package:classify/data/entities/reminder.dart';
 import 'package:classify/data/entities/schedule.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/widgets/homework_add_dialog/homework_add_dialog_model.dart';
+import 'package:classify/presentation/ui/widgets/homework_add_dialog/homework_add_dialog_screen.dart';
 import 'package:classify/presentation/ui/widgets/homework_add_dialog/homework_add_dialog_view.dart';
 import 'package:classify/presentation/utils/views_states.dart';
 import 'package:flutter/widgets.dart';
@@ -19,12 +20,12 @@ class HomeworkAddDialogViewModel
     model.onScheduleDateSelected.setCallbackObject(scheduleDateSelected);
     model.onScheduleDateRemoved.setCallback(scheduleDateRemoved);
 
-    model.onFavouriteSet.addCallback(favouriteSet);
-    model.onTestSet.addCallback(testSet);
+    model.onFavouriteSet.setCallback(favouriteSet);
+    model.onTestSet.setCallback(testSet);
     model.onReminderSet.setCallbackObject(reminderSet);
-    model.onReminderRemoved.addCallback(reminderRemoved);
+    model.onReminderRemoved.setCallback(reminderRemoved);
 
-    model.onValidateAndSaveHomework.addCallback(validateAndSaveHomework);
+    model.onValidateAndSaveHomework.setCallback(validateAndSaveHomework);
 
     setNearestUniqueScheduleList();
   }
@@ -36,7 +37,7 @@ class HomeworkAddDialogViewModel
   }
 
   void scheduleSelected(Schedule schedule) {
-    model.selectedSchedule = schedule;
+    model.currentHomework.schedule = schedule;
     model.currentHomework.schedule = schedule;
 
     model.currentHomework.dateTime = getNearestDayDate(schedule.day);
@@ -45,7 +46,7 @@ class HomeworkAddDialogViewModel
   }
 
   void scheduleRemoved() {
-    model.selectedSchedule = null;
+    model.currentHomework.schedule = null;
     model.currentHomework.schedule = null;
     model.validHomeworkDays = null;
     view.updateUI();
@@ -57,10 +58,11 @@ class HomeworkAddDialogViewModel
         .getNearestUniqueSubjectSchedules(
             day: model.currentHomework.dateTime.weekday - 1);
 
-    if (model.selectedSchedule != null) {
-      model.selectedSchedule = model.scheduleManager.getDaySchedule(
-          model.selectedSchedule, model.currentHomework.dateTime.weekday - 1);
-      model.currentHomework.schedule = model.selectedSchedule;
+    if (model.currentHomework.schedule != null) {
+      model.currentHomework.schedule = model.scheduleManager.getDaySchedule(
+          model.currentHomework.schedule,
+          model.currentHomework.dateTime.weekday - 1);
+      model.currentHomework.schedule = model.currentHomework.schedule;
     }
     view.updateUI();
   }
@@ -97,12 +99,13 @@ class HomeworkAddDialogViewModel
   }
 
   void reminderSet(DateTime dateTime) {
-    model.currentReminder = Reminder(dateTime, model.userManager.user.id);
+    model.currentHomework.reminder =
+        Reminder(dateTime, model.userManager.user.id);
     view.updateUI();
   }
 
   void reminderRemoved() {
-    model.currentReminder = null;
+    model.currentHomework.reminder = null;
     view.updateUI();
   }
 
@@ -127,11 +130,14 @@ class HomeworkAddDialogViewModel
     view.updateUI();
 
     model.currentHomework.userId = model.userManager.user.id;
-    if (model.currentReminder != null)
-      model.currentReminder.userId = model.userManager.user.id;
+    if (model.currentHomework.reminder != null)
+      model.currentHomework.reminder.userId = model.userManager.user.id;
 
-    await model.homeworkManager
-        .addNewHomework(model.currentHomework, reminder: model.currentReminder);
-    Navigator.of(view.context).pop();
+    if (model.dialogType == HomeworkAddDialogType.Add)
+      await model.homeworkManager.addNewHomework(model.currentHomework);
+    else
+      await model.homeworkManager.editHomework(model.currentHomework);
+      
+    Navigator.of(view.context).pop(model.currentHomework);
   }
 }

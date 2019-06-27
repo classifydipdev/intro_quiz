@@ -1,18 +1,14 @@
 import 'package:classify/data/entities/homework.dart';
-import 'package:classify/data/entities/reminder.dart';
 import 'package:classify/data/entities/schedule.dart';
 import 'package:classify/domain/managers/homework_manager.dart';
 import 'package:classify/domain/managers/schedule_manager.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_model.dart';
+import 'package:classify/presentation/ui/widgets/homework_add_dialog/homework_add_dialog_screen.dart';
 import 'package:classify/presentation/utils/views_states.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_arhitecture_helper/presentation/ui/mvvm/utils/base_model_utils.dart';
 
 class HomeworkAddDialogModel extends AppModel {
-  HomeworkAddDialogModel({Homework homework}){
-    currentHomework = homework;
-    if (currentHomework == null) currentHomework = Homework();
-  }
 
   OnCallCommand onScheduleSelected = OnCallCommand();
   OnCallCommand onScheduleRemoved = OnCallCommand();
@@ -28,12 +24,11 @@ class HomeworkAddDialogModel extends AppModel {
 
   final TextEditingController textEditController = TextEditingController();
 
-  Schedule selectedSchedule;
-
   List<Schedule> nearestUniqueSchedules;
 
   Homework currentHomework;
-  Reminder currentReminder;
+
+  HomeworkAddDialogType dialogType;
 
   ScheduleManager scheduleManager = ScheduleManager();
   HomeworkManager homeworkManager = HomeworkManager();
@@ -41,4 +36,14 @@ class HomeworkAddDialogModel extends AppModel {
   LoadingStates loadingState = LoadingStates.Compleate;
 
   List<int> validHomeworkDays;
+
+  HomeworkAddDialogModel({Homework homework}) {
+    if (homework == null) {
+      currentHomework = Homework();
+      dialogType = HomeworkAddDialogType.Add;
+    } else {
+      currentHomework = homework;
+      dialogType = HomeworkAddDialogType.Edit;
+    }
+  }
 }

@@ -337,12 +337,14 @@ class HomeworkDetailsView extends AppView<HomeworkDetailsModel> {
     );
   }
 
-  void showAddHomeworkDialog() {
-    showModalBottomSheetApp(
+  void showAddHomeworkDialog() async {
+    Homework homework = await showModalBottomSheetApp(
       context: context,
       builder: (BuildContext buildContext) {
         return HomeworkAddDialogScreen(homework: model.homework);
       },
     );
+
+    if (homework != null) model.onEditHomework.onCallWithValue(homework);
   }
 }

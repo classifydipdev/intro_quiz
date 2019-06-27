@@ -153,8 +153,8 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
       var subjectWidget = getSmallSubjectButton(
           schedule,
           ColorsApp.centerHomeworkScreen,
-          (model.selectedSchedule != null &&
-              model.selectedSchedule.id == schedule.id), (bool isSelected) {
+          (model.currentHomework.schedule != null &&
+              model.currentHomework.schedule.id == schedule.id), (bool isSelected) {
         model.onScheduleSelected.onCallWithValue(schedule);
         updateUI();
       });
@@ -199,16 +199,16 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
                   model.onScheduleDateRemoved.onCall();
                 })
               : Container(),
-          model.selectedSchedule != null
-              ? _homeworkParametersItem(model.selectedSchedule.subject.name,
+          model.currentHomework.schedule != null
+              ? _homeworkParametersItem(model.currentHomework.schedule.subject.name,
                   () {
                   model.onScheduleRemoved.onCall();
                 })
               : Container(),
-          model.currentReminder != null
+          model.currentHomework.reminder != null
               ? _homeworkParametersItem(
                   DateFormat("dd MMMM, HH:MM")
-                      .format(model.currentReminder.dateTime),
+                      .format(model.currentHomework.reminder.dateTime),
                   () => model.onReminderRemoved.onCall(),
                   icon: FontAwesomeIcons.solidBell)
               : Container(),
@@ -309,7 +309,7 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
         CupertinoButton(
           child: Icon(FontAwesomeIcons.solidBell,
               size: 20,
-              color: model.currentReminder != null
+              color: model.currentHomework.reminder != null
                   ? ColorsApp.centerHomeworkScreen
                   : Colors.grey[350]),
           padding: EdgeInsets.only(right: DimensApp.paddingMiddle),
@@ -424,5 +424,14 @@ class HomeworkAddDialogView extends AppView<HomeworkAddDialogModel> {
         });
       }
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (model.currentHomework.text != null)
+      model.textEditController.text = model.currentHomework.text;
+    updateUI();
   }
 }
