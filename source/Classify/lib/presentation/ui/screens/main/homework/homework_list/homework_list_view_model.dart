@@ -12,6 +12,8 @@ class HomeworkListScreenViewModel
   init() async {
     super.init();
 
+    model.onHomeworkAdded.setCallbackObject(homeworkAdded);
+
     model.homeworkManager
         .getHomeworkSortLists(model.userManager.user.id)
         .then((List<List<Homework>> homeworkSort) {
@@ -22,5 +24,11 @@ class HomeworkListScreenViewModel
       model.loadingState = LoadingStates.Compleate;
       view.updateUI();
     });
+  }
+
+  void homeworkAdded(Homework homework) {
+    model.homeworkSortLists =
+        model.homeworkManager.addHomeworkAndSortLists(homework);
+    view.updateUI();
   }
 }

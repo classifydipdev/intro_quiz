@@ -10,6 +10,8 @@ class HomeworkManager {
   final AppFirbaseFirestore _firebaseFirestore = AppFirbaseFirestore();
   final ScheduleManager _scheduleManager = ScheduleManager();
 
+  List<Homework> homeworkList;
+
   Future<void> addNewHomework(Homework homework, {Reminder reminder}) async {
     var homeworkId = await _firebaseFirestore.addHomework(homework);
 
@@ -20,25 +22,30 @@ class HomeworkManager {
   }
 
   Future<List<List<Homework>>> getHomeworkSortLists(String userId) async {
-    return getHomeworks(userId).then((List<Homework> homeworkList) {
-      List<List<Homework>> homeworkSortLists = List();
-
-      homeworkList
-          .sort((Homework a, Homework b) => a.dateTime.compareTo(b.dateTime));
-      homeworkSortLists.add(homeworkList);
-
-      homeworkList.sort(homeworkComparator);
-      homeworkSortLists.add(homeworkList);
-
-      List<Homework> testHomework = List();
-
-      for (Homework homework in homeworkList) {
-        if (homework.type == HomeworkType.Test) testHomework.add(homework);
-      }
-      homeworkSortLists.add(testHomework);
-
-      return homeworkSortLists;
+    return getHomeworks(userId).then((List<Homework> homeworks) {
+      homeworkList = homeworks;
+      return sortHomeworkLists();
     });
+  }
+
+  List<List<Homework>> sortHomeworkLists() {
+    List<List<Homework>> homeworkSortLists = List();
+
+    homeworkList
+        .sort((Homework a, Homework b) => a.dateTime.compareTo(b.dateTime));
+    homeworkSortLists.add(homeworkList);
+
+    homeworkList.sort(homeworkComparator);
+    homeworkSortLists.add(homeworkList);
+
+    List<Homework> testHomework = List();
+
+    for (Homework homework in homeworkList) {
+      if (homework.type == HomeworkType.Test) testHomework.add(homework);
+    }
+    homeworkSortLists.add(testHomework);
+
+    return homeworkSortLists;
   }
 
   int homeworkComparator(Homework a, Homework b) {
@@ -66,12 +73,17 @@ class HomeworkManager {
       for (var i = 0; i < homeworks.length; i++) {
         if (homeworks[i].scheduleId == schedule.id) {
           homeworks[i].schedule = schedule;
-          break;
         }
       }
     }
 
     return homeworks;
+  }
+
+  List<List<Homework>> addHomeworkAndSortLists(Homework homework) {
+    if (homeworkList == null) homeworkList = List();
+    homeworkList.add(homework);
+    return sortHomeworkLists();
   }
 
   factory HomeworkManager() {

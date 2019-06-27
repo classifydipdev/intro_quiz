@@ -19,12 +19,12 @@ class HomeworkAddDialogViewModel
     model.onScheduleDateSelected.setCallbackObject(scheduleDateSelected);
     model.onScheduleDateRemoved.setCallback(scheduleDateRemoved);
 
-    model.onFavouriteSet.addCallback(favouriteSet);
-    model.onTestSet.addCallback(testSet);
+    model.onFavouriteSet.setCallback(favouriteSet);
+    model.onTestSet.setCallback(testSet);
     model.onReminderSet.setCallbackObject(reminderSet);
-    model.onReminderRemoved.addCallback(reminderRemoved);
+    model.onReminderRemoved.setCallback(reminderRemoved);
 
-    model.onValidateAndSaveHomework.addCallback(validateAndSaveHomework);
+    model.onValidateAndSaveHomework.setCallback(validateAndSaveHomework);
 
     setNearestUniqueScheduleList();
   }
@@ -132,6 +132,6 @@ class HomeworkAddDialogViewModel
 
     await model.homeworkManager
         .addNewHomework(model.currentHomework, reminder: model.currentReminder);
-    Navigator.of(view.context).pop();
+    Navigator.of(view.context).pop(model.currentHomework);
   }
 }
