@@ -12,13 +12,21 @@ class HomeworkManager {
 
   List<Homework> homeworkList;
 
-  Future<void> addNewHomework(Homework homework, {Reminder reminder}) async {
+  Future<void> addNewHomework(Homework homework) async {
     var homeworkId = await _firebaseFirestore.addHomework(homework);
 
-    if (reminder != null) {
-      reminder.homeworkId = homeworkId;
-      await _firebaseFirestore.addReminder(reminder);
+    if (homework.reminder != null) {
+      homework.reminder.homeworkId = homeworkId;
+      await _firebaseFirestore.addReminder(homework.reminder);
     }
+  }
+
+  Future<void> editHomework(Homework homework) async {
+    return _firebaseFirestore.editHomework(homework).then((s) async {
+      if (homework.reminder != null) {
+        return await _firebaseFirestore.addReminder(homework.reminder);
+      }
+    });
   }
 
   Future<List<List<Homework>>> getHomeworkSortLists(String userId) async {
