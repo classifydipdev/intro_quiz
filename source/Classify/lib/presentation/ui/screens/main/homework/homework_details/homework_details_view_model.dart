@@ -9,8 +9,5 @@ class HomeworkDetailsViewModel
   @override
   init() {
     super.init();
-    model.onTap.setCallback(onTap);
   }
-
-  void onTap() {}
 }

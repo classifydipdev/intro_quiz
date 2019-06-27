@@ -1,14 +1,18 @@
+import 'package:classify/data/entities/homework.dart';
 import 'package:classify/presentation/res/colors.dart';
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/res/images.dart';
 import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/main/homework/homework_details/homework_details_model.dart';
+import 'package:classify/presentation/ui/widgets/homework_add_dialog/homework_add_dialog_screen.dart';
+import 'package:classify/presentation/ui/widgets/homework_add_dialog/modal_bottom_sheet_app.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 
 class HomeworkDetailsView extends AppView<HomeworkDetailsModel> {
   HomeworkDetailsView(HomeworkDetailsModel model) : super(model);
@@ -100,7 +104,7 @@ class HomeworkDetailsView extends AppView<HomeworkDetailsModel> {
             ),
             Expanded(
               child: Text(
-                "Spanish".toUpperCase(),
+                model.homework.schedule.subject.name,
                 style: ThemeApp.middleExtraWhiteBoldTextStyle,
                 textAlign: TextAlign.center,
               ),
@@ -144,7 +148,7 @@ class HomeworkDetailsView extends AppView<HomeworkDetailsModel> {
                     Container(
                       width: 205,
                       child: Text(
-                        "Read chapter 1 of palabra book and then go to Farenheit 451 on that mofo",
+                        model.homework.text,
                         style: ThemeApp.smallGrayBoldTextStyle,
                       ),
                     ),
@@ -156,10 +160,20 @@ class HomeworkDetailsView extends AppView<HomeworkDetailsModel> {
                   ],
                 ),
               ),
-              _infoItem("Type", "Vocab"),
-              _infoItem("Due Date", "Every Friday, 12:45"),
-              _infoItem("Reminder", "Weekdays, 12:45",
-                  icon: FontAwesomeIcons.solidBell),
+              _infoItem(
+                  "Type",
+                  model.homework.type == HomeworkType.Simple
+                      ? "Vocab"
+                      : "Test"),
+              _infoItem("Due Date",
+                  DateFormat("dd MMMM, HH:MM").format(model.homework.dateTime)),
+              model.homework.reminder != null
+                  ? _infoItem(
+                      "Reminder",
+                      DateFormat("dd MMMM, HH:MM")
+                          .format(model.homework.reminder.dateTime),
+                      icon: FontAwesomeIcons.solidBell)
+                  : Container(),
             ],
           ),
         ),
@@ -299,7 +313,7 @@ class HomeworkDetailsView extends AppView<HomeworkDetailsModel> {
   Widget _floatingActionButton() {
     return FloatingActionButton(
       onPressed: () {
-        model.onTap.onCall();
+        showAddHomeworkDialog();
       },
       elevation: 0,
       child: Container(
@@ -320,6 +334,15 @@ class HomeworkDetailsView extends AppView<HomeworkDetailsModel> {
           ),
         ),
       ),
+    );
+  }
+
+  void showAddHomeworkDialog() {
+    showModalBottomSheetApp(
+      context: context,
+      builder: (BuildContext buildContext) {
+        return HomeworkAddDialogScreen(homework: model.homework);
+      },
     );
   }
 }

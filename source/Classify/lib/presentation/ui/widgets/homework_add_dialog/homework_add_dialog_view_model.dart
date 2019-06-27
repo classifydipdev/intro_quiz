@@ -37,7 +37,7 @@ class HomeworkAddDialogViewModel
 
   void scheduleSelected(Schedule schedule) {
     model.selectedSchedule = schedule;
-    model.currentHomework.scheduleId = schedule.id;
+    model.currentHomework.schedule = schedule;
 
     model.currentHomework.dateTime = getNearestDayDate(schedule.day);
 
@@ -46,7 +46,7 @@ class HomeworkAddDialogViewModel
 
   void scheduleRemoved() {
     model.selectedSchedule = null;
-    model.currentHomework.scheduleId = null;
+    model.currentHomework.schedule = null;
     model.validHomeworkDays = null;
     view.updateUI();
   }
@@ -60,7 +60,7 @@ class HomeworkAddDialogViewModel
     if (model.selectedSchedule != null) {
       model.selectedSchedule = model.scheduleManager.getDaySchedule(
           model.selectedSchedule, model.currentHomework.dateTime.weekday - 1);
-      model.currentHomework.scheduleId = model.selectedSchedule.id;
+      model.currentHomework.schedule = model.selectedSchedule;
     }
     view.updateUI();
   }
@@ -110,7 +110,7 @@ class HomeworkAddDialogViewModel
     model.currentHomework.text = model.textEditController.text;
 
     String errorString = "";
-    if (model.currentHomework.scheduleId == null)
+    if (model.currentHomework == null)
       errorString = "Select a subject, please\n";
     if (model.currentHomework.dateTime == null)
       errorString += "Select a date of homework, please\n";

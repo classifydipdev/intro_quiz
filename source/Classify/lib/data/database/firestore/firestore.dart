@@ -12,6 +12,7 @@ import 'package:classify/data/helpers/firestore_helper.dart';
 import 'package:classify/data/util/data_utility.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
 class AppFirbaseFirestore {
   static final AppFirbaseFirestore _singleton =
@@ -397,37 +398,25 @@ class AppFirbaseFirestore {
   }
 
   Future<List<Homework>> getHomeworks(String userId) async {
-    if (userId == null) throw Exception("Wrong request");
-    var query = _db
-        .getFS()
-        .collection(homeworkCollection)
-        .where("userId", isEqualTo: userId);
-    return await _db.getAllDataByQuery(query).then((querySnapshot) {
-      List<Homework> homeworks = List();
-      for (var doc in querySnapshot.documents) {
-        Homework homework = Homework.fromFireStore(doc);
-        homework.homeworkId = doc.documentID;
-        homeworks.add(homework);
-      }
-      return homeworks;
-    });
+    if (userId == null) return Future.error(Exception("Wrong request"));
+    return Future(() => _db
+            .getFS()
+            .collection(homeworkCollection)
+            .where("userId", isEqualTo: userId))
+        .then((Query query) => _db.getAllDataByQuery(query))
+        .then((querySnapshot) =>
+            compute(parseHomeworks, querySnapshot.documents));
   }
 
   Future<List<Reminder>> getReminders(String userId) async {
-    if (userId == null) throw Exception("Wrong request");
-    var query = _db
-        .getFS()
-        .collection(reminderCollection)
-        .where("userId", isEqualTo: userId);
-    return await _db.getAllDataByQuery(query).then((querySnapshot) {
-      List<Reminder> reminders = List();
-      for (var doc in querySnapshot.documents) {
-        Reminder reminder = Reminder.fromFirestore(doc);
-        reminder.reminderId = doc.documentID;
-        reminders.add(reminder);
-      }
-      return reminders;
-    });
+    if (userId == null) return Future.error(Exception("Wrong request"));
+    return Future(() => _db
+            .getFS()
+            .collection(reminderCollection)
+            .where("userId", isEqualTo: userId))
+        .then((Query query) => _db.getAllDataByQuery(query))
+        .then((querySnapshot) =>
+            compute(parseReminders, querySnapshot.documents));
   }
 
   DocumentReference getLessonCollectionReference() {

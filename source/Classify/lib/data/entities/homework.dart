@@ -1,4 +1,5 @@
 import 'package:classify/data/entities/reminder.dart';
+import 'package:classify/data/entities/schedule.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Homework {
@@ -9,6 +10,8 @@ class Homework {
   DateTime dateTime;
   bool isFavourite = false;
   HomeworkType type = HomeworkType.Simple;
+
+  Schedule schedule;
   Reminder reminder;
 
   Homework();
@@ -27,7 +30,8 @@ class Homework {
     if (raw['text'] != null) text = raw['text'];
 
     if (raw['dateTime'] != null)
-      dateTime = DateTime.fromMillisecondsSinceEpoch(raw['dateTime']);
+      dateTime = DateTime.fromMillisecondsSinceEpoch(
+          raw['dateTime'].millisecondsSinceEpoch);
 
     if (raw['isFavourite'] != null) isFavourite = raw['isFavourite'];
 
@@ -45,7 +49,7 @@ class Homework {
 
   Map<String, dynamic> toFireStore() {
     var json = new Map<String, dynamic>();
-    if (scheduleId != null) json.putIfAbsent('scheduleId', () => scheduleId);
+    if (schedule != null) json.putIfAbsent('scheduleId', () => schedule.id);
 
     if (userId != null) json.putIfAbsent('userId', () => userId);
 
@@ -72,3 +76,7 @@ class Homework {
 }
 
 enum HomeworkType { Simple, Test }
+
+List<Homework> parseHomeworks(List<DocumentSnapshot> docs) {
+  return docs.map<Homework>((json) => Homework.fromFireStore(json)).toList();
+}

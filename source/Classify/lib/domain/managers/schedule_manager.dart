@@ -151,4 +151,13 @@ class ScheduleManager {
     }
     return soughtForSchedule;
   }
+
+  Schedule getScheduleById(String scheduleId) {
+    Schedule foundSchedule;
+    for (Schedule schedule in scheduleList) {
+      if (schedule.id == scheduleId) foundSchedule = schedule;
+      break;
+    }
+    return foundSchedule;
+  }
 }

@@ -1,11 +1,14 @@
 import 'package:classify/data/database/firestore/firestore.dart';
 import 'package:classify/data/entities/homework.dart';
 import 'package:classify/data/entities/reminder.dart';
+import 'package:classify/data/entities/schedule.dart';
+import 'package:classify/domain/managers/schedule_manager.dart';
 
 class HomeworkManager {
   static final HomeworkManager _singleton = new HomeworkManager._internal();
 
   final AppFirbaseFirestore _firebaseFirestore = AppFirbaseFirestore();
+  final ScheduleManager _scheduleManager = ScheduleManager();
 
   Future<void> addNewHomework(Homework homework, {Reminder reminder}) async {
     var homeworkId = await _firebaseFirestore.addHomework(homework);
@@ -17,24 +20,25 @@ class HomeworkManager {
   }
 
   Future<List<List<Homework>>> getHomeworkSortLists(String userId) async {
-    List<List<Homework>> homeworkSortLists = List();
-    List<Homework> homeworkList = await getHomeworks(userId);
+    return getHomeworks(userId).then((List<Homework> homeworkList) {
+      List<List<Homework>> homeworkSortLists = List();
 
-    homeworkList
-        .sort((Homework a, Homework b) => a.dateTime.compareTo(b.dateTime));
-    homeworkSortLists.add(homeworkList);
+      homeworkList
+          .sort((Homework a, Homework b) => a.dateTime.compareTo(b.dateTime));
+      homeworkSortLists.add(homeworkList);
 
-    homeworkList.sort(homeworkComparator);
-    homeworkSortLists.add(homeworkList);
+      homeworkList.sort(homeworkComparator);
+      homeworkSortLists.add(homeworkList);
 
-    List<Homework> testHomework = List();
+      List<Homework> testHomework = List();
 
-    for (Homework homework in homeworkList) {
-      if (homework.type == HomeworkType.Test) testHomework.add(homework);
-    }
-    homeworkSortLists.add(testHomework);
+      for (Homework homework in homeworkList) {
+        if (homework.type == HomeworkType.Test) testHomework.add(homework);
+      }
+      homeworkSortLists.add(testHomework);
 
-    return homeworkSortLists;
+      return homeworkSortLists;
+    });
   }
 
   int homeworkComparator(Homework a, Homework b) {
@@ -57,6 +61,16 @@ class HomeworkManager {
         }
       }
     }
+
+    for (Schedule schedule in _scheduleManager.scheduleList) {
+      for (var i = 0; i < homeworks.length; i++) {
+        if (homeworks[i].scheduleId == schedule.id) {
+          homeworks[i].schedule = schedule;
+          break;
+        }
+      }
+    }
+
     return homeworks;
   }
 

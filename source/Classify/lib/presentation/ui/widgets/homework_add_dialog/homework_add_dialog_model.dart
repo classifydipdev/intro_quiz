@@ -9,7 +9,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_arhitecture_helper/presentation/ui/mvvm/utils/base_model_utils.dart';
 
 class HomeworkAddDialogModel extends AppModel {
-  HomeworkAddDialogModel();
+  HomeworkAddDialogModel({Homework homework}){
+    currentHomework = homework;
+    if (currentHomework == null) currentHomework = Homework();
+  }
 
   OnCallCommand onScheduleSelected = OnCallCommand();
   OnCallCommand onScheduleRemoved = OnCallCommand();
@@ -29,7 +32,7 @@ class HomeworkAddDialogModel extends AppModel {
 
   List<Schedule> nearestUniqueSchedules;
 
-  Homework currentHomework = Homework();
+  Homework currentHomework;
   Reminder currentReminder;
 
   ScheduleManager scheduleManager = ScheduleManager();
