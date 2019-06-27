@@ -12,3 +12,4 @@ source/Classify/android/.idea/workspace.xml
 source/Classify/ios/Podfile.lock
 documents/key/ios/.DS_Store
 .DS_Store
+.lock
