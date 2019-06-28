@@ -94,8 +94,8 @@ class LearningManager {
     return;
   }
 
-  Future<List<Schedule>> getSchedules(String idUser, {int day}) {
-    return _firebaseFirestore.getSchedules(idUser, day: day);
+  Future<List<Schedule>> getSchedules(String idUser, {int day}) async {
+    return await _firebaseFirestore.getSchedules(idUser, day: day);
   }
 
   factory LearningManager() {
