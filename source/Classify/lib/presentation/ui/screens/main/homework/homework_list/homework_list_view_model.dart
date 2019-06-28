@@ -13,6 +13,7 @@ class HomeworkListScreenViewModel
     super.init();
 
     model.onHomeworkAdded.setCallbackObject(homeworkAdded);
+    model.onRemoveHomework.setCallbackObject(removeHomework);
 
     model.homeworkManager
         .getHomeworkSortLists(model.userManager.user.id)
@@ -29,6 +30,12 @@ class HomeworkListScreenViewModel
   void homeworkAdded(Homework homework) {
     model.homeworkSortLists =
         model.homeworkManager.addHomeworkAndSortLists(homework);
+    view.updateUI();
+  }
+
+  void removeHomework(Homework homework) {
+    model.homeworkSortLists =
+        model.homeworkManager.removeHomeworkAndSortLists(homework);
     view.updateUI();
   }
 }

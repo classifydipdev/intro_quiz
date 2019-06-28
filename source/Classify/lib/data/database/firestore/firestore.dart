@@ -398,6 +398,15 @@ class AppFirbaseFirestore {
     return await _db.updateData(reference, homework.toFireStore());
   }
 
+  Future<void> removeHomework(Homework homework) {
+    if (homework == null) throw Exception("Wrong homework");
+    var reference = _db
+        .getFS()
+        .collection(homeworkCollection)
+        .document(homework.homeworkId);
+    return _db.deleteData(reference);
+  }
+
   Future<void> addReminder(Reminder reminder) async {
     if (reminder != null &&
         reminder.dateTime == null &&
@@ -415,6 +424,15 @@ class AppFirbaseFirestore {
         .collection(reminderCollection)
         .document(reminder.reminderId);
     return await _db.updateData(reference, reminder.toFirestore());
+  }
+
+  Future<void> removeReminder(Reminder reminder) {
+    if (reminder == null) throw Exception("Wrong reminder");
+    var reference = _db
+        .getFS()
+        .collection(reminderCollection)
+        .document(reminder.reminderId);
+    return _db.deleteData(reference);
   }
 
   Future<List<Homework>> getHomeworks(String userId) async {

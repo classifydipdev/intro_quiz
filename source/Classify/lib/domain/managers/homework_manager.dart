@@ -29,6 +29,14 @@ class HomeworkManager {
     });
   }
 
+  Future<void> removeHomework(Homework homework) async {
+    return _firebaseFirestore.removeHomework(homework).then((s) async {
+      if (homework.reminder != null) {
+        return await _firebaseFirestore.removeReminder(homework.reminder);
+      }
+    });
+  }
+
   Future<List<List<Homework>>> getHomeworkSortLists(String userId) async {
     return getHomeworks(userId).then((List<Homework> homeworks) {
       homeworkList = homeworks;
@@ -91,6 +99,12 @@ class HomeworkManager {
   List<List<Homework>> addHomeworkAndSortLists(Homework homework) {
     if (homeworkList == null) homeworkList = List();
     homeworkList.add(homework);
+    return sortHomeworkLists();
+  }
+
+  List<List<Homework>> removeHomeworkAndSortLists(Homework homework) {
+    homeworkList.remove(homework);
+    removeHomework(homework);
     return sortHomeworkLists();
   }
 

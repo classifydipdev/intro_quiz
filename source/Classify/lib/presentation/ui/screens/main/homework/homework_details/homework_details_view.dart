@@ -267,7 +267,7 @@ class HomeworkDetailsView extends AppView<HomeworkDetailsModel> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           CupertinoButton(
-            onPressed: () {},
+            onPressed: () => model.onRemoveHomework.onCall(),
             padding: EdgeInsets.all(0),
             minSize: 20,
             child: Icon(
@@ -296,7 +296,7 @@ class HomeworkDetailsView extends AppView<HomeworkDetailsModel> {
             ),
           ),
           CupertinoButton(
-            onPressed: () {},
+            onPressed: model.onNavigateToList,
             padding: EdgeInsets.all(0),
             minSize: 20,
             child: Icon(

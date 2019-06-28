@@ -11,10 +11,16 @@ class HomeworkDetailsViewModel
   init() {
     super.init();
     model.onEditHomework.setCallbackObject(editHomework);
+    model.onRemoveHomework.setCallback(removeHomework);
   }
 
   void editHomework(Homework homework) {
     model.homework = homework;
     view.updateUI();
+  }
+
+  void removeHomework(){
+    model.homeworkManager.removeHomework(model.homework);
+    model.onNavigateToList();
   }
 }
