@@ -331,7 +331,7 @@ class HomeworkListScreenView extends AppView<HomeworkListScreenModel> {
                 color: Colors.transparent,
                 foregroundColor: Colors.red,
                 icon: Icons.delete,
-                onTap: () {},
+                onTap: () => model.onRemoveHomework.onCallWithValue(homework),
               ),
             ],
             secondaryActions: <Widget>[

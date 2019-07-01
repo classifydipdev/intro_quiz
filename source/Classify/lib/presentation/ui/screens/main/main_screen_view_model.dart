@@ -1,6 +1,7 @@
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/screens/main/main_screen_model.dart';
 import 'package:classify/presentation/ui/screens/main/main_screen_view.dart';
+import 'package:classify/presentation/utils/push_notifications.dart';
 
 class MainScreenViewModel
     extends AppViewModel<MainScreenModel, MainScreenView> {
@@ -10,6 +11,7 @@ class MainScreenViewModel
   init() async {
     super.init();
     model.onNavigateToPage.setCallbackObject(changePageIndex);
+    PushNotifications().init();
   }
 
   @override

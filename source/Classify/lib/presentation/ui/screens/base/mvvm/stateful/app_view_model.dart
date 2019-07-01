@@ -24,9 +24,7 @@ abstract class AppViewModel<M extends AppModel, V extends BaseView<M>>
       SystemUiOverlayStyle.dark.copyWith(
           statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.light,
-          statusBarBrightness:
-              Brightness.dark
-          ),
+          statusBarBrightness: Brightness.dark),
     );
 
     model.pushNotided.setCallback(pushNotify);
@@ -35,22 +33,22 @@ abstract class AppViewModel<M extends AppModel, V extends BaseView<M>>
     await preference.init();
     model.isNotifications = preference.getNotify();
 
-    if (model.isNotifications != null && model.isNotifications) {
-      FirebaseMessaging().configure(
-        onMessage: (Map<String, dynamic> message) async {
-          print("onMessage: $message");
-          Toast.show(message['notification']['title'], view.context,
-              duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
-          model.pushNotided.onCall();
-        },
-        onLaunch: (Map<String, dynamic> message) async {
-          print("onLaunch: $message");
-        },
-        onResume: (Map<String, dynamic> message) async {
-          print("onResume: $message");
-        },
-      );
-    }
+    // if (model.isNotifications != null && model.isNotifications) {
+    FirebaseMessaging().configure(
+      onMessage: (Map<String, dynamic> message) async {
+        print("onMessage: $message");
+        Toast.show(message['notification']['title'], view.context,
+            duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+        model.pushNotided.onCall();
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print("onLaunch: $message");
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print("onResume: $message");
+      },
+    );
+    // }
 
     model.preferenceInit.onCall();
   }

@@ -10,6 +10,7 @@ class HomeworkListScreenModel extends AppModel {
   HomeworkListScreenModel(this.onNavigateToDetails);
 
   OnCallCommand onHomeworkAdded = OnCallCommand();
+  OnCallCommand onRemoveHomework = OnCallCommand();
 
   HomeworkTabBarState tabBarState = HomeworkTabBarState.Closed;
 

@@ -19,6 +19,7 @@ class PushNotifications {
   void init() {
     permissionRequest();
     initMessagesListener();
+    // initTokenListener();
   }
 
   void setCallbacks(VoidCallback onPushNotificationMessage,
