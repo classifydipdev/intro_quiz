@@ -10,6 +10,7 @@ import 'package:classify/data/entities/user.dart';
 import 'package:classify/data/entities/user_preference.dart';
 import 'package:classify/data/helpers/firestore_helper.dart';
 import 'package:classify/data/util/data_utility.dart';
+import 'package:classify/presentation/utils/push_notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -26,6 +27,7 @@ class AppFirbaseFirestore {
   static final homeworkCollection = "homeworks";
   static final reminderCollection = "reminders";
 
+  static final pushNotification = PushNotifications();
   static final _db = FirestoreHelper();
 
   Future<void> aplyBatch(List<FirestoreBatch> operations) async {
@@ -74,11 +76,12 @@ class AppFirbaseFirestore {
       {String name, String photo}) async {
     return await getUser(fbUser.uid).then((user) async {
       if (user == null) {
-        var photouser = photo != null ? photo : fbUser.photoUrl;
+        var photoUser = photo != null ? photo : fbUser.photoUrl;
         var nameUser = name != null
             ? name
             : DataUtility.formatFirestoreName(fbUser.displayName);
-        var user = User(fbUser.uid, nameUser, photo: photouser);
+        var fcmToken = await pushNotification.initTokenListener();
+        var user = User(fbUser.uid, nameUser, fcmToken, photo: photoUser);
         return await addUser(user);
       } else
         return;

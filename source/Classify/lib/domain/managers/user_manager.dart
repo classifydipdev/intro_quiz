@@ -48,13 +48,14 @@ class UserManager {
     var userInfo = UserUpdateInfo();
     userInfo.displayName = name.trim();
     await fbUser.updateProfile(userInfo);
-    return await _checkUserExist(fbUser);
+    return await _checkUserExist(fbUser, name: name.trim());
   }
 
-  Future<void> _checkUserExist(FirebaseUser fbUser) async {
+  Future<void> _checkUserExist(FirebaseUser fbUser,
+      {String name, String photo}) async {
     if (fbUser != null) {
       await _firebaseFirestore
-          .createUserFromFirebaseAuth(fbUser)
+          .createUserFromFirebaseAuth(fbUser, name: name, photo: photo)
           .then((_) async {
         return await _firebaseFirestore.addUserPreference(fbUser.uid);
       });
@@ -68,6 +69,11 @@ class UserManager {
     assert(id != null, 'Wrong id');
     _user = await _firebaseFirestore.getUser(id);
     _user.preference = await _firebaseFirestore.getUserPreference(id);
+  }
+
+  Future<void> saveUser(User user) async {
+    assert(user != null, 'Wrong id');
+    return await _firebaseFirestore.updateUser(user);
   }
 
   Future<void> updateUserPreference(UserPreference preference) async {

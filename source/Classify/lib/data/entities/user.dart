@@ -5,9 +5,10 @@ class User {
   String id;
   String name;
   String photo;
+  String fcmToken;
   UserPreference preference;
 
-  User(this.id, this.name, {this.photo, this.preference});
+  User(this.id, this.name, this.fcmToken, {this.photo, this.preference});
 
   User.fromFireStore(DocumentSnapshot document) {
     assert(document != null, "Document is null!");
@@ -16,12 +17,14 @@ class User {
     id = document.documentID;
     if (raw['name'] != null) name = raw['name'];
     if (raw['photo'] != null) photo = raw['photo'];
+    if (raw['fcmToken'] != null) fcmToken = raw['fcmToken'];
   }
 
   Map<String, dynamic> toFireStore() {
     var json = new Map<String, dynamic>();
     if (name != null) json.putIfAbsent('name', () => name);
     if (photo != null) json.putIfAbsent('photo', () => photo);
+    if (fcmToken != null) json.putIfAbsent('fcmToken', () => fcmToken);
     return json;
   }
 }
