@@ -303,7 +303,7 @@ class HomeworkListScreenView extends AppView<HomeworkListScreenModel> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          homework.schedule.subject.name,
+                          homework.schedule?.subject?.name,
                           textAlign: TextAlign.left,
                           style: ThemeApp.middleGreyBoldTextStyle,
                         ),

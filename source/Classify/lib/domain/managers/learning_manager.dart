@@ -54,7 +54,7 @@ class LearningManager {
 
         var batch = FirestoreBatch.set(
           lessonsReference,
-          schedule.toFirestore(),
+          schedule.toFireStore(),
           merge: false,
         );
         if (batchList.length < 500) {

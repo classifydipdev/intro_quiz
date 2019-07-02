@@ -11,7 +11,7 @@ class Schedule {
 
   Schedule(this.id, this.idUser, this.subject, this.lesson, this.day);
 
-  Schedule.fromFirestore(DocumentSnapshot document, this.subject, this.lesson) {
+  Schedule.fromFireStore(DocumentSnapshot document, this.subject, this.lesson) {
     assert(document != null);
     Map<dynamic, dynamic> raw = document.data;
     id = document.documentID;
@@ -19,7 +19,7 @@ class Schedule {
     if (raw['day'] != null) day = raw['day'];
   }
 
-  Map<String, dynamic> toFirestore() {
+  Map<String, dynamic> toFireStore() {
     var json = new Map<String, dynamic>();
     if (idUser != null) json.putIfAbsent('idUser', () => idUser);
     if (subject != null && subject.id != null)

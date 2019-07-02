@@ -99,8 +99,8 @@ class HomeworkAddDialogViewModel
   }
 
   void reminderSet(DateTime dateTime) {
-    model.currentHomework.reminder =
-        Reminder(dateTime, model.userManager.user.id);
+    model.currentHomework.reminder = Reminder(
+        dateTime, model.userManager.user.id, model.userManager.user.fcmToken);
     view.updateUI();
   }
 
@@ -137,7 +137,7 @@ class HomeworkAddDialogViewModel
       await model.homeworkManager.addNewHomework(model.currentHomework);
     else
       await model.homeworkManager.editHomework(model.currentHomework);
-      
+
     Navigator.of(view.context).pop(model.currentHomework);
   }
 }

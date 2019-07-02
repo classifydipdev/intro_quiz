@@ -4,11 +4,12 @@ class Reminder {
   String reminderId;
   String homeworkId;
   String userId;
+  String fcmToken;
   DateTime dateTime;
 
-  Reminder(this.dateTime, this.userId);
+  Reminder(this.dateTime, this.userId, this.fcmToken);
 
-  Reminder.fromFirestore(DocumentSnapshot document) {
+  Reminder.fromFireStore(DocumentSnapshot document) {
     assert(document != null, "Document is null!");
     assert(document.data != null, "Reminder not found!");
     Map<dynamic, dynamic> raw = document.data;
@@ -19,16 +20,20 @@ class Reminder {
 
     if (raw['userId'] != null) userId = raw['userId'];
 
+    if (raw['fcmToken'] != null) fcmToken = raw['fcmToken'];
+
     if (raw['dateTime'] != null)
       dateTime = DateTime.fromMillisecondsSinceEpoch(
           raw['dateTime'].millisecondsSinceEpoch);
   }
 
-  Map<String, dynamic> toFirestore() {
+  Map<String, dynamic> toFireStore() {
     var json = new Map<String, dynamic>();
     if (homeworkId != null) json.putIfAbsent('homeworkId', () => homeworkId);
 
     if (userId != null) json.putIfAbsent('userId', () => userId);
+
+    if (fcmToken != null) json.putIfAbsent('fcmToken', () => fcmToken);
 
     if (dateTime != null)
       json.putIfAbsent('dateTime', () => Timestamp.fromDate(dateTime));
@@ -38,5 +43,5 @@ class Reminder {
 }
 
 List<Reminder> parseReminders(List<DocumentSnapshot> docs) {
-  return docs.map<Reminder>((json) => Reminder.fromFirestore(json)).toList();
+  return docs.map<Reminder>((json) => Reminder.fromFireStore(json)).toList();
 }
