@@ -38,7 +38,6 @@ class HomeworkAddDialogViewModel
 
   void scheduleSelected(Schedule schedule) {
     model.currentHomework.schedule = schedule;
-    model.currentHomework.schedule = schedule;
 
     model.currentHomework.dateTime = getNearestDayDate(schedule.day);
 
@@ -99,8 +98,15 @@ class HomeworkAddDialogViewModel
   }
 
   void reminderSet(DateTime dateTime) {
-    model.currentHomework.reminder =
-        Reminder(dateTime, model.userManager.user.id);
+    var reminder = model.currentHomework.reminder;
+    if (reminder != null) {
+      reminder.dateTime = dateTime;
+      reminder.fcmToken = model.userManager.user.fcmToken;
+    } else {
+      reminder = Reminder(
+          dateTime, model.userManager.user.id, model.userManager.user.fcmToken);
+    }
+    model.currentHomework.reminder = reminder;
     view.updateUI();
   }
 
@@ -135,9 +141,13 @@ class HomeworkAddDialogViewModel
 
     if (model.dialogType == HomeworkAddDialogType.Add)
       await model.homeworkManager.addNewHomework(model.currentHomework);
-    else
+    else {
+      model.currentHomework.reminder.homeworkId =
+          model.currentHomework.homeworkId;
+
       await model.homeworkManager.editHomework(model.currentHomework);
-      
+    }
+
     Navigator.of(view.context).pop(model.currentHomework);
   }
 }

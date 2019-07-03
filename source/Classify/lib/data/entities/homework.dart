@@ -77,6 +77,6 @@ class Homework {
 
 enum HomeworkType { Simple, Test }
 
-List<Homework> parseHomeworks(List<DocumentSnapshot> docs) {
+List<Homework> parseHomeWorks(List<DocumentSnapshot> docs) {
   return docs.map<Homework>((json) => Homework.fromFireStore(json)).toList();
 }

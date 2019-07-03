@@ -1,3 +1,4 @@
+import 'package:classify/data/entities/user.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/screens/main/main_screen_model.dart';
 import 'package:classify/presentation/ui/screens/main/main_screen_view.dart';
@@ -11,7 +12,15 @@ class MainScreenViewModel
   init() async {
     super.init();
     model.onNavigateToPage.setCallbackObject(changePageIndex);
-    PushNotifications().init();
+
+    final User user = model.userManager.user;
+    final pushNotification = PushNotifications();
+    pushNotification.init();
+
+    if (user != null) {
+      user.fcmToken = await pushNotification.initTokenListener();
+      await model.userManager.saveUser(user);
+    }
   }
 
   @override

@@ -10,13 +10,14 @@ import 'package:classify/data/entities/user.dart';
 import 'package:classify/data/entities/user_preference.dart';
 import 'package:classify/data/helpers/firestore_helper.dart';
 import 'package:classify/data/util/data_utility.dart';
+import 'package:classify/presentation/utils/push_notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
-class AppFirbaseFirestore {
-  static final AppFirbaseFirestore _singleton =
-      new AppFirbaseFirestore._internal();
+class AppFirbaseFireStore {
+  static final AppFirbaseFireStore _singleton =
+      new AppFirbaseFireStore._internal();
 
   static final userCollection = "users";
   static final userPreferenceCollection = "preferences";
@@ -26,6 +27,7 @@ class AppFirbaseFirestore {
   static final homeworkCollection = "homeworks";
   static final reminderCollection = "reminders";
 
+  static final pushNotification = PushNotifications();
   static final _db = FirestoreHelper();
 
   Future<void> aplyBatch(List<FirestoreBatch> operations) async {
@@ -74,11 +76,12 @@ class AppFirbaseFirestore {
       {String name, String photo}) async {
     return await getUser(fbUser.uid).then((user) async {
       if (user == null) {
-        var photouser = photo != null ? photo : fbUser.photoUrl;
+        var photoUser = photo != null ? photo : fbUser.photoUrl;
         var nameUser = name != null
             ? name
             : DataUtility.formatFirestoreName(fbUser.displayName);
-        var user = User(fbUser.uid, nameUser, photo: photouser);
+        var fcmToken = await pushNotification.initTokenListener();
+        var user = User(fbUser.uid, nameUser, fcmToken, photo: photoUser);
         return await addUser(user);
       } else
         return;
@@ -199,7 +202,7 @@ class AppFirbaseFirestore {
     if (schedule == null || schedule.idUser == null)
       throw Exception("Wrong schedule");
     var reference = _db.getFS().collection(scheduleCollection).document();
-    return await _db.setData(reference, schedule.toFirestore());
+    return await _db.setData(reference, schedule.toFireStore());
   }
 
   Future<void> updateSchedule(Schedule schedule) async {
@@ -207,7 +210,7 @@ class AppFirbaseFirestore {
       throw Exception("Wrong schedule");
     var reference =
         _db.getFS().collection(scheduleCollection).document(schedule.id);
-    return await _db.updateData(reference, schedule.toFirestore());
+    return await _db.updateData(reference, schedule.toFireStore());
   }
 
   Future<List<Schedule>> getSchedules(String idUser, {int day}) async {
@@ -251,7 +254,7 @@ class AppFirbaseFirestore {
       lesson = Lesson.fromFirestore(doc);
     }
 
-    return Schedule.fromFirestore(doc, subject, lesson);
+    return Schedule.fromFireStore(doc, subject, lesson);
   }
 
   Future<void> deleteAllSchedules(String idUser) async {
@@ -344,7 +347,7 @@ class AppFirbaseFirestore {
           batchList,
           FirestoreBatch.set(
             scheduleReferences.last,
-            compleateScheduleList[i].toFirestore(),
+            compleateScheduleList[i].toFireStore(),
             merge: false,
           ),
         );
@@ -359,7 +362,7 @@ class AppFirbaseFirestore {
             batchList,
             FirestoreBatch.set(
               scheduleReferences.last,
-              schedule.toFirestore(),
+              schedule.toFireStore(),
               merge: false,
             ),
           );
@@ -412,7 +415,7 @@ class AppFirbaseFirestore {
         reminder.dateTime == null &&
         reminder.homeworkId == null) throw Exception("Wrong reminder");
     var reference = _db.getFS().collection(reminderCollection).document();
-    return await _db.setData(reference, reminder.toFirestore());
+    return await _db.setData(reference, reminder.toFireStore());
   }
 
   Future<void> editReminder(Reminder reminder) async {
@@ -423,7 +426,7 @@ class AppFirbaseFirestore {
         .getFS()
         .collection(reminderCollection)
         .document(reminder.reminderId);
-    return await _db.updateData(reference, reminder.toFirestore());
+    return await _db.updateData(reference, reminder.toFireStore());
   }
 
   Future<void> removeReminder(Reminder reminder) {
@@ -443,7 +446,7 @@ class AppFirbaseFirestore {
             .where("userId", isEqualTo: userId))
         .then((Query query) => _db.getAllDataByQuery(query))
         .then((querySnapshot) =>
-            compute(parseHomeworks, querySnapshot.documents));
+            compute(parseHomeWorks, querySnapshot.documents));
   }
 
   Future<List<Reminder>> getReminders(String userId) async {
@@ -465,9 +468,9 @@ class AppFirbaseFirestore {
     return _db.getFS().collection(scheduleCollection).document();
   }
 
-  factory AppFirbaseFirestore() {
+  factory AppFirbaseFireStore() {
     return _singleton;
   }
 
-  AppFirbaseFirestore._internal();
+  AppFirbaseFireStore._internal();
 }
