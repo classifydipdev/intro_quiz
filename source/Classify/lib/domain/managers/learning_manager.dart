@@ -8,7 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class LearningManager {
   static final LearningManager _singleton = new LearningManager._internal();
 
-  final AppFirbaseFirestore _firebaseFirestore = AppFirbaseFirestore();
+  final AppFirbaseFireStore _firebaseFirestore = AppFirbaseFireStore();
 
   Stream<List<Subject>> getSubjects() {
     return _firebaseFirestore.getSubjects();
@@ -83,7 +83,7 @@ class LearningManager {
 
   Future<void> createCompleteSchedules(
       String idUser, List<Schedule> schedules) async {
-    await AppFirbaseFirestore()
+    await AppFirbaseFireStore()
         .createLessonsAndSchedules(idUser, compleateScheduleList: schedules);
   }
 

@@ -19,7 +19,7 @@ class HomeworkDetailsViewModel
     view.updateUI();
   }
 
-  void removeHomework(){
+  void removeHomework() {
     model.homeworkManager.removeHomework(model.homework);
     model.onNavigateToList();
   }

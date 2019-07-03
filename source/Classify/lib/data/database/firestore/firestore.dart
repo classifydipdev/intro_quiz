@@ -15,9 +15,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
-class AppFirbaseFirestore {
-  static final AppFirbaseFirestore _singleton =
-      new AppFirbaseFirestore._internal();
+class AppFirbaseFireStore {
+  static final AppFirbaseFireStore _singleton =
+      new AppFirbaseFireStore._internal();
 
   static final userCollection = "users";
   static final userPreferenceCollection = "preferences";
@@ -468,9 +468,9 @@ class AppFirbaseFirestore {
     return _db.getFS().collection(scheduleCollection).document();
   }
 
-  factory AppFirbaseFirestore() {
+  factory AppFirbaseFireStore() {
     return _singleton;
   }
 
-  AppFirbaseFirestore._internal();
+  AppFirbaseFireStore._internal();
 }

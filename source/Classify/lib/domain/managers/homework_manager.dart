@@ -7,7 +7,7 @@ import 'package:classify/domain/managers/schedule_manager.dart';
 class HomeworkManager {
   static final HomeworkManager _singleton = new HomeworkManager._internal();
 
-  final AppFirbaseFirestore _firebaseFirestore = AppFirbaseFirestore();
+  final AppFirbaseFireStore _firebaseFirestore = AppFirbaseFireStore();
   final ScheduleManager _scheduleManager = ScheduleManager();
 
   List<Homework> homeworkList;
@@ -24,7 +24,7 @@ class HomeworkManager {
   Future<void> editHomework(Homework homework) async {
     return _firebaseFirestore.editHomework(homework).then((s) async {
       if (homework.reminder != null) {
-        return await _firebaseFirestore.addReminder(homework.reminder);
+        return await _firebaseFirestore.editReminder(homework.reminder);
       }
     });
   }

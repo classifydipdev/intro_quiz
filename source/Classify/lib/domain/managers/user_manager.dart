@@ -8,7 +8,7 @@ class UserManager {
   static final UserManager _singleton = new UserManager._internal();
 
   final AppFirbaseAuth _firbaseAuth = AppFirbaseAuth();
-  final AppFirbaseFirestore _firebaseFirestore = AppFirbaseFirestore();
+  final AppFirbaseFireStore _firebaseFirestore = AppFirbaseFireStore();
 
   User _user;
 
