@@ -116,6 +116,8 @@ class HomeworkAddDialogViewModel
   }
 
   Future validateAndSaveHomework() async {
+    model.currentHomework.text = model.textEditController.text;
+
     String errorString = "";
     if (model.currentHomework == null)
       errorString = "Select a subject, please\n";
@@ -130,7 +132,6 @@ class HomeworkAddDialogViewModel
       return;
     }
 
-    model.currentHomework.text = model.textEditController.text;
     model.loadingState = LoadingStates.Loading;
     view.updateUI();
 
