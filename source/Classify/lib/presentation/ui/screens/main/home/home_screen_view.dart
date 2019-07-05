@@ -1,3 +1,4 @@
+import 'package:classify/data/entities/homework.dart';
 import 'package:classify/presentation/res/colors.dart';
 import 'package:classify/presentation/res/dimens.dart';
 import 'package:classify/presentation/res/images.dart';
@@ -5,6 +6,8 @@ import 'package:classify/presentation/res/theme.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view.dart';
 import 'package:classify/presentation/ui/screens/main/home/home_screen_model.dart';
 import 'package:classify/presentation/ui/widgets/squircle_border.dart';
+import 'package:classify/presentation/utils/utility.dart';
+import 'package:classify/presentation/utils/views_states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -201,107 +204,75 @@ class HomeScreenView extends AppView<HomeScreenModel> {
                 ],
               ),
               //TODO: ListView
-              Container(
-                margin:
-                    EdgeInsets.symmetric(vertical: DimensApp.paddingSmallExtra),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+              model.loadingState == LoadingStates.Compleate
+                  ? _homeworkListView(model.homeworkList)
+                  : Stack(
                       children: <Widget>[
-                        Text(
-                          "Spanish",
-                          textAlign: TextAlign.left,
-                          style: ThemeApp.middleGreyBoldTextStyle,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: DimensApp.paddingSmall),
-                          child: Text(
-                            "Read chapter 1 of palabra book",
-                            textAlign: TextAlign.left,
-                            style: ThemeApp.picoGreyTextStyle,
+                        Center(
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                                ColorsApp.centerHomeworkScreen),
                           ),
-                        ),
+                        )
                       ],
                     ),
-                    Text(
-                      "Tomorrow".toUpperCase(),
-                      textAlign: TextAlign.right,
-                      style: ThemeApp.littleOrangeTextStyle,
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                margin:
-                    EdgeInsets.symmetric(vertical: DimensApp.paddingSmallExtra),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          "English",
-                          textAlign: TextAlign.left,
-                          style: ThemeApp.middleGreyBoldTextStyle,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: DimensApp.paddingSmall),
-                          child: Text(
-                            "Finsh reading",
-                            textAlign: TextAlign.left,
-                            style: ThemeApp.picoGreyTextStyle,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      "2 days".toUpperCase(),
-                      textAlign: TextAlign.right,
-                      style: ThemeApp.littleOrangeTextStyle,
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: DimensApp.paddingSmallExtra),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          "Maths",
-                          textAlign: TextAlign.left,
-                          style: ThemeApp.middleGreyBoldTextStyle,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: DimensApp.paddingSmall),
-                          child: Text(
-                            "Read chapter 58",
-                            textAlign: TextAlign.left,
-                            style: ThemeApp.picoGreyTextStyle,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      "3 days".toUpperCase(),
-                      textAlign: TextAlign.right,
-                      style: ThemeApp.littleOrangeTextStyle,
-                    ),
-                  ],
-                ),
-              )
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _homeworkListView(List<Homework> homeworkList) {
+    var homeworkListLenght = homeworkList.length;
+    return homeworkListLenght > 0
+        ? ListView.builder(
+            shrinkWrap: true,
+            physics: ClampingScrollPhysics(),
+            padding: EdgeInsets.all(0),
+            itemBuilder: (BuildContext context, int index) {
+              return _homeworkItem(homeworkList[index]);
+            },
+            itemCount: homeworkListLenght,
+          )
+        : Column(
+            children: <Widget>[
+              Container(),
+            ],
+          );
+  }
+
+  Widget _homeworkItem(Homework homework) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: DimensApp.paddingSmallExtra),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                homework.schedule?.subject?.name,
+                textAlign: TextAlign.left,
+                style: ThemeApp.middleGreyBoldTextStyle,
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: DimensApp.paddingSmall),
+                child: Text(
+                  homework.text,
+                  textAlign: TextAlign.left,
+                  style: ThemeApp.picoGreyTextStyle,
+                ),
+              ),
+            ],
+          ),
+          Text(
+            Utility.getDateRange(homework.dateTime),
+            textAlign: TextAlign.right,
+            style: ThemeApp.littleOrangeTextStyle,
+          )
+        ],
       ),
     );
   }
@@ -356,7 +327,7 @@ class HomeScreenView extends AppView<HomeScreenModel> {
                       padding: EdgeInsets.only(top: DimensApp.paddingSmall),
                       child: model.scheduleItems.length > 0
                           ? ListView.builder(
-                            padding: EdgeInsets.all(0),
+                              padding: EdgeInsets.all(0),
                               shrinkWrap: true,
                               itemCount: model.scheduleItems.length,
                               physics: const NeverScrollableScrollPhysics(),
