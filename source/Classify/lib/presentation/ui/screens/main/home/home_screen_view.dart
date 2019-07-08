@@ -203,7 +203,6 @@ class HomeScreenView extends AppView<HomeScreenModel> {
                   ),
                 ],
               ),
-              //TODO: ListView
               model.loadingState == LoadingStates.Compleate
                   ? _homeworkListView(model.homeworkList)
                   : Stack(
@@ -224,22 +223,28 @@ class HomeScreenView extends AppView<HomeScreenModel> {
   }
 
   Widget _homeworkListView(List<Homework> homeworkList) {
-    var homeworkListLenght = homeworkList.length;
-    return homeworkListLenght > 0
-        ? ListView.builder(
-            shrinkWrap: true,
-            physics: ClampingScrollPhysics(),
-            padding: EdgeInsets.all(0),
-            itemBuilder: (BuildContext context, int index) {
-              return _homeworkItem(homeworkList[index]);
-            },
-            itemCount: homeworkListLenght,
-          )
-        : Column(
-            children: <Widget>[
-              Container(),
-            ],
-          );
+    var homeworkListLength = homeworkList.length;
+    return Padding(
+        padding: EdgeInsets.only(top: DimensApp.paddingMicro),
+        child: homeworkListLength > 0
+            ? ListView.builder(
+                shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
+                padding: EdgeInsets.all(0),
+                itemBuilder: (BuildContext context, int index) {
+                  return _homeworkItem(homeworkList[index]);
+                },
+                itemCount: homeworkListLength,
+              )
+            : Container(
+                padding: EdgeInsets.only(top: DimensApp.paddingMicro),
+                width: double.maxFinite,
+                child: Text(
+                  "No home works today",
+                  textAlign: TextAlign.left,
+                  style: ThemeApp.middleGreyBoldTextStyle,
+                ),
+              ));
   }
 
   Widget _homeworkItem(Homework homework) {

@@ -15,20 +15,21 @@ class HomeScreenViewModel
   init() async {
     super.init();
 
-    Future.delayed(const Duration(milliseconds: 5000), () {
-      model.homeworkManager
-          .getHomeworks(model.userManager.user.id)
-          .then((List<Homework> listHomeWorks) {
-        model.homeworkList = listHomeWorks;
-        model.loadingState = LoadingStates.Compleate;
-        view.updateUI();
-      }).whenComplete(() {
-        model.loadingState = LoadingStates.Compleate;
-        view.updateUI();
-      });
-    });
-
     setSchedule();
+    setHomeWork();
+  }
+
+  Future<void> setHomeWork() async {
+    model.homeworkManager
+        .getHomeWorks(model.userManager.user.id)
+        .then((List<Homework> listHomeWorks) {
+      model.homeworkList = listHomeWorks;
+      model.loadingState = LoadingStates.Compleate;
+      view.updateUI();
+    }).whenComplete(() {
+      model.loadingState = LoadingStates.Compleate;
+      view.updateUI();
+    });
   }
 
   Future<void> setSchedule() async {

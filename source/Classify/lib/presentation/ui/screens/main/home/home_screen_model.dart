@@ -18,7 +18,7 @@ class HomeScreenModel extends AppModel {
   ScheduleManager scheduleManager = ScheduleManager();
 
   List<ScheduleItem> scheduleItems = List();
-  List<Homework> homeworkList;
+  List<Homework> homeworkList = List();
 
   LoadingStates loadingState = LoadingStates.Loading;
 }

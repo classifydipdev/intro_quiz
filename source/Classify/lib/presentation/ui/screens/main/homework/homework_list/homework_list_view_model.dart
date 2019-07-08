@@ -15,6 +15,10 @@ class HomeworkListScreenViewModel
     model.onHomeworkAdded.setCallbackObject(homeworkAdded);
     model.onRemoveHomework.setCallbackObject(removeHomework);
 
+    setHomeWork();
+  }
+
+  Future<void> setHomeWork() async {
     model.homeworkManager
         .getHomeworkSortLists(model.userManager.user.id)
         .then((List<List<Homework>> homeworkSort) {
