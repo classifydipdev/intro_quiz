@@ -79,7 +79,7 @@ class HomeworkManager {
 
     for (Reminder reminder in reminders) {
       for (var i = 0; i < homeWorks.length; i++) {
-        if (homeWorks[i].homeworkId == reminder.homeworkId) {
+        if (homeWorks[i].id == reminder.homeworkId) {
           homeWorks[i].reminder = reminder;
           break;
         }

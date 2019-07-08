@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Reminder {
-  String reminderId;
+  String id;
   String homeworkId;
   String userId;
   String fcmToken;
@@ -14,7 +14,7 @@ class Reminder {
     assert(document.data != null, "Reminder not found!");
     Map<dynamic, dynamic> raw = document.data;
 
-    reminderId = document.documentID;
+    id = document.documentID;
 
     if (raw['homeworkId'] != null) homeworkId = raw['homeworkId'];
 
