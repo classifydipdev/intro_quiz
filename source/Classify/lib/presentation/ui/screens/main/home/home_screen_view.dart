@@ -234,8 +234,7 @@ class HomeScreenView extends AppView<HomeScreenModel> {
                 itemBuilder: (BuildContext context, int index) {
                   return _homeworkItem(homeworkList[index]);
                 },
-                itemCount: homeworkListLength,
-              )
+                itemCount: 3)
             : Container(
                 padding: EdgeInsets.only(top: DimensApp.paddingMicro),
                 width: double.maxFinite,

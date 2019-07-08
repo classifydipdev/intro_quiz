@@ -431,7 +431,7 @@ class AppFirbaseFireStore {
     return _db.deleteData(reference);
   }
 
-  Future<List<Homework>> getHomeworks(String userId) async {
+  Future<List<Homework>> getHomeWorks(String userId) async {
     if (userId == null) return Future.error(Exception("Wrong request"));
     return Future(() => _db
             .getFS()
@@ -440,6 +440,18 @@ class AppFirbaseFireStore {
         .then((Query query) => _db.getAllDataByQuery(query))
         .then((querySnapshot) =>
             compute(parseHomeWorks, querySnapshot.documents));
+  }
+
+  Future<List<Homework>> getHomeWorksLimit(String userId) async {
+    if (userId == null) return Future.error(Exception("Wrong request"));
+    return Future(() =>
+        _db
+            .getFS()
+            .collection(homeworkCollection)
+            .where("userId", isEqualTo: userId)
+            .orderBy("dateTime", descending: false)
+            .limit(3)).then((Query query) => _db.getAllDataByQuery(query)).then(
+        (querySnapshot) => compute(parseHomeWorks, querySnapshot.documents));
   }
 
   Future<List<Reminder>> getReminders(String userId) async {

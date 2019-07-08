@@ -21,9 +21,9 @@ class HomeScreenViewModel
 
   Future<void> setHomeWork() async {
     model.homeworkManager
-        .getHomeWorks(model.userManager.user.id)
-        .then((List<Homework> listHomeWorks) {
-      model.homeworkList = listHomeWorks;
+        .getHomeworkSortListsLimit(model.userManager.user.id)
+        .then((List<Homework> homeworkSort) {
+      model.homeworkList = homeworkSort;
       model.loadingState = LoadingStates.Compleate;
       view.updateUI();
     }).whenComplete(() {
