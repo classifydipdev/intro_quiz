@@ -1,9 +1,11 @@
 import 'package:classify/data/auth/firebase/auth.dart';
+import 'package:classify/data/entities/homework.dart';
 import 'package:classify/presentation/ui/screens/auth/auth_screen.dart';
 import 'package:classify/presentation/ui/screens/base/mvvm/stateful/app_view_model.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/schedule/schedule_item.dart';
 import 'package:classify/presentation/ui/screens/main/home/home_screen_model.dart';
 import 'package:classify/presentation/ui/screens/main/home/home_screen_view.dart';
+import 'package:classify/presentation/utils/views_states.dart';
 
 class HomeScreenViewModel
     extends AppViewModel<HomeScreenModel, HomeScreenView> {
@@ -13,9 +15,21 @@ class HomeScreenViewModel
   init() async {
     super.init();
 
-    model.onLogOut.addCallback(logOut);
-
     setSchedule();
+    setHomeWork();
+  }
+
+  Future<void> setHomeWork() async {
+    model.homeworkManager
+        .getHomeworkSortListsLimit(model.userManager.user.id)
+        .then((List<Homework> homeworkSort) {
+      model.homeworkList = homeworkSort;
+      model.loadingState = LoadingStates.Compleate;
+      view.updateUI();
+    }).whenComplete(() {
+      model.loadingState = LoadingStates.Compleate;
+      view.updateUI();
+    });
   }
 
   Future<void> setSchedule() async {

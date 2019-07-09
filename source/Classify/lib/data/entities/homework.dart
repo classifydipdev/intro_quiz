@@ -3,7 +3,7 @@ import 'package:classify/data/entities/schedule.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Homework {
-  String homeworkId;
+  String id;
   String scheduleId;
   String userId;
   String text;
@@ -21,7 +21,7 @@ class Homework {
     assert(document.data != null, "Homework not found!");
     Map<dynamic, dynamic> raw = document.data;
 
-    homeworkId = document.documentID;
+    id = document.documentID;
 
     if (raw['scheduleId'] != null) scheduleId = raw['scheduleId'];
 

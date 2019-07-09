@@ -4,8 +4,8 @@ import 'package:classify/domain/managers/user_manager.dart';
 import 'package:classify/presentation/ui/screens/learn_planning/schedule/schedule_item.dart';
 
 class ScheduleManager {
-  LearningManager _learningManager = LearningManager();
-  UserManager _userManager = UserManager();
+  final LearningManager _learningManager = LearningManager();
+  final UserManager _userManager = UserManager();
 
   static final ScheduleManager _singleton = new ScheduleManager._internal();
 
@@ -19,6 +19,7 @@ class ScheduleManager {
 
   Future<void> setActualSchedule() async {
     scheduleList = await _learningManager.getSchedules(_userManager.user.id);
+    return scheduleList;
   }
 
   List<ScheduleItem> getTodayScheduleItems() {

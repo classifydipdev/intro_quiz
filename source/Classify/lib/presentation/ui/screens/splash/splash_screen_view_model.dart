@@ -42,10 +42,12 @@ class SplashScreenViewModel
 
   void _checkLogin() async {
     await model.userManager.checkSignIn().then((isLoggedIn) async {
+      if (isLoggedIn) {
+        final scheduleManager = ScheduleManager();
+        await scheduleManager.setActualSchedule();
+      }
       model.isLoggedIn = isLoggedIn;
       model.userChecked = true;
-      if (model.userManager.user != null)
-        await ScheduleManager().setActualSchedule();
       _navigate();
     }).catchError((onError) {
       showError(error: onError);

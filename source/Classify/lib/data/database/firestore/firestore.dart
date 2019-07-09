@@ -394,51 +394,44 @@ class AppFirbaseFireStore {
 
   Future<void> editHomework(Homework homework) async {
     if (homework == null) throw Exception("Wrong homework");
-    var reference = _db
-        .getFS()
-        .collection(homeworkCollection)
-        .document(homework.homeworkId);
+    var reference =
+        _db.getFS().collection(homeworkCollection).document(homework.id);
     return await _db.updateData(reference, homework.toFireStore());
   }
 
   Future<void> removeHomework(Homework homework) {
     if (homework == null) throw Exception("Wrong homework");
-    var reference = _db
-        .getFS()
-        .collection(homeworkCollection)
-        .document(homework.homeworkId);
+    var reference =
+        _db.getFS().collection(homeworkCollection).document(homework.id);
     return _db.deleteData(reference);
   }
 
-  Future<void> addReminder(Reminder reminder) async {
+  Future<String> addReminder(Reminder reminder) async {
     if (reminder != null &&
         reminder.dateTime == null &&
         reminder.homeworkId == null) throw Exception("Wrong reminder");
     var reference = _db.getFS().collection(reminderCollection).document();
-    return await _db.setData(reference, reminder.toFireStore());
+    await _db.setData(reference, reminder.toFireStore());
+    return reference.documentID;
   }
 
   Future<void> editReminder(Reminder reminder) async {
     if (reminder != null &&
         reminder.dateTime == null &&
         reminder.homeworkId == null) throw Exception("Wrong reminder");
-    var reference = _db
-        .getFS()
-        .collection(reminderCollection)
-        .document(reminder.reminderId);
+    var reference =
+        _db.getFS().collection(reminderCollection).document(reminder.id);
     return await _db.updateData(reference, reminder.toFireStore());
   }
 
   Future<void> removeReminder(Reminder reminder) {
     if (reminder == null) throw Exception("Wrong reminder");
-    var reference = _db
-        .getFS()
-        .collection(reminderCollection)
-        .document(reminder.reminderId);
+    var reference =
+        _db.getFS().collection(reminderCollection).document(reminder.id);
     return _db.deleteData(reference);
   }
 
-  Future<List<Homework>> getHomeworks(String userId) async {
+  Future<List<Homework>> getHomeWorks(String userId) async {
     if (userId == null) return Future.error(Exception("Wrong request"));
     return Future(() => _db
             .getFS()
@@ -447,6 +440,18 @@ class AppFirbaseFireStore {
         .then((Query query) => _db.getAllDataByQuery(query))
         .then((querySnapshot) =>
             compute(parseHomeWorks, querySnapshot.documents));
+  }
+
+  Future<List<Homework>> getHomeWorksLimit(String userId) async {
+    if (userId == null) return Future.error(Exception("Wrong request"));
+    return Future(() =>
+        _db
+            .getFS()
+            .collection(homeworkCollection)
+            .where("userId", isEqualTo: userId)
+            .orderBy("dateTime", descending: false)
+            .limit(3)).then((Query query) => _db.getAllDataByQuery(query)).then(
+        (querySnapshot) => compute(parseHomeWorks, querySnapshot.documents));
   }
 
   Future<List<Reminder>> getReminders(String userId) async {

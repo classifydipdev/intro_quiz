@@ -142,9 +142,8 @@ class HomeworkAddDialogViewModel
     if (model.dialogType == HomeworkAddDialogType.Add)
       await model.homeworkManager.addNewHomework(model.currentHomework);
     else {
-      model.currentHomework.reminder.homeworkId =
-          model.currentHomework.homeworkId;
-
+      if (model.currentHomework.reminder.homeworkId == null)
+        model.currentHomework.reminder.homeworkId = model.currentHomework.id;
       await model.homeworkManager.editHomework(model.currentHomework);
     }
 

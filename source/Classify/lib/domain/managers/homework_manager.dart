@@ -38,10 +38,14 @@ class HomeworkManager {
   }
 
   Future<List<List<Homework>>> getHomeworkSortLists(String userId) async {
-    return getHomeworks(userId).then((List<Homework> homeworks) {
-      homeworkList = homeworks;
+    return getHomeWorks(userId).then((List<Homework> homeWorks) {
+      homeworkList = homeWorks;
       return sortHomeworkLists();
     });
+  }
+
+  Future<List<Homework>> getHomeworkSortListsLimit(String userId) async {
+    return getHomeWorksLimit(userId);
   }
 
   List<List<Homework>> sortHomeworkLists() {
@@ -72,28 +76,55 @@ class HomeworkManager {
     return a.dateTime.compareTo(b.dateTime);
   }
 
-  Future<List<Homework>> getHomeworks(String userId) async {
-    List<Homework> homeworks = await _firebaseFirestore.getHomeworks(userId);
+  Future<List<Homework>> getHomeWorks(String userId) async {
+    List<Homework> homeWorks = await _firebaseFirestore.getHomeWorks(userId);
     List<Reminder> reminders = await _firebaseFirestore.getReminders(userId);
+    List<Schedule> schedules = _scheduleManager.scheduleList;
 
     for (Reminder reminder in reminders) {
-      for (var i = 0; i < homeworks.length; i++) {
-        if (homeworks[i].homeworkId == reminder.homeworkId) {
-          homeworks[i].reminder = reminder;
+      for (var i = 0; i < homeWorks.length; i++) {
+        if (homeWorks[i].id == reminder.homeworkId) {
+          homeWorks[i].reminder = reminder;
           break;
         }
       }
     }
 
-    for (Schedule schedule in _scheduleManager.scheduleList) {
-      for (var i = 0; i < homeworks.length; i++) {
-        if (homeworks[i].scheduleId == schedule.id) {
-          homeworks[i].schedule = schedule;
+    for (Schedule schedule in schedules) {
+      for (var i = 0; i < homeWorks.length; i++) {
+        if (homeWorks[i].scheduleId == schedule.id) {
+          homeWorks[i].schedule = schedule;
         }
       }
     }
 
-    return homeworks;
+    return homeWorks;
+  }
+
+  Future<List<Homework>> getHomeWorksLimit(String userId) async {
+    List<Homework> homeWorksLimit =
+        await _firebaseFirestore.getHomeWorksLimit(userId);
+    List<Reminder> reminders = await _firebaseFirestore.getReminders(userId);
+    List<Schedule> schedules = _scheduleManager.scheduleList;
+
+    for (Reminder reminder in reminders) {
+      for (var i = 0; i < homeWorksLimit.length; i++) {
+        if (homeWorksLimit[i].id == reminder.homeworkId) {
+          homeWorksLimit[i].reminder = reminder;
+          break;
+        }
+      }
+    }
+
+    for (Schedule schedule in schedules) {
+      for (var i = 0; i < homeWorksLimit.length; i++) {
+        if (homeWorksLimit[i].scheduleId == schedule.id) {
+          homeWorksLimit[i].schedule = schedule;
+        }
+      }
+    }
+
+    return homeWorksLimit;
   }
 
   List<List<Homework>> addHomeworkAndSortLists(Homework homework) {
