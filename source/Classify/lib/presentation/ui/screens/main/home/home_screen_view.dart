@@ -55,13 +55,13 @@ class HomeScreenView extends AppView<HomeScreenModel> {
 
   Widget _pageHeader() {
     return Container(
-      height: model.screenHeight / 4,
+      height: 198,
       width: double.maxFinite,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [ColorsApp.startHomeScreen, ColorsApp.endHomeScreen],
-          begin: Alignment.centerRight,
-          end: Alignment.bottomLeft,
+          begin: Alignment(1.0, -1.0),
+          end: Alignment(0.5, 1.0),
           stops: [0.11, 1.0],
           tileMode: TileMode.clamp,
         ),
@@ -113,7 +113,7 @@ class HomeScreenView extends AppView<HomeScreenModel> {
                           style: ThemeApp.littleWhiteTextStyle,
                         ),
                         Text(
-                          "4 HOMEWORKS",
+                          "${model.homeworkList.length} HOMEWORKS",
                           textAlign: TextAlign.left,
                           style: ThemeApp.littleWhiteTextStyle,
                         ),
@@ -241,7 +241,7 @@ class HomeScreenView extends AppView<HomeScreenModel> {
                 child: Text(
                   "No home works today",
                   textAlign: TextAlign.left,
-                  style: ThemeApp.middleGreyBoldTextStyle,
+                  style: ThemeApp.smallGrayBoldTextStyle,
                 ),
               ));
   }
@@ -365,7 +365,7 @@ class HomeScreenView extends AppView<HomeScreenModel> {
                               child: Text(
                                 "No subjects today",
                                 textAlign: TextAlign.left,
-                                style: ThemeApp.middleGreyBoldTextStyle,
+                                style: ThemeApp.smallGrayBoldTextStyle,
                               ),
                             ),
                     )
@@ -399,7 +399,10 @@ class HomeScreenView extends AppView<HomeScreenModel> {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           gradient: LinearGradient(
-            colors: [ColorsApp.startHomeScreen, ColorsApp.centerHomeScreen],
+            colors: [
+              ColorsApp.startHomeScreenFloat,
+              ColorsApp.endHomeScreenFloat
+            ],
             begin: Alignment.bottomRight,
             end: Alignment.topLeft,
             stops: [0.0, 1.0],

@@ -34,7 +34,7 @@ class DimensApp {
 
   //Text sizes
   static const double textSizePico = 10.0;
-  static const double textSizeLittle = 12.0;
+  static const double textSizeLittle = 11.0;
   static const double textSizeSmall = 14.0;
   static const double textSizeMiddle = 16.0;
   static const double textSizeMiddleExtra = 18.0;
