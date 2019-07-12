@@ -45,12 +45,12 @@ class LogInScreenView extends AppView<LogInScreenModel> {
             children: <Widget>[
               getLogo(),
               SizedBox(height: 60),
-              getFieldContainer(AppLocalizations().email, "Email",
+              getFieldContainer(AppLocalizations().email, "",
                   model.emailTextController, model.emailValidator),
               SizedBox(height: DimensApp.sizeSmall),
               getFieldContainer(
                 AppLocalizations().password,
-                "Password",
+                "",
                 model.passwordTextController,
                 model.passwordValidator,
                 obscureText: !model.passwordShow,

@@ -45,7 +45,7 @@ class AppLocalizations {
 
   String get privacyPolicy {
     return Intl.message(
-        'by clicking sign up, you agree to our terms of use, \nprivacy policy and disclaimer',
+        'By clicking sign up, you agree to our terms of use, \nprivacy policy and disclaimer',
         name: 'privacyPolicy');
   }
 

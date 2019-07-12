@@ -59,12 +59,12 @@ class MainScreenView extends AppView<MainScreenModel> {
                     width: DimensApp.bottomIconSize,
                     height: DimensApp.bottomIconSize,
                     alignment: Alignment.center,
-                    color: ColorsApp.centerHomeScreen,
+                    color: ColorsApp.textTubHomeScreen,
                   ),
                   title: Text(
                     "Home",
                     style: TextStyle(
-                      color: ColorsApp.centerHomeScreen,
+                      color: ColorsApp.textTubHomeScreen,
                       fontWeight: FontWeight.bold,
                       fontSize: DimensApp.textSizeSmall,
                       fontFamily: MainScreenModel.fontFamily,
@@ -117,7 +117,7 @@ class MainScreenView extends AppView<MainScreenModel> {
                     ),
                   )),
               BubbleBottomBarItem(
-                  backgroundColor: ColorsApp.centerHomeScreen,
+                  backgroundColor: ColorsApp.textTubHomeScreen,
                   icon: Image.asset(
                     ImagesApp.profileGrey,
                     width: DimensApp.bottomIconSize,

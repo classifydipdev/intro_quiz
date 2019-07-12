@@ -223,8 +223,10 @@ class AppFirbaseFireStore {
     return await _db.getAllDataByQuery(query).then((querySnapshot) async {
       List<Schedule> schedules = List();
       for (var doc in querySnapshot.documents) {
-        var schedule = await getScheduleFromDoc(doc);
-        if (schedule != null) schedules.add(schedule);
+        if (doc.exists) {
+          var schedule = await getScheduleFromDoc(doc);
+          if (schedule != null) schedules.add(schedule);
+        }
       }
       return schedules;
     });

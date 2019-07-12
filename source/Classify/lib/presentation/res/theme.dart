@@ -94,7 +94,7 @@ class ThemeApp {
     return TextStyle(
       fontFamily: 'GoogleSans',
       fontSize: DimensApp.textSizeSmall,
-      color: Colors.grey[400],
+      color: ColorsApp.gray,
       fontWeight: FontWeight.bold,
     );
   }
@@ -103,7 +103,7 @@ class ThemeApp {
     return TextStyle(
       fontFamily: 'GoogleSans',
       fontSize: DimensApp.textSizeMiddle,
-      color: Colors.black54,
+      color: ColorsApp.gray,
       fontWeight: FontWeight.w600,
     );
   }
@@ -112,7 +112,7 @@ class ThemeApp {
     return TextStyle(
       fontFamily: 'GoogleSans',
       fontSize: DimensApp.textSizeMiddle,
-      color: Colors.black26,
+      color: ColorsApp.gray,
       fontWeight: FontWeight.w500,
     );
   }
@@ -147,7 +147,7 @@ class ThemeApp {
   static TextStyle get bigWhiteBoldTextStyle {
     return TextStyle(
       fontFamily: 'GoogleSans',
-      fontSize: DimensApp.textSizeBig,
+      fontSize: DimensApp.textSizeNormal,
       color: Colors.white,
       fontWeight: FontWeight.bold,
     );
